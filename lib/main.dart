@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
         '/settings': (_) => Settings(),
         '/splash': (_) => SplashScreen(),
       },
-
     );
   }
-}
+}//test
