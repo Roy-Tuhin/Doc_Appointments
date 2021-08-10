@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:medbo/API/Registration/AfterRegistrationResPage.dart';
+import 'package:medbo/API/Registration/RegistrationApiResponse.dart';
 import 'package:medbo/login_n_registration/login.dart';
 import 'package:medbo/login_n_registration/registrationDecoration.dart';
+import 'package:http/http.dart' as http;
 
 class Registration extends StatefulWidget {
   const Registration({Key? key}) : super(key: key);
@@ -11,6 +16,16 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var phoneController = TextEditingController();
+  var rePasswordController = TextEditingController();
+
+
+
+
+
+
   dynamic Status;
   static String url = "http://medbo.digitalicon.in/api/medboapi/userreg";
   Dio dio=Dio();
@@ -144,7 +159,8 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                          controller: _email,
+                          controller:emailController,
+                          //controller: _email,//===================================E m a i l c o n t r o l l e r
                           keyboardType: TextInputType.text,
                           decoration:buildInputDecoration("Email"),
                           // validator: (value){
@@ -174,7 +190,8 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                          controller: _phone,
+                          controller:phoneController,
+                          //controller: _phone,//=================================== c o n t r o l l e r
                           keyboardType: TextInputType.number,
                           decoration:buildInputDecoration("Phone No"),
                           // validator: (value){
@@ -203,7 +220,8 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                          controller: _password,
+                         controller: passwordController,
+                          //controller: _password,//=================================== c o n t r o l l e r
                           obscureText: true,
                           keyboardType: TextInputType.text,
                           decoration:buildInputDecoration("Password"),
@@ -232,7 +250,8 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                          controller: _confirmpassword,
+                           controller: rePasswordController,
+                          //controller: _confirmpassword,//=================================== c o n t r o l l e r
                           obscureText: true,
                           keyboardType: TextInputType.text,
                           decoration:buildInputDecoration("Confirm Password"),
@@ -265,6 +284,7 @@ class _RegistrationState extends State<Registration> {
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
+                          registrationOfuser() ;
                           validate();
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Login()
                             ),);
@@ -313,4 +333,48 @@ class _RegistrationState extends State<Registration> {
 
     );
   }
-}
+
+
+
+
+
+  //===============================================================================
+
+  Future <void> registrationOfuser() async{
+    var jsonResponse = null;
+    if (emailController.text.isNotEmpty && phoneController.text.isNotEmpty && passwordController.text.isNotEmpty && rePasswordController.text.isNotEmpty){
+      var response=await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/userreg"),
+      body:({
+        'Email':emailController,
+        'Mobile':phoneController,
+        'Password':passwordController,
+        'RetypePassword':rePasswordController,
+      }));
+
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterRegistrationResPage(response: RegistrationApiResponse.fromJson(jsonResponse))));     
+         }
+
+
+
+
+         else {
+        print("Wronggooooooooooooooooooooooooooo");
+        print(response.body);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid credentials")));
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Blank field is not allowed")));
+    }
+
+
+
+    }
+  }
+

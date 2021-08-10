@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:medbo/API/Login/ApiResponse.dart';
+import 'package:medbo/API/Login/afterLoginResPage.dart';
 import 'package:medbo/login_n_registration/registration.dart';
 import 'package:medbo/models/loginModel.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   @override
@@ -10,15 +15,25 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  late TextEditingController _userid;
+  var emailController = TextEditingController();
+  var passwordontroller = TextEditingController();
 
+
+
+
+
+
+
+
+
+  late TextEditingController _userid;
   late TextEditingController _password;
 
   static String url = "http://medbo.digitalicon.in/api/medboapi/login";
   Dio dio = Dio();
 
   late GlobalKey<FormState> formkey;
-  dynamic userData = UserData(name: '', encUserId: '');
+  // dynamic userData = UserData(name: '', encUserId: '');
 
   void initState() {
     formkey = GlobalKey<FormState>();
@@ -29,7 +44,6 @@ class _LoginState extends State<Login> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _userid.dispose();
     _password.dispose();
     super.dispose();
@@ -61,17 +75,17 @@ class _LoginState extends State<Login> {
       // print("logged in");
       print(response.data);
 
-      UserData loginuserdata = UserData(
-          name: response.data['UserData']['Name'],
-          encUserId: response.data['UserData']['EncUserId']);
+      // UserData loginuserdata = UserData(
+      //     name: response.data['UserData']['Name'],
+      //     encUserId: response.data['UserData']['EncUserId']);
 
-      setState(() {
-        userData = loginuserdata;
-      });
+      // setState(() {
+      //   userData = loginuserdata;
+      // });
     } else {
       print(response.statusMessage);
     }
-    print(userData.name);
+    // print(userData.name);
     print(response.data['Status']);
     dynamic status = response.data['Status'];
     if (status == 1) {
@@ -168,8 +182,24 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
+
+
+
+
+
+                      ////////////////////////Enter email//////////////////////////////
+
+
+
+
+
+
+
+
+
                       child: TextFormField(
-                        controller: _userid,
+                        controller:emailController,//=================
+                        // controller: _userid,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           fillColor: Colors.white,
@@ -197,8 +227,20 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
+
+
+
+
+
+
+                      ////////////////////////////Password//////////////////////////////
+                     
+                     
+                     
+                     
                       child: TextFormField(
-                        controller: _password,
+                        controller:passwordontroller, //================
+                        // controller: _password,
                         obscureText: true,
                         decoration: InputDecoration(
                           fillColor: Colors.white,
@@ -236,8 +278,9 @@ class _LoginState extends State<Login> {
                   InkWell(
                     // onTap: validate,
                     onTap: () {
-                      validate();
-                      Navigator.of(context).pushNamed('/');
+                      login() ;////////////////////////////////////////////////////////=======================================
+                      // validate();
+                      // Navigator.of(context).pushNamed('/');
                     },
                     child: Container(
                       margin: const EdgeInsets.all(5.0),
@@ -318,7 +361,7 @@ class _LoginState extends State<Login> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Registration()));
-                      },
+                      },//=============================================================================Registration=====================================================
                       child: Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
@@ -339,5 +382,44 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+
+
+
+
+/////////////////////////////////////////After login Responce//////////////////////
+  Future<void> login() async{
+        var jsonResponse = null;
+    if (passwordontroller.text.isNotEmpty && emailController.text.isNotEmpty) {
+      var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/login"),
+          body: ({
+            'LoginId': emailController.text,
+            'Password': passwordontroller.text
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterLoginResPage(response: ApiResponse.fromJson(jsonResponse))));
+      }
+      
+      
+      
+      
+      
+      
+       else {
+        print("Wronggooooooooooooooooooooooooooo");
+        print(response.body);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid credentials")));
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Blank field is not allowed")));
+    }
+
   }
 }

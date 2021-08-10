@@ -25,6 +25,13 @@ class Settings extends StatelessWidget {
             'SETTINGS',
             style: TextStyle(fontFamily: 'Roboto_Condensed'),
           )),
+     
+     
+     
+     
+     
+     
+     
       drawer: SideDrawer(),
       body: SingleChildScrollView(
         child: Container(
@@ -50,6 +57,37 @@ class Settings extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    width: 250,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.topRight,
+                        colors: [
+                          Theme.of(context).primaryColor,
+                          Theme.of(context).accentColor
+                        ],
+                      ),
+                    ),
+                    child: Text(
+                      'PROFILE',//========================================================================
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Roboto_Condensed',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
@@ -69,7 +107,7 @@ class Settings extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'PROFILE',
+                    'BOOKING',//========================================================================
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -98,36 +136,7 @@ class Settings extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'BOOKING',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Roboto_Condensed',
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 50,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.topRight,
-                      colors: [
-                        Theme.of(context).primaryColor,
-                        Theme.of(context).accentColor
-                      ],
-                    ),
-                  ),
-                  child: Text(
-                    'CUSTOMER SERVICES',
+                    'CUSTOMER SERVICES',//========================================================================
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -161,7 +170,7 @@ class Settings extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'LOGIN',
+                      'LOGIN',//========================================================================
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,

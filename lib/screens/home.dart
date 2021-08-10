@@ -12,6 +12,7 @@ import 'package:medbo/parsing/allSurgicalPack.dart';
 import 'package:medbo/screen_helper/clip_path.dart';
 import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:medbo/API/Doctors/allDoc.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
   late List docList = [];
   List finaldocList = [];
   late bool _loadDocList = true;
@@ -35,9 +37,10 @@ class _HomeState extends State<Home> {
   List finalchkUpList = [];
   late bool _loadChkUpList = true;
 
-  AllDoctorsList doctorList = AllDoctorsList();
+  AllDoctorsList doctorList = AllDoctorsList(); // doctorList obj
   Future<void> getDocs() async {
-    finaldocList = await doctorList.getDocs();
+    finaldocList = await doctorList
+        .getDocs(); // getDocs() is our function // calling function with the class obj ==> doctorList
     setState(() {
       docList = finaldocList;
     });
@@ -220,6 +223,7 @@ class _HomeState extends State<Home> {
                             SizedBox(
                               height: 40,
                             ),
+                            //=============================================================1st row===========================================================================
                             Container(
                               height: 70,
                               // color: Colors.green,
@@ -306,7 +310,7 @@ class _HomeState extends State<Home> {
                 ),
                 SizedBox(
                   height: 35,
-                  child: Container(
+                  child: Container(//=============================================================2nd row  All doc coming==========================================================================
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
                     child: Text(
@@ -319,13 +323,11 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                SizedBox(
+                SizedBox(//===========================================doc list showing for Api=====================
                   //onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorDetails()));},
                   height: 250,
-                  child:
-                      // doctorList,
-                      ListView.builder(
-                    itemCount: docList == null ? 0 : docList.length,
+                  child: ListView.builder(
+                    itemCount: docList == null ? 0 : docList.length, ///////
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => Container(
                       decoration: BoxDecoration(
@@ -336,6 +338,7 @@ class _HomeState extends State<Home> {
                       margin: EdgeInsets.all(10),
                       child: Stack(children: [
                         Column(
+                          //==============================doc image horizonal
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -437,6 +440,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
+                //=============================================================Doc list end===========================================================================
                 SizedBox(
                   height: 35,
                   child: Container(

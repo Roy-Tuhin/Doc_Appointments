@@ -9,7 +9,7 @@ class AllDoctorsList {
       'http://medbo.digitalicon.in/api/medboapi/alldoctor';
   Dio dio = Dio();
 
-  Future<List<Datum>> getDocs() async {
+  Future<List<Datum>> getDocs() async {//======================= fetchData
     late List<Datum> _datum=[];
     var i;
     try {
