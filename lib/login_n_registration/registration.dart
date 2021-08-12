@@ -284,7 +284,7 @@ class _RegistrationState extends State<Registration> {
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
-                          registrationOfuser() ;
+                          registrationOfuser() ;//======================================================================Registration SUBMIT button
                           validate();
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Login()
                             ),);
@@ -356,14 +356,17 @@ class _RegistrationState extends State<Registration> {
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterRegistrationResPage(response: RegistrationApiResponse.fromJson(jsonResponse))));     
+        //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterRegistrationResPage(response: RegistrationApiResponse.fromJson(jsonResponse)))); 
+
+         ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;      
          }
 
 
 
 
          else {
-        print("Wronggooooooooooooooooooooooooooo");
+        print("Noooooo Response from API  404");
         print(response.body);
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text("Invalid credentials")));

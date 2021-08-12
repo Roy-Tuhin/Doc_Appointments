@@ -27,10 +27,12 @@ class AfterRegistrationResPageState extends State<AfterRegistrationResPage> {
             children: [
                Text("Status: ${widget.response.status}"),
                Text("Message: ${widget.response.message}"),
-              // Text("name: ${widget.UserData.name}"),
+               Text("Name: ${widget.response.userData!.name}"),
+               Text("encUserId: ${widget.response.userData!.encUserId}"),
+              
               SizedBox(height: 50,),
 
-              OutlinedButton.icon(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));}, icon: Icon(Icons.exit_to_app,size :18,), label: Text("LogIn Now")),
+             // OutlinedButton.icon(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));}, icon: Icon(Icons.exit_to_app,size :18,), label: Text("LogIn Now")),
 
             ],
           ),

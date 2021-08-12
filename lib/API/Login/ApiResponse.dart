@@ -14,7 +14,6 @@ class ApiResponse {
         status: json["Status"],
         message: json["Message"],
         //userData: UserData.fromJson(json["UserData"]),
-       
          userData: json["UserData"] == null? null:UserData.fromJson(json["UserData"] as Map<String, dynamic>),
     );
 

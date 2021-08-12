@@ -32,7 +32,13 @@ class Settings extends StatelessWidget {
      
      
      
-      drawer: SideDrawer(),
+      drawer:SideDrawer(),
+
+
+
+
+
+      
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,

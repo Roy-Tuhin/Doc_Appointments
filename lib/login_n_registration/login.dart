@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_session/flutter_session.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:medbo/API/Login/ApiResponse.dart';
 import 'package:medbo/API/Login/afterLoginResPage.dart';
 import 'package:medbo/login_n_registration/registration.dart';
 import 'package:medbo/models/loginModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -15,6 +18,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final box = GetStorage(); 
   var emailController = TextEditingController();
   var passwordontroller = TextEditingController();
 
@@ -278,7 +282,7 @@ class _LoginState extends State<Login> {
                   InkWell(
                     // onTap: validate,
                     onTap: () {
-                      login() ;////////////////////////////////////////////////////////=======================================
+                      login() ;////////////////////////////////////////////////////////=========================login() F U N C T I O N==============================================
                       // validate();
                       // Navigator.of(context).pushNamed('/');
                     },
@@ -356,7 +360,7 @@ class _LoginState extends State<Login> {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: InkWell(
-                      onTap: () {
+                      onTap: () {//=============================================================================Registration=====================================================
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -388,9 +392,9 @@ class _LoginState extends State<Login> {
 
 
 
-/////////////////////////////////////////After login Responce//////////////////////
+/////////////////////////////////////////After login Response//////////////////////
   Future<void> login() async{
-        var jsonResponse = null;
+    var jsonResponse;
     if (passwordontroller.text.isNotEmpty && emailController.text.isNotEmpty) {
       var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/login"),
           body: ({
@@ -398,11 +402,17 @@ class _LoginState extends State<Login> {
             'Password': passwordontroller.text
           }));
       if (response.statusCode == 200) {
-        print("Correct");
-        print(response.body);
-        jsonResponse = json.decode(response.body.toString());
-        print(jsonResponse);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterLoginResPage(response: ApiResponse.fromJson(jsonResponse))));
+         print("Correct");
+         print(response.body);
+         jsonResponse = json.decode(response.body.toString());
+         print(jsonResponse);
+       // Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterLoginResPage(rresponse: ApiResponse.fromJson(jsonResponse))));
+      
+
+         ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;   
+
+          pageRoute(jsonResponse['Message']);
       }
       
       
@@ -422,4 +432,17 @@ class _LoginState extends State<Login> {
     }
 
   }
+
+
+  void pageRoute(String Message) async {
+    //HERE WE STORE VALUE OR TOKEN INSIDE SHARED PREFERENCE
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString("login", Message);// KEY : VALUE
+  }
+
+
 }
+
+
+

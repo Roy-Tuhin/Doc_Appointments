@@ -1,16 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 // import 'package:medbo/screens/home.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:medbo/API/Login/ApiResponse.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:medbo/login_n_registration/login.dart';
 
 
-class SideDrawer extends StatelessWidget {
+
+class SideDrawer extends StatefulWidget {
+  
   const SideDrawer({Key? key}) : super(key: key);
+
+
+
+  @override
+  _SideDrawerState createState() => _SideDrawerState();
+}
+
+class _SideDrawerState extends State<SideDrawer> {
+
+
+
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+String Message="";
+
+void initState(){
+  super.initState();
+  getred();
+}
+
+void getred() async{
+  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  setState(() {
+    Message = pref.getString("login");
+  });
+
+}
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+
+
+
+
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Drawer(
+      child: Drawer(//==================================================Drawer
         // child: Text('drawer'),
         child: Column(
           children: <Widget>[
@@ -58,10 +106,22 @@ class SideDrawer extends StatelessWidget {
                           'Android Studio',
                           style: TextStyle(fontSize: 16, color: Colors.white,fontFamily: 'Roboto_Condensed'),
                         ),
-                        Text(
-                          'android.studio@android.com',
+                        // Text(
+                        //   'android.studio@android.com',
+                        //   style: TextStyle(color: Colors.white),
+                        // ),
+
+
+
+
+                       Text(
+                         " ${Message}",
                           style: TextStyle(color: Colors.white),
-                        ),
+                         ),
+
+
+                  
+
                       ],
                     ),
                   ],
