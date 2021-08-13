@@ -16,15 +16,23 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var phoneController = TextEditingController();
-  var rePasswordController = TextEditingController();
 
-  final TextEditingController email = new TextEditingController();
-  final TextEditingController contact = new TextEditingController();
-  final TextEditingController password = new TextEditingController();
-  final TextEditingController conpassword = new TextEditingController();
+    TextEditingController emailControler = TextEditingController();
+  TextEditingController contactControler = TextEditingController();
+  TextEditingController passwordControler = TextEditingController();
+  TextEditingController conpasswordControler = TextEditingController();
+
+
+
+  // var emailController = TextEditingController();
+  // var passwordController = TextEditingController();
+  // var phoneController = TextEditingController();
+  // var rePasswordController = TextEditingController();
+
+  // final TextEditingController email = new TextEditingController();
+  // final TextEditingController contact = new TextEditingController();
+  // final TextEditingController password = new TextEditingController();
+  // final TextEditingController conpassword = new TextEditingController();
 
 
 
@@ -164,7 +172,7 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                          controller:emailController,
+                          controller:emailControler,
                           //controller: _email,//===================================E m a i l c o n t r o l l e r
                           keyboardType: TextInputType.text,
                           decoration:buildInputDecoration("Email"),
@@ -178,9 +186,9 @@ class _RegistrationState extends State<Registration> {
                           //   return null;
                           //
                           // },
-                          onSaved: (value){
-                           // _email = value as TextEditingController;
-                          },
+                          // onSaved: (value){
+                          //  // _email = value as TextEditingController;
+                          // },
                         ),
                       ),
                     ),
@@ -195,7 +203,7 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                          controller:phoneController,
+                          controller:contactControler,
                           //controller: _phone,//=================================== c o n t r o l l e r
                           keyboardType: TextInputType.number,
                           decoration:buildInputDecoration("Phone No"),
@@ -208,9 +216,9 @@ class _RegistrationState extends State<Registration> {
                           //   // }
                           //   return null;
                           // },
-                          onSaved: (value){
-                           // _phone = value as TextEditingController;
-                          },
+                          // onSaved: (value){
+                          //  // _phone = value as TextEditingController;
+                          // },
                         ),
                       ),
                     ),
@@ -225,7 +233,7 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                         controller: passwordController,
+                         controller: passwordControler,
                           //controller: _password,//=================================== c o n t r o l l e r
                           obscureText: true,
                           keyboardType: TextInputType.text,
@@ -255,7 +263,7 @@ class _RegistrationState extends State<Registration> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
-                           controller: rePasswordController,
+                           controller: conpasswordControler,
                           //controller: _confirmpassword,//=================================== c o n t r o l l e r
                           obscureText: true,
                           keyboardType: TextInputType.text,
@@ -289,7 +297,7 @@ class _RegistrationState extends State<Registration> {
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
-                          registrationOfuser(email.text, contact.text, password.text, conpassword.text) ;//======================================================================Registration SUBMIT button
+                          registrationOfuser(emailControler.text, contactControler.text, passwordControler.text, conpasswordControler.text) ;//================================================Registration SUBMIT button
                           //validate();
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Login()
                             ),);
@@ -345,7 +353,7 @@ class _RegistrationState extends State<Registration> {
 
   //===============================================================================
 
-  Future <void> registrationOfuser(String  email, contact, pass,conpass) async{
+    registrationOfuser(String  email, contact, pass,conpass) async{
     var jsonResponse ;
     Map data = {
       
@@ -359,7 +367,7 @@ class _RegistrationState extends State<Registration> {
      String body = json.encode(data);
     var url = 'http://medbo.digitalicon.in/api/medboapi/userreg';
     var response = await http.post(
-      url,
+     Uri.parse(url),
       body: body,
       headers: {
         "Content-Type": "application/json",
