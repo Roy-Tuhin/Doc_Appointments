@@ -21,80 +21,85 @@ class _RegistrationState extends State<Registration> {
   var phoneController = TextEditingController();
   var rePasswordController = TextEditingController();
 
+  final TextEditingController email = new TextEditingController();
+  final TextEditingController contact = new TextEditingController();
+  final TextEditingController password = new TextEditingController();
+  final TextEditingController conpassword = new TextEditingController();
 
 
 
 
 
-  dynamic Status;
-  static String url = "http://medbo.digitalicon.in/api/medboapi/userreg";
-  Dio dio=Dio();
+
+  // dynamic Status;
+  // static String url = "http://medbo.digitalicon.in/api/medboapi/userreg";
+  // Dio dio=Dio();
 
 
-  late TextEditingController _email;
-  late TextEditingController _phone;
-  late TextEditingController _password;
-  late TextEditingController _confirmpassword;
-  late GlobalKey<FormState> _regformkey;
+  // late TextEditingController _email;
+  // late TextEditingController _phone;
+  // late TextEditingController _password;
+  // late TextEditingController _confirmpassword;
+  // late GlobalKey<FormState> _regformkey;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    _regformkey = GlobalKey<FormState>();
-    _email=TextEditingController();
-    _phone=TextEditingController();
-    _password=TextEditingController();
-    _confirmpassword=TextEditingController();
-    super.initState();
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   _regformkey = GlobalKey<FormState>();
+  //   _email=TextEditingController();
+  //   _phone=TextEditingController();
+  //   _password=TextEditingController();
+  //   _confirmpassword=TextEditingController();
+  //   super.initState();
 
-  }
+  // }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _email.dispose();
-    _password.dispose();
-    _phone.dispose();
-    _confirmpassword.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   _email.dispose();
+  //   _password.dispose();
+  //   _phone.dispose();
+  //   _confirmpassword.dispose();
+  //   super.dispose();
+  // }
 
-  void validate(){
-    if(_regformkey.currentState!.validate()){
-      print("Validated");
-      registerUser();
-      setState(() {
-        _email.clear();
-        _phone.clear();
-        _password.clear();
-        _confirmpassword.clear();
-      });
-    }
-    // else if(_regformkey.currentState==null){
-    //
-    // }
-    else{
-      print('Not Validated');
-    }
-  }
+  // void validate(){
+  //   if(_regformkey.currentState!.validate()){
+  //     print("Validated");
+  //     registerUser();
+  //     setState(() {
+  //       _email.clear();
+  //       _phone.clear();
+  //       _password.clear();
+  //       _confirmpassword.clear();
+  //     });
+  //   }
+  //   // else if(_regformkey.currentState==null){
+  //   //
+  //   // }
+  //   else{
+  //     print('Not Validated');
+  //   }
+  // }
 
-  Future registerUser() async{
-    Map mapRegData={
+  // Future registerUser() async{
+  //   Map mapRegData={
 
-        "Email": _email.text,
-        "Mobile": _phone.text,
-        "Password": _password.text,
-        "RetypePassword":_confirmpassword.text,
-    };
-    print('RegData: $mapRegData');
-    Response response=await dio.post(url,data: mapRegData);
-    if(response.statusCode==200){
-      print(response.data);
-      print(response.data['Status']);
-      Status=response.data['Status'];
-      // return 'Registered';
-    }
-  }
+  //       "Email": _email.text,
+  //       "Mobile": _phone.text,
+  //       "Password": _password.text,
+  //       "RetypePassword":_confirmpassword.text,
+  //   };
+  //   print('RegData: $mapRegData');
+  //   Response response=await dio.post(url,data: mapRegData);
+  //   if(response.statusCode==200){
+  //     print(response.data);
+  //     print(response.data['Status']);
+  //     Status=response.data['Status'];
+  //     // return 'Registered';
+  //   }
+  // }
 
 
   @override
@@ -124,7 +129,7 @@ class _RegistrationState extends State<Registration> {
             padding: EdgeInsets.all(25),
             child: SingleChildScrollView(
               child: Form(
-                key: _regformkey,
+               // key: _regformkey,
                 child:
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -174,7 +179,7 @@ class _RegistrationState extends State<Registration> {
                           //
                           // },
                           onSaved: (value){
-                            _email = value as TextEditingController;
+                           // _email = value as TextEditingController;
                           },
                         ),
                       ),
@@ -204,7 +209,7 @@ class _RegistrationState extends State<Registration> {
                           //   return null;
                           // },
                           onSaved: (value){
-                            _phone = value as TextEditingController;
+                           // _phone = value as TextEditingController;
                           },
                         ),
                       ),
@@ -233,7 +238,7 @@ class _RegistrationState extends State<Registration> {
                             return null;
                           },
                           onSaved: (value){
-                            _password = value ! as TextEditingController;
+                           // _password = value ! as TextEditingController;
                           },
 
                         ),
@@ -260,18 +265,18 @@ class _RegistrationState extends State<Registration> {
                             {
                               return 'Please re-enter password';
                             }
-                            print(_password.text);
+                           // print(_password.text);
 
-                            print(_confirmpassword.text);
+                           // print(_confirmpassword.text);
 
-                            if(_password.text!=_confirmpassword.text){
+                           // if(_password.text!=_confirmpassword.text){
                               return "Password does not match";
                             }
-                            return null;
-                          },
-                          onSaved: (value){
-                            _confirmpassword = value ! as TextEditingController;
-                          },
+                           // return null;
+                         // },
+                          // onSaved: (value){
+                          //   _confirmpassword = value ! as TextEditingController;
+                          // },
                         ),
                       ),
                     ),
@@ -284,8 +289,8 @@ class _RegistrationState extends State<Registration> {
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
-                          registrationOfuser() ;//======================================================================Registration SUBMIT button
-                          validate();
+                          registrationOfuser(email.text, contact.text, password.text, conpassword.text) ;//======================================================================Registration SUBMIT button
+                          //validate();
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Login()
                             ),);
 
@@ -340,44 +345,82 @@ class _RegistrationState extends State<Registration> {
 
   //===============================================================================
 
-  Future <void> registrationOfuser() async{
-    var jsonResponse = null;
-    if (emailController.text.isNotEmpty && phoneController.text.isNotEmpty && passwordController.text.isNotEmpty && rePasswordController.text.isNotEmpty){
-      var response=await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/userreg"),
-      body:({
-        'Email':emailController,
-        'Mobile':phoneController,
-        'Password':passwordController,
-        'RetypePassword':rePasswordController,
-      }));
+  Future <void> registrationOfuser(String  email, contact, pass,conpass) async{
+    var jsonResponse ;
+    Map data = {
+      
+      'Email': email,
+      'Mobile': contact,
+      'Password': pass,
+      'RetypePassword': conpass,
+    };
+    print(data);
 
-      if (response.statusCode == 200) {
-        print("Correct");
-        print(response.body);
-        jsonResponse = json.decode(response.body.toString());
-        print(jsonResponse);
-        //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterRegistrationResPage(response: RegistrationApiResponse.fromJson(jsonResponse)))); 
+     String body = json.encode(data);
+    var url = 'http://medbo.digitalicon.in/api/medboapi/userreg';
+    var response = await http.post(
+      url,
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+    );
 
-         ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;      
-         }
+    print(response.body);
+    print(response.statusCode);
 
-
-
-
-         else {
-        print("Noooooo Response from API  404");
-        print(response.body);
+    if (response.statusCode == 200) {
+       jsonResponse = json.decode(response.body.toString());
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Invalid credentials")));
-      }
+          .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;      
+         
+      //Or put here your next screen using Navigator.push() method
+      print('success');
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Blank field is not allowed")));
+      print('error');
     }
 
 
+    // var jsonResponse ;
+    // if (emailController.text.isNotEmpty && phoneController.text.isNotEmpty && passwordController.text.isNotEmpty && rePasswordController.text.isNotEmpty){
+    //   var response=await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/userreg"),
+    //   body:({
+    //     'Email':emailController.text,
+    //     'Mobile':phoneController,
+    //     'Password':passwordController,
+    //     'RetypePassword':rePasswordController,
+    //   }));
 
-    }
+    //   if (response.statusCode == 200) {
+    //     print("Correct");
+    //     print(response.body);
+    //     jsonResponse = json.decode(response.body.toString());
+    //     print(jsonResponse);
+    //     //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterRegistrationResPage(response: RegistrationApiResponse.fromJson(jsonResponse)))); 
+
+    //      ScaffoldMessenger.of(context)
+    //       .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;      
+    //      }
+
+
+
+
+    //      else {
+    //     print("Noooooo Response from API  404");
+    //     print(response.body);
+    //     ScaffoldMessenger.of(context)
+    //         .showSnackBar(SnackBar(content: Text("Invalid credentials")));
+    //   }
+    // } else {
+    //   ScaffoldMessenger.of(context)
+    //       .showSnackBar(SnackBar(content: Text("Blank field is not allowed")));
+    // }
+
+
+
+   // }
   }
 
+}

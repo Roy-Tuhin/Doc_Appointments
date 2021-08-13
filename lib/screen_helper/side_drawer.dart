@@ -26,7 +26,7 @@ class _SideDrawerState extends State<SideDrawer> {
 
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
-String Message="";
+String Name="";
 
 void initState(){
   super.initState();
@@ -37,7 +37,7 @@ void getred() async{
   //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
   SharedPreferences pref = await SharedPreferences.getInstance();
   setState(() {
-    Message = pref.getString("login");
+    Name = pref.getString("login");
   });
 
 }
@@ -103,7 +103,7 @@ void getred() async{
                       // mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          'Android Studio',
+                          'Welcome',
                           style: TextStyle(fontSize: 16, color: Colors.white,fontFamily: 'Roboto_Condensed'),
                         ),
                         // Text(
@@ -115,7 +115,7 @@ void getred() async{
 
 
                        Text(
-                         " ${Message}",
+                         " ${Name}",
                           style: TextStyle(color: Colors.white),
                          ),
 

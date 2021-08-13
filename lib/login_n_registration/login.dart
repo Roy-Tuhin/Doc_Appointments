@@ -410,9 +410,9 @@ class _LoginState extends State<Login> {
       
 
          ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;   
+          .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}")));   
 
-          pageRoute(jsonResponse['Message']);
+          pageRoute(jsonResponse['UserData']['Name'],); // WANT TO SHOW USER NAME IN APP DRAWER
       }
       
       
@@ -434,11 +434,11 @@ class _LoginState extends State<Login> {
   }
 
 
-  void pageRoute(String Message) async {
+  void pageRoute(String Name,) async {
     //HERE WE STORE VALUE OR TOKEN INSIDE SHARED PREFERENCE
 
     SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setString("login", Message);// KEY : VALUE
+    await pref.setString("login", Name);// KEY : VALUE
   }
 
 
