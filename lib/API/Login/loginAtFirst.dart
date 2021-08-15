@@ -121,32 +121,33 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topCenter,
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).accentColor
-              ],
-            ),
-          ),
-        ),
-        title: Text(
-          'LOGIN',
-          style: TextStyle(
-            fontFamily: 'Roboto_Condensed',
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   flexibleSpace: Container(
+      //     decoration: BoxDecoration(
+      //       gradient: LinearGradient(
+      //         begin: Alignment.topLeft,
+      //         end: Alignment.topCenter,
+      //         colors: [
+      //           Theme.of(context).primaryColor,
+      //           Theme.of(context).accentColor
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      //   title: Text(
+      //     'LOGIN',
+      //     style: TextStyle(
+      //       fontFamily: 'Roboto_Condensed',
+      //     ),
+      //   ),
+      // ),
       body: Container(
         color: Colors.lightBlue[50],
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Padding(
-          padding: EdgeInsets.all(25),
+          //padding: EdgeInsets.all(25),
+          padding: EdgeInsets.only(left: 25, right: 25,top: 10),
           child: SingleChildScrollView(
             child: Form(
               // key: formkey,
@@ -155,11 +156,12 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    // padding: const EdgeInsets.all(8.0),
+                     padding: const EdgeInsets.only(left: 8.0,right: 8.0),
                     child: Container(
-                      // width: MediaQuery.of(context).size.width,
-                      height: 250,
-                      width: 250,
+                       width: MediaQuery.of(context).size.width,
+                      // height: 250,
+                      // width: 250,
                       color: Colors.white,
                       child: Image(
                         image:
@@ -267,7 +269,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                       width: MediaQuery.of(context).size.width,
                       // color: Colors.green,
                       child: Text(
-                        'forgot password?',
+                        'Forgot Password?',
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 15),
@@ -345,7 +347,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                       width: MediaQuery.of(context).size.width,
                       // color: Colors.green,
                       child: Text(
-                        'do not have an account ?',
+                        'Do not have an account ?',
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 15),
