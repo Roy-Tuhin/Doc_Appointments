@@ -12,39 +12,35 @@ import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:medbo/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'ProgressHUD.dart';
+
 class LoginAtFirst extends StatefulWidget {
   @override
   _LoginAtFirstState createState() => _LoginAtFirstState();
 }
 
 class _LoginAtFirstState extends State<LoginAtFirst> {
-  bool hidepassword=true;
+  bool isApiCallProcess = false;
+  bool hidepassword = true;
   var emailController = TextEditingController();
   var passwordontroller = TextEditingController();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     checkLogin();
   }
 
-  void checkLogin()async{
+  void checkLogin() async {
     //HERE WE CHECK IF USER ALREADY LOGIN OR CREDENTIAL ALREADY AVAOLABLE OR NOT
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String? val = pref.getString("userEmail"); //userEmail is the key: And the value will be `Name` in APIabc@gmail.com
-    if (val !=null){
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Home()), (route) => false);
+    String? val = pref.getString(
+        "userEmail"); //userEmail is the key: And the value will be `Name` in APIabc@gmail.com
+    if (val != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => Home()), (route) => false);
     }
   }
-
-
-
-
-
-
-
-
-  
 
   late TextEditingController _userid;
   late TextEditingController _password;
@@ -95,13 +91,13 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
     //   // print("logged in");
     //   print(response.data);
 
-      // UserData loginuserdata = UserData(
-      //     name: response.data['UserData']['Name'],
-      //     encUserId: response.data['UserData']['EncUserId']);
+    // UserData loginuserdata = UserData(
+    //     name: response.data['UserData']['Name'],
+    //     encUserId: response.data['UserData']['EncUserId']);
 
-      // setState(() {
-      //   userData = loginuserdata;
-      // });
+    // setState(() {
+    //   userData = loginuserdata;
+    // });
     // } else {
     //   print(response.statusMessage);
     // }
@@ -119,8 +115,15 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
       RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
           .hasMatch(input);
 
-  @override
   Widget build(BuildContext context) {
+    return ProgressHUD(
+      child: _uiSetup(context),
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+    );
+  }
+
+  Widget _uiSetup(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
       //   flexibleSpace: Container(
@@ -148,7 +151,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
         height: MediaQuery.of(context).size.height,
         child: Padding(
           //padding: EdgeInsets.all(25),
-          padding: EdgeInsets.only(left: 25, right: 25,top: 10),
+          padding: EdgeInsets.only(left: 25, right: 25, top: 10),
           child: SingleChildScrollView(
             child: Form(
               // key: formkey,
@@ -158,9 +161,9 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                 children: <Widget>[
                   Padding(
                     // padding: const EdgeInsets.all(8.0),
-                     padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                     child: Container(
-                       width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width,
                       // height: 250,
                       // width: 250,
                       color: Colors.white,
@@ -212,14 +215,19 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                         // controller: _userid,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.mail,size: 13.0,),
-                          fillColor: Colors.white,
-                          border: InputBorder.none,
-                          //hintText: 'Enter your Email | Phone no.',
-                          //hintStyle: TextStyle(color: Colors.grey),
-                          labelText:'Enter your Email | Phone no.',
-                          labelStyle: TextStyle(color: Colors.grey, fontSize: 13,fontFamily: 'Jost')
-                        ),
+                            prefixIcon: Icon(
+                              Icons.mail,
+                              size: 13.0,
+                            ),
+                            fillColor: Colors.white,
+                            border: InputBorder.none,
+                            //hintText: 'Enter your Email | Phone no.',
+                            //hintStyle: TextStyle(color: Colors.grey),
+                            labelText: 'Enter your Email | Phone no.',
+                            labelStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 13,
+                                fontFamily: 'Jost')),
                         validator: (value) {
                           if (!isEmail(value) && !isPhone(value)) {
                             return 'Please enter a valid email or phone number.';
@@ -248,23 +256,35 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                         // controller: _password,
                         obscureText: hidepassword,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock, size: 13.0,),
-                          suffixIcon: IconButton(
-                            onPressed: (){
-                              setState(() {
-                                hidepassword=!hidepassword;
-                              });
-                            },
-                            color: Theme.of(context).accentColor.withOpacity(0.4),
-                            icon: Icon(hidepassword? Icons.visibility_off: Icons.visibility,size: 17,),
-                          ),
-                          fillColor: Colors.white,
-                          border: InputBorder.none,
-                          // hintText: 'Enter your password',
-                          // hintStyle: TextStyle(color: Colors.grey),
-                           labelText:'Enter your password',
-                          labelStyle: TextStyle(color: Colors.grey, fontSize: 13,fontFamily:'Jost')
-                        ),
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              size: 13.0,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  hidepassword = !hidepassword;
+                                });
+                              },
+                              color: Theme.of(context)
+                                  .accentColor
+                                  .withOpacity(0.4),
+                              icon: Icon(
+                                hidepassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                size: 17,
+                              ),
+                            ),
+                            fillColor: Colors.white,
+                            border: InputBorder.none,
+                            // hintText: 'Enter your password',
+                            // hintStyle: TextStyle(color: Colors.grey),
+                            labelText: 'Enter your password',
+                            labelStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 13,
+                                fontFamily: 'Jost')),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Enter password';
@@ -295,6 +315,9 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                   InkWell(
                     // onTap: validate,
                     onTap: () {
+                      setState(() {
+                        isApiCallProcess = true;
+                      });
                       login(); ////////////////////////////////////////////////////////=========================login() API F U N C T I O N==============================================
                       // validate();
                       // Navigator.of(context).pushNamed('/');
@@ -413,34 +436,34 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
             'Password': passwordontroller.text
           }));
       if (response.statusCode == 200) {
+        setState(() {
+          isApiCallProcess = false;//progress bar hide
+        });
         print("Correct");
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
         // Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterLoginResPage(rresponse: ApiResponse.fromJson(jsonResponse))));
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" ${jsonResponse['Message']}"),backgroundColor: Color(0xFF152A38),));
-        pageRoute(jsonResponse['UserData']['Name'],); // WANT TO SHOW USER NAME IN APP DRAWER AFTER LOGIN WITH CORRECT CREDENTIALS
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(" ${jsonResponse['Message']}"),
+          backgroundColor: Color(0xFF152A38),
+        ));
+        pageRoute(
+          jsonResponse['UserData']['Name'],
+        ); // WANT TO SHOW USER NAME IN APP DRAWER AFTER LOGIN WITH CORRECT CREDENTIALS
       } else {
         print("Wronggooooooooooooooooooooooooooo");
         print(response.body);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid credentials")));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid credentials")));
       }
-    }
-    
-    
-    else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Blank field is not allowed"),backgroundColor: Color(0xFFAF0404),));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Blank field is not allowed"),
+        backgroundColor: Color(0xFFAF0404),
+      ));
     }
   }
-
-
-
-
-
-
-
-
 
   void pageRoute(
     String Name,
@@ -450,7 +473,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setString("userEmail", Name); // KEY : VALUE
     //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Home()), (route) => false);
-
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => Home()), (route) => false);
   }
 }
