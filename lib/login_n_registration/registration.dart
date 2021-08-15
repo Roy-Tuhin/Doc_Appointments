@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:medbo/API/Login/loginAtFirst.dart';
 import 'package:medbo/API/Registration/AfterRegistrationResPage.dart';
 import 'package:medbo/API/Registration/RegistrationApiResponse.dart';
@@ -182,12 +183,14 @@ class _RegistrationState extends State<Registration> {
                           //controller: _email,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.email,size: 13.0,),
+                          prefixIcon: Icon(Icons.mail,size: 13.0,),
                           fillColor: Colors.white,
                           border: InputBorder.none,
-                          hintText: 'Enter your Email',
+                          // hintText: 'Enter your Email',
+                          //hintStyle: TextStyle(color: Colors.grey),
                           labelText: 'Email',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          labelStyle: TextStyle(color: Colors.grey, fontSize: 14.5,fontFamily: 'Jost'),
+                          
                         ),
                           validator: (value){
                             if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value!)){
@@ -230,13 +233,16 @@ class _RegistrationState extends State<Registration> {
                           controller:contactControler,
                           //controller: _phone,
                           keyboardType: TextInputType.number,
+                          inputFormatters: [
+                          LengthLimitingTextInputFormatter(10),], //only 10 digit mobile number
                           decoration: InputDecoration(
                           prefixIcon: Icon(Icons.phone_android, size: 13.0,),
                           fillColor: Colors.white,
                           border: InputBorder.none,
-                          hintText: 'Enter your phone no',
-                          labelText: 'Phone No',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          // hintText: 'Enter your phone no',
+                          // hintStyle: TextStyle(color: Colors.grey),
+                          labelText: 'Enter your phone no',
+                          labelStyle: TextStyle(color: Colors.grey, fontSize: 14.5,fontFamily: 'Jost'),
                         ),
                           validator: (value){
                             if(!RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$').hasMatch(value!)){
@@ -276,12 +282,13 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.text,
                           //decoration:buildInputDecoration("Password"),
                           decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.password_sharp, size: 13.0,),
+                          prefixIcon: Icon(Icons.lock, size: 13.0,),
                           fillColor: Colors.white,
                           border: InputBorder.none,
-                          hintText: 'Enter your password',
-                          labelText: 'Password',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          // hintText: 'Enter your password',
+                          // hintStyle: TextStyle(color: Colors.grey),
+                          labelText: 'Enter your password',
+                          labelStyle: TextStyle(color: Colors.grey, fontSize: 14.5,fontFamily: 'Jost'),
                         ),
                           validator: (value){
                             if(value!.isEmpty)
@@ -319,12 +326,13 @@ class _RegistrationState extends State<Registration> {
                           keyboardType: TextInputType.text,
                           //decoration:buildInputDecoration("Confirm Password"),
                           decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.confirmation_number,size: 13.0,),
+                          prefixIcon: Icon(Icons.lock,size: 13.0,),
                           fillColor: Colors.white,
                           border: InputBorder.none,
-                          hintText: 'Re-type your password',
-                          labelText: 'Confirm password',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          // hintText: 'Re-type your password',
+                          // hintStyle: TextStyle(color: Colors.grey),
+                          labelText: 'Confirm your password',
+                          labelStyle: TextStyle(color: Colors.grey, fontSize: 14.5,fontFamily: 'Jost'),
                         ),
                           validator: (value){
                             if(value!.isEmpty)

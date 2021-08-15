@@ -18,6 +18,7 @@ class LoginAtFirst extends StatefulWidget {
 }
 
 class _LoginAtFirstState extends State<LoginAtFirst> {
+  bool hidepassword=true;
   var emailController = TextEditingController();
   var passwordontroller = TextEditingController();
 
@@ -207,15 +208,17 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                       ////////////////////////Enter email//////////////////////////////
 
                       child: TextFormField(
-                        controller: emailController, //=================
+                        controller: emailController,
                         // controller: _userid,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          //prefixIcon: Icon(Icons.email,size: 13.0,),
+                        prefixIcon: Icon(Icons.mail,size: 13.0,),
                           fillColor: Colors.white,
                           border: InputBorder.none,
-                          hintText: 'Enter your Email | Phone no.',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          //hintText: 'Enter your Email | Phone no.',
+                          //hintStyle: TextStyle(color: Colors.grey),
+                          labelText:'Enter your Email | Phone no.',
+                          labelStyle: TextStyle(color: Colors.grey, fontSize: 13,fontFamily: 'Jost')
                         ),
                         validator: (value) {
                           if (!isEmail(value) && !isPhone(value)) {
@@ -243,13 +246,24 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                       child: TextFormField(
                         controller: passwordontroller, //================
                         // controller: _password,
-                        obscureText: true,
+                        obscureText: hidepassword,
                         decoration: InputDecoration(
-                          //prefixIcon: Icon(Icons.password, size: 13.0,),
+                          prefixIcon: Icon(Icons.lock, size: 13.0,),
+                          suffixIcon: IconButton(
+                            onPressed: (){
+                              setState(() {
+                                hidepassword=!hidepassword;
+                              });
+                            },
+                            color: Theme.of(context).accentColor.withOpacity(0.4),
+                            icon: Icon(hidepassword? Icons.visibility_off: Icons.visibility,size: 17,),
+                          ),
                           fillColor: Colors.white,
                           border: InputBorder.none,
-                          hintText: 'Enter your password',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          // hintText: 'Enter your password',
+                          // hintStyle: TextStyle(color: Colors.grey),
+                           labelText:'Enter your password',
+                          labelStyle: TextStyle(color: Colors.grey, fontSize: 13,fontFamily:'Jost')
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
