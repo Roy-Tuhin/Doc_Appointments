@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:medbo/API/Login/loginAtFirst.dart';
 import 'package:medbo/API/Registration/AfterRegistrationResPage.dart';
 import 'package:medbo/API/Registration/RegistrationApiResponse.dart';
 import 'package:medbo/login_n_registration/login.dart';
@@ -17,7 +18,7 @@ class Registration extends StatefulWidget {
 
 class _RegistrationState extends State<Registration> {
 
-    TextEditingController emailControler = TextEditingController();
+  TextEditingController emailControler = TextEditingController();
   TextEditingController contactControler = TextEditingController();
   TextEditingController passwordControler = TextEditingController();
   TextEditingController conpasswordControler = TextEditingController();
@@ -48,48 +49,48 @@ class _RegistrationState extends State<Registration> {
   // late TextEditingController _phone;
   // late TextEditingController _password;
   // late TextEditingController _confirmpassword;
-  // late GlobalKey<FormState> _regformkey;
+   late GlobalKey<FormState> _regformkey;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   _regformkey = GlobalKey<FormState>();
-  //   _email=TextEditingController();
-  //   _phone=TextEditingController();
-  //   _password=TextEditingController();
-  //   _confirmpassword=TextEditingController();
-  //   super.initState();
+  @override
+  void initState() {
+    // TODO: implement initState
+    _regformkey = GlobalKey<FormState>();
+    emailControler=TextEditingController();
+    contactControler=TextEditingController();
+    passwordControler=TextEditingController();
+    conpasswordControler=TextEditingController();
+    super.initState();
 
-  // }
+  }
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   _email.dispose();
-  //   _password.dispose();
-  //   _phone.dispose();
-  //   _confirmpassword.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+   emailControler.dispose();
+     passwordControler.dispose();
+    contactControler.dispose();
+    conpasswordControler.dispose();
+    super.dispose();
+  }
 
-  // void validate(){
-  //   if(_regformkey.currentState!.validate()){
-  //     print("Validated");
-  //     registerUser();
-  //     setState(() {
-  //       _email.clear();
-  //       _phone.clear();
-  //       _password.clear();
-  //       _confirmpassword.clear();
-  //     });
-  //   }
-  //   // else if(_regformkey.currentState==null){
-  //   //
-  //   // }
-  //   else{
-  //     print('Not Validated');
-  //   }
-  // }
+  void validate(){
+    if(_regformkey.currentState!.validate()){
+      print("Validated");
+      registrationOfuser(emailControler.text, contactControler.text, passwordControler.text, conpasswordControler.text) ;//==============registrationOfuser() API CALLr();
+      setState(() {
+       emailControler.clear();
+       contactControler.clear();
+       passwordControler.clear();
+        conpasswordControler.clear();
+      });
+    }
+    else if(_regformkey.currentState==null){
+    
+    }
+    else{
+      print('Not Validated');
+    }
+  }
 
   // Future registerUser() async{
   //   Map mapRegData={
@@ -137,7 +138,7 @@ class _RegistrationState extends State<Registration> {
             padding: EdgeInsets.all(25),
             child: SingleChildScrollView(
               child: Form(
-               // key: _regformkey,
+                key: _regformkey,
                 child:
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,6 +163,10 @@ class _RegistrationState extends State<Registration> {
                       child: Text("REGISTRATION",style: TextStyle(fontFamily: 'Roboto_Condensed',fontWeight: FontWeight.bold,fontSize: 22,color: Theme.of(context).primaryColor),),
                     ),
 
+
+
+                    //======================================================================E m a i l c o n t r o l l e r===================================================
+
                     Container(
                       margin: EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -173,25 +178,36 @@ class _RegistrationState extends State<Registration> {
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
                           controller:emailControler,
-                          //controller: _email,//===================================E m a i l c o n t r o l l e r
+                          //controller: _email,
                           keyboardType: TextInputType.text,
                           decoration:buildInputDecoration("Email"),
-                          // validator: (value){
-                          //   if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value!)){
-                          //     return 'Please a valid Email';
-                          //   }
-                          //   // else if(value==null){
-                          //   //   _email='' as TextEditingController;
-                          //   // }
-                          //   return null;
-                          //
-                          // },
-                          // onSaved: (value){
-                          //  // _email = value as TextEditingController;
-                          // },
+                          validator: (value){
+                            if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value!)){
+                              return 'Please enter a valid Email';
+                            }
+                            else if(value==null){
+                              emailControler='' as TextEditingController;
+                            }
+                            return null;
+                          
+                          },
+                          onSaved: (value){
+                           emailControler = value as TextEditingController;
+                          },
                         ),
                       ),
                     ),
+
+
+
+
+                    //===========================================================contact  c o n t r o l l e r=========================================================================================
+
+
+
+
+
+
 
                     Container(
                       margin: EdgeInsets.all(10),
@@ -204,24 +220,30 @@ class _RegistrationState extends State<Registration> {
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
                           controller:contactControler,
-                          //controller: _phone,//=================================== c o n t r o l l e r
+                          //controller: _phone,
                           keyboardType: TextInputType.number,
                           decoration:buildInputDecoration("Phone No"),
-                          // validator: (value){
-                          //   if(!RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$').hasMatch(value!)){
-                          //     return "Please enter a valid phone number";
-                          //   }
-                          //   // else if(value==null){
-                          //   //   _phone="" as TextEditingController ;
-                          //   // }
-                          //   return null;
-                          // },
-                          // onSaved: (value){
-                          //  // _phone = value as TextEditingController;
-                          // },
+                          validator: (value){
+                            if(!RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$').hasMatch(value!)){
+                              return "Please enter a valid phone number";
+                            }
+                            else if(value==null){
+                              contactControler="" as TextEditingController ;
+                            }
+                            return null;
+                          },
+                          onSaved: (value){
+                            contactControler = value as TextEditingController;
+                          },
                         ),
                       ),
                     ),
+
+
+
+                     //===========================================================Password c o n t r o l l e r=========================================================================================
+
+
 
                     Container(
                       margin: EdgeInsets.all(10),
@@ -234,7 +256,7 @@ class _RegistrationState extends State<Registration> {
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
                          controller: passwordControler,
-                          //controller: _password,//=================================== c o n t r o l l e r
+                          //controller: _password,
                           obscureText: true,
                           keyboardType: TextInputType.text,
                           decoration:buildInputDecoration("Password"),
@@ -246,12 +268,17 @@ class _RegistrationState extends State<Registration> {
                             return null;
                           },
                           onSaved: (value){
-                           // _password = value ! as TextEditingController;
+                            passwordControler = value ! as TextEditingController;
                           },
 
                         ),
                       ),
                     ),
+
+
+                     //=========================================================== confirmation password  c o n t r o l l e r=========================================================================================
+
+
 
                     Container(
                       margin: EdgeInsets.all(10),
@@ -264,7 +291,7 @@ class _RegistrationState extends State<Registration> {
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextFormField(
                            controller: conpasswordControler,
-                          //controller: _confirmpassword,//=================================== c o n t r o l l e r
+                          //controller: _confirmpassword,
                           obscureText: true,
                           keyboardType: TextInputType.text,
                           decoration:buildInputDecoration("Confirm Password"),
@@ -273,18 +300,18 @@ class _RegistrationState extends State<Registration> {
                             {
                               return 'Please re-enter password';
                             }
-                           // print(_password.text);
+                           print(passwordControler.text);
 
-                           // print(_confirmpassword.text);
+                            print(conpasswordControler.text);
 
-                           // if(_password.text!=_confirmpassword.text){
+                           if(passwordControler.text!=conpasswordControler.text){
                               return "Password does not match";
                             }
-                           // return null;
-                         // },
-                          // onSaved: (value){
-                          //   _confirmpassword = value ! as TextEditingController;
-                          // },
+                           return null;
+                         },
+                          onSaved: (value){
+                            conpasswordControler = value ! as TextEditingController;
+                          },
                         ),
                       ),
                     ),
@@ -297,10 +324,10 @@ class _RegistrationState extends State<Registration> {
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
-                          registrationOfuser(emailControler.text, contactControler.text, passwordControler.text, conpasswordControler.text) ;//================================================Registration SUBMIT button
-                          //validate();
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Login()
-                            ),);
+                          //registrationOfuser(emailControler.text, contactControler.text, passwordControler.text, conpasswordControler.text) ;//==============registrationOfuser() API CALL
+                          validate();
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginAtFirst()
+                          //   ),);
 
                         },
 
@@ -308,7 +335,7 @@ class _RegistrationState extends State<Registration> {
                             borderRadius: BorderRadius.circular(10.0),
 
                         ),
-                        textColor:Colors.white,child: Text("Submit"),
+                        textColor:Colors.white,child: Text("Submit"), //===================Registration Submit button
 
 
                       ),
@@ -326,7 +353,8 @@ class _RegistrationState extends State<Registration> {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: InkWell(
-                        onTap:(){ Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));},
+                        onTap:(){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginAtFirst()));},// =================== L O G I N   P A G E  if user want to login insted of registration
                         child: Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width,
@@ -381,10 +409,10 @@ class _RegistrationState extends State<Registration> {
 
     if (response.statusCode == 200) {
        jsonResponse = json.decode(response.body.toString());
-        ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;      
-         
-      //Or put here your next screen using Navigator.push() method
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> LoginAtFirst()), (route) => false); 
+
+        
       print('success');
     } else {
       print('error');
