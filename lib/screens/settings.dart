@@ -87,9 +87,10 @@ class Settings extends StatelessWidget {
                     'PROFILE',//========================================================================
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: 18,
+                      letterSpacing: 3,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Roboto_Condensed',
+                      fontFamily: 'Jost',
                     ),
                   ),
                 ),
@@ -116,9 +117,10 @@ class Settings extends StatelessWidget {
                     'BOOKING',//========================================================================
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: 18,
+                      letterSpacing: 3,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Roboto_Condensed',
+                      fontFamily: 'Jost',
                     ),
                   ),
                 ),
@@ -145,7 +147,8 @@ class Settings extends StatelessWidget {
                     'CUSTOMER SERVICES',//========================================================================
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: 18,
+                      letterSpacing: 3,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Roboto_Condensed',
                     ),
@@ -182,7 +185,8 @@ class Settings extends StatelessWidget {
                       'LOGOUT',//========================================================================
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: 18,
+                        letterSpacing: 3,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Roboto_Condensed',
                       ),

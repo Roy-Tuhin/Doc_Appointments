@@ -104,7 +104,7 @@ void getCred() async{
                       children: [
                         Text(
                           'Welcome',
-                          style: TextStyle(fontSize: 16, color: Colors.white,fontFamily: 'Roboto_Condensed'),
+                          style: TextStyle(fontSize: 16, color: Colors.white,fontFamily: 'Jost'),
                         ),
                         // Text(
                         //   'android.studio@android.com',
@@ -116,7 +116,7 @@ void getCred() async{
 
                        Text(
                          " ${Name}",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white,fontFamily: 'Jost'),
                          ),
 
 
@@ -132,7 +132,7 @@ void getCred() async{
               leading: Icon(Icons.home, color: Theme.of(context).accentColor),
               title: Text(
                 'Home',
-                style: TextStyle(color: Theme.of(context).accentColor),
+                style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'JOST',fontWeight: FontWeight.bold,),
               ),
               onTap: () {
               Navigator.of(context).pop();
@@ -144,7 +144,7 @@ void getCred() async{
                   color: Theme.of(context).accentColor),
               title: Text(
                 'Services',
-                style: TextStyle(color: Theme.of(context).accentColor),
+                style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'JOST',fontWeight: FontWeight.bold,),
               ),
               onTap: () {
                 Navigator.of(context).pop();
@@ -159,7 +159,7 @@ void getCred() async{
               ),
               title: Text(
                 'About',
-                style: TextStyle(color: Theme.of(context).accentColor),
+                style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'JOST',fontWeight: FontWeight.bold,),
               ),
               onTap: () {
                 Navigator.of(context).pop();
@@ -183,7 +183,7 @@ void getCred() async{
                   Icon(Icons.settings, color: Theme.of(context).accentColor),
               title: Text(
                 'Setting',
-                style: TextStyle(color: Theme.of(context).accentColor),
+                style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'JOST',fontWeight: FontWeight.bold,),
               ),
               onTap: () {
                 Navigator.of(context).pop();

@@ -410,7 +410,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                         child: Text(
                           'Sign Up',
                           style: TextStyle(
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,
                               fontSize: 20),
                         ),
                       ),
@@ -458,6 +458,9 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
             .showSnackBar(SnackBar(content: Text("Invalid credentials")));
       }
     } else {
+      setState(() {
+          isApiCallProcess = false;//progress bar hide
+        });
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Blank field is not allowed"),
         backgroundColor: Color(0xFFAF0404),

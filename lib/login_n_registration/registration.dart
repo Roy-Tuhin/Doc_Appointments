@@ -370,7 +370,7 @@ class _RegistrationState extends State<Registration> {
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
                           setState(() {
-                        isApiCallProcess = true;
+                        isApiCallProcess = false;
                       });
                           //registrationOfuser(emailControler.text, contactControler.text, passwordControler.text, conpasswordControler.text) ;//==============registrationOfuser() API CALL
                           validate();
@@ -407,7 +407,7 @@ class _RegistrationState extends State<Registration> {
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width,
                           // color: Colors.green,
-                          child: Text('Login',style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),),
+                          child: Text('Login',style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 22,fontWeight: FontWeight.bold,),),
                         ),
                       ),
                     ),
@@ -466,6 +466,9 @@ class _RegistrationState extends State<Registration> {
         
       print('success');
     } else {
+      setState(() {
+          isApiCallProcess = false;//progress bar hide
+        });
       print('error');
     }
 
