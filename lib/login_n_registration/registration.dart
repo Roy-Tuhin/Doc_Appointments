@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:medbo/API/Login/ProgressHUD.dart';
 import 'package:medbo/API/Login/loginAtFirst.dart';
 import 'package:medbo/API/Registration/AfterRegistrationResPage.dart';
 import 'package:medbo/API/Registration/RegistrationApiResponse.dart';
@@ -18,7 +19,7 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-
+   bool isApiCallProcess = false;
   TextEditingController emailControler = TextEditingController();
   TextEditingController contactControler = TextEditingController();
   TextEditingController passwordControler = TextEditingController();
@@ -110,10 +111,15 @@ class _RegistrationState extends State<Registration> {
   //     // return 'Registered';
   //   }
   // }
-
-
-  @override
   Widget build(BuildContext context) {
+    return ProgressHUD(
+      child: _uiSetup(context),
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+    );
+  }
+
+  Widget _uiSetup(BuildContext context) {
     return Scaffold(
       // appBar:AppBar(
       //   flexibleSpace: Container(
@@ -363,6 +369,9 @@ class _RegistrationState extends State<Registration> {
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
+                          setState(() {
+                        isApiCallProcess = true;
+                      });
                           //registrationOfuser(emailControler.text, contactControler.text, passwordControler.text, conpasswordControler.text) ;//==============registrationOfuser() API CALL
                           validate();
                           // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginAtFirst()
@@ -447,6 +456,9 @@ class _RegistrationState extends State<Registration> {
     print(response.statusCode);
 
     if (response.statusCode == 200) {
+      setState(() {
+          isApiCallProcess = false;//progress bar hide
+        });
        jsonResponse = json.decode(response.body.toString());
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"),backgroundColor: Color(0xFF152A38),)) ;
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> LoginAtFirst()), (route) => false); 
