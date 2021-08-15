@@ -114,28 +114,29 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topCenter,
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).accentColor
-              ] ,
-            ),
-          ),
-        ),
-        title: Text('Register',style: TextStyle(fontFamily: 'Roboto_Condensed',),),
-      ),
+      // appBar:AppBar(
+      //   flexibleSpace: Container(
+      //     decoration: BoxDecoration(
+      //       gradient: LinearGradient(
+      //         begin: Alignment.topLeft,
+      //         end: Alignment.topCenter,
+      //         colors: [
+      //           Theme.of(context).primaryColor,
+      //           Theme.of(context).accentColor
+      //         ] ,
+      //       ),
+      //     ),
+      //   ),
+      //   title: Text('Register',style: TextStyle(fontFamily: 'Roboto_Condensed',),),
+      // ),
 
       body: Container(
           color: Colors.lightBlue[50],
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Padding(
-            padding: EdgeInsets.all(25),
+            // padding: EdgeInsets.all(25),
+              padding: EdgeInsets.only(left: 25, right: 25,top: 10),
             child: SingleChildScrollView(
               child: Form(
                 key: _regformkey,
@@ -143,12 +144,12 @@ class _RegistrationState extends State<Registration> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
+                  children:[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        // width: MediaQuery.of(context).size.width,
-                        height: 250,
+                         //width: MediaQuery.of(context).size.width,
+                        height: 240,
                         width: 250,
                         color: Colors.white,
                         child:
@@ -157,7 +158,7 @@ class _RegistrationState extends State<Registration> {
                     ),
 
                     Container(
-                      height: 50,
+                      height: 20,
                       alignment: Alignment.center,
                       // color: Colors.green,
                       child: Text("REGISTRATION",style: TextStyle(fontFamily: 'Roboto_Condensed',fontWeight: FontWeight.bold,fontSize: 22,color: Theme.of(context).primaryColor),),
@@ -180,7 +181,14 @@ class _RegistrationState extends State<Registration> {
                           controller:emailControler,
                           //controller: _email,
                           keyboardType: TextInputType.text,
-                          decoration:buildInputDecoration("Email"),
+                          decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.email,size: 13.0,),
+                          fillColor: Colors.white,
+                          border: InputBorder.none,
+                          hintText: 'Enter your Email',
+                          labelText: 'Email',
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
                           validator: (value){
                             if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value!)){
                               return 'Please enter a valid Email';
@@ -222,7 +230,14 @@ class _RegistrationState extends State<Registration> {
                           controller:contactControler,
                           //controller: _phone,
                           keyboardType: TextInputType.number,
-                          decoration:buildInputDecoration("Phone No"),
+                          decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.phone_android, size: 13.0,),
+                          fillColor: Colors.white,
+                          border: InputBorder.none,
+                          hintText: 'Enter your phone no',
+                          labelText: 'Phone No',
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
                           validator: (value){
                             if(!RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$').hasMatch(value!)){
                               return "Please enter a valid phone number";
@@ -259,7 +274,15 @@ class _RegistrationState extends State<Registration> {
                           //controller: _password,
                           obscureText: true,
                           keyboardType: TextInputType.text,
-                          decoration:buildInputDecoration("Password"),
+                          //decoration:buildInputDecoration("Password"),
+                          decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.password_sharp, size: 13.0,),
+                          fillColor: Colors.white,
+                          border: InputBorder.none,
+                          hintText: 'Enter your password',
+                          labelText: 'Password',
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
                           validator: (value){
                             if(value!.isEmpty)
                             {
@@ -294,7 +317,15 @@ class _RegistrationState extends State<Registration> {
                           //controller: _confirmpassword,
                           obscureText: true,
                           keyboardType: TextInputType.text,
-                          decoration:buildInputDecoration("Confirm Password"),
+                          //decoration:buildInputDecoration("Confirm Password"),
+                          decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.confirmation_number,size: 13.0,),
+                          fillColor: Colors.white,
+                          border: InputBorder.none,
+                          hintText: 'Re-type your password',
+                          labelText: 'Confirm password',
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
                           validator: (value){
                             if(value!.isEmpty)
                             {
@@ -347,7 +378,7 @@ class _RegistrationState extends State<Registration> {
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
                         // color: Colors.green,
-                        child: Text('already have an account ?',style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 15),),
+                        child: Text('Already have an account ?',style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 15),),
                       ),
                     ),
                     Padding(
@@ -409,7 +440,7 @@ class _RegistrationState extends State<Registration> {
 
     if (response.statusCode == 200) {
        jsonResponse = json.decode(response.body.toString());
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"))) ;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text(" ${jsonResponse['Message']}"),backgroundColor: Color(0xFF152A38),)) ;
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> LoginAtFirst()), (route) => false); 
 
         

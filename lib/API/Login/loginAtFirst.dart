@@ -211,6 +211,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                         // controller: _userid,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
+                          //prefixIcon: Icon(Icons.email,size: 13.0,),
                           fillColor: Colors.white,
                           border: InputBorder.none,
                           hintText: 'Enter your Email | Phone no.',
@@ -244,6 +245,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
                         // controller: _password,
                         obscureText: true,
                         decoration: InputDecoration(
+                          //prefixIcon: Icon(Icons.password, size: 13.0,),
                           fillColor: Colors.white,
                           border: InputBorder.none,
                           hintText: 'Enter your password',
@@ -402,29 +404,29 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
         // Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterLoginResPage(rresponse: ApiResponse.fromJson(jsonResponse))));
-
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(" ${jsonResponse['Message']}")));
-
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(" ${jsonResponse['Message']}"),backgroundColor: Color(0xFF152A38),));
         pageRoute(jsonResponse['UserData']['Name'],); // WANT TO SHOW USER NAME IN APP DRAWER AFTER LOGIN WITH CORRECT CREDENTIALS
-
-
       } else {
         print("Wronggooooooooooooooooooooooooooo");
         print(response.body);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Invalid credentials")));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid credentials")));
       }
-    } 
-    
-    
+    }
     
     
     else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Blank field is not allowed")));
+          .showSnackBar(SnackBar(content: Text("Blank field is not allowed"),backgroundColor: Color(0xFFAF0404),));
     }
   }
+
+
+
+
+
+
+
+
 
   void pageRoute(
     String Name,

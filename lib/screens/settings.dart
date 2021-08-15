@@ -54,7 +54,7 @@ class Settings extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 370,
+                  height: 270,
                   color: Colors.white,
                   child: Image(
                     image: AssetImage('assets/images/medbo-home-banner.png'),
