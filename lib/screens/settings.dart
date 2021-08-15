@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medbo/API/Login/loginAtFirst.dart';
 import 'package:medbo/login_n_registration/login.dart';
 import 'package:medbo/screen_helper/side_drawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -150,38 +152,39 @@ class Settings extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      width: 250,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                            Theme.of(context).primaryColor,
-                            Theme.of(context).accentColor
-                          ],
-                        ),
+              InkWell(
+                onTap: () async{
+                  SharedPreferences pref = await SharedPreferences.getInstance();//////////////////////////////////////////LOGOUT AND CLEAR MEMORY
+                      await pref.clear();
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> LoginAtFirst()), (route) => false);
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => Logout()));//============================= Login material page// here have to implement logout
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    width: 250,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.topRight,
+                        colors: [
+                          Theme.of(context).primaryColor,
+                          Theme.of(context).accentColor
+                        ],
                       ),
-                      child: Text(
-                        'LOGIN',//========================================================================
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Roboto_Condensed',
-                        ),
+                    ),
+                    child: Text(
+                      'LOGOUT',//========================================================================
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Roboto_Condensed',
                       ),
                     ),
                   ),

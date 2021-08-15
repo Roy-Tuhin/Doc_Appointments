@@ -1,5 +1,6 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
+import 'package:medbo/API/Login/loginAtFirst.dart';
 import 'package:medbo/screen_helper/app_color.dart';
 import 'package:medbo/screens/about.dart';
 import 'package:medbo/screens/home.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       title: 'Medbo',
       initialRoute: '/',
       routes: {
-        '/': (_) => Home(),
+         '/': (_) => LoginAtFirst(),
+        '/Home': (_) => Home(),
         '/services': (_) => Services(),
         '/about': (_) => About(),
         // '/blogs':(_)=>Blogs(),

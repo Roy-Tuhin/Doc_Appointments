@@ -30,14 +30,14 @@ String Name="";
 
 void initState(){
   super.initState();
-  getred();
+  getCred();
 }
 
-void getred() async{
+void getCred() async{
   //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
   SharedPreferences pref = await SharedPreferences.getInstance();
   setState(() {
-    Name = pref.getString("login");
+    Name = pref.getString("userEmail");
   });
 
 }
