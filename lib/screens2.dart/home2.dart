@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:medbo/API/Search/SearchApiResponse.dart';
+import 'package:medbo/API/Search/afterSearchPage.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
 import 'package:medbo/onTapScreens/healthchkupDetails.dart';
 import 'package:medbo/onTapScreens/lastVisit.dart';
@@ -24,9 +26,8 @@ class Home2 extends StatefulWidget {
 
 class _Home2State extends State<Home2> {
 
-
-
-
+   var searchController = TextEditingController();
+//======================================================================================================================================================================
   late List docList = [];
   List finaldocList = [];
   late bool _loadDocList = true;
@@ -43,28 +44,12 @@ class _Home2State extends State<Home2> {
   List finalchkUpList = [];
   late bool _loadChkUpList = true;
 
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+//======================================================================================================================================================================
 
   AllDoctorsList doctorList = AllDoctorsList(); // doctorList obj
   Future<void> getDocs() async {
-    finaldocList = await doctorList.getDocs(); // getDocs() is our function // calling function with the class obj ==> doctorList
+    finaldocList = await doctorList
+        .getDocs(); // getDocs() is our function // calling function with the class obj ==> doctorList
     setState(() {
       docList = finaldocList;
     });
@@ -102,9 +87,9 @@ class _Home2State extends State<Home2> {
     // print(finalchkUpList.length);
   }
 
-  void initState() {//=====================================================init State
+  void initState() {
+    //=====================================================init State
     super.initState();
-
 
     getDocs();
     getSPlist();
@@ -125,6 +110,7 @@ class _Home2State extends State<Home2> {
     }
   }
 
+//=================================================================================================built (BuildContext context)=====================================================================
   @override
   Widget build(BuildContext context) {
     Widget image_carousel = new Container(
@@ -155,22 +141,23 @@ class _Home2State extends State<Home2> {
 
     return Scaffold(
       appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.topRight,
-                colors: [
-                  Theme.of(context).primaryColor,
-                  Theme.of(context).accentColor
-                ],
-              ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).accentColor
+              ],
             ),
           ),
-          title: Text(
-            'HOME',
-            style: TextStyle(fontFamily: 'Roboto_Condensed'),
-          )),
+        ),
+        title: Text(
+          'HOME',
+          style: TextStyle(fontFamily: 'Roboto_Condensed'),
+        ),
+      ),
       drawer: SideDrawer(),
       body: SingleChildScrollView(
         child: Container(
@@ -196,6 +183,35 @@ class _Home2State extends State<Home2> {
                 ),
               ),
               Column(children: [
+
+                Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: userField(),
+                        ),
+                        // Expanded(
+                        // child: ElevatedButton (
+                        //   //style: style,
+                        //    onPressed: (){
+                        //       searchByUser();
+                        //    },
+                        //   child: Icon(
+                        //    Icons.search),
+                        // ),
+                        // ),
+                    ],
+                  ),
+                ),
+
+                //  Padding(
+                //    padding: const EdgeInsets.all(13.0),
+                //    child: userField(),
+                //  ),
+
+                 //SizedBox(height: 20,),
+                 
                 image_carousel,
                 Container(
                   height: 200,
@@ -344,57 +360,15 @@ class _Home2State extends State<Home2> {
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                           fontFamily: 'Roboto_Condensed',
+                          fontFamily: 'Roboto_Condensed',
                           //fontFamily: 'Poppins',
                           color: Theme.of(context).primaryColor),
                     ),
                   ),
                 ),
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
-              
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                SizedBox(//=============================================================2nd row  All doc coming==========================================================================
+                SizedBox(
+                  //=============================================================2nd row  All doc coming==========================================================================
                   //onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorDetails()));},
                   height: 250,
                   child: ListView.builder(
@@ -827,4 +801,161 @@ class _Home2State extends State<Home2> {
       ),
     );
   }
+
+   Widget userField() {
+     
+    return TextFormField(
+      controller: searchController,
+      onChanged: (text) {
+        setState(
+          () {
+           // textLength = text.length;
+          },
+        );
+      },
+
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blueGrey),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
+        ),
+
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: Colors.blueGrey //greenAccent//Color(0xFF425c5a),
+              ),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
+        ),
+
+        errorBorder: OutlineInputBorder(
+        //  borderSide: BorderSide(color: Colors.red[100]),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
+        ),
+
+        suffixIcon: IconButton(
+        icon: Icon(Icons.search, color: Color(0xFFF4D3AE),size: 34,),
+        onPressed: (){
+          searchByUser();
+          },//=============================================================
+        ),
+
+        // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
+        //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
+
+        labelText: 'Search Doctors, Clinics, Hospitals, Diseases Etc',
+        labelStyle: TextStyle(
+          fontFamily: 'Californian FB',
+          color: Colors.white38, //Color(0xFF425c5a),
+          fontWeight: FontWeight.normal,
+          letterSpacing: 2.0,
+          fontSize: 13.0,
+        ),
+        hintText: 'Ex : Dental or Sugar Check up etc',
+        hintStyle: TextStyle(
+          fontFamily: 'Californian FB',
+          color: Colors.white38, //Color(0xFF425c5a),
+          fontWeight: FontWeight.normal,
+          letterSpacing: 2.0,
+          fontSize: 9.0,
+        ),
+        //filled: true,
+        //fillColor: Colors.grey[200],
+        // prefixIcon: Icon(
+        //   Icons.search,
+        //   color: Color(0xFFF4D3AE),
+        // ),
+      ),
+
+     //keyboardType: TextInputType.number,
+      // inputFormatters: [
+      //   //only numeric keyboard.
+      //  // LengthLimitingTextInputFormatter(6), //only 6 digit
+      //  // WhitelistingTextInputFormatter.digitsOnly,
+      // ],
+
+      // validator: (String value) {
+      //   if (value.length < 6) {
+      //     return 'Enter your vaild 6 digit User ID';
+      //   }
+      //   return null;
+      // },                                                                              // Active button validation
+    );
+  }
+
+
+
+
+
+
+
+//=================================================================================================
+
+
+
+
+
+
+  Future<void> searchByUser() async {
+    var jsonResponse;
+    if (searchController.text.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/searchResult"),
+          body: ({
+            'SearchKey': searchController.text,
+          }));
+      if (response.statusCode == 200) {
+        setState(() {
+          //isApiCallProcess = false;//progress bar hide
+        });
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterSearchPage(rresponse: SearchApiResponse.fromJson(jsonResponse))));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(" ${jsonResponse['Message']}"),
+          backgroundColor: Color(0xFF152A38),
+        ));
+        // pageRoute(
+        //   jsonResponse['UserData']['Name'],
+        // ); // WANT TO SHOW USER NAME IN APP DRAWER AFTER LOGIN WITH CORRECT CREDENTIALS
+      } else {
+        print("Wronggooooooooooooooooooooooooooo");
+        print(response.body);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid credentials")));
+      }
+    } else {
+      // setState(() {
+      //     isApiCallProcess = false;//progress bar hide
+      //   });
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   content: Text("Blank field is not allowed"),
+      //   backgroundColor: Color(0xFFAF0404),
+      // ));
+    }
+  }
+
+
+
+
+
+
+
+
 }
