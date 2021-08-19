@@ -10,6 +10,7 @@ import 'package:medbo/models/loginModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:medbo/screens/home.dart';
+import 'package:medbo/screens2.dart/home2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ProgressHUD.dart';
@@ -38,7 +39,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
         "userEmail"); //userEmail is the key: And the value will be `Name` in APIabc@gmail.com
     if (val != null) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => Home()), (route) => false);
+          MaterialPageRoute(builder: (context) => Home2()), (route) => false);
     }
   }
 
@@ -477,6 +478,6 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
     await pref.setString("userEmail", Name); // KEY : VALUE
     //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => Home()), (route) => false);
+        MaterialPageRoute(builder: (context) => Home2()), (route) => false);
   }
 }

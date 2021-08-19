@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:medbo/main.dart';
 import 'package:medbo/screens/home.dart';
+import 'package:medbo/screens2.dart/home2.dart';
 
 import 'ApiResponse.dart';
 
@@ -39,7 +40,7 @@ class _AfterLoginResPageState extends State<AfterLoginResPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => Home2(),
                       ),
                     );
                   },
