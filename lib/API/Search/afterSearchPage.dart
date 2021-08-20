@@ -23,58 +23,76 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[50],
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topCenter,
+              colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).accentColor
+              ],
+            ),
+          ),
+        ),
+        title: Text(
+          'Search Result',
+          style: TextStyle(
+            fontFamily: 'Roboto_Condensed',
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (final item in widget.rresponse.data)
-                  Column(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (final item in widget.rresponse.data)
+                Container(
+                  margin: EdgeInsets.all(20),
+                  child: Column(
                     children: [
                       ListTile(
+                        title: Text(item.name),
+                        trailing: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Theme.of(context).primaryColor),
+                            onPressed: () {},
+                            child: Text("Show details")),
                         leading: CircleAvatar(
+                          backgroundColor: Colors.lightBlue[50],
                           radius: 30,
                           backgroundImage: NetworkImage(item.image),
                         ),
                       ),
-                      // Text(item.status),
-                      // Text(item.message),
-                      Text(item.name),
+                      // Text(item.name),
                       Text(item.extra1),
                       Text(item.extra2),
                       //Image.network(item.image,height: 200,),
                     ],
                   ),
-
-                //  Text("Status: ${widget.rresponse.status}"),
-                //     Text("Message: ${widget.rresponse.message}"),
-                //     Text("Name: ${widget.rresponse.data[0].name}"),
-
-                //==??????????????????????????????????????
-                // Text("Name: ${widget.rresponse.userData!.name}"),
-                //Text("encUserId: ${widget.rresponse.userData!.encUserId}"),
-                // Text("name: ${widget.UserData.name}"),
-                SizedBox(
-                  height: 50,
                 ),
+              SizedBox(
+                height: 50,
+              ),
 
-                OutlinedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Home2(),
-                        ),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.exit_to_app,
-                      size: 18,
-                    ),
-                    label: Text("GoTo Home")),
-              ],
-            ),
+              // OutlinedButton.icon(
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => Home2(),
+              //         ),
+              //       );
+              //     },
+              //     icon: Icon(
+              //       Icons.exit_to_app,
+              //       size: 18,
+              //     ),
+              //     label: Text("GoTo Home")),
+            ],
           ),
         ),
       ),

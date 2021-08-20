@@ -113,6 +113,14 @@ class _Home2State extends State<Home2> {
 //=================================================================================================built (BuildContext context)=====================================================================
   @override
   Widget build(BuildContext context) {
+
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var blockSizeHorizontal = (screenWidth/100);
+    var blockSizeVertical= (screenHeight/100);
+
+
+
     Widget image_carousel = new Container(
       margin: EdgeInsets.all(10.0),
       // padding: EdgeInsets.all(10),
@@ -130,8 +138,8 @@ class _Home2State extends State<Home2> {
         images: [
           AssetImage('assets/images/medbo-doctors.png'),
           AssetImage('assets/images/medbo-pathological-tests.png'),
-          AssetImage('assets/images/medbo-home-banner.png'),
-          AssetImage('assets/images/medbo-surgical-packages.png'),
+          AssetImage('assets/images/medbo-home-banner-removebg.png'),
+          AssetImage('assets/images/medbo-pathological-tests.png'),
         ],
         dotSize: 0.0,
         indicatorBgPadding: 0.0,
@@ -153,10 +161,16 @@ class _Home2State extends State<Home2> {
             ),
           ),
         ),
-        title: Text(
-          'HOME',
-          style: TextStyle(fontFamily: 'Roboto_Condensed'),
+        title: Center(
+          child: Image.asset(
+      "assets/images/medbo.png",
+      fit: BoxFit.contain,
+      height: 52,),
         ),
+        //toolbarHeight: 88,
+    actions: [
+      IconButton(onPressed: () => {}, icon: Icon(Icons.more_vert,size: 0.1,),),
+    ],
       ),
       drawer: SideDrawer(),
       body: SingleChildScrollView(
@@ -168,7 +182,8 @@ class _Home2State extends State<Home2> {
               ClipPath(
                 clipper: MyClipper(),
                 child: Container(
-                  height: 400,
+                  //height: 400,
+                  height:blockSizeVertical*50,
                   width: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -213,16 +228,19 @@ class _Home2State extends State<Home2> {
                  //SizedBox(height: 20,),
                  
                 image_carousel,
-                Container(
-                  height: 200,
-                  // color: Colors.blue,
-                  child: ListView.separated(
+                Container(//===================================================1st=======================================================
+                 height: blockSizeVertical*29,//===============whole horizontal 1st card container height,
+
+                   //color: Colors.blue,
+                  child: ListView.separated(//=======================actual scrollble 5 box
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,      
                     itemBuilder: (context, index) => Container(
                         // color: Colors.green,
-                        height: 100,
-                        width: 300,
+                       height: blockSizeVertical*10,
+                        width:blockSizeHorizontal*70,//=================scrollable box
                         margin: EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
@@ -239,9 +257,9 @@ class _Home2State extends State<Home2> {
                         child: Column(
                           children: [
                             Container(
-                              height: 50,
-                              width: 150,
-                              // color: Colors.green,
+                             height: blockSizeVertical*8,
+                              width: blockSizeHorizontal*50,
+                               //color: Colors.green,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -249,32 +267,34 @@ class _Home2State extends State<Home2> {
                                     'Your Last Visit',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        fontFamily: 'Roboto_Condensed',
+                                        fontSize: 17,
+                                        fontFamily: 'Poppins',
                                         color: Colors.white),
                                   ),
                                   Text('Date and Time:',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontSize: 17,
                                           color: Colors.white,
-                                          fontFamily: 'Roboto_Condensed')),
+                                          fontFamily: 'Poppins')),
                                 ],
                               ),
                             ),
                             SizedBox(
-                              height: 40,
+                              height: blockSizeVertical*7,
                             ),
                             //=============================================================1st row===========================================================================
                             Container(
-                              height: 70,
-                              // color: Colors.green,
+                              height: blockSizeVertical*6.9,
+                              width: blockSizeHorizontal*100,//======container which contain 2Row elements
+                               //color: Colors.green,
                               child: Row(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(10),
-                                    width: 145,
-                                    // color: Colors.black,
+                                    padding: EdgeInsets.only(left:10),
+                                    width: blockSizeHorizontal*33,
+                                    height: blockSizeVertical*6,
+                                    //color: Colors.black,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -285,25 +305,25 @@ class _Home2State extends State<Home2> {
                                           'Doctors Name',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                              fontFamily: 'Roboto_Condensed',
+                                              fontSize: 13,
+                                              fontFamily: 'Poppins',
                                               color: Colors.white),
                                         ),
                                         Text('Doctor_speciality',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontFamily: 'Roboto_Condensed',
-                                                fontSize: 15,
+                                                fontFamily: 'Poppins',
+                                                fontSize: 13,
                                                 color: Colors.white)),
                                       ],
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 10,
+                                    width: blockSizeHorizontal*5,
                                   ),
                                   Container(
-                                    width: 145,
-                                    // color: Colors.black,
+                                    width: blockSizeHorizontal*30,
+                                     //color: Colors.black,
                                     child: InkWell(
                                       onTap: () {
                                         Navigator.push(
@@ -315,26 +335,29 @@ class _Home2State extends State<Home2> {
                                         // print("tapped on container");
                                       },
                                       child: Container(
-                                        margin: EdgeInsets.all(10),
+                                        margin: EdgeInsets.all(8),
                                         // padding: EdgeInsets.only(
                                         //     top: 10.0,
                                         //     bottom: 10.0,
                                         //     right: 32.0,
                                         //     left: 35.0),
-                                        height: 38,
+                                        height: blockSizeVertical*10,
                                         // color: Colors.green,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.rectangle,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
-                                        child: Text(
-                                          'Details:',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
-                                              color: Theme.of(context)
-                                                  .primaryColor),
+                                        child: Center(
+                                          child: Text(
+                                            'Details',
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -350,28 +373,46 @@ class _Home2State extends State<Home2> {
                     ),
                   ),
                 ),
+
+
+
+                //==========================================End of 1st block=======================
+
+
+
+
+
+
+
+
                 SizedBox(
-                  height: 35,
+                  height: blockSizeVertical*5.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      'Doctors',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Roboto_Condensed',
-                          //fontFamily: 'Poppins',
-                          color: Theme.of(context).primaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:8.0),
+                      child: Text(
+                        'Doctors',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins',
+                            //fontFamily: 'Poppins',
+                            color: Theme.of(context).primaryColor),
+                      ),
                     ),
                   ),
                 ),
 
-                SizedBox(
+                Container(//=============================================Doc containers==================================================
                   //=============================================================2nd row  All doc coming==========================================================================
                   //onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorDetails()));},
-                  height: 250,
+                  height: blockSizeVertical*38,
+                  //width: double.infinity,
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
                     itemCount: docList == null ? 0 : docList.length, ///////
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => Container(
@@ -379,43 +420,92 @@ class _Home2State extends State<Home2> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      width: 125,
+                      width: blockSizeHorizontal*40,//================================== white "container" width
                       margin: EdgeInsets.all(10),
                       child: Stack(children: [
                         Column(
                           //=================================================================================================doc image horizonal============================================
                           children: [
-                            Padding(
+                            Padding(//====================images 
                               padding: const EdgeInsets.all(5.0),
-                              child: Image(
-                                image: NetworkImage(
-                                  docList[index].doctorImage,
+                              child: ClipRRect(
+                                 borderRadius: BorderRadius.circular(14.0),
+                                child: Image(
+                                  image: NetworkImage(
+                                    docList[index].doctorImage,
+                                  ),
+                                  fit: BoxFit.cover,
+                                  height: blockSizeVertical*18,
+                                  width: blockSizeHorizontal*50,
                                 ),
-                                fit: BoxFit.contain,
-                                height: 100,
-                                width: 100,
                               ),
                             ),
                             // SizedBox(height: 5),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Text(
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: Center(
+                            //     child: Text(
+                            //       '${docList[index].doctorName}',
+                            //       style: TextStyle(
+                            //           fontFamily: 'Roboto_Condensed',
+                            //           color: Theme.of(context).primaryColor,
+                            //           fontWeight: FontWeight.bold,
+                            //           fontSize: 20),
+                            //       textAlign: TextAlign.center,
+                            //     ),
+                            //   ),
+                            // ),
+
+
+
+                            // SizedBox(height: 10),
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 5.0),
+                            //   child: Text(
+                            //     (() {
+                            //       var str =
+                            //           docList[index].specialisation.toString();
+                            //       if (str.length > 3) {
+                            //         return '${docList[index].specialisation.toString().substring(0, 20)} ' +
+                            //             '...';
+                            //       }
+
+                            //       return "${docList[index].specialisation}";
+                            //     })(),
+                            //     // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
+
+                            //     style: TextStyle(
+                            //       fontSize: 12,
+                            //       fontFamily: 'Roboto_Condensed',
+                            //       color: Theme.of(context).primaryColor,
+                            //     ),
+                            //     textAlign: TextAlign.center,
+                            //   ),
+                            // ),
+
+                            /////////////////////////////////
+
+                            SizedBox(height: blockSizeVertical*0.5),
+
+                            
+                            Text(
                                   '${docList[index].doctorName}',
                                   style: TextStyle(
-                                      fontFamily: 'Roboto_Condensed',
+                                      fontFamily: 'Poppins',
                                       color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20),
+                                      fontSize: 13),
                                   textAlign: TextAlign.center,
+                                  maxLines:1
                                 ),
-                              ),
-                            ),
-                            // SizedBox(height: 10),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Text(
+
+
+                                 SizedBox(height: blockSizeVertical*0.5),
+
+
+                                Text(
+                                  
                                 (() {
                                   var str =
                                       docList[index].specialisation.toString();
@@ -430,19 +520,29 @@ class _Home2State extends State<Home2> {
 
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontFamily: 'Roboto_Condensed',
+                                  fontFamily: 'Poppins',
                                   color: Theme.of(context).primaryColor,
                                 ),
+                                overflow: TextOverflow.clip,
+                                maxLines: 1,
                                 textAlign: TextAlign.center,
                               ),
-                            ),
+
+
+
+                             SizedBox(height: blockSizeVertical*0.5),
+
+
+
+                            
                           ],
+                          
                         ),
                         Positioned(
-                          bottom: 5,
-                          left: 2,
+                            bottom: 5,
+                          left: 5,
                           child: Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.only(left:15.0, bottom: 5),
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(
@@ -454,8 +554,8 @@ class _Home2State extends State<Home2> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                height: 30,
-                                width: 110,
+                                height: blockSizeVertical*5,
+                                width: blockSizeHorizontal*30,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(10),
@@ -472,9 +572,9 @@ class _Home2State extends State<Home2> {
                                   'Show Details',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Roboto_Condensed',
+                                    fontFamily: 'Poppins',
                                   ),
                                 ),
                               ),
@@ -485,33 +585,47 @@ class _Home2State extends State<Home2> {
                     ),
                   ),
                 ),
+
+
+
+
+
                 //=============================================================Doc list end===========================================================================
+                
+                
+                
+                
+                
                 SizedBox(
-                  height: 35,
+                  height: blockSizeVertical*5.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      'Surgical Package',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Roboto_Condensed',
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:8.0),
+                      child: Text(
+                        'Surgical Package',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 220,
+                Container(//=============================================================================================Surgical Package whole box=================================================
+                  height: blockSizeVertical*30,//38
                   child: ListView.builder(
                     itemCount: surglist == null ? 0 : surglist.length,
                     scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      width: 125,
+                      width: blockSizeHorizontal*40,
                       margin: EdgeInsets.all(10),
                       child: Stack(children: [
                         Column(
@@ -522,25 +636,26 @@ class _Home2State extends State<Home2> {
                                 '${surglist[index].packageName}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  fontFamily: 'Roboto_Condensed',
+                                  fontSize: 17,
+                                  fontFamily: 'Poppins',
                                   color: Theme.of(context).primaryColor,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: blockSizeVertical*0.8),
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               // color: Colors.green,
                               child: Text(
                                 '${surglist[index].description}',
                                 style: TextStyle(
-                                    fontFamily: 'Roboto_Condensed',
+                                    fontFamily: 'Poppins',
                                     // fontWeight: FontWeight.bold,
                                     fontSize: 12,
                                     color: Theme.of(context).primaryColor),
                                 textAlign: TextAlign.center,
+                                maxLines: 4,
                               ),
                             ),
                           ],
@@ -553,7 +668,7 @@ class _Home2State extends State<Home2> {
                           bottom: 5,
                           left: 2,
                           child: Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.only(left:15.0, bottom: 5),
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(
@@ -565,8 +680,8 @@ class _Home2State extends State<Home2> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                height: 30,
-                                width: 110,
+                                height: blockSizeVertical*5,
+                                width: blockSizeHorizontal*30,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(10),
@@ -585,7 +700,7 @@ class _Home2State extends State<Home2> {
                                     color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Roboto_Condensed',
+                                    fontFamily: 'Poppins',
                                   ),
                                 ),
                               ),
@@ -596,32 +711,55 @@ class _Home2State extends State<Home2> {
                     ),
                   ),
                 ),
+
+
+
+
+
+
+
+
+                //============================================================================Surgical end=================================
+
+
+
+
+
+
+
+
+
+
                 SizedBox(
-                  height: 35,
+                  height: blockSizeVertical*5.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      'Pathological Tests',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Roboto_Condensed',
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:8.0),
+                      child: Text(
+                        'Pathological Tests',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 200,
+                Container(
+                  height: blockSizeVertical*30,//38
                   child: ListView.builder(
                     itemCount: pathList == null ? 0 : pathList.length,
                     scrollDirection: Axis.horizontal,
+                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      width: 125,
+                      width: blockSizeHorizontal*40,
                       margin: EdgeInsets.all(10),
                       child: Stack(children: [
                         Column(
@@ -633,20 +771,39 @@ class _Home2State extends State<Home2> {
                                   '${pathList[index].testName}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    fontFamily: 'Roboto_Condensed',
+                                    fontSize: 17,
+                                    fontFamily: 'Poppins',
                                     color: Theme.of(context).primaryColor,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              SizedBox(height: 10),
-                            ]),
+                               SizedBox(height: blockSizeVertical*0.8),
+
+                                Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              // color: Colors.green,
+                              child: Center(
+                                child: Text(
+                                  '${pathList[index].testId}',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      // fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      color: Theme.of(context).primaryColor),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 4,
+                                ),
+                              ),
+                            ),
+                            ]
+                            
+                            ),
                         Positioned(
                           bottom: 5,
                           left: 2,
                           child: Padding(
-                            padding: const EdgeInsets.all(5.0),
+                           padding: const EdgeInsets.only(left:15.0, bottom: 5),
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(
@@ -657,8 +814,8 @@ class _Home2State extends State<Home2> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                height: 30,
-                                width: 110,
+                                height: blockSizeVertical*5,
+                                width: blockSizeHorizontal*30,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(10),
@@ -677,7 +834,7 @@ class _Home2State extends State<Home2> {
                                     color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Roboto_Condensed',
+                                    fontFamily: 'Poppins',
                                   ),
                                 ),
                               ),
@@ -688,32 +845,51 @@ class _Home2State extends State<Home2> {
                     ),
                   ),
                 ),
+
+
+
+
+
+
+               //============================================================================Pathological end=================================
+
+
+
+
+
+
+
+
                 SizedBox(
-                  height: 35,
+                 height: blockSizeVertical*5.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      'Health Checkups',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Roboto_Condensed',
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:8.0),
+                      child: Text(
+                        'Health Checkups',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 250,
+                Container(
+                  height: blockSizeVertical*30,//38
                   child: ListView.builder(
                     itemCount: chkUpList == null ? 0 : chkUpList.length,
                     scrollDirection: Axis.horizontal,
+                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      width: 125,
+                      width: blockSizeHorizontal*40,
                       margin: EdgeInsets.all(10),
                       child: Stack(children: [
                         Column(
@@ -724,34 +900,37 @@ class _Home2State extends State<Home2> {
                                 '${chkUpList[index].healthName}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  fontFamily: 'Roboto_Condensed',
+                                  fontSize: 17,
+                                  fontFamily: 'Poppins',
                                   color: Theme.of(context).primaryColor,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: blockSizeVertical*0.8),
+
+
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               // color: Colors.green,
                               child: Text(
                                 '${chkUpList[index].testName}',
                                 style: TextStyle(
-                                    fontFamily: 'Roboto_Condensed',
+                                    fontFamily: 'Poppins',
                                     // fontWeight: FontWeight.bold,
                                     fontSize: 12,
                                     color: Theme.of(context).primaryColor),
                                 textAlign: TextAlign.center,
+                                maxLines: 4,
                               ),
                             ),
                           ],
                         ),
-                        Positioned(
+                        Positioned(//===========================================================================show details button
                           bottom: 5,
-                          left: 2,
+                          left: 5,
                           child: Padding(
-                            padding: const EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.only(left:15.0, bottom: 5),
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(
@@ -763,8 +942,8 @@ class _Home2State extends State<Home2> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                height: 30,
-                                width: 110,
+                               height: blockSizeVertical*5,
+                                width: blockSizeHorizontal*30,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(10),
@@ -783,7 +962,7 @@ class _Home2State extends State<Home2> {
                                     color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Roboto_Condensed',
+                                    fontFamily: 'Poppins',
                                   ),
                                 ),
                               ),
@@ -805,6 +984,7 @@ class _Home2State extends State<Home2> {
    Widget userField() {
      
     return TextFormField(
+      style: TextStyle(color: Colors.white),
       controller: searchController,
       onChanged: (text) {
         setState(
@@ -857,15 +1037,15 @@ class _Home2State extends State<Home2> {
         // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
         //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
 
-        labelText: 'Search Doctors, Clinics, Hospitals, Diseases Etc',
+        labelText: 'Search Doctors, Clinics, Hospitals, Etc',
         labelStyle: TextStyle(
           fontFamily: 'Californian FB',
           color: Colors.white38, //Color(0xFF425c5a),
           fontWeight: FontWeight.normal,
           letterSpacing: 2.0,
-          fontSize: 13.0,
+          fontSize: 11.0,
         ),
-        hintText: 'Ex : Dental or Sugar Check up etc',
+        //hintText: 'Ex : Dental or Sugar Check up etc',
         hintStyle: TextStyle(
           fontFamily: 'Californian FB',
           color: Colors.white38, //Color(0xFF425c5a),

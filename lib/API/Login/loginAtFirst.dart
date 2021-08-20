@@ -125,6 +125,11 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
   }
 
   Widget _uiSetup(BuildContext context) {
+
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var blockSizeHorizontal = (screenWidth/100);
+    var blockSizeVertical= (screenHeight/100);
     return Scaffold(
       // appBar: AppBar(
       //   flexibleSpace: Container(
@@ -146,278 +151,282 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
       //     ),
       //   ),
       // ),
-      body: Container(
-        color: Colors.lightBlue[50],
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Padding(
-          //padding: EdgeInsets.all(25),
-          padding: EdgeInsets.only(left: 25, right: 25, top: 10),
-          child: SingleChildScrollView(
-            child: Form(
-              // key: formkey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    // padding: const EdgeInsets.all(8.0),
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      // height: 250,
-                      // width: 250,
-                      color: Colors.white,
-                      child: Image(
-                        image:
-                            AssetImage('assets/images/medbo-home-banner.png'),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 50,
-                    alignment: Alignment.center,
-                    // color: Colors.green,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "WELCOME TO MEDBO",
-                          style: TextStyle(
-                              fontFamily: 'Roboto_Condensed',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Theme.of(context).primaryColor),
+      body: SafeArea(
+        child: Container(
+          color: Colors.lightBlue[50],
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          //height: blockSizeVertical*100,
+          child: Padding(
+            //padding: EdgeInsets.all(25),
+            padding: EdgeInsets.only(left: 25, right: 25, top: 10),
+            child: SingleChildScrollView(
+              child: Form(
+                // key: formkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      // padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: Container(
+                        //width: MediaQuery.of(context).size.width,
+                         height: blockSizeVertical*35,
+                        width: blockSizeHorizontal*100,
+                        //color: Colors.white,
+                        child: Image(
+                          image:
+                              AssetImage('assets/images/medbo-home-banner-removebg.png'),
+                          fit: BoxFit.contain,
                         ),
-                        Text(
-                          "Medbo(Care close to you) ",
-                          style: TextStyle(
-                              fontFamily: 'Roboto_Condensed',
-                              fontSize: 15,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-
-                      ////////////////////////Enter email//////////////////////////////
-
-                      child: TextFormField(
-                        controller: emailController,
-                        // controller: _userid,
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.mail,
-                              size: 13.0,
-                            ),
-                            fillColor: Colors.white,
-                            border: InputBorder.none,
-                            //hintText: 'Enter your Email | Phone no.',
-                            //hintStyle: TextStyle(color: Colors.grey),
-                            labelText: 'Enter your Email | Phone no.',
-                            labelStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 13,
-                                fontFamily: 'Jost')),
-                        validator: (value) {
-                          if (!isEmail(value) && !isPhone(value)) {
-                            return 'Please enter a valid email or phone number.';
-                          }
-                          return null;
-                        },
-                        onSaved: (name) {
-                          _userid = name as TextEditingController;
-                        },
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-
-                      ////////////////////////////Password//////////////////////////////
-
-                      child: TextFormField(
-                        controller: passwordontroller, //================
-                        // controller: _password,
-                        obscureText: hidepassword,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              size: 13.0,
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  hidepassword = !hidepassword;
-                                });
-                              },
-                              color: Theme.of(context)
-                                  .accentColor
-                                  .withOpacity(0.4),
-                              icon: Icon(
-                                hidepassword
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                size: 17,
-                              ),
-                            ),
-                            fillColor: Colors.white,
-                            border: InputBorder.none,
-                            // hintText: 'Enter your password',
-                            // hintStyle: TextStyle(color: Colors.grey),
-                            labelText: 'Enter your password',
-                            labelStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 13,
-                                fontFamily: 'Jost')),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Enter password';
-                          } else {
-                            return null;
-                          }
-                        },
-                        onSaved: (pass) {
-                          _password = pass as TextEditingController;
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      width: MediaQuery.of(context).size.width,
-                      // color: Colors.green,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 15),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    // onTap: validate,
-                    onTap: () {
-                      setState(() {
-                        isApiCallProcess = true;
-                      });
-                      login(); ////////////////////////////////////////////////////////=========================login() API F U N C T I O N==============================================
-                      // validate();
-                      // Navigator.of(context).pushNamed('/');
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(5.0),
+                    Container(
+                      //color: Colors.blue,
+                     height: blockSizeVertical*8,
                       alignment: Alignment.center,
-                      height: 50,
-                      width: 250,
-                      // margin: EdgeInsets.all(5),
+                      // color: Colors.green,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "WELCOME TO MEDBO",
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          Text(
+                            "Medbo(Care close to you) ",
+                            style: TextStyle(
+                                fontFamily: 'Roboto_Condensed',
+                                fontSize: 15,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(20),
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    // color: Colors.green,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          // margin: const EdgeInsets.all(5.0),
-                          alignment: Alignment.center,
-                          height: 50,
-                          width: 150,
-                          // margin: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.red,
-                          ),
-                          child: Text(
-                            'G login',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+      
+                        ////////////////////////Enter email//////////////////////////////
+      
+                        child: TextFormField(
+                          controller: emailController,
+                          // controller: _userid,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.mail,
+                                size: 13.0,
+                              ),
+                              fillColor: Colors.white,
+                              border: InputBorder.none,
+                              //hintText: 'Enter your Email | Phone no.',
+                              //hintStyle: TextStyle(color: Colors.grey),
+                              labelText: 'Enter your Email | Phone no.',
+                              labelStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                  fontFamily: 'Jost')),
+                          validator: (value) {
+                            if (!isEmail(value) && !isPhone(value)) {
+                              return 'Please enter a valid email or phone number.';
+                            }
+                            return null;
+                          },
+                          onSaved: (name) {
+                            _userid = name as TextEditingController;
+                          },
                         ),
-                        Container(
-                          margin: const EdgeInsets.all(5.0),
-                          alignment: Alignment.center,
-                          height: 50,
-                          width: 150,
-                          // margin: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.lightBlue[900],
-                          ),
-                          child: Text(
-                            'F login',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width,
-                      // color: Colors.green,
-                      child: Text(
-                        'Do not have an account ?',
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 15),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: InkWell(
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+      
+                        ////////////////////////////Password//////////////////////////////
+      
+                        child: TextFormField(
+                          controller: passwordontroller, //================
+                          // controller: _password,
+                          obscureText: hidepassword,
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.lock,
+                                size: 13.0,
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    hidepassword = !hidepassword;
+                                  });
+                                },
+                                color: Theme.of(context)
+                                    .accentColor
+                                    .withOpacity(0.4),
+                                icon: Icon(
+                                  hidepassword
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  size: 17,
+                                ),
+                              ),
+                              fillColor: Colors.white,
+                              border: InputBorder.none,
+                              // hintText: 'Enter your password',
+                              // hintStyle: TextStyle(color: Colors.grey),
+                              labelText: 'Enter your password',
+                              labelStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 13,
+                                  fontFamily: 'Jost')),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter password';
+                            } else {
+                              return null;
+                            }
+                          },
+                          onSaved: (pass) {
+                            _password = pass as TextEditingController;
+                          },
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        width: MediaQuery.of(context).size.width,
+                        // color: Colors.green,
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      // onTap: validate,
                       onTap: () {
-                        //=============================================================================Registration=====================================================
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Registration()));
-                      }, //=============================================================================Registration=====================================================
+                        setState(() {
+                          isApiCallProcess = true;
+                        });
+                        login(); ////////////////////////////////////////////////////////=========================login() API F U N C T I O N==============================================
+                        // validate();
+                        // Navigator.of(context).pushNamed('/');
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                         height: blockSizeVertical*7.5,
+                         width: blockSizeHorizontal*60,
+                        // margin: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(20),
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      // color: Colors.green,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            // margin: const EdgeInsets.all(5.0),
+                            alignment: Alignment.center,
+                            height: blockSizeVertical*7.5,
+                            width: blockSizeHorizontal*38.5,
+                            // margin: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.red,
+                            ),
+                            child: Text(
+                              'G login',
+                              style: TextStyle(color: Colors.white, fontSize: 17,fontFamily: 'Poppins'),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(5.0),
+                            alignment: Alignment.center,
+                           height: blockSizeVertical*7.5,
+                            width: blockSizeHorizontal*38.5,
+                            // margin: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.lightBlue[900],
+                            ),
+                            child: Text(
+                              'F login',
+                              style: TextStyle(color: Colors.white, fontSize: 17,fontFamily: 'Poppins'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
                       child: Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
                         // color: Colors.green,
                         child: Text(
-                          'Sign Up',
+                          'Do not have an account ?',
                           style: TextStyle(
-                              color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 15),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: InkWell(
+                        onTap: () {
+                          //=============================================================================Registration=====================================================
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Registration()));
+                        }, //=============================================================================Registration=====================================================
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width,
+                          // color: Colors.green,
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

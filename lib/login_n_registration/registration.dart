@@ -120,6 +120,11 @@ class _RegistrationState extends State<Registration> {
   }
 
   Widget _uiSetup(BuildContext context) {
+
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var blockSizeHorizontal = (screenWidth/100);
+    var blockSizeVertical= (screenHeight/100);
     return Scaffold(
       // appBar:AppBar(
       //   flexibleSpace: Container(
@@ -147,8 +152,7 @@ class _RegistrationState extends State<Registration> {
             child: SingleChildScrollView(
               child: Form(
                 key: _regformkey,
-                child:
-                Column(
+                child:Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children:[
@@ -156,19 +160,18 @@ class _RegistrationState extends State<Registration> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                          //width: MediaQuery.of(context).size.width,
-                        height: 240,
-                        width: 250,
-                        color: Colors.white,
+                        height: blockSizeVertical*30,
+                        width: blockSizeHorizontal*100,
                         child:
-                        Image(image: AssetImage('assets/images/medbo-home-banner.png'),fit: BoxFit.contain,),
+                        Image(image: AssetImage('assets/images/medbo-home-banner-removebg.png'),fit: BoxFit.contain,),
                       ),
                     ),
 
                     Container(
-                      height: 20,
+                      height: blockSizeVertical*4.5,
                       alignment: Alignment.center,
                       // color: Colors.green,
-                      child: Text("REGISTRATION",style: TextStyle(fontFamily: 'Roboto_Condensed',fontWeight: FontWeight.bold,fontSize: 22,color: Theme.of(context).primaryColor),),
+                      child: Text("REGISTRATION",style: TextStyle(fontFamily: 'Poppins',fontWeight: FontWeight.bold,fontSize: 22,color: Theme.of(context).primaryColor),),
                     ),
 
 
@@ -361,11 +364,11 @@ class _RegistrationState extends State<Registration> {
                       ),
                     ),
 
-                    SizedBox(height: 5,),
+                    SizedBox(height: blockSizeVertical*0.5,),
 
                     SizedBox(
-                      width: 200,
-                      height: 50,
+                         height: blockSizeVertical*7.5,
+                         width: blockSizeHorizontal*58,
                       child: RaisedButton(
                         color: Theme.of(context).primaryColor,
                         onPressed: (){
