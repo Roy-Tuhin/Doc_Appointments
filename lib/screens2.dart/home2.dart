@@ -18,6 +18,7 @@ import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 // import 'package:medbo/API/Doctors/allDoc.dart';
 import 'package:http/http.dart' as http;
+import 'package:sizer/sizer.dart';
 
 class Home2 extends StatefulWidget {
   @override
@@ -597,7 +598,7 @@ class _Home2State extends State<Home2> {
                 
                 
                 SizedBox(
-                  height: blockSizeVertical*5.2,
+                  height: blockSizeVertical*6.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
@@ -731,7 +732,7 @@ class _Home2State extends State<Home2> {
 
 
                 SizedBox(
-                  height: blockSizeVertical*5.2,
+                  height: blockSizeVertical*6.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
@@ -861,7 +862,7 @@ class _Home2State extends State<Home2> {
 
 
                 SizedBox(
-                 height: blockSizeVertical*5.2,
+                 height: blockSizeVertical*6.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
                     alignment: Alignment.topLeft,
