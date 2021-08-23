@@ -62,12 +62,12 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
                       boxShadow: [
                         BoxShadow(
                           //color: Color(0xFF3E64FF).withOpacity(0.3),
-                          color: Colors.grey.withOpacity(0.3),
+                          color: Colors.grey.withOpacity(0.9),
                           offset: const Offset(
                             0.0,
-                            15.0,
+                            5.0,
                           ),
-                          blurRadius: 25.0,
+                          blurRadius: 3.0,
                           spreadRadius: 0.5,
                         ),
                       ]),
