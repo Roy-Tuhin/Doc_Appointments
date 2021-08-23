@@ -9,6 +9,10 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var blockSizeHorizontal = (screenWidth/100);
+    var blockSizeVertical= (screenHeight/100);
     return Scaffold(
       appBar: AppBar(
           flexibleSpace: Container(
@@ -25,7 +29,7 @@ class Settings extends StatelessWidget {
           ),
           title: Text(
             'SETTINGS',
-            style: TextStyle(fontFamily: 'Roboto_Condensed'),
+            style: TextStyle(fontFamily: 'Poppins'),
           )),
      
      
@@ -43,9 +47,10 @@ class Settings extends StatelessWidget {
       
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          height: blockSizeVertical*100,
           width: MediaQuery.of(context).size.width,
           color: Colors.lightBlue[50],
+          //color: Colors.black,
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,16 +59,16 @@ class Settings extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 270,
-                  color: Colors.white,
+                  height: blockSizeVertical*50,
+                  //color: Colors.white,
                   child: Image(
-                    image: AssetImage('assets/images/medbo-home-banner.png'),
+                    image: AssetImage('assets/images/medbo-home-banner-removebg.png'),
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: blockSizeVertical*0.5,
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),

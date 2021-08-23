@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:medbo/main.dart';
+import 'package:medbo/models/surgPackDetailsModel.dart';
 import 'package:medbo/screens/home.dart';
 import 'package:medbo/screens2.dart/home2.dart';
 
@@ -23,7 +24,8 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
+      // backgroundColor: Colors.lightBlue[50],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -52,6 +54,23 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
               for (final item in widget.rresponse.data)
                 Container(
                   margin: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      // color: Color(0xFF3E64FF),
+                      color: Colors.lightBlue[50],
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      boxShadow: [
+                        BoxShadow(
+                          //color: Color(0xFF3E64FF).withOpacity(0.3),
+                          color: Colors.grey.withOpacity(0.3),
+                          offset: const Offset(
+                            0.0,
+                            15.0,
+                          ),
+                          blurRadius: 25.0,
+                          spreadRadius: 0.5,
+                        ),
+                      ]),
                   child: Column(
                     children: [
                       ListTile(

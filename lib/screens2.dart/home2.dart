@@ -18,7 +18,6 @@ import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 // import 'package:medbo/API/Doctors/allDoc.dart';
 import 'package:http/http.dart' as http;
-import 'package:sizer/sizer.dart';
 
 class Home2 extends StatefulWidget {
   @override
@@ -241,7 +240,7 @@ class _Home2State extends State<Home2> {
                     itemBuilder: (context, index) => Container(
                         // color: Colors.green,
                        height: blockSizeVertical*10,
-                        width:blockSizeHorizontal*70,//=================scrollable box
+                        width:blockSizeHorizontal*75,//=================scrollable box
                         margin: EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
@@ -268,14 +267,14 @@ class _Home2State extends State<Home2> {
                                     'Your Last Visit',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 17,
+                                        fontSize:  blockSizeHorizontal*4,
                                         fontFamily: 'Poppins',
                                         color: Colors.white),
                                   ),
                                   Text('Date and Time:',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 17,
+                                          fontSize:  blockSizeHorizontal*2.5,
                                           color: Colors.white,
                                           fontFamily: 'Poppins')),
                                 ],
@@ -293,7 +292,7 @@ class _Home2State extends State<Home2> {
                                 children: [
                                   Container(
                                     padding: EdgeInsets.only(left:10),
-                                    width: blockSizeHorizontal*33,
+                                    width: blockSizeHorizontal*35,
                                     height: blockSizeVertical*6,
                                     //color: Colors.black,
                                     child: Column(
@@ -306,7 +305,7 @@ class _Home2State extends State<Home2> {
                                           'Doctors Name',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 13,
+                                              fontSize:  blockSizeHorizontal*3,
                                               fontFamily: 'Poppins',
                                               color: Colors.white),
                                         ),
@@ -314,7 +313,7 @@ class _Home2State extends State<Home2> {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontFamily: 'Poppins',
-                                                fontSize: 13,
+                                                fontSize: blockSizeHorizontal*2.4,
                                                 color: Colors.white)),
                                       ],
                                     ),
@@ -355,7 +354,7 @@ class _Home2State extends State<Home2> {
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 15,
+                                                fontSize:  blockSizeHorizontal*3,
                                                 color: Theme.of(context)
                                                     .primaryColor),
                                           ),
@@ -396,7 +395,7 @@ class _Home2State extends State<Home2> {
                       child: Text(
                         'Doctors',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: blockSizeHorizontal*4.5,
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Poppins',
                             //fontFamily: 'Poppins',
@@ -496,7 +495,7 @@ class _Home2State extends State<Home2> {
                                       fontFamily: 'Poppins',
                                       color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 13),
+                                      fontSize: blockSizeHorizontal*3),
                                   textAlign: TextAlign.center,
                                   maxLines:1
                                 ),
@@ -520,7 +519,7 @@ class _Home2State extends State<Home2> {
                                 // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
 
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: blockSizeHorizontal*2.5,
                                   fontFamily: 'Poppins',
                                   color: Theme.of(context).primaryColor,
                                 ),
@@ -573,7 +572,7 @@ class _Home2State extends State<Home2> {
                                   'Show Details',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 13,
+                                    fontSize: blockSizeHorizontal*2.7,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Poppins',
                                   ),
@@ -607,7 +606,7 @@ class _Home2State extends State<Home2> {
                       child: Text(
                         'Surgical Package',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: blockSizeHorizontal*4.1,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).primaryColor),
@@ -637,7 +636,7 @@ class _Home2State extends State<Home2> {
                                 '${surglist[index].packageName}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  fontSize: blockSizeHorizontal*3.5,
                                   fontFamily: 'Poppins',
                                   color: Theme.of(context).primaryColor,
                                 ),
@@ -653,7 +652,7 @@ class _Home2State extends State<Home2> {
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
                                     // fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize: blockSizeHorizontal*2.5,
                                     color: Theme.of(context).primaryColor),
                                 textAlign: TextAlign.center,
                                 maxLines: 4,
@@ -699,7 +698,7 @@ class _Home2State extends State<Home2> {
                                   'Show Details',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: blockSizeHorizontal*2.7,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Poppins',
                                   ),
@@ -731,7 +730,7 @@ class _Home2State extends State<Home2> {
 
 
 
-                SizedBox(
+                Container(
                   height: blockSizeVertical*6.2,
                   child: Container(
                     padding: EdgeInsets.all(5),
@@ -741,7 +740,7 @@ class _Home2State extends State<Home2> {
                       child: Text(
                         'Pathological Tests',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: blockSizeHorizontal*4.1,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).primaryColor),
@@ -772,7 +771,7 @@ class _Home2State extends State<Home2> {
                                   '${pathList[index].testName}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 17,
+                                    fontSize: blockSizeHorizontal*3.5,
                                     fontFamily: 'Poppins',
                                     color: Theme.of(context).primaryColor,
                                   ),
@@ -790,7 +789,7 @@ class _Home2State extends State<Home2> {
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       // fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                                      fontSize: blockSizeHorizontal*2.5,
                                       color: Theme.of(context).primaryColor),
                                   textAlign: TextAlign.center,
                                   maxLines: 4,
@@ -833,7 +832,7 @@ class _Home2State extends State<Home2> {
                                   'Show Details',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: blockSizeHorizontal*2.7,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Poppins',
                                   ),
@@ -871,7 +870,7 @@ class _Home2State extends State<Home2> {
                       child: Text(
                         'Health Checkups',
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: blockSizeHorizontal*4.1,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).primaryColor),
@@ -901,7 +900,7 @@ class _Home2State extends State<Home2> {
                                 '${chkUpList[index].healthName}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  fontSize: blockSizeHorizontal*3.5,
                                   fontFamily: 'Poppins',
                                   color: Theme.of(context).primaryColor,
                                 ),
@@ -919,7 +918,7 @@ class _Home2State extends State<Home2> {
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
                                     // fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize: blockSizeHorizontal*2.5,
                                     color: Theme.of(context).primaryColor),
                                 textAlign: TextAlign.center,
                                 maxLines: 4,
@@ -961,7 +960,7 @@ class _Home2State extends State<Home2> {
                                   'Show Details',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 15,
+                                    fontSize: blockSizeHorizontal*2.7,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Poppins',
                                   ),
