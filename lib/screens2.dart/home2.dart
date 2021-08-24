@@ -56,6 +56,7 @@ class _Home2State extends State<Home2> {
     // print(_datum[0].doctorId);
     // print('doclist length:  ${finaldocList.length}');
   }
+//======================================================================================================================================================================
 
   AllSurgPackList sList = AllSurgPackList();
   Future<void> getSPlist() async {
@@ -66,6 +67,7 @@ class _Home2State extends State<Home2> {
     // print(_datum[0].doctorId);
     // print('surgListLength: ${finalsurglist.length}');
   }
+//======================================================================================================================================================================
 
   PathTestList PList = PathTestList();
   Future<void> getPathTest() async {
@@ -76,6 +78,7 @@ class _Home2State extends State<Home2> {
     // print(_datum[0].doctorId);
     // print(finalDatum.length);
   }
+//======================================================================================================================================================================
 
   HlthChkUpList HList = HlthChkUpList();
   Future<void> getHList() async {
@@ -149,6 +152,7 @@ class _Home2State extends State<Home2> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -674,7 +678,7 @@ class _Home2State extends State<Home2> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SurgPackDetails(
+                                        builder: (context) => SurgPackDetails(    
                                             encId:
                                                 surglist[index].encPackageId)));
                               },
@@ -810,7 +814,7 @@ class _Home2State extends State<Home2> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PathTestDetails(
-                                            encId: pathList[index].encTestId)));
+                                            encId: pathList[index].encTestId))); 
                               },
                               child: Container(
                                 alignment: Alignment.center,

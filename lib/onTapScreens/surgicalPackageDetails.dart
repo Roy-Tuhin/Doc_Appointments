@@ -16,10 +16,20 @@ class _SurgPackDetailsState extends State<SurgPackDetails> {
   static String url="http://medbo.digitalicon.in/api/medboapi/surgicaldetails";
   Dio dio = Dio();
 
-  SurgicalData _surgicalData=SurgicalData(packageId: '', encPackageId: '',
-      packageName: '', note: '', createBy: '', createDate: '',
-      modBy: '', modDate: '', activeStatus: '', permission: '',
-      fee: '', discountedFee: '', bookingFee: '',
+  SurgicalData _surgicalData=SurgicalData(
+    packageId: '', 
+    encPackageId: '',
+      packageName: '', 
+      note: '',
+       createBy: '',
+        createDate: '',
+      modBy: '',
+       modDate: '',
+        activeStatus: '',
+         permission: '',
+      fee: '', 
+      discountedFee: '',
+       bookingFee: '',
       description: '');
 
   late List<PartnerDatum> surgPartnerData = [];

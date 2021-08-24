@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:medbo/main.dart';
-import 'package:medbo/models/surgPackDetailsModel.dart';
+import 'package:medbo/onTapScreens/surgicalPackageDetails.dart';
+import 'package:medbo/onTapScreens/doctorDetails.dart';
+import 'package:medbo/onTapScreens/healthchkupDetails.dart';
+import 'package:medbo/onTapScreens/pathLabDetails.dart';
 import 'package:medbo/screens/home.dart';
 import 'package:medbo/screens2.dart/home2.dart';
 
@@ -19,6 +22,22 @@ class AfterSearchPage extends StatefulWidget {
 }
 
 class _AfterSearchPageState extends State<AfterSearchPage> {
+   //late List pathList = [];
+     late List docList = [];
+  List finaldocList = [];
+  late bool _loadDocList = true;
+
+  late List surglist = [];
+  List finalsurglist = [];
+  late bool _loadSurgList = true;
+
+  late List pathList = [];
+  List finalPathList = [];
+  late bool _loadPathList = true;
+
+  late List chkUpList = [];
+  List finalchkUpList = [];
+  late bool _loadChkUpList = true;
   // var responseRef;
   //  _SecondState(this.responseRef);
   @override
@@ -78,7 +97,141 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
                         trailing: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 primary: Theme.of(context).primaryColor),
-                            onPressed: () {},
+                            onPressed: () {
+
+
+
+                              //======================================patha===============================
+                              if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 PathTestDetails(encId:'IujyQXg8KZg8asLvK/FS7g==')));  
+                              }//new test
+                              else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='U4exk+vfMGrn7cjNUa/PBw=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 PathTestDetails(encId:'U4exk+vfMGrn7cjNUa/PBw==')));  
+                              }else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 PathTestDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ==')));  
+                              }else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='B909+U0FIAHIs+sl3IYTvQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 PathTestDetails(encId:'B909+U0FIAHIs+sl3IYTvQ==')));  
+                              }else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 PathTestDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
+                              }
+
+
+                              //================================Doctor====================================================================
+
+
+
+
+
+                              else if( item.encId=='fXVmzecGStqrhx1PmIgwlQ=='&&item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 DoctorDetails(encId:'fXVmzecGStqrhx1PmIgwlQ==')));  
+
+                              }else if( item.encId=='pEl2B9kuumKRxIxLJO76eQ=='&&item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 DoctorDetails(encId:'pEl2B9kuumKRxIxLJO76eQ=='))); 
+
+                              }else if( item.encId=='kFgorcFF0G6RQD4W+LwWnQ=='&&item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 DoctorDetails(encId:'kFgorcFF0G6RQD4W+LwWnQ=='))); 
+
+                              }else if(item.resultFor=='xPCleDOirQpArdOv0uUR9g=='&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 DoctorDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ==')));
+
+                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&& item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                 DoctorDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
+                              }
+
+
+
+
+                            //=============================Health Checkups search redirect=======================================================================
+
+
+
+
+                            else if( item.encId=='q8O8YMzYKXSB4RtkX4k7Lw=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                HlthChkUpDetails(encId:'q8O8YMzYKXSB4RtkX4k7Lw==')));  
+
+                              }else if( item.encId=='VKo7nNHPtalBOZv4YpBZFg=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                HlthChkUpDetails(encId:'VKo7nNHPtalBOZv4YpBZFg==')));
+
+                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                HlthChkUpDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A=='))); 
+
+                              }else if( item.encId=='eYwtNBXR6P/JDtsIwr+Bvw=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                HlthChkUpDetails(encId:'eYwtNBXR6P/JDtsIwr+Bvw==')));  
+                              }
+
+
+
+
+
+
+                            //=============================Surgical search redirect=======================================================================
+
+
+                              else if( item.encId=='IujyQXg8KZg8asLvK/FS7g=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                               SurgPackDetails(encId:'IujyQXg8KZg8asLvK/FS7g=='))); 
+
+                              }else if( item.encId=='B909+U0FIAHIs+sl3IYTvQ=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                               SurgPackDetails(encId:'B909+U0FIAHIs+sl3IYTvQ==')));  
+
+                              }else if( item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                               SurgPackDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ=='))); 
+
+                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                               SurgPackDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
+                              }
+
+
+
+
+
+                              // else if(item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    SurgPackDetails()));
+
+                              // }
+
+
+                              // else if(item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    SurgPackDetails()));
+
+                              // }
+
+
+
+                              // else if(item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    SurgPackDetails()));
+
+                              // }
+
+
+
+
+
+
+
+
+
+                            },
                             child: Text("Show details")),
                         leading: CircleAvatar(
                           backgroundColor: Colors.lightBlue[50],
@@ -96,21 +249,6 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
               SizedBox(
                 height: 50,
               ),
-
-              // OutlinedButton.icon(
-              //     onPressed: () {
-              //       Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //           builder: (context) => Home2(),
-              //         ),
-              //       );
-              //     },
-              //     icon: Icon(
-              //       Icons.exit_to_app,
-              //       size: 18,
-              //     ),
-              //     label: Text("GoTo Home")),
             ],
           ),
         ),
