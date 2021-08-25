@@ -61,7 +61,7 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
         title: Text(
           'Search Result',
           style: TextStyle(
-            fontFamily: 'Roboto_Condensed',
+            fontFamily: 'Poppins',
           ),
         ),
       ),
@@ -101,49 +101,52 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
 
 
-                              //======================================patha===============================
-                              if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
+                              //======================================patha search redirect===============================
+                              if(item.resultFor=='T'&& item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  PathTestDetails(encId:'IujyQXg8KZg8asLvK/FS7g==')));  
                               }//new test
-                              else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='U4exk+vfMGrn7cjNUa/PBw=='){
+                              else if(item.resultFor=='T'&& item.encId=='U4exk+vfMGrn7cjNUa/PBw=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  PathTestDetails(encId:'U4exk+vfMGrn7cjNUa/PBw==')));  
-                              }else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
+
+                              }else if(item.resultFor=='T'&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  PathTestDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ==')));  
-                              }else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='B909+U0FIAHIs+sl3IYTvQ=='){
+
+                              }else if(item.resultFor=='T'&& item.encId=='B909+U0FIAHIs+sl3IYTvQ=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  PathTestDetails(encId:'B909+U0FIAHIs+sl3IYTvQ==')));  
-                              }else if(item.resultFor=='aZsjjLg3WIBbTg05/15o2w=='&& item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='){
+
+                              }else if(item.resultFor=='T'&& item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  PathTestDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
                               }
 
 
-                              //================================Doctor====================================================================
+                              //================================Doctor search redirect====================================================================
 
 
 
 
 
-                              else if( item.encId=='fXVmzecGStqrhx1PmIgwlQ=='&&item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                              else if( item.encId=='fXVmzecGStqrhx1PmIgwlQ=='&&item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  DoctorDetails(encId:'fXVmzecGStqrhx1PmIgwlQ==')));  
 
-                              }else if( item.encId=='pEl2B9kuumKRxIxLJO76eQ=='&&item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                              }else if( item.encId=='pEl2B9kuumKRxIxLJO76eQ=='&&item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  DoctorDetails(encId:'pEl2B9kuumKRxIxLJO76eQ=='))); 
 
-                              }else if( item.encId=='kFgorcFF0G6RQD4W+LwWnQ=='&&item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                              }else if( item.encId=='kFgorcFF0G6RQD4W+LwWnQ=='&&item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  DoctorDetails(encId:'kFgorcFF0G6RQD4W+LwWnQ=='))); 
 
-                              }else if(item.resultFor=='xPCleDOirQpArdOv0uUR9g=='&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
+                              }else if(item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&& item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  DoctorDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ==')));
 
-                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&& item.resultFor=='xPCleDOirQpArdOv0uUR9g=='){
+                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&& item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                  DoctorDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
                               }
@@ -156,19 +159,19 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
 
 
-                            else if( item.encId=='q8O8YMzYKXSB4RtkX4k7Lw=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                            else if( item.encId=='q8O8YMzYKXSB4RtkX4k7Lw=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                 HlthChkUpDetails(encId:'q8O8YMzYKXSB4RtkX4k7Lw==')));  
 
-                              }else if( item.encId=='VKo7nNHPtalBOZv4YpBZFg=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                              }else if( item.encId=='VKo7nNHPtalBOZv4YpBZFg=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                 HlthChkUpDetails(encId:'VKo7nNHPtalBOZv4YpBZFg==')));
 
-                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                 HlthChkUpDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A=='))); 
 
-                              }else if( item.encId=='eYwtNBXR6P/JDtsIwr+Bvw=='&&item.resultFor=='UzBdqHDKwEPCtAOnU50sAQ=='){
+                              }else if( item.encId=='eYwtNBXR6P/JDtsIwr+Bvw=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                 HlthChkUpDetails(encId:'eYwtNBXR6P/JDtsIwr+Bvw==')));  
                               }
@@ -181,48 +184,22 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
                             //=============================Surgical search redirect=======================================================================
 
 
-                              else if( item.encId=='IujyQXg8KZg8asLvK/FS7g=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                              else if( item.encId=='IujyQXg8KZg8asLvK/FS7g=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                SurgPackDetails(encId:'IujyQXg8KZg8asLvK/FS7g=='))); 
 
-                              }else if( item.encId=='B909+U0FIAHIs+sl3IYTvQ=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                              }else if( item.encId=='B909+U0FIAHIs+sl3IYTvQ=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                SurgPackDetails(encId:'B909+U0FIAHIs+sl3IYTvQ==')));  
 
-                              }else if( item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                              }else if( item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                SurgPackDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ=='))); 
 
-                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='p6r4bAAI4ybdJySoV+PqGQ=='){
+                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
                                SurgPackDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
                               }
-
-
-
-
-
-                              // else if(item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
-                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                              //    SurgPackDetails()));
-
-                              // }
-
-
-                              // else if(item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
-                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                              //    SurgPackDetails()));
-
-                              // }
-
-
-
-                              // else if(item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
-                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                              //    SurgPackDetails()));
-
-                              // }
-
 
 
 

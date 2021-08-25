@@ -788,8 +788,8 @@ class _Home2State extends State<Home2> {
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               // color: Colors.green,
                               child: Center(
-                                child: Text(
-                                  '${pathList[index].testId}',
+                                child: Text('',
+                                  //'${pathList[index].testId}',
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       // fontWeight: FontWeight.bold,
@@ -988,7 +988,7 @@ class _Home2State extends State<Home2> {
    Widget userField() {
      
     return TextFormField(
-      style: TextStyle(color: Colors.white),
+      style: TextStyle(color: Colors.white,fontFamily: 'Poppins',),
       controller: searchController,
       onChanged: (text) {
         setState(
@@ -1000,7 +1000,7 @@ class _Home2State extends State<Home2> {
 
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blueGrey),
+          borderSide: BorderSide(color: Colors.white30),
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),
@@ -1011,7 +1011,7 @@ class _Home2State extends State<Home2> {
 
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-              color: Colors.blueGrey //greenAccent//Color(0xFF425c5a),
+              color: Colors.white30//greenAccent//Color(0xFF425c5a),
               ),
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20),
@@ -1032,7 +1032,7 @@ class _Home2State extends State<Home2> {
         ),
 
         suffixIcon: IconButton(
-        icon: Icon(Icons.search, color: Color(0xFFF4D3AE),size: 34,),
+        icon: Icon(Icons.search, color: Colors.white,size: 34,),
         onPressed: (){
           searchByUser();
           },//=============================================================
@@ -1043,7 +1043,7 @@ class _Home2State extends State<Home2> {
 
         labelText: 'Search Doctors, Clinics, Hospitals, Etc',
         labelStyle: TextStyle(
-          fontFamily: 'Californian FB',
+          fontFamily: 'Poppins',
           color: Colors.white38, //Color(0xFF425c5a),
           fontWeight: FontWeight.normal,
           letterSpacing: 2.0,
@@ -1051,7 +1051,7 @@ class _Home2State extends State<Home2> {
         ),
         //hintText: 'Ex : Dental or Sugar Check up etc',
         hintStyle: TextStyle(
-          fontFamily: 'Californian FB',
+          fontFamily: 'Poppins',
           color: Colors.white38, //Color(0xFF425c5a),
           fontWeight: FontWeight.normal,
           letterSpacing: 2.0,
