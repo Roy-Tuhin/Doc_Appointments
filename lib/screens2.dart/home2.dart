@@ -187,7 +187,7 @@ class _Home2State extends State<Home2> {
                 clipper: MyClipper(),
                 child: Container(
                   //height: 400,
-                  height:blockSizeVertical*50,
+                  height:blockSizeVertical*40,
                   width: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -232,151 +232,153 @@ class _Home2State extends State<Home2> {
                  //SizedBox(height: 20,),
                  
                 image_carousel,
-                Container(//===================================================1st=======================================================
-                 height: blockSizeVertical*29,//===============whole horizontal 1st card container height,
+                SizedBox(height: 20,),
+                // Container(//===================================================1st=======================================================
+                //  color: Colors.blue,
+                //  height: blockSizeVertical*29,//===============whole horizontal 1st card container height,
 
-                   //color: Colors.blue,
-                  child: ListView.separated(//=======================actual scrollble 5 box
-                    itemCount: 5,
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,      
-                    itemBuilder: (context, index) => Container(
-                        // color: Colors.green,
-                       height: blockSizeVertical*10,
-                        width:blockSizeHorizontal*75,//=================scrollable box
-                        margin: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(5),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.center,
-                            colors: [
-                              Theme.of(context).primaryColor,
-                              Theme.of(context).accentColor
-                            ],
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                             height: blockSizeVertical*8,
-                              width: blockSizeHorizontal*50,
-                               //color: Colors.green,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Your Last Visit',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:  blockSizeHorizontal*4,
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white),
-                                  ),
-                                  Text('Date and Time:',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize:  blockSizeHorizontal*2.5,
-                                          color: Colors.white,
-                                          fontFamily: 'Poppins')),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: blockSizeVertical*7,
-                            ),
-                            //=============================================================1st row===========================================================================
-                            Container(
-                              height: blockSizeVertical*6.9,
-                              width: blockSizeHorizontal*100,//======container which contain 2Row elements
-                               //color: Colors.green,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(left:10),
-                                    width: blockSizeHorizontal*35,
-                                    height: blockSizeVertical*6,
-                                    //color: Colors.black,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Doctors Name',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize:  blockSizeHorizontal*3,
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white),
-                                        ),
-                                        Text('Doctor_speciality',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Poppins',
-                                                fontSize: blockSizeHorizontal*2.4,
-                                                color: Colors.white)),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: blockSizeHorizontal*5,
-                                  ),
-                                  Container(
-                                    width: blockSizeHorizontal*30,
-                                     //color: Colors.black,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LastVisit()),
-                                        );
-                                        // print("tapped on container");
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.all(8),
-                                        // padding: EdgeInsets.only(
-                                        //     top: 10.0,
-                                        //     bottom: 10.0,
-                                        //     right: 32.0,
-                                        //     left: 35.0),
-                                        height: blockSizeVertical*10,
-                                        // color: Colors.green,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.rectangle,
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: Center(
-                                          child: Text(
-                                            'Details',
-                                            style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.bold,
-                                                fontSize:  blockSizeHorizontal*3,
-                                                color: Theme.of(context)
-                                                    .primaryColor),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )),
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                ),
+                //    //color: Colors.blue,
+                //   child: ListView(//=======================actual scrollble 5 box
+                    // itemCount: 5,
+                    // scrollDirection: Axis.horizontal,
+                    // physics: BouncingScrollPhysics(),
+                    // shrinkWrap: true,      
+                    // itemBuilder: (context, index) => Container(
+                    //      color: Colors.green,
+                    //    height: blockSizeVertical*10,
+                    //     width:blockSizeHorizontal*75,//=================scrollable box
+                    //     margin: EdgeInsets.all(20),
+                    //     decoration: BoxDecoration(
+                    //       shape: BoxShape.rectangle,
+                    //       borderRadius: BorderRadius.circular(5),
+                    //       gradient: LinearGradient(
+                    //         begin: Alignment.topLeft,
+                    //         end: Alignment.center,
+                    //         colors: [
+                    //           Theme.of(context).primaryColor,
+                    //           Theme.of(context).accentColor
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     child: Column(
+                    //       children: [
+                    //         Container(
+                    //          height: blockSizeVertical*8,
+                    //           width: blockSizeHorizontal*50,
+                    //           //color: Colors.green,
+                    //           child: Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: [
+                    //               Text(
+                    //                 'Your Last Visit',
+                    //                 style: TextStyle(
+                    //                     fontWeight: FontWeight.bold,
+                    //                     fontSize:  blockSizeHorizontal*4,
+                    //                     fontFamily: 'Poppins',
+                    //                     color: Colors.white),
+                    //               ),
+                    //               Text('Date and Time:',
+                    //                   style: TextStyle(
+                    //                       fontWeight: FontWeight.bold,
+                    //                       fontSize:  blockSizeHorizontal*2.5,
+                    //                       color: Colors.white,
+                    //                       fontFamily: 'Poppins')),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //         SizedBox(
+                    //           height: blockSizeVertical*7,
+                    //         ),
+                    //         //=============================================================1st row===========================================================================
+                    //         Container(
+                    //           height: blockSizeVertical*6.9,
+                    //           width: blockSizeHorizontal*100,//======container which contain 2Row elements
+                    //            //color: Colors.green,
+                    //           child: Row(
+                    //             children: [
+                    //               Container(
+                    //                 padding: EdgeInsets.only(left:10),
+                    //                 width: blockSizeHorizontal*35,
+                    //                 height: blockSizeVertical*6,
+                    //                 //color: Colors.black,
+                    //                 child: Column(
+                    //                   mainAxisAlignment:
+                    //                       MainAxisAlignment.center,
+                    //                   crossAxisAlignment:
+                    //                       CrossAxisAlignment.start,
+                    //                   children: [
+                    //                     Text(
+                    //                       'Doctors Name',
+                    //                       style: TextStyle(
+                    //                           fontWeight: FontWeight.bold,
+                    //                           fontSize:  blockSizeHorizontal*3,
+                    //                           fontFamily: 'Poppins',
+                    //                           color: Colors.white),
+                    //                     ),
+                    //                     Text('Doctor_speciality',
+                    //                         style: TextStyle(
+                    //                             fontWeight: FontWeight.bold,
+                    //                             fontFamily: 'Poppins',
+                    //                             fontSize: blockSizeHorizontal*2.4,
+                    //                             color: Colors.white)),
+                    //                   ],
+                    //                 ),
+                    //               ),
+                    //               SizedBox(
+                    //                 width: blockSizeHorizontal*5,
+                    //               ),
+                    //               Container(
+                    //                 width: blockSizeHorizontal*30,
+                    //                  //color: Colors.black,
+                    //                 child: InkWell(
+                    //                   onTap: () {
+                    //                     Navigator.push(
+                    //                       context,
+                    //                       MaterialPageRoute(
+                    //                           builder: (context) =>
+                    //                               LastVisit()),
+                    //                     );
+                    //                     // print("tapped on container");
+                    //                   },
+                    //                   child: Container(
+                    //                     margin: EdgeInsets.all(8),
+                    //                     // padding: EdgeInsets.only(
+                    //                     //     top: 10.0,
+                    //                     //     bottom: 10.0,
+                    //                     //     right: 32.0,
+                    //                     //     left: 35.0),
+                    //                     height: blockSizeVertical*10,
+                    //                     // color: Colors.green,
+                    //                     decoration: BoxDecoration(
+                    //                         color: Colors.white,
+                    //                         shape: BoxShape.rectangle,
+                    //                         borderRadius:
+                    //                             BorderRadius.circular(5)),
+                    //                     child: Center(
+                    //                       child: Text(
+                    //                         'Details',
+                    //                         style: TextStyle(
+                    //                           fontFamily: 'Poppins',
+                    //                             fontWeight: FontWeight.bold,
+                    //                             fontSize:  blockSizeHorizontal*3,
+                    //                             color: Theme.of(context)
+                    //                                 .primaryColor),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     )),
+                    // separatorBuilder: (BuildContext context, int index) =>
+                    //     const Divider(
+                    //   color: Colors.transparent,
+                    // ),
+                //   ),
+                // ),
 
 
 
