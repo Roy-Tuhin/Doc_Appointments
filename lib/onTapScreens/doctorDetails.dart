@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:medbo/Booking/DocBooking.dart';
 import 'package:medbo/models/docDetailsModel.dart';
 
 // import 'package:url_launcher/url_launcher.dart';
@@ -204,7 +205,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                           child: _docData.doctorImage.isEmpty
                               ? Center(child: const CircularProgressIndicator())
                               : Image.network(
-                                  _docData.doctorImage,
+                                  _docData.doctorImage,//==========================================================================================================================================
                                   fit: BoxFit.contain,
                                 ),
                         ),
@@ -220,7 +221,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 2.0, horizontal: 10),
                                 child: Text(
-                                  _docData.doctorName,
+                                  _docData.doctorName,//====================================================================================================
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 22,
@@ -314,7 +315,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               // crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
+                                              children: [//===========================================================================================================================
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.all(4.0),
@@ -345,7 +346,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                     ),
                                                   ),
                                                 ),
-                                              ],
+                                              ],//================================================================================================================================
                                             ),
                                           ],
                                         ),
@@ -719,25 +720,35 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                             ),
                                           ],
                                         ),
-                                        Positioned(
+                                        Positioned(//===========================================================================on Pressed======================================================
                                           bottom:5,
                                           left:0,
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            height: 40,
-                                            width: 270,
-                                            margin:
-                                                EdgeInsets.only(left: 5, right: 5),
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.rectangle,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.white),
-                                            child: Text(
-                                              'BOOK',
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
+                                          child: InkWell(
+                                            onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DocBooking( _finalpartnerData[index],  _docData )));
+                              },
+
+
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              height: 40,
+                                              width: 270,
+                                              margin:
+                                                  EdgeInsets.only(left: 5, right: 5),
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Colors.white),
+                                              child: Text(
+                                                'BOOK',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor),
+                                              ),
                                             ),
                                           ),
                                         ),

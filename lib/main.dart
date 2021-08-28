@@ -7,11 +7,9 @@ import 'package:medbo/screens/home.dart';
 import 'package:medbo/screens/our_services.dart';
 import 'package:medbo/SplashScreen.dart';
 import 'package:medbo/screens/settings.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:medbo/screens2.dart/home2.dart';
 
 void main() async{
-   await GetStorage.init();
   runApp(MyApp());
 } 
 

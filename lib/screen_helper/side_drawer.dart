@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 // import 'package:medbo/screens/home.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:medbo/API/Login/ApiResponse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medbo/login_n_registration/login.dart';

@@ -553,7 +553,7 @@ class _Home2State extends State<Home2> {
                               onTap: () {
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(
+                                    MaterialPageRoute(//===============================================================================================================================================
                                         builder: (context) => DoctorDetails(
                                             encId:
                                                 docList[index].encDoctorId)));

@@ -37,7 +37,7 @@ dependencies:
   dio:
   animations:
   shared_preferences:
-  get_storage:
+  date_time_picker:
 
 dev_dependencies:
   flutter_test:
