@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:medbo/Booking/PathalogicalBookingPage.dart';
 import 'package:medbo/models/pathTestDetailsModel.dart';
 
 class PathTestDetails extends StatefulWidget {
@@ -226,17 +227,26 @@ class _PathTestDetailsState extends State<PathTestDetails> {
                                       ),
                                     ),
 
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 40,
-                                      width: 280,
-                                      margin: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.white
+                                    InkWell(
+                                      onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => PathalogicalBookingPage(_pathTestData,pathPartnerData[index])
+                                                          ));
+                                            },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 40,
+                                        width: 280,
+                                        margin: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: Colors.white
+                                        ),
+                                        child: Text('BOOK',style: TextStyle(color:Theme.of(context).primaryColor ),),
                                       ),
-                                      child: Text('BOOK',style: TextStyle(color:Theme.of(context).primaryColor ),),
                                     ),
                                   ],
                                 ),

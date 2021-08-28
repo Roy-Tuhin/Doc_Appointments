@@ -205,7 +205,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                           child: _docData.doctorImage.isEmpty
                               ? Center(child: const CircularProgressIndicator())
                               : Image.network(
-                                  _docData.doctorImage,//==========================================================================================================================================
+                                  _docData
+                                      .doctorImage, //==========================================================================================================================================
                                   fit: BoxFit.contain,
                                 ),
                         ),
@@ -221,7 +222,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 2.0, horizontal: 10),
                                 child: Text(
-                                  _docData.doctorName,//====================================================================================================
+                                  _docData
+                                      .doctorName, //====================================================================================================
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 22,
@@ -315,7 +317,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               // crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [//===========================================================================================================================
+                                              children: [
+                                                //===========================================================================================================================
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.all(4.0),
@@ -323,7 +326,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                     _finalpartnerData[index]
                                                         .partnerName,
                                                     style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 20,
                                                       color: Colors.white,
                                                       fontFamily:
@@ -346,7 +350,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                     ),
                                                   ),
                                                 ),
-                                              ],//================================================================================================================================
+                                              ], //================================================================================================================================
                                             ),
                                           ],
                                         ),
@@ -399,7 +403,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                                         .white,
                                                                     fontFamily:
                                                                         'Roboto_Condensed',
-                                                                    fontSize: 14),
+                                                                    fontSize:
+                                                                        14),
                                                               ),
                                                               Text(
                                                                 '${partnerData[index].dayList[1].dayName} | Time from ${partnerData[index].dayList[1].timeFrom} Time to ${partnerData[index].dayList[0].timeTo}',
@@ -408,7 +413,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                                         .white,
                                                                     fontFamily:
                                                                         'Roboto_Condensed',
-                                                                    fontSize: 14),
+                                                                    fontSize:
+                                                                        14),
                                                               )
                                                             ],
                                                           )
@@ -510,8 +516,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                                         5
                                                                     ? Column(
                                                                         crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
                                                                             '${partnerData[index].dayList[0].dayName} | Time from ${partnerData[index].dayList[0].timeFrom} Time to ${partnerData[index].dayList[0].timeTo}',
@@ -550,9 +555,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                                           )
                                                                         ],
                                                                       )
-                                                                    : partnerData[index]
-                                                                                .dayList
-                                                                                .length ==
+                                                                    : partnerData[index].dayList.length ==
                                                                             6
                                                                         ? Column(
                                                                             crossAxisAlignment:
@@ -659,7 +662,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                           children: [
                                             Container(
                                               alignment: Alignment.center,
-                                              padding:EdgeInsets.only(top:8),
+                                              padding: EdgeInsets.only(top: 8),
                                               // height: 40,
                                               // width: 100,
                                               margin: EdgeInsets.all(5),
@@ -674,7 +677,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 15,
-                                                  fontFamily: 'Roboto_Condensed',
+                                                  fontFamily:
+                                                      'Roboto_Condensed',
                                                 ),
                                               ),
                                             ),
@@ -694,7 +698,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 15,
-                                                  fontFamily: 'Roboto_Condensed',
+                                                  fontFamily:
+                                                      'Roboto_Condensed',
                                                 ),
                                               ),
                                             ),
@@ -714,30 +719,34 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 15,
-                                                  fontFamily: 'Roboto_Condensed',
+                                                  fontFamily:
+                                                      'Roboto_Condensed',
                                                 ),
                                               ),
                                             ),
                                           ],
                                         ),
-                                        Positioned(//===========================================================================on Pressed======================================================
-                                          bottom:5,
-                                          left:0,
+                                        Positioned(
+                                          //===========================================================================on Pressed======================================================
+                                          bottom: 5,
+                                          left: 0,
                                           child: InkWell(
                                             onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DocBooking( _finalpartnerData[index],  _docData )));
-                              },
-
-
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DocBooking(
+                                                              _finalpartnerData[
+                                                                  index],
+                                                              _docData)));
+                                            },
                                             child: Container(
                                               alignment: Alignment.center,
                                               height: 40,
                                               width: 270,
-                                              margin:
-                                                  EdgeInsets.only(left: 5, right: 5),
+                                              margin: EdgeInsets.only(
+                                                  left: 5, right: 5),
                                               decoration: BoxDecoration(
                                                   shape: BoxShape.rectangle,
                                                   borderRadius:
@@ -756,8 +765,9 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                 ),
                               ],
                             ),
-                            separatorBuilder: (BuildContext context, int index) =>
-                                const Divider(
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const Divider(
                               color: Colors.transparent,
                               // height: 5,
                             ),

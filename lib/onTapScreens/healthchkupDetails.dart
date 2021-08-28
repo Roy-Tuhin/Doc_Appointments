@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:medbo/Booking/HealthCheckUpBookingPage.dart';
 import 'package:medbo/models/healthChkupDetailsModel.dart';
 
 class HlthChkUpDetails extends StatefulWidget {
@@ -120,187 +121,198 @@ class _HlthChkUpDetailsState extends State<HlthChkUpDetails> {
           },
         ),
       ),
-      body: Stack(
-
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.lightBlue[50],
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-
-                Container(
-                  // height: 250,
-                  // width: 200,
-                  // color: Colors.grey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 10),
-                        child: Text(_healthData.healthName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Theme.of(context).primaryColor,fontFamily: 'Roboto_Condensed',),),
-                      ),
-
-                      Container(
-                          margin: EdgeInsets.all(5),
-                          padding: EdgeInsets.all(10),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.topRight,
-                              colors: [
-                                Theme.of(context).primaryColor,
-                                Theme.of(context).accentColor
-                              ],
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                child: Text('Test Name:',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color:Colors.white,fontFamily: 'Roboto_Condensed',),),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: Text(_healthData.testName,style: TextStyle(fontSize: 17,color:Colors.white,fontFamily: 'Roboto_Condensed',),),
-                              ),
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-
-                Container(
-                  // height: 500,
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    // color: Colors.green,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  child:
+      body: SingleChildScrollView(
+        child: Stack(
+      
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.lightBlue[50],
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+      
                   Container(
-                    height: 250,
-                    // color: Colors.blue,
-                    child: ListView.separated(
-                      itemCount: hlthPartnerData.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          Column(
-                            children: [
-                              Container(
-                                // color: Colors.green,
-                                height: 200,
-                                width: 300,
-                                // margin: EdgeInsets.all(20),
-                                decoration: BoxDecoration(
-                                  // color: Colors.green,
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.center,
-                                    colors: [
-                                      Theme.of(context).primaryColor,
-                                      Theme.of(context).accentColor
-                                    ],
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Text(hlthPartnerData[index].partnerName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white,fontFamily: 'Roboto_Condensed',),),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Text(hlthPartnerData[index].partnerAddress,style: TextStyle(fontSize: 18,color: Colors.white,fontFamily: 'Roboto_Condensed',),),
-                                    ),
-                                    SizedBox(height:10),
-                                    Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Text(
-                                        'Actual Fee: ${hlthPartnerData[index].fee}',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Roboto_Condensed',
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Text(
-                                        'Discount Fee: ${hlthPartnerData[index].discountedFee}',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Roboto_Condensed',
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: Text(
-                                        'Booking Fee: ${hlthPartnerData[index].bookingFee}',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontFamily: 'Roboto_Condensed',
-                                        ),
-                                      ),
-                                    ),
-
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 40,
-                                      width: 280,
-                                      margin: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.white
-                                      ),
-                                      child: Text('BOOK',style: TextStyle(color:Theme.of(context).primaryColor ),),
-                                    ),
-                                  ],
-                                ),
-
+                    // height: 250,
+                    // width: 200,
+                    // color: Colors.grey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+      
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 10),
+                          child: Text(_healthData.healthName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Theme.of(context).primaryColor,fontFamily: 'Roboto_Condensed',),),
+                        ),
+      
+                        Container(
+                            margin: EdgeInsets.all(5),
+                            padding: EdgeInsets.all(10),
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.topRight,
+                                colors: [
+                                  Theme.of(context).primaryColor,
+                                  Theme.of(context).accentColor
+                                ],
                               ),
-
-                            ],
-                          ),
-                      separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(
-                        color: Colors.transparent,
-                        // height: 5,
-                      ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text('Test Name:',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color:Colors.white,fontFamily: 'Roboto_Condensed',),),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Text(_healthData.testName,style: TextStyle(fontSize: 13,color:Colors.white,fontFamily: 'Roboto_Condensed',),),
+                                ),
+                              ],
+                            )),
+                      ],
                     ),
                   ),
-
-                ),
-
-              ],
+      
+                  Container(
+                    // height: 500,
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      // color: Colors.green,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child:
+                    Container(
+                      height: 250,
+                      // color: Colors.blue,
+                      child: ListView.separated(
+                        itemCount: hlthPartnerData.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) =>
+                            Column(
+                              children: [
+                                Container(
+                                  // color: Colors.green,
+                                  height: 200,
+                                  width: 300,
+                                  // margin: EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    // color: Colors.green,
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(10),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.center,
+                                      colors: [
+                                        Theme.of(context).primaryColor,
+                                        Theme.of(context).accentColor
+                                      ],
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(hlthPartnerData[index].partnerName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white,fontFamily: 'Roboto_Condensed',),),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(hlthPartnerData[index].partnerAddress,style: TextStyle(fontSize: 18,color: Colors.white,fontFamily: 'Roboto_Condensed',),),
+                                      ),
+                                      SizedBox(height:10),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: Text(
+                                          'Actual Fee: ${hlthPartnerData[index].fee}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Roboto_Condensed',
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: Text(
+                                          'Discount Fee: ${hlthPartnerData[index].discountedFee}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Roboto_Condensed',
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: Text(
+                                          'Booking Fee: ${hlthPartnerData[index].bookingFee}',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Roboto_Condensed',
+                                          ),
+                                        ),
+                                      ),
+      
+                                      InkWell(
+                                         onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => HealthCheckUpBookingPage(_healthData, hlthPartnerData[index])
+                                                          ));
+                                            },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          width: 280,
+                                          margin: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.rectangle,
+                                              borderRadius: BorderRadius.circular(10),
+                                              color: Colors.white
+                                          ),
+                                          child: Text('BOOK',style: TextStyle(color:Theme.of(context).primaryColor ),),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+      
+                                ),
+      
+                              ],
+                            ),
+                        separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(
+                          color: Colors.transparent,
+                          // height: 5,
+                        ),
+                      ),
+                    ),
+      
+                  ),
+      
+                ],
+              ),
             ),
-          ),
-
-
-        ],
+      
+      
+          ],
+        ),
       ),
 
 

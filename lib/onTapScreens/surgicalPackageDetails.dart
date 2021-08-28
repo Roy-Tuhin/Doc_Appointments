@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:medbo/Booking/SurgicalPackBooking.dart';
 import 'package:medbo/models/surgPackDetailsModel.dart';
 
 class SurgPackDetails extends StatefulWidget {
@@ -147,7 +148,7 @@ class _SurgPackDetailsState extends State<SurgPackDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      Padding(
+                      Padding(//===================================================================================================================================================================================
                         padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 10),
                         child: Text(_surgicalData.packageName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Theme.of(context).primaryColor,fontFamily: 'Roboto_Condensed',),),
                       ),
@@ -230,7 +231,7 @@ class _SurgPackDetailsState extends State<SurgPackDetails> {
                                       padding: const EdgeInsets.all(4.0),
                                       child: Text(surgPartnerData[index].partnerName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.white,fontFamily: 'Roboto_Condensed',),),
                                     ),
-                                    Padding(
+                                    Padding(//=======================================================================================================================================================================================================
                                       padding: const EdgeInsets.all(4.0),
                                       child: Text(surgPartnerData[index].partnerAddress,style: TextStyle(fontSize: 18,color: Colors.white,fontFamily: 'Roboto_Condensed',),),
                                     ),
@@ -269,17 +270,26 @@ class _SurgPackDetailsState extends State<SurgPackDetails> {
                                       ),
                                     ),
 
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 40,
-                                      width: 280,
-                                      margin: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.white
+                                    InkWell(
+                                      onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => SurgicalPackBooking(_surgicalData, surgPartnerData[index])
+                                                          ));
+                                            },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 40,
+                                        width: 280,
+                                        margin: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: Colors.white
+                                        ),
+                                        child: Text('BOOK',style: TextStyle(color:Theme.of(context).primaryColor ),),
                                       ),
-                                      child: Text('BOOK',style: TextStyle(color:Theme.of(context).primaryColor ),),
                                     ),
                                   ],
                                 ),
