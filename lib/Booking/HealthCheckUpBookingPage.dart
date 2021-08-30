@@ -109,63 +109,70 @@ class _HealthCheckUpBookingPageState extends State<HealthCheckUpBookingPage> {
 
 
 
-                  
-                  ListTile(
-                    title: Text(
-                      "Fee",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 5,
-                        fontFamily: 'Poppins',
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                    subtitle: Expanded(
-                      child: Container(
-                          height: 17,
-                          //color: Colors.green,
-                          child: Row(
-                            children: [
-                              Text(
-                                'Actual Fee: ₹ ${healthPartnerDataRef.fee}',
-                                 style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 2.5,
-                        fontFamily: 'Poppins',
-                        //color: Theme.of(context).primaryColor,
-                      ),
-                              ),
-                              VerticalDivider(
-                                thickness: 1,
-                                color: Colors.blueGrey,
-                              ),
-                              Text(
-                                'Discount Fee: ₹ ${healthPartnerDataRef.discountedFee}',
-                                style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 2.5,
-                        fontFamily: 'Poppins',
-                        //color: Theme.of(context).primaryColor,
-                      ),
-                              ),
-                              VerticalDivider(
-                                thickness: 1,
-                                color: Colors.blueGrey,
-                              ),
-                              Text(
-                                'Discount Fee: ₹ ${healthPartnerDataRef.bookingFee}',
-                                style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 2.5,
-                        fontFamily: 'Poppins',
-                        //color: Theme.of(context).primaryColor,
-                      ),
-                              ),
-                            ],
-                          ),
-                          ),
-                    ),
-                  ),
+
+                  // ListTile(
+                  //   title: Text(
+                  //     "Fee",
+                  //     style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 5,
+                  //       fontFamily: 'Poppins',
+                  //       color: Theme.of(context).primaryColor,
+                  //     ),
+                  //   ),
+                  //   subtitle: Expanded(
+                  //     child: Container(
+                  //         height: 17,
+                  //         //color: Colors.green,
+                  //         child: Row(
+                  //           children: [
+                  //             Text(
+                  //               'Actual Fee: ₹ ${healthPartnerDataRef.fee}',
+                  //                style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 2.5,
+                  //       fontFamily: 'Poppins',
+                  //       //color: Theme.of(context).primaryColor,
+                  //     ),
+                  //             ),
+                  //             VerticalDivider(
+                  //               thickness: 1,
+                  //               color: Colors.blueGrey,
+                  //             ),
+                  //             Text(
+                  //               'Discount Fee: ₹ ${healthPartnerDataRef.discountedFee}',
+                  //               style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 2.5,
+                  //       fontFamily: 'Poppins',
+                  //       //color: Theme.of(context).primaryColor,
+                  //     ),
+                  //             ),
+                  //             VerticalDivider(
+                  //               thickness: 1,
+                  //               color: Colors.blueGrey,
+                  //             ),
+                  //             Text(
+                  //               'Discount Fee: ₹ ${healthPartnerDataRef.bookingFee}',
+                  //               style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 2.5,
+                  //       fontFamily: 'Poppins',
+                  //       //color: Theme.of(context).primaryColor,
+                  //     ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         ),
+                  //   ),
+                  // ),
+
+
+
+
+
+
+
                   ListTile(
                     title: Text(
                       "Preferred Visit Date",

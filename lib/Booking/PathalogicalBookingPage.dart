@@ -109,62 +109,62 @@ class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
                   ),
 
 
-                  ListTile(
-                    title: Text(
-                      "Fee",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 5,
-                        fontFamily: 'Poppins',
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                    subtitle: Expanded(
-                      child: Container(
-                          height: 17,
-                          //color: Colors.green,
-                          child: Row(
-                            children: [
-                              Text(
-                                'Actual Fee: ₹ ${pathTestPartnerDataRef.fee}',
-                                 style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 2.3,
-                        fontFamily: 'Poppins',
-                        //color: Theme.of(context).primaryColor,
-                      ),
-                              ),
-                              VerticalDivider(
-                                thickness: 1,
-                                color: Colors.blueGrey,
-                              ),
-                              Text(
-                                'Discount Fee: ₹ ${pathTestPartnerDataRef.discountedFee}',
-                                style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 2.3,
-                        fontFamily: 'Poppins',
-                        //color: Theme.of(context).primaryColor,
-                      ),
-                              ),
-                              VerticalDivider(
-                                thickness: 1,
-                                color: Colors.blueGrey,
-                              ),
-                              Text(
-                                'Discount Fee: ₹ ${pathTestPartnerDataRef.bookingFee}',
-                                style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 2.3,
-                        fontFamily: 'Poppins',
-                        //color: Theme.of(context).primaryColor,
-                      ),
-                              ),
-                            ],
-                          ),
-                          ),
-                    ),
-                  ),
+                  // ListTile(
+                  //   title: Text(
+                  //     "Fee",
+                  //     style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 5,
+                  //       fontFamily: 'Poppins',
+                  //       color: Theme.of(context).primaryColor,
+                  //     ),
+                  //   ),
+                  //   subtitle: Expanded(
+                  //     child: Container(
+                  //         height: 17,
+                  //         //color: Colors.green,
+                  //         child: Row(
+                  //           children: [
+                  //             Text(
+                  //               'Actual Fee: ₹ ${pathTestPartnerDataRef.fee}',
+                  //                style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 2.3,
+                  //       fontFamily: 'Poppins',
+                  //       //color: Theme.of(context).primaryColor,
+                  //     ),
+                  //             ),
+                  //             VerticalDivider(
+                  //               thickness: 1,
+                  //               color: Colors.blueGrey,
+                  //             ),
+                  //             Text(
+                  //               'Discount Fee: ₹ ${pathTestPartnerDataRef.discountedFee}',
+                  //               style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 2.3,
+                  //       fontFamily: 'Poppins',
+                  //       //color: Theme.of(context).primaryColor,
+                  //     ),
+                  //             ),
+                  //             VerticalDivider(
+                  //               thickness: 1,
+                  //               color: Colors.blueGrey,
+                  //             ),
+                  //             Text(
+                  //               'Discount Fee: ₹ ${pathTestPartnerDataRef.bookingFee}',
+                  //               style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: blockSizeHorizontal * 2.3,
+                  //       fontFamily: 'Poppins',
+                  //       //color: Theme.of(context).primaryColor,
+                  //     ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         ),
+                  //   ),
+                  // ),
 
 
 

@@ -736,10 +736,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          DocBooking(
-                                                              _finalpartnerData[
-                                                                  index],
-                                                              _docData)));
+                                                          DocBooking(   _finalpartnerData[index],  _docData)));
                                             },
                                             child: Container(
                                               alignment: Alignment.center,
