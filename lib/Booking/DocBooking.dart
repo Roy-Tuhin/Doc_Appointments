@@ -12,10 +12,9 @@ import 'package:http/http.dart' as http;
 import 'package:medbo/models/docVisitDaysModel.dart';
 
 import 'afterDateSelectPage.dart';
+import 'confirmPaymentPage.dart';
 
 class DocBooking extends StatefulWidget {
-  
-  // const DocBooking(PartnerDatum finalpartnerData, { Key? key, encId }) : super(key: key);
   var partnerData, docData;
   DocBooking(this.partnerData, this.docData);
 
@@ -25,9 +24,12 @@ class DocBooking extends StatefulWidget {
 }
 
 class _DocBookingState extends State<DocBooking> {
+  String radioItemHolder = '03/09/2021';
+  String radioFee = '';
+  String discountRadioFee = '';
+  String bookingRadioFee = '';
 
-
-  int _radioValue = 0;
+  int _radioValue = 1;
   String _selectedDate = "";
   final List<String> appointments = [
     "Physically Appointment",
@@ -120,7 +122,7 @@ class _DocBookingState extends State<DocBooking> {
 
                   // Text("Booking Information: ${partnerDataRef.partnerName}",textAlign: TextAlign.left,),
                   // Text("Location: ${partnerDataRef.partnerAddress}",textAlign: TextAlign.left,),
-                 //Text(_finalUserData.encUserId),
+                  //Text(_finalUserData.encUserId),
                 ],
               ),
             ),
@@ -267,6 +269,11 @@ class _DocBookingState extends State<DocBooking> {
                         },
                       ),
                     ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Your Selected Date: $_selectedDate',
+                      style: TextStyle(fontSize: 16),
+                    ),
 
 //=========================================================================================================================================
 
@@ -321,14 +328,22 @@ class _DocBookingState extends State<DocBooking> {
                                           activeColor: Colors.green,
                                           value: index,
                                           groupValue: _radioValue,
-                                          onChanged: (value) {
+                                          onChanged: (val) {
                                             setState(() {
-                                              _radioValue = value as int;
+                                              radioItemHolder = snapshot
+                                                  .data[index].visitDate;
+                                              radioFee =
+                                                  snapshot.data[index].fee;
+                                              discountRadioFee = snapshot
+                                                  .data[index].discountedFee;
+                                              bookingRadioFee = snapshot
+                                                  .data[index].bookingFee;
+                                              _radioValue = val as int;
                                             });
                                           },
                                         ),
                                         Text(
-                                          "Visit Day: ${snapshot.data[index].visitDayName},\n Fee: ${snapshot.data[index].fee},  \n Discounted Fee: ${snapshot.data[index].discountedFee},  \n Booking Fee: ${snapshot.data[index].bookingFee} ",
+                                          "Visit Day: ${snapshot.data[index].visitDate},\n Fee: ${snapshot.data[index].fee},  \n Discounted Fee: ${snapshot.data[index].discountedFee},  \n Booking Fee: ${snapshot.data[index].bookingFee} ",
                                           style:
                                               TextStyle(fontFamily: 'Poppins'),
                                         ),
@@ -343,10 +358,20 @@ class _DocBookingState extends State<DocBooking> {
                     ),
 
                     ElevatedButton(
-                      onPressed: () {
-                        SaveDoctBooking();
-                      }, 
-                      child: Text("Next")),
+                        onPressed: () {
+                          SaveDoctBooking();
+                        },
+                        child: Text("Next")),
+
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ConfirmPaymentPage(partnerDataRef)));
+                        },
+                        child: Text("Payment Confirmm")),
 
 //=========================================================================================================================================
                   ],
@@ -375,7 +400,7 @@ class _DocBookingState extends State<DocBooking> {
         // print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
-        // Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterDateSelectPage(rresponse: DocVisitDaysModel.fromJson(jsonResponse))));
+        //Navigator.push(context, MaterialPageRoute(builder: (context)=>ConfirmPaymentPage(rresponse: DocVisitDaysModel.fromJson(jsonResponse))));
 
         DocVisitDaysModel dataModel = docVisitDaysModelFromJson(response.body);
         print(dataModel.data.length);
@@ -394,29 +419,32 @@ class _DocBookingState extends State<DocBooking> {
     }
   }
 
-
-
 //==============================================================================================================================
 
-
- Future<void> SaveDoctBooking() async {
+  Future<void> SaveDoctBooking() async {
     var jsonResponse;
     if (partnerDataRef.encPartnerId.isNotEmpty &&
         docDataRef.encDoctorId.isNotEmpty) {
       var response = await http.post(
           Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveDoctBooking"),
           body: ({
-             'EncPartnerId': partnerDataRef.encPartnerId,
-             'EncDoctorId': docDataRef.encDoctorId,
-             'VisitDate': '31/08/2021',
-             //'EncUserId': _finalUserData.encUserId,
+            'EncPartnerId': partnerDataRef.encPartnerId,
+            'EncDoctorId': docDataRef.encDoctorId,
+            'VisitDate': radioItemHolder,
+            'Fee': radioFee,
+            'DiscountedFee': discountRadioFee,
+            'BookingFee': bookingRadioFee,
           }));
       if (response.statusCode == 200) {
         print("Correct");
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterDateSelectPage(rresponse: DocBookingModel.fromJson(jsonResponse))));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AfterDateSelectPage(
+                    rresponse: DocBookingModel.fromJson(jsonResponse),)));
       } else {
         print("Wrong URL");
         throw Exception("Faild to fetch");
@@ -425,17 +453,5 @@ class _DocBookingState extends State<DocBooking> {
       throw Exception("Faild to fetch");
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+//partnerDataRef,

@@ -12,17 +12,17 @@ import 'package:medbo/screens/home.dart';
 import 'package:medbo/screens2.dart/home2.dart';
 import 'package:http/http.dart' as http;
 
-class DocBookingAcknowledgementPage extends StatefulWidget {
+class PaymentAmountDetailsPage extends StatefulWidget {
   final DocBookingAcknowledgement rresponse;
-  const DocBookingAcknowledgementPage({required this.rresponse});
+  const PaymentAmountDetailsPage({required this.rresponse});
 
   @override
-  _DocBookingAcknowledgementPageState createState() =>
-      _DocBookingAcknowledgementPageState();
+  _PaymentAmountDetailsPageState createState() =>
+      _PaymentAmountDetailsPageState();
 }
 
-class _DocBookingAcknowledgementPageState
-    extends State<DocBookingAcknowledgementPage> {
+class _PaymentAmountDetailsPageState
+    extends State<PaymentAmountDetailsPage> {
   var responseRef;
   //  _SecondState(this.responseRef);
   @override
@@ -105,7 +105,7 @@ class _DocBookingAcknowledgementPageState
                           ),
                         ),
                         subtitle: Text(
-                          "Booking Reference No: ${widget.rresponse.refNo}\nBooking Date: ${widget.rresponse.bookingDate}\nVisit Date: ${widget.rresponse.visitDate}\nVisit Location: ${widget.rresponse.visitLocation} ",
+                          "Booking Reference No: ${widget.rresponse.refNo}\nBooking Date: ${widget.rresponse.bookingDate} ",
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               color: Theme.of(context).primaryColor),

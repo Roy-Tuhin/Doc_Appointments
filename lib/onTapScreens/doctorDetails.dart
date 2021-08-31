@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:medbo/Booking/DocBooking.dart';
 import 'package:medbo/models/docDetailsModel.dart';
+import 'package:medbo/models/docVisitDaysModel.dart';
 
 // import 'package:url_launcher/url_launcher.dart';
 class DoctorDetails extends StatefulWidget {
@@ -12,6 +13,7 @@ class DoctorDetails extends StatefulWidget {
 }
 
 class _DoctorDetailsState extends State<DoctorDetails> {
+  late final DocVisitDaysModel rresponse;
   static String url = "http://medbo.digitalicon.in/api/medboapi/doctdetails";
   Dio dio = Dio();
   DoctorData _docData = DoctorData(
@@ -736,7 +738,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          DocBooking(   _finalpartnerData[index],  _docData)));
+                                                          DocBooking(   _finalpartnerData[index],  _docData,)));
                                             },
                                             child: Container(
                                               alignment: Alignment.center,
