@@ -187,8 +187,8 @@ class _Home2State extends State<Home2> {
                 clipper: MyClipper(),
                 child: Container(
                   //height: 400,
-                  height:blockSizeVertical*40,
-                  width: MediaQuery.of(context).size.height,
+                  height:blockSizeVertical*30,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,

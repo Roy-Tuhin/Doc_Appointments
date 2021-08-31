@@ -101,11 +101,11 @@ class _DocBookingAcknowledgementPageState
                             fontWeight: FontWeight.bold,
                             fontSize: blockSizeHorizontal * 5,
                             fontFamily: 'Poppins',
-                            color: Colors.green,
+                            color: Color(0xFF79a0be),
                           ),
                         ),
                         subtitle: Text(
-                          "Booking Reference No: ${widget.rresponse.refNo}\nBooking Date: ${widget.rresponse.bookingDate}\nVisit Date: ${widget.rresponse.visitDate}\nVisit Location: ${widget.rresponse.visitLocation} ",
+                          "Paid Amount: ${widget.rresponse.paidAmt}\nBooking Reference No: ${widget.rresponse.refNo}\nBooking Date: ${widget.rresponse.bookingDate}\nVisit Date: ${widget.rresponse.visitDate}\nVisit Location: ${widget.rresponse.visitLocation} ",
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               color: Theme.of(context).primaryColor),

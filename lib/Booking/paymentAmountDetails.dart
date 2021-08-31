@@ -8,12 +8,15 @@ import 'package:medbo/main.dart';
 import 'package:medbo/models/DocBookingAcknowledgement.dart';
 import 'package:medbo/models/DocBookingModel.dart';
 import 'package:medbo/models/docVisitDaysModel.dart';
+import 'package:medbo/models/paymentAmountDetailsModel.dart';
 import 'package:medbo/screens/home.dart';
 import 'package:medbo/screens2.dart/home2.dart';
 import 'package:http/http.dart' as http;
 
+import 'DocBookingAcknowledgePage.dart';
+
 class PaymentAmountDetailsPage extends StatefulWidget {
-  final DocBookingAcknowledgement rresponse;
+  final PaymentAmountDetailsModel rresponse;
   const PaymentAmountDetailsPage({required this.rresponse});
 
   @override
@@ -91,26 +94,52 @@ class _PaymentAmountDetailsPageState
                   child: Column(
                     children: [
                       Image.asset(
-                        "assets/images/done.png",
+                        "assets/images/payment2.png",
                         fit: BoxFit.cover,
                       ),
-                      ListTile(
-                        title: Text(
-                          "Doc Name: ${widget.rresponse.doctorName}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: blockSizeHorizontal * 5,
-                            fontFamily: 'Poppins',
-                            color: Colors.green,
-                          ),
-                        ),
-                        subtitle: Text(
-                          "Booking Reference No: ${widget.rresponse.refNo}\nBooking Date: ${widget.rresponse.bookingDate} ",
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).primaryColor),
+
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                                "Payment Amount :  " ,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: blockSizeHorizontal * 4,
+                                  fontFamily: 'Poppins',
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              Text("${widget.rresponse.paymentAmount} ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: blockSizeHorizontal * 5,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.green,
+                                ),
+                              
+                              ),
+                          ],
                         ),
                       ),
+                      // ListTile(
+                      //   title: Text(
+                      //     "Payment Amount: ${widget.rresponse.paymentAmount} ",
+                      //     style: TextStyle(
+                      //       fontWeight: FontWeight.bold,
+                      //       fontSize: blockSizeHorizontal * 5,
+                      //       fontFamily: 'Poppins',
+                      //       color: Colors.green,
+                      //     ),
+                      //   ),
+                      //   // subtitle: Text(
+                      //   //   "Payment Amount: ${widget.rresponse.paidAmt} ",
+                      //   //   style: TextStyle(
+                      //   //       fontFamily: 'Poppins',
+                      //   //       color: Theme.of(context).primaryColor),
+                      //   // ),
+                      // ),
                       //Text("Doc Name: ${widget.rresponse.doctorName}"),
                       //Text("Booking Date: ${widget.rresponse.bookingDate}"),
                       //Text("Booking Refference No: ${widget.rresponse.refNo}"),
@@ -121,17 +150,14 @@ class _PaymentAmountDetailsPageState
 
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Home2()));
+                            DoPaymentDetails();
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Color(0xFF79a0be)),
+                                MaterialStateProperty.all(Color(0xFF5da45f)),
                                  padding: MaterialStateProperty.all(EdgeInsets.only(left:50,right: 50)),
                           ),
-                          child: Text("Home")),
+                          child: Text("Confirm")),
                     ],
                   ),
                 ),
@@ -163,4 +189,43 @@ class _PaymentAmountDetailsPageState
       ),
     );
   }
+
+
+
+
+
+
+   Future<void> DoPaymentDetails() async {
+    var jsonResponse;
+    if (widget.rresponse.encBookingId.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/DoPayment"),
+          body: ({
+             'EncId': widget.rresponse.encBookingId,
+
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>DocBookingAcknowledgementPage(rresponse:DocBookingAcknowledgement.fromJson(jsonResponse))));
+      } else {
+        print("Wrong URL");
+        throw Exception("Faild to fetch");
+      }
+    } else {
+      throw Exception("Faild to fetch");
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 }

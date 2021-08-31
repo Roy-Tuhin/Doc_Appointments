@@ -363,15 +363,15 @@ class _DocBookingState extends State<DocBooking> {
                         },
                         child: Text("Next")),
 
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ConfirmPaymentPage(partnerDataRef)));
-                        },
-                        child: Text("Payment Confirmm")),
+                    // ElevatedButton(
+                    //     onPressed: () {
+                    //       Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) =>
+                    //                   ConfirmPaymentPage(partnerDataRef)));
+                    //     },
+                    //     child: Text("Payment Confirmm")),
 
 //=========================================================================================================================================
                   ],

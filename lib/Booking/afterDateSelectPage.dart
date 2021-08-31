@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -9,15 +7,15 @@ import 'package:medbo/main.dart';
 import 'package:medbo/models/DocBookingAcknowledgement.dart';
 import 'package:medbo/models/DocBookingModel.dart';
 import 'package:medbo/models/docVisitDaysModel.dart';
+import 'package:medbo/models/paymentAmountDetailsModel.dart';
 import 'package:medbo/screens/home.dart';
 import 'package:medbo/screens2.dart/home2.dart';
 import 'package:http/http.dart' as http;
 
 import 'DocBookingAcknowledgePage.dart';
 
-
 class AfterDateSelectPage extends StatefulWidget {
-  final  DocBookingModel rresponse;
+  final DocBookingModel rresponse;
   const AfterDateSelectPage({required this.rresponse});
 
   @override
@@ -29,11 +27,9 @@ class _AfterDateSelectPageState extends State<AfterDateSelectPage> {
   //  _SecondState(this.responseRef);
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-       backgroundColor:Color(0xFFd6ecfe),
-      body:SafeArea(
+      backgroundColor: Color(0xFFd6ecfe),
+      body: SafeArea(
         child: Column(
           children: [
             Expanded(
@@ -48,7 +44,7 @@ class _AfterDateSelectPageState extends State<AfterDateSelectPage> {
                       "Your Health",
                       style: TextStyle(
                         fontSize: 45,
-                        color:Color(0xFF283c50),
+                        color: Color(0xFF283c50),
                         fontFamily: 'Poppins',
                       ),
                     ),
@@ -77,12 +73,18 @@ class _AfterDateSelectPageState extends State<AfterDateSelectPage> {
                           height: 1.5),
                     ),
                     Spacer(),
-                   ElevatedButton(
-                       onPressed: () {
-                       PaymentDetails();
-                      //PaymentDetailsAmount();
-                      }, 
-                      child: Text("Book Now")),
+                    ElevatedButton(
+                        onPressed: () {
+                          //PaymentDetails();
+                          PaymentDetailsAmount();
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xFF79a0be)),
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.only(left: 50, right: 50)),
+                        ),
+                        child: Text("Book Now")),
                     Spacer(),
                   ],
                 ),
@@ -105,53 +107,25 @@ class _AfterDateSelectPageState extends State<AfterDateSelectPage> {
     );
   }
 
-
-
-
-  // Future<void> PaymentDetailsAmount() async {
-  //   var jsonResponse;
-  //   if (widget.rresponse.encBookingId.isNotEmpty) {
-  //     var response = await http.post(
-  //         Uri.parse("http://medbo.digitalicon.in/api/medboapi/PaymentDetails"),
-  //         body: ({
-  //            'EncId': widget.rresponse.encBookingId,
-
-  //         }));
-  //     if (response.statusCode == 200) {
-  //       print("Correct");
-  //       print(response.body);
-  //       jsonResponse = json.decode(response.body.toString());
-  //       print(jsonResponse);
-  //        Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentAmountDetailsPage(rresponse:DocBookingAcknowledgement.fromJson(jsonResponse))));
-  //     } else {
-  //       print("Wrong URL");
-  //       throw Exception("Faild to fetch");
-  //     }
-  //   } else {
-  //     throw Exception("Faild to fetch");
-  //   }
-  // }
-
-
-
-
-
-
-  Future<void> PaymentDetails() async {
+  Future<void> PaymentDetailsAmount() async {
     var jsonResponse;
     if (widget.rresponse.encBookingId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/DoPayment"),
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/PaymentDetails"),
           body: ({
-             'EncId': widget.rresponse.encBookingId,
-
+            'EncId': widget.rresponse.encBookingId,
           }));
       if (response.statusCode == 200) {
         print("Correct");
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>DocBookingAcknowledgementPage(rresponse:DocBookingAcknowledgement.fromJson(jsonResponse))));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PaymentAmountDetailsPage(
+                    rresponse:
+                        PaymentAmountDetailsModel.fromJson(jsonResponse))));
       } else {
         print("Wrong URL");
         throw Exception("Faild to fetch");
@@ -161,34 +135,31 @@ class _AfterDateSelectPageState extends State<AfterDateSelectPage> {
     }
   }
 
-
-
+  // Future<void> PaymentDetails() async {
+  //   var jsonResponse;
+  //   if (widget.rresponse.encBookingId.isNotEmpty) {
+  //     var response = await http.post(
+  //         Uri.parse("http://medbo.digitalicon.in/api/medboapi/DoPayment"),
+  //         body: ({
+  //           'EncId': widget.rresponse.encBookingId,
+  //         }));
+  //     if (response.statusCode == 200) {
+  //       print("Correct");
+  //       print(response.body);
+  //       jsonResponse = json.decode(response.body.toString());
+  //       print(jsonResponse);
+  //       Navigator.push(
+  //           context,
+  //           MaterialPageRoute(
+  //               builder: (context) => DocBookingAcknowledgementPage(
+  //                   rresponse:
+  //                       DocBookingAcknowledgement.fromJson(jsonResponse))));
+  //     } else {
+  //       print("Wrong URL");
+  //       throw Exception("Faild to fetch");
+  //     }
+  //   } else {
+  //     throw Exception("Faild to fetch");
+  //   }
+  // }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
