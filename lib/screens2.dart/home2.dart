@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:medbo/API/Search/SearchApiResponse.dart';
 import 'package:medbo/API/Search/afterSearchPage.dart';
+import 'package:medbo/models/AllDieticianModel.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
 import 'package:medbo/onTapScreens/healthchkupDetails.dart';
 import 'package:medbo/onTapScreens/lastVisit.dart';
@@ -98,6 +99,7 @@ class _Home2State extends State<Home2> {
     getSPlist();
     getPathTest();
     getHList();
+    //AllDietician();
     // print(_datum[0].doctorId);
     // _initUser();
     if (docList != null ||
@@ -124,7 +126,7 @@ class _Home2State extends State<Home2> {
 
 
 
-    Widget image_carousel = new Container(
+    Widget imageCarousel = new Container(
       margin: EdgeInsets.all(10.0),
       // padding: EdgeInsets.all(10),
       height: 180,
@@ -231,7 +233,7 @@ class _Home2State extends State<Home2> {
 
                  //SizedBox(height: 20,),
                  
-                image_carousel,
+                imageCarousel,
                 SizedBox(height: 20,),
                 // Container(//===================================================1st=======================================================
                 //  color: Colors.blue,
@@ -866,6 +868,107 @@ class _Home2State extends State<Home2> {
 
 
 
+
+               //=========================================================================================================================================
+               Container(
+                  height: blockSizeVertical*6.2,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:8.0),
+                      child: Text(
+                        'Dietician',
+                        style: TextStyle(
+                            fontSize: blockSizeHorizontal*4.1,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                ),
+
+                
+
+                    Container(
+                      //color: Colors.blueAccent,
+                      child: FutureBuilder(
+                        future: AllDietician(),
+                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                          // if (snapshot.connectionState !=ConnectionState.done) {
+                          //   return CircularProgressIndicator();
+                          // }
+                          if (snapshot.hasError) {
+                            return Text("Somthing went wrong");
+                          }
+
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Text(
+                                    "Dietian Name: ${snapshot.data[index].dietName}",
+                                    style: TextStyle(fontFamily: 'Poppins'),
+                                  );
+
+                                  // return Container(
+                                  //   margin: EdgeInsets.all(10),
+                                  //   padding: EdgeInsets.all(10),
+                                  //   decoration: BoxDecoration(
+                                  //     // color: Color(0xFF3E64FF),
+                                  //     color: Colors.lightBlue[50],
+                                  //     borderRadius:
+                                  //         BorderRadius.all(Radius.circular(12)),
+                                  //     boxShadow: [
+                                  //       BoxShadow(
+                                  //         //color: Color(0xFF3E64FF).withOpacity(0.3),
+                                  //         color: Colors.grey.withOpacity(0.9),
+                                  //         offset: const Offset(
+                                  //           0.0,
+                                  //           5.0,
+                                  //         ),
+                                  //         blurRadius: 3.0,
+                                  //         spreadRadius: 0.5,
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Text("hola"),
+                                  //     ],
+                                  //   ),
+                                   
+                                  // );
+                                });
+                          }
+                          return Text("Error while calling");
+                        },
+                      ),
+                    ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 SizedBox(
                  height: blockSizeVertical*6.2,
                   child: Container(
@@ -1136,6 +1239,53 @@ class _Home2State extends State<Home2> {
       // ));
     }
   }
+
+
+
+
+
+  
+//=================================================================================================
+
+
+
+
+
+
+  Future<List<Datum>> AllDietician() async {
+    var jsonResponse;
+
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllDietician"),
+          body: ({
+            //'SearchKey': searchController.text,
+          }));
+      if (response.statusCode == 200) {
+        setState(() {
+          //isApiCallProcess = false;//progress bar hide
+        });
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+         //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterSearchPage(rresponse: SearchApiResponse.fromJson(jsonResponse))));
+          AllDieticianModel dataModel = allDieticianModelFromJson(response.body);
+        print(dataModel.data.length);
+        for (final item in dataModel.data) print(item.dietName);
+
+        List<Datum> arrData =dataModel.data; // this data is actuall json array of data[]
+        //print(arrData[1].dietName);
+        return arrData;
+
+      } else {
+        print("Wrong Url");
+        print(response.body);
+        throw Exception("Faild to fetch");
+      }
+      //return AllDietician();
+   
+  }
+
 
 
 
