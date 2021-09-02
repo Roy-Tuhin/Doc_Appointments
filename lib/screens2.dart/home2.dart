@@ -5,6 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:medbo/API/Search/SearchApiResponse.dart';
 import 'package:medbo/API/Search/afterSearchPage.dart';
 import 'package:medbo/models/AllDieticianModel.dart';
+import 'package:medbo/onTapScreens/DietcianDetails.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
 import 'package:medbo/onTapScreens/healthchkupDetails.dart';
 import 'package:medbo/onTapScreens/lastVisit.dart';
@@ -892,6 +893,7 @@ class _Home2State extends State<Home2> {
                 
 
                     Container(
+                      height: blockSizeVertical*30,//38
                       //color: Colors.blueAccent,
                       child: FutureBuilder(
                         future: AllDietician(),
@@ -905,46 +907,127 @@ class _Home2State extends State<Home2> {
 
                           if (snapshot.hasData) {
                             return ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                physics: BouncingScrollPhysics(),
+                                 scrollDirection: Axis.horizontal,
+                                  physics: BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: snapshot.data.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Text(
-                                    "Dietian Name: ${snapshot.data[index].dietName}",
-                                    style: TextStyle(fontFamily: 'Poppins'),
-                                  );
+                                itemBuilder: (BuildContext context, int index) =>
+                                  Container(
+                                    decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  width: blockSizeHorizontal*40,
+                                  margin: EdgeInsets.all(10),
 
-                                  // return Container(
-                                  //   margin: EdgeInsets.all(10),
-                                  //   padding: EdgeInsets.all(10),
-                                  //   decoration: BoxDecoration(
-                                  //     // color: Color(0xFF3E64FF),
-                                  //     color: Colors.lightBlue[50],
-                                  //     borderRadius:
-                                  //         BorderRadius.all(Radius.circular(12)),
-                                  //     boxShadow: [
-                                  //       BoxShadow(
-                                  //         //color: Color(0xFF3E64FF).withOpacity(0.3),
-                                  //         color: Colors.grey.withOpacity(0.9),
-                                  //         offset: const Offset(
-                                  //           0.0,
-                                  //           5.0,
-                                  //         ),
-                                  //         blurRadius: 3.0,
-                                  //         spreadRadius: 0.5,
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  //   child: Row(
-                                  //     children: [
-                                  //       Text("hola"),
-                                  //     ],
-                                  //   ),
-                                   
-                                  // );
-                                });
-                          }
+
+
+
+                                  child: Stack(children: [
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+
+
+                               Padding(//====================images 
+                              padding: const EdgeInsets.all(5.0),
+                              // child: ClipRRect(
+                              //    borderRadius: BorderRadius.circular(14.0),
+                              //   child: 
+                              //   Image(
+                              //     // image: NetworkImage(
+                              //     //   snapshot.data[index].image,
+                              //     // ),
+                              //     fit: BoxFit.cover,
+                              //     height: blockSizeVertical*18,
+                              //     width: blockSizeHorizontal*50,
+                              //   ),
+                              // ),
+                            ),
+
+
+                            SizedBox(height: blockSizeVertical*0.5),
+
+
+
+                              Text(
+                                '${snapshot.data[index].dietName}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: blockSizeHorizontal*3.5,
+                                  fontFamily: 'Poppins',
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                               SizedBox(height: blockSizeVertical*0.8),
+
+                                Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              // color: Colors.green,
+                              child: Center(
+                                child: Text(
+                                  'Email : ${snapshot.data[index].email}',//put email
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      // fontWeight: FontWeight.bold,
+                                      fontSize: blockSizeHorizontal*2.5,
+                                      color: Theme.of(context).primaryColor),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 4,
+                                ),
+                              ),
+                            ),
+                            ]
+                            
+                            ),
+                        Positioned(
+                          bottom: 5,
+                          left: 2,
+                          child: Padding(
+                           padding: const EdgeInsets.only(left:15.0, bottom: 5),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute( builder: (context) => DietcianDetailsPage( snapshot.data[index].encDietId, snapshot.data[index].dietName))); 
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: blockSizeVertical*5,
+                                width: blockSizeHorizontal*30,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Theme.of(context).primaryColor,
+                                      Theme.of(context).accentColor
+                                    ],
+                                  ),
+                                ),
+                                child: Text(
+                                  'Show Details',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: blockSizeHorizontal*2.7,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Poppins',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]),
+
+
+
+
+
+                      ),
+                    );
+                  }
                           return Text("Error while calling");
                         },
                       ),
@@ -1261,9 +1344,6 @@ class _Home2State extends State<Home2> {
             //'SearchKey': searchController.text,
           }));
       if (response.statusCode == 200) {
-        setState(() {
-          //isApiCallProcess = false;//progress bar hide
-        });
         print("Correct");
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
@@ -1285,6 +1365,57 @@ class _Home2State extends State<Home2> {
       //return AllDietician();
    
   }
+
+
+
+
+
+
+
+
+
+  
+  // Future<void> dietcianDetailsApi() async {
+  //   var jsonResponse;
+  //   if (searchController.text.isNotEmpty) {
+  //     var response = await http.post(
+  //         Uri.parse("http://medbo.digitalicon.in/api/medboapi/DietDetails"),
+  //         body: ({
+  //           'EncId ': snapshot.data[index].encDietId,
+  //         }));
+  //     if (response.statusCode == 200) {
+  //       setState(() {
+  //         //isApiCallProcess = false;//progress bar hide
+  //       });
+  //       print("Correct");
+  //       print(response.body);
+  //       jsonResponse = json.decode(response.body.toString());
+  //       print(jsonResponse);
+  //        Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterSearchPage(rresponse: SearchApiResponse.fromJson(jsonResponse))));
+  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //         content: Text(" ${jsonResponse['Message']}"),
+  //         backgroundColor: Color(0xFF152A38),
+  //       ));
+  //       // pageRoute(
+  //       //   jsonResponse['UserData']['Name'],
+  //       // ); // WANT TO SHOW USER NAME IN APP DRAWER AFTER LOGIN WITH CORRECT CREDENTIALS
+  //     } else {
+  //       print("Wronggooooooooooooooooooooooooooo");
+  //       print(response.body);
+  //       ScaffoldMessenger.of(context)
+  //           .showSnackBar(SnackBar(content: Text("Invalid credentials")));
+  //     }
+  //   } else {
+  //     // setState(() {
+  //     //     isApiCallProcess = false;//progress bar hide
+  //     //   });
+  //     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //     //   content: Text("Blank field is not allowed"),
+  //     //   backgroundColor: Color(0xFFAF0404),
+  //     // ));
+  //   }
+  // }
+
 
 
 

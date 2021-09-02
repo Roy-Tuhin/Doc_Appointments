@@ -24,13 +24,13 @@ class DocBooking extends StatefulWidget {
 }
 
 class _DocBookingState extends State<DocBooking> {
-  String radioItemHolder = '03/09/2021';
+  String radioItemHolder = '30/09/2021';
   String radioFee = '';
   String discountRadioFee = '';
   String bookingRadioFee = '';
 
-  int _radioValue = 1;
-  String _selectedDate = "";
+  int _radioValue = -1;
+   String _selectedDate =  DateTime.now().toString();
   final List<String> appointments = [
     "Physically Appointment",
     "Online Appointment"
@@ -235,8 +235,8 @@ class _DocBookingState extends State<DocBooking> {
                         borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
                       child: DateTimePicker(
-                        initialValue:
-                            '', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
+                        initialValue: DateTime.now().toString(),
+                       // initialValue: '', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
                         type: DateTimePickerType.date,
                         dateLabelText: 'Select Date',
                         style: TextStyle(
@@ -247,9 +247,7 @@ class _DocBookingState extends State<DocBooking> {
                           letterSpacing: 2.0,
                         ),
                         firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(Duration(
-                            days:
-                                30)), // This will add 30 days from current date
+                        lastDate: DateTime.now().add(Duration(days:30)), // This will add 30 days from current date
                         validator: (value) {
                           return null;
                         },
@@ -269,10 +267,15 @@ class _DocBookingState extends State<DocBooking> {
                         },
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Your Selected Date: $_selectedDate',
-                      style: TextStyle(fontSize: 16),
+                    SizedBox(height: 0),
+                    // Text(
+                    //   'Your Selected Date: $_selectedDate',
+                    //   style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: Colors.green ),
+                    // ),
+                    ListTile(
+                      title: Text("Available Dates : ",
+                      style: TextStyle(fontSize: 16, fontFamily: 'Poppins', color: Colors.green ),
+                      ),
                     ),
 
 //=========================================================================================================================================
@@ -343,7 +346,7 @@ class _DocBookingState extends State<DocBooking> {
                                           },
                                         ),
                                         Text(
-                                          "Visit Day: ${snapshot.data[index].visitDate},\n Fee: ${snapshot.data[index].fee},  \n Discounted Fee: ${snapshot.data[index].discountedFee},  \n Booking Fee: ${snapshot.data[index].bookingFee} ",
+                                          "Visit Day: ${snapshot.data[index].visitDate},\n Fee: ${snapshot.data[index].fee}  \n Discounted Fee: ${snapshot.data[index].discountedFee}  \n Booking Fee: ${snapshot.data[index].bookingFee} ",
                                           style:
                                               TextStyle(fontFamily: 'Poppins'),
                                         ),
