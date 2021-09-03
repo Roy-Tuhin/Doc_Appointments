@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:medbo/Booking/DieticianBooking.dart';
 import 'package:medbo/models/DietDetailsModel.dart';
 
 class DietcianDetailsPage extends StatefulWidget {
@@ -65,7 +66,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
           child: Column(
             children: [
               Text(
-                " Diet Name : ${widget.dietName}",  //======================encoded dietician iD for future use
+                " Diet Name : ${widget.dietName}",
               //" dataModel.data.",
               style: TextStyle(
                                         fontFamily: 'Poppins',
@@ -76,6 +77,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                                     maxLines: 4,
               
               ),
+              Text(widget.encDietcianId),
 
 
               //========================================================================
@@ -97,23 +99,12 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
 
                             if (snapshot.hasData) {
                               return ListView.builder(
-                                   scrollDirection: Axis.horizontal,
-                                    physics: BouncingScrollPhysics(),
-                                  shrinkWrap: true,
+                                  //  scrollDirection: Axis.horizontal,
+                                  //   physics: BouncingScrollPhysics(),
+                                  // shrinkWrap: true,
                                   itemCount: snapshot.data.length,
                                   itemBuilder: (BuildContext context, int index) =>
-                                    Container(
-                                      decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    width: blockSizeHorizontal*80,
-                                    margin: EdgeInsets.all(10),
-
-
-
-
-                                    child: Stack(children: [
+                                    Stack(children: [
                           Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -147,7 +138,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
 
 
                                 Text(
-                                  'PartnerName :  ${snapshot.data[index].partnerName}',
+                                  'Partner Name :  ${snapshot.data[index].partnerName}\n  EncPatnerId: ${snapshot.data[index].encPartnerId}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: blockSizeHorizontal*3.5,
@@ -163,11 +154,11 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                                 // color: Colors.green,
                                 child: Center(
                                   child: Text(
-                                    'PartnerAddress : ${snapshot.data[index].partnerAddress} \n Fee: ${snapshot.data[index].fee} \n DiscountedFee: ${snapshot.data[index].discountedFee} \n Booking Fee:  ${snapshot.data[index].bookingFee} ',//put email
+                                    'Partner Address : ${snapshot.data[index].partnerAddress} \n Fee: ${snapshot.data[index].fee} \n Discounted Fee: ${snapshot.data[index].discountedFee} \n Booking Fee:  ${snapshot.data[index].bookingFee} ',//put email
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         // fontWeight: FontWeight.bold,
-                                        fontSize: blockSizeHorizontal*2.5,
+                                        fontSize: blockSizeHorizontal*4,
                                         color: Theme.of(context).primaryColor),
                                     textAlign: TextAlign.center,
                                     maxLines: 4,
@@ -185,11 +176,11 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                                 // color: Colors.green,
                                 child: Center(
                                   child: Text(
-                                    ' Day Name: ${snapshot.data[index].dayList[0].dayName} | TimeFrom : ${snapshot.data[index].dayList[index].timeFrom}  | TimeTo : ${snapshot.data[index].dayList[index].timeTo} ',//put email
+                                    ' Day : ${snapshot.data[index].dayList[0].dayName} \n Time From :  ${snapshot.data[index].dayList[index].timeFrom} - ${snapshot.data[index].dayList[index].timeTo} ',//put email
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         // fontWeight: FontWeight.bold,
-                                        fontSize: blockSizeHorizontal*2.5,
+                                        fontSize: blockSizeHorizontal*3.5,
                                         color: Theme.of(context).primaryColor),
                                     textAlign: TextAlign.center,
                                     maxLines: 4,
@@ -199,41 +190,41 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
 
 
 
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                // color: Colors.green,
-                                child: Center(
-                                  child: Text(
-                                    ' Day Name: ${snapshot.data[index].dayList[1].dayName} | TimeFrom : ${snapshot.data[index].dayList[index].timeFrom}   | TimeTo : ${snapshot.data[index].dayList[index].timeTo}',//put email
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: blockSizeHorizontal*2.5,
-                                        color: Theme.of(context).primaryColor),
-                                    textAlign: TextAlign.center,
-                                    maxLines: 4,
-                                  ),
-                                ),
-                              ),
+                              // Container(
+                              //   padding: EdgeInsets.symmetric(horizontal: 10),
+                              //   // color: Colors.green,
+                              //   child: Center(
+                              //     child: Text(
+                              //       ' Day Name: ${snapshot.data[index].dayList[1].dayName} | TimeFrom : ${snapshot.data[index].dayList[index].timeFrom}   | TimeTo : ${snapshot.data[index].dayList[index].timeTo}',//put email
+                              //       style: TextStyle(
+                              //           fontFamily: 'Poppins',
+                              //           // fontWeight: FontWeight.bold,
+                              //           fontSize: blockSizeHorizontal*2.5,
+                              //           color: Theme.of(context).primaryColor),
+                              //       textAlign: TextAlign.center,
+                              //       maxLines: 4,
+                              //     ),
+                              //   ),
+                              // ),
 
 
 
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                // color: Colors.green,
-                                child: Center(
-                                  child: Text(
-                                    ' Day Name: ${snapshot.data[index].dayList[2].dayName} | TimeFrom : ${snapshot.data[index].dayList[index].timeFrom}  | TimeTo : ${snapshot.data[index].dayList[index].timeTo}  ',//put email
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: blockSizeHorizontal*2.5,
-                                        color: Theme.of(context).primaryColor),
-                                    textAlign: TextAlign.center,
-                                    maxLines: 4,
-                                  ),
-                                ),
-                              ),
+                              // Container(
+                              //   padding: EdgeInsets.symmetric(horizontal: 10),
+                              //   // color: Colors.green,
+                              //   child: Center(
+                              //     child: Text(
+                              //       ' Day Name: ${snapshot.data[index].dayList[2].dayName} | TimeFrom : ${snapshot.data[index].dayList[index].timeFrom}  | TimeTo : ${snapshot.data[index].dayList[index].timeTo}  ',//put email
+                              //       style: TextStyle(
+                              //           fontFamily: 'Poppins',
+                              //           // fontWeight: FontWeight.bold,
+                              //           fontSize: blockSizeHorizontal*2.5,
+                              //           color: Theme.of(context).primaryColor),
+                              //       textAlign: TextAlign.center,
+                              //       maxLines: 4,
+                              //     ),
+                              //   ),
+                              // ),
 
 
 
@@ -263,58 +254,71 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                               
                               ),
                               SizedBox(height: 30,),
-                          // Positioned(
-                          //   bottom: 5,
-                          //   left: 2,
-                          //   child: Padding(
-                          //    padding: const EdgeInsets.only(left:15.0, bottom: 5),
-                          //     child: InkWell(
-                          //       onTap: () {
-                          //        // Navigator.push(context, MaterialPageRoute( builder: (context) => DietcianDetailsPage( snapshot.data[index].encDietId))); 
-                          //       },
-                          //       child: Container(
-                          //         alignment: Alignment.center,
-                          //         height: blockSizeVertical*5,
-                          //         width: blockSizeHorizontal*30,
-                          //         decoration: BoxDecoration(
-                          //           shape: BoxShape.rectangle,
-                          //           borderRadius: BorderRadius.circular(10),
-                          //           gradient: LinearGradient(
-                          //             begin: Alignment.topLeft,
-                          //             end: Alignment.topRight,
-                          //             colors: [
-                          //               Theme.of(context).primaryColor,
-                          //               Theme.of(context).accentColor
-                          //             ],
-                          //           ),
-                          //         ),
-                          //         child: Text(
-                          //           'Show Details',
-                          //           style: TextStyle(
-                          //             color: Colors.white,
-                          //             fontSize: blockSizeHorizontal*2.7,
-                          //             fontWeight: FontWeight.bold,
-                          //             fontFamily: 'Poppins',
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+                          Positioned(
+                            bottom: 5,
+                            left: 2,
+                            child: Padding(
+                             padding: const EdgeInsets.only(left:15.0, bottom: 5),
+                              child: InkWell(
+                                onTap: () {
+                                Navigator.push(context, MaterialPageRoute( builder: (context) => DieticianBookingPage( snapshot.data[index].encPartnerId, dietNameRef))); 
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: blockSizeVertical*5,
+                                  width: blockSizeHorizontal*30,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(10),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.topRight,
+                                      colors: [
+                                        Theme.of(context).primaryColor,
+                                        Theme.of(context).accentColor
+                                      ],
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Show Details',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: blockSizeHorizontal*2.7,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ]),
-
-
-
-
-
-                        ),
                       );
                     }
                             return Center(child: CircularProgressIndicator());
                             //Text("Error while calling");
                           },
+
+                          
+
+
+
                         ),
                       ),
+
+
+
+                      // ElevatedButton(
+                      //   onPressed: (){
+                      //     //DieticianBookingPage(encDietcianIdRef, snapshot.data[index].partnerAddress)
+                      //      //Navigator.push(context, MaterialPageRoute( builder: (context) => DieticianBookingPage( snapshot.data[index].encPartnerId, encDietcianIdRef))); 
+                      //   }, 
+                      //   style: ButtonStyle(
+                      //       backgroundColor:
+                      //           MaterialStateProperty.all(Color(0xFF79a0be)),
+                      //            padding: MaterialStateProperty.all(EdgeInsets.only(left:50,right: 50)),
+                      //     ),
+                      //   child: Text("Book Now"))
 
 
 
