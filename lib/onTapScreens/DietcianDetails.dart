@@ -261,7 +261,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                              padding: const EdgeInsets.only(left:15.0, bottom: 5),
                               child: InkWell(
                                 onTap: () {
-                                Navigator.push(context, MaterialPageRoute( builder: (context) => DieticianBookingPage( snapshot.data[index].encPartnerId, dietNameRef))); 
+                                Navigator.push(context, MaterialPageRoute( builder: (context) => DieticianBookingPage( snapshot.data[index], widget.dietName, widget.encDietcianId))); //or also can pass "dietNameRef" insted of "widget.dietName"
                                 },
                                 child: Container(
                                   alignment: Alignment.center,
