@@ -35,9 +35,9 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
   void checkLogin() async {
     //HERE WE CHECK IF USER ALREADY LOGIN OR CREDENTIAL ALREADY AVAOLABLE OR NOT
     SharedPreferences pref = await SharedPreferences.getInstance();
-    String? val = pref.getString(
-        "userEmail"); //userEmail is the key: And the value will be `Name` in APIabc@gmail.com
-    if (val != null) {
+    String? val = pref.getString("userEmail"); //userEmail is the key: And the value will be `Name` in APIabc@gmail.com
+    String? encVal = pref.getString("encId");
+    if (val != null && encVal!=null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => Home2()), (route) => false);
     }
@@ -460,6 +460,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
         ));
         pageRoute(
           jsonResponse['UserData']['Name'],
+          jsonResponse['UserData']['EncUserId'],
         ); // WANT TO SHOW USER NAME IN APP DRAWER AFTER LOGIN WITH CORRECT CREDENTIALS
       } else {
         print("Wronggooooooooooooooooooooooooooo");
@@ -479,12 +480,13 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
   }
 
   void pageRoute(
-    String Name,
+    String Name, String EncUserId,
   ) async {
     //HERE WE STORE VALUE OR TOKEN INSIDE SHARED PREFERENCE
 
     SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setString("userEmail", Name); // KEY : VALUE
+    await pref.setString("userEmail", Name,);
+    await pref.setString( "encId", EncUserId); // KEY : VALUE
     //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => Home2()), (route) => false);

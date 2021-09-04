@@ -11,6 +11,7 @@ import 'package:medbo/models/docVisitDaysModel.dart';
 import 'package:medbo/screens/home.dart';
 import 'package:medbo/screens2.dart/home2.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DocBookingAcknowledgementPage extends StatefulWidget {
   final DocBookingAcknowledgement rresponse;
@@ -23,6 +24,38 @@ class DocBookingAcknowledgementPage extends StatefulWidget {
 
 class _DocBookingAcknowledgementPageState
     extends State<DocBookingAcknowledgementPage> {
+
+
+
+      //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+String Name="";
+String EncUserId="";
+
+void initState(){
+  super.initState();
+  getCred();
+}
+
+void getCred() async{
+  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  setState(() {
+    Name = pref.getString("userEmail");
+    EncUserId= pref.getString("encId");
+  });
+
+}
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+
+
+
+
+
+
+
+
   var responseRef;
   //  _SecondState(this.responseRef);
   @override
@@ -96,7 +129,7 @@ class _DocBookingAcknowledgementPageState
                       ),
                       ListTile(
                         title: Text(
-                          "Doc Name: ${widget.rresponse.doctorName}",
+                          "Doc Name: ${widget.rresponse.doctorName}\n Patient Name: $Name",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: blockSizeHorizontal * 5,

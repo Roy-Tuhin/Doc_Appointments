@@ -22,6 +22,7 @@ class DocBookingAcknowledgement {
         required this.transactionNo,
         required this.refNo,
         required this.timing,
+        required this.patientName,//=========================================== added myself
     });
 
     String status;
@@ -35,6 +36,7 @@ class DocBookingAcknowledgement {
     String transactionNo;
     String refNo;
     dynamic timing;
+    String patientName;
 
     factory DocBookingAcknowledgement.fromJson(Map<String, dynamic> json) => DocBookingAcknowledgement(
         status: json["Status"],
@@ -48,6 +50,7 @@ class DocBookingAcknowledgement {
         transactionNo: json["TransactionNo"],
         refNo: json["RefNo"],
         timing: json["Timing"],
+        patientName: json["PatientName"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -62,5 +65,6 @@ class DocBookingAcknowledgement {
         "TransactionNo": transactionNo,
         "RefNo": refNo,
         "Timing": timing,
+        "PatientName": patientName,
     };
 }

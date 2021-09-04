@@ -11,6 +11,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbo/models/docVisitDaysModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'DieticianAfterDateSelect/DieticianAfterDateSelectPage.dart';
 import 'DieticianEncBookingIdModel.dart';
@@ -27,6 +28,44 @@ class DieticianBookingPage extends StatefulWidget {//DieticianBookingPage
 }
 
 class _DieticianBookingPageState extends State<DieticianBookingPage> {
+
+
+
+
+  
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+String Name="";
+String EncUserId="";
+
+void initState(){
+  super.initState();
+  getCred();
+}
+
+void getCred() async{
+  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  setState(() {
+    Name = pref.getString("userEmail");
+    EncUserId= pref.getString("encId");
+  });
+
+}
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
   String radioItemHolder = '';
   String radioFee = '';
   String discountRadioFee = '';
@@ -104,6 +143,10 @@ class _DieticianBookingPageState extends State<DieticianBookingPage> {
                   ]),
               child: Column(
                 children: [
+                  Text(
+                           " $EncUserId",
+                            style: TextStyle(color: Colors.blue,fontFamily: 'Poppins'),
+                           ),
                   ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.lightBlue[50],
@@ -393,7 +436,7 @@ class _DieticianBookingPageState extends State<DieticianBookingPage> {
             'EncPartnerId': widget.dieticianAllPartnerData.encPartnerId,
             'EncDoctorId': widget.encDieticianId,
             'VisitDate': _selectedDate,
-            'AppointmentType': 'Offline'
+            'AppointmentType': 'Offline',
           }));
       if (response.statusCode == 200) {
         print("Correct");
@@ -433,6 +476,8 @@ class _DieticianBookingPageState extends State<DieticianBookingPage> {
             'Fee': radioFee,
             'DiscountedFee': discountRadioFee,
             'BookingFee': bookingRadioFee,
+            'EncUserId' : EncUserId,
+            'AppointmentType': 'Offline',
           }));
       if (response.statusCode == 200) {
         print("Correct");

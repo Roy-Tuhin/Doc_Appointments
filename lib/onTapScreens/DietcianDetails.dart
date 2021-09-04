@@ -84,7 +84,8 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
 
 
                Container(
-                        height: blockSizeVertical*30,//38
+                        height: blockSizeVertical*70,//38
+                       // width: blockSizeHorizontal*20,
                         //color: Colors.blueAccent,
                         child: FutureBuilder(
                           future: dietcianDetailsApi(),
@@ -173,7 +174,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
 
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 10),
-                                // color: Colors.green,
+                                 //color: Colors.green,
                                 child: Center(
                                   child: Text(
                                     ' Day : ${snapshot.data[index].dayList[0].dayName} \n Time From :  ${snapshot.data[index].dayList[index].timeFrom} - ${snapshot.data[index].dayList[index].timeTo} ',//put email
@@ -253,10 +254,11 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                               ]
                               
                               ),
-                              SizedBox(height: 30,),
+                              SizedBox(height: 300,),
                           Positioned(
-                            bottom: 5,
-                            left: 2,
+                            top: 220,
+                            right: 80,
+                            left: 80,
                             child: Padding(
                              padding: const EdgeInsets.only(left:15.0, bottom: 5),
                               child: InkWell(
@@ -280,10 +282,10 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                                     ),
                                   ),
                                   child: Text(
-                                    'Show Details',
+                                    'Boook Appointment',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: blockSizeHorizontal*2.7,
+                                      fontSize: blockSizeHorizontal*3.5,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Poppins',
                                     ),
