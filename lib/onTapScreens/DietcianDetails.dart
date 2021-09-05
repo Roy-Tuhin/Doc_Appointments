@@ -66,7 +66,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
           child: Column(
             children: [
               Text(
-                " Diet Name : ${widget.dietName}",
+                " Dietician Name : ${widget.dietName}",
               //" dataModel.data.",
               style: TextStyle(
                                         fontFamily: 'Poppins',
@@ -77,7 +77,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                                     maxLines: 4,
               
               ),
-              Text(widget.encDietcianId),
+              //Text(widget.encDietcianId),// dietcian encId
 
 
               //========================================================================
@@ -139,7 +139,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
 
 
                                 Text(
-                                  'Partner Name :  ${snapshot.data[index].partnerName}\n  EncPatnerId: ${snapshot.data[index].encPartnerId}',
+                                  'Partner Name :  ${snapshot.data[index].partnerName}',//\n  EncPatnerId: ${snapshot.data[index].encPartnerId}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: blockSizeHorizontal*3.5,
@@ -177,7 +177,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                                  //color: Colors.green,
                                 child: Center(
                                   child: Text(
-                                    ' Day : ${snapshot.data[index].dayList[0].dayName} \n Time From :  ${snapshot.data[index].dayList[index].timeFrom} - ${snapshot.data[index].dayList[index].timeTo} ',//put email
+                                    'Day : ${snapshot.data[index].dayList[0]?.dayName} \n Time From :  ${snapshot.data[index].dayList[0]?.timeFrom} - ${snapshot.data[index].dayList[index]?.timeTo} ',//put email
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         // fontWeight: FontWeight.bold,
@@ -191,41 +191,54 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
 
 
 
-                              // Container(
-                              //   padding: EdgeInsets.symmetric(horizontal: 10),
-                              //   // color: Colors.green,
-                              //   child: Center(
-                              //     child: Text(
-                              //       ' Day Name: ${snapshot.data[index].dayList[1].dayName} | TimeFrom : ${snapshot.data[index].dayList[index].timeFrom}   | TimeTo : ${snapshot.data[index].dayList[index].timeTo}',//put email
-                              //       style: TextStyle(
-                              //           fontFamily: 'Poppins',
-                              //           // fontWeight: FontWeight.bold,
-                              //           fontSize: blockSizeHorizontal*2.5,
-                              //           color: Theme.of(context).primaryColor),
-                              //       textAlign: TextAlign.center,
-                              //       maxLines: 4,
-                              //     ),
-                              //   ),
-                              // ),
+                               Padding(
+                                  padding: const EdgeInsets.only(left:100.0,right: 100),
+                                  child: Divider(
+                                     color: Colors.blueGrey,),
+                                ),
 
 
 
-                              // Container(
-                              //   padding: EdgeInsets.symmetric(horizontal: 10),
-                              //   // color: Colors.green,
-                              //   child: Center(
-                              //     child: Text(
-                              //       ' Day Name: ${snapshot.data[index].dayList[2].dayName} | TimeFrom : ${snapshot.data[index].dayList[index].timeFrom}  | TimeTo : ${snapshot.data[index].dayList[index].timeTo}  ',//put email
-                              //       style: TextStyle(
-                              //           fontFamily: 'Poppins',
-                              //           // fontWeight: FontWeight.bold,
-                              //           fontSize: blockSizeHorizontal*2.5,
-                              //           color: Theme.of(context).primaryColor),
-                              //       textAlign: TextAlign.center,
-                              //       maxLines: 4,
-                              //     ),
-                              //   ),
-                              // ),
+
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                // color: Colors.green,
+                                child: Center(
+                                  child: Text(
+                                    'Day : ${snapshot.data[index].dayList[1]?.dayName} \n Time From :  ${snapshot.data[index].dayList[1]?.timeFrom} - ${snapshot.data[index].dayList[1]?.timeTo} ',//put email
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        // fontWeight: FontWeight.bold,
+                                        fontSize: blockSizeHorizontal*3.5,
+                                        color: Theme.of(context).primaryColor),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 4,
+                                  ),
+                                ),
+                              ),
+
+                                Padding(
+                                  padding: const EdgeInsets.only(left:100.0,right: 100),
+                                  child: Divider(
+                                     color: Colors.blueGrey,),
+                                ),
+
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                // color: Colors.green,
+                                child: Center(
+                                  child: Text(
+                                    'Day : ${snapshot.data[index].dayList[2]?.dayName} \n Time From :  ${snapshot.data[index].dayList[2]?.timeFrom} - ${snapshot.data[index].dayList[2]?.timeTo} ',//put email
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        // fontWeight: FontWeight.bold,
+                                        fontSize: blockSizeHorizontal*3.5,
+                                        color: Theme.of(context).primaryColor),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 4,
+                                  ),
+                                ),
+                              ),
 
 
 
@@ -254,9 +267,9 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                               ]
                               
                               ),
-                              SizedBox(height: 300,),
+                              SizedBox(height: 360,),
                           Positioned(
-                            top: 220,
+                            top: 320,
                             right: 80,
                             left: 80,
                             child: Padding(

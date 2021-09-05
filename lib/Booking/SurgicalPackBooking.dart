@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'DieticianAfterDateSelect/DieticianAfterDateSelectPage.dart';
+import 'DieticianEncBookingIdModel.dart';
 
 class SurgicalPackBooking extends StatefulWidget {
   //const SurgicalPackBooking({ Key? key }) : super(key: key);
@@ -13,7 +20,40 @@ class SurgicalPackBooking extends StatefulWidget {
 }
 
 class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
-  String _selectedDate = "";
+
+
+
+
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+String Name="";
+String EncUserId="";
+
+void initState(){
+  super.initState();
+  getCred();
+}
+
+void getCred() async{
+  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  setState(() {
+    Name = pref.getString("userEmail");
+    EncUserId= pref.getString("encId");
+  });
+
+}
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+
+
+
+
+
+
+
+
+  String _selectedDate =  DateTime.now().toString();
   var SurgicalPackDataRef;
   var surgicalPartnerDataRef;
   _SurgicalPackBookingState(
@@ -79,7 +119,8 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                     ]),
                 child: Column(children: [
                   ListTile(
-                    title: Text("${SurgicalPackDataRef.packageName}\nPackageEncId : ${SurgicalPackDataRef.encPackageId}",
+                    title: Text(
+                        "${SurgicalPackDataRef.packageName}\nPackageEncId : ${SurgicalPackDataRef.encPackageId}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: blockSizeHorizontal * 5,
@@ -102,17 +143,10 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                     subtitle: Text(
                         "${surgicalPartnerDataRef.partnerName} \n ${surgicalPartnerDataRef.partnerAddress} \n \nEncPartnerId:  ${surgicalPartnerDataRef.encPartnerId}"),
                   ),
-
-
-
                   SizedBox(
                     height: 20,
                   ),
-
-
-
-
-                   ListTile(
+                  ListTile(
                     title: Text(
                       "Fee",
                       style: TextStyle(
@@ -123,29 +157,23 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                       ),
                     ),
                     subtitle: Container(
-                        height: blockSizeVertical*13,
-                        //color: Colors.green,
-                        child: Row(
-                          children: [
-                            Text(
-                              'Actual Fee : ₹ ${surgicalPartnerDataRef.fee}\nDiscount Fee : ₹ ${surgicalPartnerDataRef.discountedFee}\nBooking Fee : ₹ ${surgicalPartnerDataRef.bookingFee}   ',
-                               style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: blockSizeHorizontal * 4.0,
-                      fontFamily: 'Poppins',
-                      //color: Theme.of(context).primaryColor,
-                    ),
+                      height: blockSizeVertical * 13,
+                      //color: Colors.green,
+                      child: Row(
+                        children: [
+                          Text(
+                            'Actual Fee : ₹ ${surgicalPartnerDataRef.fee}\nDiscount Fee : ₹ ${surgicalPartnerDataRef.discountedFee}\nBooking Fee : ₹ ${surgicalPartnerDataRef.bookingFee}   ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: blockSizeHorizontal * 4.0,
+                              fontFamily: 'Poppins',
+                              //color: Theme.of(context).primaryColor,
                             ),
-                           
-                          ],
-                        ),
-                        ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-
-
-
-
-
                   ListTile(
                     title: Text(
                       "Preferred Visit Date",
@@ -179,8 +207,8 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                       // ],
                     ),
                     child: DateTimePicker(
-                      initialValue:
-                          '', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
+                      initialValue: DateTime.now().toString(),
+                      //initialValue:'', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
                       type: DateTimePickerType.date,
                       dateLabelText: 'Select Date',
                       style: TextStyle(
@@ -329,7 +357,7 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                           ),
                           //filled: true,
                           //fillColor: Colors.grey[200],
-                           prefixIcon: Icon(
+                          prefixIcon: Icon(
                             Icons.face,
                             color: Colors.blueGrey,
                           ),
@@ -454,9 +482,6 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                       ),
                     ),
 
-
-
-
                     //=================================================PHONE ==================================================
 
                     Padding(
@@ -560,10 +585,6 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                       ),
                     ),
 
-
-
-
-
                     //================================================= A G E ==================================================
 
                     Padding(
@@ -645,7 +666,7 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                           ),
                           //filled: true,
                           //fillColor: Colors.grey[200],
-                           prefixIcon: Icon(
+                          prefixIcon: Icon(
                             Icons.calendar_today,
                             color: Colors.blueGrey,
                           ),
@@ -667,17 +688,11 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
                       ),
                     ),
 
-
-
-
-
-
-                    
-
-
-
-
-
+                    ElevatedButton(
+                        onPressed: () {
+                           SaveSurgicalBooking();
+                        },
+                        child: Text("Book Appointment")),
                   ],
                 ),
               ),
@@ -687,4 +702,45 @@ class _SurgicalPackBookingState extends State<SurgicalPackBooking> {
       ),
     );
   }
+
+
+
+
+
+    Future<void> SaveSurgicalBooking() async {
+    var jsonResponse;
+    if (surgicalPartnerDataRef.encPartnerId.isNotEmpty && SurgicalPackDataRef.encPackageId.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveSurgicalBooking"),
+          body: ({
+            'EncPartnerId':surgicalPartnerDataRef.encPartnerId,
+            'EncDoctorId': SurgicalPackDataRef.encPackageId,
+            'VisitDate': _selectedDate,
+            // 'Fee': radioFee,
+            // 'DiscountedFee': discountRadioFee,
+            // 'BookingFee': bookingRadioFee,
+            'EncUserId' : EncUserId,
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+        Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));// common page for all after date selection
+      } else {
+        print("Wrong URL");
+        throw Exception("Faild to fetch");
+      }
+    } else {
+      throw Exception("Faild to fetch");
+    }
+  }
+
+
+
+
+
+
+
+
 }

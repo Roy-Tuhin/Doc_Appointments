@@ -143,25 +143,26 @@ void getCred() async{
                   ]),
               child: Column(
                 children: [
-                  Text(
-                           " $EncUserId",
-                            style: TextStyle(color: Colors.blue,fontFamily: 'Poppins'),
-                           ),
+                  // Text(
+                  //          " $EncUserId",
+                  //           style: TextStyle(color: Colors.blue,fontFamily: 'Poppins'),//  EncUserId from login
+                  //          ),
                   ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.lightBlue[50],
-                      radius: 30,
-                      // backgroundImage:
-                      //     NetworkImage("${docDataRef.doctorImage}"),
-                    ),
-                    title: Text(" Doctor Name and EncId: ${widget.dietName}, ${widget.encDieticianId}",
+                    // leading: CircleAvatar(
+                    //   backgroundColor: Colors.lightBlue[50],
+                    //   radius: 30,
+                    //   // backgroundImage:
+                    //   //     NetworkImage("${docDataRef.doctorImage}"),
+                    // ),
+                    title: Text(" Doctor Name : ${widget.dietName}", //${widget.encDieticianId}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: blockSizeHorizontal * 3.5,
+                          fontSize: blockSizeHorizontal * 4.0,
                           fontFamily: 'Poppins',
                           color: Theme.of(context).primaryColor,
                         )),
-                    subtitle: Text("Partner Encode Id and Name: ${widget.dieticianAllPartnerData.encPartnerId}\n${widget.dieticianAllPartnerData.partnerName}  "),
+                    subtitle: Text("Dietician Partner Name: ${widget.dieticianAllPartnerData.partnerName}",//\n${widget.dieticianAllPartnerData.partnerName}  "
+                    ),
                     //"Booking Information: ${widget.dieticianAllPartnerData},\n Location: ${widget.dieticianAllPartnerData}",
                   ),
 
@@ -229,9 +230,20 @@ void getCred() async{
                     //   ),
                     //   textAlign: TextAlign.left,
                     // ),
+                    ListTile(
+                      title: Text(
+                        "Appointment Type",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: blockSizeHorizontal * 4.0,
+                          fontFamily: 'Poppins',
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        ),
+                    ),
 
                     Padding(
-                      padding: const EdgeInsets.only(left: 28.0),
+                      padding: const EdgeInsets.only(left: 0.0),
                       child: DropdownButton<String>(
                         style: TextStyle(
                           color: Colors.green,
@@ -255,25 +267,27 @@ void getCred() async{
                     ),
 
                     SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
 
-                    Text(
-                      "Preferred Visit Date",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 3.5,
-                        fontFamily: 'Poppins',
-                        color: Theme.of(context).primaryColor,
+                    ListTile(
+                      title: Text(
+                        "Preferred Visit Date",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: blockSizeHorizontal * 4.0,
+                          fontFamily: 'Poppins',
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      textAlign: TextAlign.left,
                     ),
 
                     // Text('Selected Item = '+'$_radioValue', style: TextStyle(fontSize: 23)),
 
                     Container(
-                      margin: EdgeInsets.all(20),
-                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(top:0, left: 20, right: 20,bottom: 20),
+                      padding: EdgeInsets.only(top:10),
                       decoration: BoxDecoration(
                         // color: Color(0xFF3E64FF),
                         color: Colors.lightBlue[50],
@@ -395,7 +409,7 @@ void getCred() async{
                                   );
                                 });
                           }
-                          return Text("Error while calling");
+                          return Text("Waiting for Internet Connection");
                         },
                       ),
                     ),
@@ -486,7 +500,8 @@ void getCred() async{
         print(jsonResponse);
         Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
       } else {
-        print("Wrong URL");
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Please select from available dates")));
         throw Exception("Faild to fetch");
       }
     } else {

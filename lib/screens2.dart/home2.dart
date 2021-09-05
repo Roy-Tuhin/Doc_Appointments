@@ -902,7 +902,7 @@ class _Home2State extends State<Home2> {
                           //   return CircularProgressIndicator();
                           // }
                           if (snapshot.hasError) {
-                            return Text("Somthing went wrong");
+                            return Text("Waiting for internet Connection...");
                           }
 
                           if (snapshot.hasData) {

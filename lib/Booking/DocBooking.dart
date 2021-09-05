@@ -10,6 +10,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbo/models/docVisitDaysModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'afterDateSelectPage.dart';
 import 'confirmPaymentPage.dart';
@@ -24,7 +25,36 @@ class DocBooking extends StatefulWidget {
 }
 
 class _DocBookingState extends State<DocBooking> {
-  String radioItemHolder = '30/09/2021';
+
+
+
+
+  //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+String Name="";
+String EncUserId="";
+
+void initState(){
+  super.initState();
+  getCred();
+}
+
+void getCred() async{
+  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  setState(() {
+    Name = pref.getString("userEmail");
+    EncUserId= pref.getString("encId");
+  });
+
+}
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+
+
+
+
+  String radioItemHolder = '';
   String radioFee = '';
   String discountRadioFee = '';
   String bookingRadioFee = '';
@@ -431,6 +461,7 @@ class _DocBookingState extends State<DocBooking> {
       var response = await http.post(
           Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveDoctBooking"),
           body: ({
+            'EncUserId' : EncUserId,
             'EncPartnerId': partnerDataRef.encPartnerId,
             'EncDoctorId': docDataRef.encDoctorId,
             'VisitDate': radioItemHolder,
@@ -449,7 +480,8 @@ class _DocBookingState extends State<DocBooking> {
                 builder: (context) => AfterDateSelectPage(
                     rresponse: DocBookingModel.fromJson(jsonResponse),)));
       } else {
-        print("Wrong URL");
+       ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Please select from available dates")));
         throw Exception("Faild to fetch");
       }
     } else {

@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'DieticianAfterDateSelect/DieticianAfterDateSelectPage.dart';
+import 'DieticianEncBookingIdModel.dart';
 
 class HealthCheckUpBookingPage extends StatefulWidget {
   var healthAllData;
@@ -13,7 +20,37 @@ class HealthCheckUpBookingPage extends StatefulWidget {
 }
 
 class _HealthCheckUpBookingPageState extends State<HealthCheckUpBookingPage> {
-  String _selectedDate = "";
+
+
+
+
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+String Name="";
+String EncUserId="";
+
+void initState(){
+  super.initState();
+  getCred();
+}
+
+void getCred() async{
+  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  setState(() {
+    Name = pref.getString("userEmail");
+    EncUserId= pref.getString("encId");
+  });
+
+}
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+
+
+
+
+
+  String _selectedDate = DateTime.now().toString();
   var healthDataRef;
   var healthPartnerDataRef;
   _HealthCheckUpBookingPageState(this.healthDataRef, this.healthPartnerDataRef);
@@ -85,7 +122,7 @@ class _HealthCheckUpBookingPageState extends State<HealthCheckUpBookingPage> {
                           fontFamily: 'Poppins',
                           color: Theme.of(context).primaryColor,
                         )),
-                    subtitle: Text("${healthDataRef.testName}"),
+                    subtitle: Text("${healthDataRef.testName} \n${healthDataRef.encHealthPartnerId}"), // health package Id ==> healthDataRef.encHealthPartnerId
                   ),
                   SizedBox(
                     height: 20,
@@ -99,7 +136,7 @@ class _HealthCheckUpBookingPageState extends State<HealthCheckUpBookingPage> {
                           color: Theme.of(context).primaryColor,
                         )),
                     subtitle: Text(
-                        "${healthPartnerDataRef.partnerName} \n ${healthPartnerDataRef.partnerAddress}"),
+                        "${healthPartnerDataRef.partnerName} \n ${healthPartnerDataRef.partnerAddress} \n \n ${healthPartnerDataRef.encPartnerId}  "),
                   ),
 
 
@@ -206,8 +243,8 @@ class _HealthCheckUpBookingPageState extends State<HealthCheckUpBookingPage> {
                       // ],
                     ),
                     child: DateTimePicker(
-                      initialValue:
-                          '', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
+                      initialValue: DateTime.now().toString(),
+                      //initialValue:'', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
                       type: DateTimePickerType.date,
                       dateLabelText: 'Select Date',
                       style: TextStyle(
@@ -689,10 +726,60 @@ class _HealthCheckUpBookingPageState extends State<HealthCheckUpBookingPage> {
                   ],
                 ),
               ),
+            
+            
+            
+
+             ElevatedButton(
+                        onPressed: () {
+                           SaveHealthBooking();
+                        },
+                        child: Text("Book Appointment")),
             ],
           ),
         ),
       ),
     );
   }
+
+
+
+
+
+  Future<void> SaveHealthBooking() async {
+    var jsonResponse;
+    if (healthPartnerDataRef.encPartnerId.isNotEmpty && healthDataRef.encHealthPartnerId.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveHealthBooking"),
+          body: ({
+            'EncPartnerId':healthPartnerDataRef.encPartnerId,
+            'EncDoctorId': healthDataRef.encHealthPartnerId, // health package Id
+            'VisitDate': _selectedDate,
+            // 'Fee': radioFee,
+            // 'DiscountedFee': discountRadioFee,
+            // 'BookingFee': bookingRadioFee,
+            'EncUserId' : EncUserId,
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+        Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));//'DieticianAfterDateSelectPage' common page for all after date selection
+      } else {
+        print("Wrong URL");
+        throw Exception("Faild to fetch");
+      }
+    } else {
+      throw Exception("Faild to fetch");
+    }
+  }
+
+
+
+
+
+
+
+
 }
