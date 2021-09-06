@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
+import 'DieticianAfterDateSelect/DieticianAfterDateSelectPage.dart';
+import 'DieticianEncBookingIdModel.dart';
 
 class PathalogicalBookingPage extends StatefulWidget {
   //const SurgicalPackBooking({ Key? key }) : super(key: key);
@@ -13,7 +20,40 @@ class PathalogicalBookingPage extends StatefulWidget {
 }
 
 class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
-  String _selectedDate = "";
+
+
+
+
+  
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+String Name="";
+String EncUserId="";
+
+void initState(){
+  super.initState();
+  getCred();
+}
+
+void getCred() async{
+  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  setState(() {
+    Name = pref.getString("userEmail");
+    EncUserId= pref.getString("encId");
+  });
+
+}
+//=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
+
+
+
+
+
+
+
+
+  String _selectedDate = DateTime.now().toString();
   var pathTestAllDataRef;
   var pathTestPartnerDataRef;
   _PathalogicalBookingPageState(
@@ -28,7 +68,7 @@ class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '${ pathTestAllDataRef.testName} Booking',
+          '${ pathTestAllDataRef.testName} \n TestEncId: ${pathTestAllDataRef.encTestId} Booking',
           style: TextStyle(fontFamily: 'Poppins'),
         ),
         flexibleSpace: Container(
@@ -79,7 +119,7 @@ class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
                     ]),
                 child: Column(children: [
                   ListTile(
-                    title: Text("${ pathTestAllDataRef.testName}",
+                    title: Text("${ pathTestAllDataRef.testName} \n TestEncId: ${pathTestAllDataRef.encTestId} ",//=====================================================
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: blockSizeHorizontal * 5,
@@ -100,12 +140,43 @@ class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
                           color: Theme.of(context).primaryColor,
                         )),
                     subtitle: Text(
-                        "${ pathTestPartnerDataRef.partnerName} \n ${pathTestPartnerDataRef.partnerAddress}"),
+                        "${ pathTestPartnerDataRef.partnerName} \n ${pathTestPartnerDataRef.partnerAddress} \n ${pathTestPartnerDataRef.encPartnerId}  "),
                   ),
 
 
                   SizedBox(
                     height: 20,
+                  ),
+
+
+
+                  ListTile(
+                    title: Text(
+                      "Fee",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: blockSizeHorizontal * 5,
+                        fontFamily: 'Poppins',
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    subtitle: Container(
+                      height: blockSizeVertical * 13,
+                      //color: Colors.green,
+                      child: Row(
+                        children: [
+                          Text(
+                            'Actual Fee : ₹ ${pathTestPartnerDataRef.fee}\nDiscount Fee : ₹ ${pathTestPartnerDataRef.discountedFee}\nBooking Fee : ₹ ${pathTestPartnerDataRef.bookingFee}   ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: blockSizeHorizontal * 4.0,
+                              fontFamily: 'Poppins',
+                              //color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
 
 
@@ -203,8 +274,8 @@ class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
                       // ],
                     ),
                     child: DateTimePicker(
-                      initialValue:
-                          '', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
+                      initialValue: DateTime.now().toString(),
+                      //initialValue:'', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
                       type: DateTimePickerType.date,
                       dateLabelText: 'Select Date',
                       style: TextStyle(
@@ -235,7 +306,24 @@ class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
                       },
                     ),
                   ),
-                ]),
+                  
+                    ElevatedButton(
+                        onPressed: () {
+                          SaveSingleTestBooking();
+                        },
+                        child: Text("Book Appointment")),
+
+
+                ],
+                
+                ),
+
+
+                
+
+
+
+
               ),
 
               //=========================================================================
@@ -246,4 +334,42 @@ class _PathalogicalBookingPageState extends State<PathalogicalBookingPage> {
       ),
     );
   }
+
+
+
+
+   Future<void> SaveSingleTestBooking() async {
+    var jsonResponse;
+    if (pathTestPartnerDataRef.encPartnerId.isNotEmpty && pathTestAllDataRef.encTestId.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveSingleTestBooking"),
+          body: ({
+            'EncPartnerId': pathTestPartnerDataRef.encPartnerId,
+            'EncDoctorId': pathTestAllDataRef.encTestId,
+            'VisitDate': _selectedDate,
+            // 'Fee': radioFee,
+            // 'DiscountedFee': discountRadioFee,
+            // 'BookingFee': bookingRadioFee,
+            'EncUserId' : EncUserId,
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+        Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));// common page for all after date selection
+      } else {
+        print("Wrong URL");
+        throw Exception("Faild to fetch");
+      }
+    } else {
+      throw Exception("Faild to fetch");
+    }
+
+
+
+
+
+}
+
 }
