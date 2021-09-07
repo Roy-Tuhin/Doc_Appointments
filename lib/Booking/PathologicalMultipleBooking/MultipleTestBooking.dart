@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'AllPathLabTestModel.dart';
+import 'package:http/http.dart' as http;
 
 class MultipleTestBooking extends StatefulWidget {
   const MultipleTestBooking({Key? key}) : super(key: key);
@@ -9,13 +12,22 @@ class MultipleTestBooking extends StatefulWidget {
 }
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
+
+
+  void initState(){
+  super.initState();
+  AllPathLab();
+}
+
+
+
   String _selectedDate = DateTime.now().toString();
-  final List<String> appointments = [
+  final List<String> allLabList = [
     "Select Lab",
-    "Offline Appointment",
-    "Online Appointment",
+    "Abc",
+    "Xyz",
   ];
-  String selectedAppointmentType = "Select Lab";
+  String selectedLabFromList = "Abc";
 
   @override
   Widget build(BuildContext context) {
@@ -121,14 +133,13 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                           fontSize: 15,
                           fontFamily: 'Poppins',
                         ),
-                        value: selectedAppointmentType,
+                        value: selectedLabFromList,
                         onChanged: (value) {
                           setState(() {
-                            selectedAppointmentType = value!;
+                            selectedLabFromList = value!;
                           });
                         },
-                        items:
-                            appointments.map<DropdownMenuItem<String>>((value) {
+                        items:allLabList.map<DropdownMenuItem<String>>((value) {
                           return DropdownMenuItem(
                             child: Text(value),
                             value: value,
@@ -146,16 +157,12 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
 
 
-  Future<List<DieticianVisitData>> AllPathLab() async {
+  Future<List<Partner>> AllPathLab() async {
     var jsonResponse;
-    if (widget.encDieticianId.isNotEmpty && widget.dieticianAllPartnerData.encPartnerId.isNotEmpty) {
-      var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllPathLab"),
+  
+      var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllPathLab"),
           body: ({
-            'EncPartnerId': widget.dieticianAllPartnerData.encPartnerId,
-            'EncDoctorId': widget.encDieticianId,
-            'VisitDate': _selectedDate,
-            'AppointmentType': 'Offline',
+            
           }));
       if (response.statusCode == 200) {
         print("Correct");
@@ -164,21 +171,19 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         print(jsonResponse);
         //Navigator.push(context, MaterialPageRoute(builder: (context)=>ConfirmPaymentPage(rresponse: DocVisitDaysModel.fromJson(jsonResponse))));
 
-        DieticianVisitModel dataModel = dieticianVisitModelFromJson(response.body);
-        print(dataModel.data.length);
-        for (final item in dataModel.data) 
-        print(item.visitDate);
+        AllPathLabTestModel dataModel = allPathLabTestModelFromJson(response.body);
+        print(dataModel.partner.length);
+        for (final item in dataModel.partner) 
+        print(item.partnerName);
 
-        List<DieticianVisitData> arrData = dataModel.data; // this data is actuall json array of data[]
+        List<Partner> arrData = dataModel.partner; // this "partner" is actual json array of data[]
         //print(arrData[1].visitDate);
         return arrData;
       } else {
         print("Wrong URL");
         throw Exception("Faild to fetch");
       }
-    } else {
-      throw Exception("Faild to fetch");
-    }
+    
   }
 
 

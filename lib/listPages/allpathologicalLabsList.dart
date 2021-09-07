@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medbo/Booking/PathologicalMultipleBooking/MultipleTestBooking.dart';
+import 'package:medbo/Booking/PathologicalMultipleBooking/SingleTestBooking.dart';
 import 'package:medbo/models/allPathTestModel.dart';
 import 'package:medbo/models/pathTestDetailsModel.dart';
 import 'package:medbo/onTapScreens/pathLabDetails.dart';
@@ -62,23 +64,23 @@ class _PathologicalLabDetailsState extends State<PathologicalLabDetails> {
         color: Colors.lightBlue[50],
         child: Stack(
           children: [
-            ClipPath(
-              clipper: MyClipper(),
-              child: Container(
-                height: 400,
-                width: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.center,
-                    colors: [
-                      Theme.of(context).primaryColor,
-                      Theme.of(context).accentColor
-                    ] ,
-                  ),
-                ),
-              ),
-            ),
+            // ClipPath(
+            //   clipper: MyClipper(),
+            //   child: Container(
+            //     height: 400,
+            //     width: MediaQuery.of(context).size.height,
+            //     decoration: BoxDecoration(
+            //       gradient: LinearGradient(
+            //         begin: Alignment.topLeft,
+            //         end: Alignment.center,
+            //         colors: [
+            //           Theme.of(context).primaryColor,
+            //           Theme.of(context).accentColor
+            //         ] ,
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
             Stack(
               children: [
@@ -90,12 +92,29 @@ class _PathologicalLabDetailsState extends State<PathologicalLabDetails> {
                     children: [
                       _searchBar(),
 
+                      ElevatedButton(
+                        onPressed: (){
+                           Navigator.push(context,MaterialPageRoute(builder: (context) => PathologicalSingleTestBookingPage()));//=========== single Test
+                        }, 
+                        child: 
+                        Text("Make your Own Test and Book")
+                        ),
+                      
+                        ElevatedButton(
+                          onPressed: (){
+                             Navigator.push(context,MaterialPageRoute(builder: (context) => MultipleTestBooking ()));//=========== Pathological Multiple Test
+                          }, 
+                          child: 
+                          Text("Book more than one Test")
+                        ),
+
                       Expanded(
                         child: ListView.separated(
                           padding: EdgeInsets.all(15),
                           scrollDirection: Axis.vertical,
                           itemCount: pathList== null ? 0 : pathList.length,
                           itemBuilder: (BuildContext context,int index){
+                            maxline:1;
                             return _listItem(index);
 
                           },
@@ -172,27 +191,17 @@ class _PathologicalLabDetailsState extends State<PathologicalLabDetails> {
             ] ,
           ),
         ),
-        child: Row(
-            children:[
-              Container(
-                padding:EdgeInsets.all(15),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        child: Text('${pathList[index].testName}',style: TextStyle(fontFamily: 'Roboto_Condensed',fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),),
-                      ),
-                    ]
+        child: Expanded(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('${pathList[index].testName}',style: TextStyle(fontFamily: 'Poppins',fontWeight: FontWeight.bold,fontSize: 17,color: Colors.white),),
                 ),
-              ),
-
-              // Container(
-              //     color: Colors.green,
-              //     child: Icon(Icons.play_arrow,color: Colors.white,)
-              // ),
-            ]
+              ]
+          ),
         ),
       ),
     );
