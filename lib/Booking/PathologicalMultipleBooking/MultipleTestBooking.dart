@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:medbo/models/allSurgicalPackModels.dart';
 import 'AllPathLabTestModel.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +15,8 @@ class MultipleTestBooking extends StatefulWidget {
 }
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
+
+  String _val = '';
 
 
   String encLabId = '';
@@ -121,7 +124,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
                             ListTile(
                                 title: Text(
-                                  " Select Pathological Lab",
+                                  "Select Pathological Lab",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: blockSizeHorizontal * 4.0,
@@ -146,23 +149,28 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
                           if (snapshot.hasData) {
                             return DropdownButton<Partner>(
+                              // value: _val ,
                               hint: Text("Select Lab"),
                         //underline: SizedBox(),
                         //isExpanded: true,
                         items: snapshot.data.map((Partner data) =>
                         DropdownMenuItem<Partner>(
-                          child: Text("${data.partnerName}"),
-                        value: data,
-                        )
-                          ).toList().cast<DropdownMenuItem<Partner>>(),
+                                                  child: Text("${data.partnerName}"),
+                                                  value: data,
+                                                )
+                                                ).toList().cast<DropdownMenuItem<Partner>>(),
                           onChanged: (value){
                             setState(() {
+                              // _val=value;
                               encLabId = value!.encPartnerId;
+                              GetTestByLab(); 
                             });
                             //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
-                            GetTestByLab(); 
+                           // GetTestByLab(); 
 
-                          });
+                          }
+                          
+                          );
                               
                             }
                           return Text("Waiting for Internet Connection");
@@ -171,6 +179,19 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                     ),
 
                     //=========================================================== Dependent drop down===================================
+
+
+                         ListTile(
+                                title: Text(
+                                  "Test Name",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: blockSizeHorizontal * 4.0,
+                                    fontFamily: 'Poppins',
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ),
 
                     Container(
                       child: FutureBuilder<List<Datum>>(
@@ -181,12 +202,12 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                             return CircularProgressIndicator();
                           }
                           if (snapshot.hasError) {
-                            return Text("Somthing went wrong");
+                            return Text("Select a Lab for your Test");
                           }
 
                           if (snapshot.hasData) {
                             return DropdownButton<Datum>(
-                              hint: Text("Test Name"),
+                              hint: Text(""),
                         //underline: SizedBox(),
                         //isExpanded: true,
                         items: snapshot.data.map((Datum data) =>
