@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'AllPathLabTestModel.dart';
 import 'package:http/http.dart' as http;
 
+import 'Dependent_DropDown_in_MultipleTest_Model.dart';
+
 class MultipleTestBooking extends StatefulWidget {
   const MultipleTestBooking({Key? key}) : super(key: key);
 
@@ -12,6 +14,9 @@ class MultipleTestBooking extends StatefulWidget {
 }
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
+
+
+  String encLabId = '';
 
 
   void initState(){
@@ -141,8 +146,9 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
                           if (snapshot.hasData) {
                             return DropdownButton<Partner>(
+                              hint: Text("Select Lab"),
                         //underline: SizedBox(),
-                        isExpanded: true,
+                        //isExpanded: true,
                         items: snapshot.data.map((Partner data) =>
                         DropdownMenuItem<Partner>(
                           child: Text("${data.partnerName}"),
@@ -150,6 +156,47 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                         )
                           ).toList().cast<DropdownMenuItem<Partner>>(),
                           onChanged: (value){
+                            setState(() {
+                              encLabId = value!.encPartnerId;
+                            });
+                            //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
+                            GetTestByLab(); 
+
+                          });
+                              
+                            }
+                          return Text("Waiting for Internet Connection");
+                        },
+                      ),
+                    ),
+
+                    //=========================================================== Dependent drop down===================================
+
+                    Container(
+                      child: FutureBuilder<List<Datum>>(
+                        future: GetTestByLab(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState !=ConnectionState.done) {
+                            return CircularProgressIndicator();
+                          }
+                          if (snapshot.hasError) {
+                            return Text("Somthing went wrong");
+                          }
+
+                          if (snapshot.hasData) {
+                            return DropdownButton<Datum>(
+                              hint: Text("Test Name"),
+                        //underline: SizedBox(),
+                        //isExpanded: true,
+                        items: snapshot.data.map((Datum data) =>
+                        DropdownMenuItem<Datum>(
+                          child: Text("${data.testName}"),
+                        value: data,
+                        )
+                          ).toList().cast<DropdownMenuItem<Datum>>(),
+                          onChanged: (value){
+                            //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
 
                           });
                               
@@ -167,36 +214,37 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
 
 
-              ListTile(
-                title: Text(
-                  " Select Pathological Lab",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: blockSizeHorizontal * 4.0,
-                    fontFamily: 'Poppins',
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
 
-              Padding(
-                      padding: const EdgeInsets.only(left: 0.0),
-                      child: DropdownButton<String>(
+              // ListTile(
+              //   title: Text(
+              //     " Select Pathological Lab",
+              //     style: TextStyle(
+              //       fontWeight: FontWeight.bold,
+              //       fontSize: blockSizeHorizontal * 4.0,
+              //       fontFamily: 'Poppins',
+              //       color: Theme.of(context).primaryColor,
+              //     ),
+              //   ),
+              // ),
 
-                        value: selectedLabFromList,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedLabFromList = value!;
-                          });
-                        },
-                        items:allLabList.map<DropdownMenuItem<String>>((value) {
-                          return DropdownMenuItem(
-                            child: Text(value),
-                            value: value,
-                          );
-                        }).toList(),
-                      ),
-                    ),
+              // Padding(
+              //         padding: const EdgeInsets.only(left: 0.0),
+              //         child: DropdownButton<String>(
+
+              //           value: selectedLabFromList,
+              //           onChanged: (value) {
+              //             setState(() {
+              //               selectedLabFromList = value!;
+              //             });
+              //           },
+              //           items:allLabList.map<DropdownMenuItem<String>>((value) {
+              //             return DropdownMenuItem(
+              //               child: Text(value),
+              //               value: value,
+              //             );
+              //           }).toList(),
+              //         ),
+              //       ),
             ],
           ),
         ),
@@ -222,10 +270,47 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
         AllPathLabTestModel dataModel = allPathLabTestModelFromJson(response.body);
         print(dataModel.partner.length);
-        for (final item in dataModel.partner) 
+        for (final item in dataModel.partner) {
         print(item.partnerName);
+ 
+        
+        }
 
         List<Partner> arrData = dataModel.partner; // this "partner" is actual json array of data[]
+        return arrData;
+      } else {
+        print("Wrong URL");
+        throw Exception("Faild to fetch");
+      }
+    
+  }
+
+
+//==========================================================================================================================================================================
+
+
+
+  Future<List<Datum>> GetTestByLab() async {
+    var jsonResponse;
+  
+      var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestByLab"),
+          body: ({
+            "EncId": encLabId
+            //"EncId": 'I3uXyzcuDZf21SSe5fHnSQ=='
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        // print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+
+        DependentDropDownModel dataModel = dependentDropDownModelFromJson(response.body);
+        print(dataModel.data.length);
+        for (final item in dataModel.data) 
+        print(item.testName);
+       // print(item.testId);
+
+        List<Datum> arrData = dataModel.data; // this "partner" is actual json array of data[]
         return arrData;
       } else {
         print("Wrong URL");
