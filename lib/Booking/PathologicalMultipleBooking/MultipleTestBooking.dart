@@ -113,6 +113,60 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
               //==============================================================================
 
+
+                            ListTile(
+                                title: Text(
+                                  " Select Pathological Lab",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: blockSizeHorizontal * 4.0,
+                                    fontFamily: 'Poppins',
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ),
+
+
+               Container(
+                      child: FutureBuilder<List<Partner>>(
+                        future: AllPathLab(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState !=ConnectionState.done) {
+                            return CircularProgressIndicator();
+                          }
+                          if (snapshot.hasError) {
+                            return Text("Somthing went wrong");
+                          }
+
+                          if (snapshot.hasData) {
+                            return DropdownButton<Partner>(
+                        //underline: SizedBox(),
+                        isExpanded: true,
+                        items: snapshot.data.map((Partner data) =>
+                        DropdownMenuItem<Partner>(
+                          child: Text("${data.partnerName}"),
+                        value: data,
+                        )
+                          ).toList().cast<DropdownMenuItem<Partner>>(),
+                          onChanged: (value){
+
+                          });
+                              
+                            }
+                          return Text("Waiting for Internet Connection");
+                        },
+                      ),
+                    ),
+
+
+
+
+
+
+
+
+
               ListTile(
                 title: Text(
                   " Select Pathological Lab",
@@ -128,11 +182,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
               Padding(
                       padding: const EdgeInsets.only(left: 0.0),
                       child: DropdownButton<String>(
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 15,
-                          fontFamily: 'Poppins',
-                        ),
+
                         value: selectedLabFromList,
                         onChanged: (value) {
                           setState(() {
@@ -169,7 +219,6 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         // print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
-        //Navigator.push(context, MaterialPageRoute(builder: (context)=>ConfirmPaymentPage(rresponse: DocVisitDaysModel.fromJson(jsonResponse))));
 
         AllPathLabTestModel dataModel = allPathLabTestModelFromJson(response.body);
         print(dataModel.partner.length);
@@ -177,7 +226,6 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         print(item.partnerName);
 
         List<Partner> arrData = dataModel.partner; // this "partner" is actual json array of data[]
-        //print(arrData[1].visitDate);
         return arrData;
       } else {
         print("Wrong URL");
