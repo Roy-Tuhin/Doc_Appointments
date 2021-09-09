@@ -16,7 +16,8 @@ class MultipleTestBooking extends StatefulWidget {
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
-  String _val = '';
+ Partner? _selectedLab;
+ Datum? _selectedTest;
 
 
   String encLabId = '';
@@ -149,8 +150,8 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
                           if (snapshot.hasData) {
                             return DropdownButton<Partner>(
-                              // value: _val ,
-                              hint: Text("Select Lab"),
+                                value: _selectedLab,
+                               hint: Text("Select Lab"),
                         //underline: SizedBox(),
                         //isExpanded: true,
                         items: snapshot.data.map((Partner data) =>
@@ -161,14 +162,14 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                                                 ).toList().cast<DropdownMenuItem<Partner>>(),
                           onChanged: (value){
                             setState(() {
-                              // _val=value;
+                               _selectedLab=value;
                               encLabId = value!.encPartnerId;
                               GetTestByLab(); 
                             });
                             //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
                            // GetTestByLab(); 
 
-                          }
+                          },
                           
                           );
                               
@@ -207,6 +208,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
                           if (snapshot.hasData) {
                             return DropdownButton<Datum>(
+                              value: _selectedTest,
                               hint: Text(""),
                         //underline: SizedBox(),
                         //isExpanded: true,
@@ -217,6 +219,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                         )
                           ).toList().cast<DropdownMenuItem<Datum>>(),
                           onChanged: (value){
+                            _selectedTest=value;
                             //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
 
                           });
