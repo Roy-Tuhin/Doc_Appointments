@@ -414,6 +414,8 @@ class MultipleTestBooking extends StatefulWidget {
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
+  List<TableRow> tableRows = [];
+
   GetTestFeeMap? getTestFeeObj;
 
    Partner? _selectedLab;
@@ -432,17 +434,13 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
   }
 
   String _selectedDate = DateTime.now().toString();
-
+//============================================================================All Lab list API=============================================================================================
   Future<List<Partner>> allPathLab() async {
       var jsonResponse;
-  
       var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllPathLab"),
-          body: ({
-            
-          }));
+          body: ({  }));
       if (response.statusCode == 200) {
         print("Correct");
-        // print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
 
@@ -458,14 +456,8 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         print("Wrong URL");
         throw Exception("Faild to fetch");
       }
-    
-
-
-
-
-
-
   }
+//============================================================== Dependent Test dropdown list Api =======================================================================================
 
   Future<List<Datum>> getTestByLab() async {
     print("This is the LabId :$encLabId");
@@ -488,7 +480,36 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
     return [];
   }
+//=====================================================================Get Test Fee Api================================================================================================================
 
+   Future<void> GetTestFee() async {
+    var jsonResponse;
+    if (encTestId.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestFee"),
+          body: ({
+            'EncPartnerId': encLabId,
+            'EncTestId': encTestId,
+
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+        getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
+
+      } else {
+        throw Exception("Faild to fetch");
+      }
+    } else {
+      throw Exception("Faild to fetch");
+    }
+    //throw Exception("Faild to fetch");
+    return GetTestFee();
+  }
+
+//=====================================================================================================================================================================================
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -692,30 +713,34 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
               ),
 
              
-
+  
              
-              DataTable(
-                columns: <DataColumn>[
-                  //DataColumn(label: Text("encPartnerId")),
-                  //DataColumn(label: Text("encTestId")),
-                  DataColumn(label: Text("TestName")),
-                  DataColumn(label: Text("Fee")),
-                   DataColumn(label: Text("Discounted Fee")),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columnSpacing: 13.0,
+                  columns: <DataColumn>[
+                    //DataColumn(label: Text("encPartnerId")),
+                    //DataColumn(label: Text("encTestId")),
+                    DataColumn(label: Text("TestName")),
+                    DataColumn(label: Text("Fee")),
+                    DataColumn(label: Text("Discounted Fee")),
                     DataColumn(label: Text("Booking Fee")),
-                ],
-               rows: <DataRow>[
-                DataRow(
-                   cells: <DataCell>[
-                  // DataCell(Text(user?.encPartnerId ?? 'encPartnerId')),
-                  // DataCell(Text(user?.encTestId ?? 'encPartnerId')),
-                   DataCell(Text(testName?? '')),
-                  DataCell(Text(getTestFeeObj?.fee ?? '')),
-                  DataCell(Text(getTestFeeObj?.discountedFee ?? '')),
-                  DataCell(Text(getTestFeeObj?.bookingFee ?? '')),
-                 ],
-                )
-               ]
-               )
+                  ],
+                 rows: <DataRow>[
+                  DataRow(
+                     cells: <DataCell>[
+                    // DataCell(Text(user?.encPartnerId ?? 'encPartnerId')),
+                    // DataCell(Text(user?.encTestId ?? 'encPartnerId')),
+                    DataCell(Container(child: Text(testName?? '',overflow: TextOverflow.ellipsis))),
+                    DataCell(Text(getTestFeeObj?.fee ?? '')),
+                    DataCell(Text(getTestFeeObj?.discountedFee ?? '')),
+                    DataCell(Text(getTestFeeObj?.bookingFee ?? '')),
+                   ],
+                  )
+                 ]
+                 ),
+              )
             ],
           ),
         ),
@@ -731,41 +756,32 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
 
 
-    GetTestFee() async {
-    var jsonResponse;
-    if (encTestId.isNotEmpty) {
-      var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestFee"),
-          body: ({
-            'EncPartnerId': encLabId,
-            'EncTestId': encTestId,
+  //  Future<void> GetTestFee() async {
+  //   var jsonResponse;
+  //   if (encTestId.isNotEmpty) {
+  //     var response = await http.post(
+  //         Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestFee"),
+  //         body: ({
+  //           'EncPartnerId': encLabId,
+  //           'EncTestId': encTestId,
 
-          }));
-      if (response.statusCode == 200) {
-        print("Correct");
-        print(response.body);
-        jsonResponse = json.decode(response.body.toString());
-        print(jsonResponse);
-        getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
-        
-        // //Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
-        //  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Test Added")));
+  //         }));
+  //     if (response.statusCode == 200) {
+  //       print("Correct");
+  //       print(response.body);
+  //       jsonResponse = json.decode(response.body.toString());
+  //       print(jsonResponse);
+  //       getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
 
-
-         //GetTestFeeModel dataModel = getTestFeeModelFromJson(response.body);
-        // print(dataModel.fee);
-
-
-
-      } else {
-        throw Exception("Faild to fetch");
-      }
-    } else {
-      throw Exception("Faild to fetch");
-    }
-    //throw Exception("Faild to fetch");
-    return GetTestFee();
-  }
+  //     } else {
+  //       throw Exception("Faild to fetch");
+  //     }
+  //   } else {
+  //     throw Exception("Faild to fetch");
+  //   }
+  //   //throw Exception("Faild to fetch");
+  //   return GetTestFee();
+  // }
 
 
 
