@@ -463,9 +463,10 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
     print("This is the LabId :$encLabId");
     print("This is the EncTestId :$encTestId");
     _selectedTest = null as Datum;
-    var response = await http.post(
-        Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestByLab"),
-        body: ({"EncId": encLabId}));
+    var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestByLab"),
+        body: ({
+          "EncId": encLabId
+          }));
 
     if (response.statusCode == 200) {
       final dataModel = dataModelFromJson(response.body);
@@ -480,8 +481,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
     return [];
   }
-//=====================================================================Get Test Fee Api================================================================================================================
-
+//=====================================================================Get Test Fee Api===================================================================================================
    Future<void> GetTestFee() async {
     var jsonResponse;
     if (encTestId.isNotEmpty) {
@@ -578,6 +578,8 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                 ),
               ),
 
+//=========================================================== INITIAL drop down======================================================================================
+
               ListTile(
                 title: Text(
                   "Select Pathological Lab",
@@ -636,7 +638,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                 ),
               ),
 
-              //=========================================================== Dependent drop down===================================
+//=========================================================== Dependent drop down===============================================================================================
 
               ListTile(
                 title: Text(
@@ -702,10 +704,8 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                     OutlinedButton(
                       onPressed: (){
                         setState(() {
-                       
                         });
                            GetTestFee();
-                        
                       }, 
                       child:Text("Add"))
                   ],
