@@ -413,9 +413,8 @@ class MultipleTestBooking extends StatefulWidget {
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
-  List<TableRow> tableRows = [];
-  final rows = <TableRow>[];
-  List<GetTestFeeMap> reponseArray =[];
+ 
+  List<GetTestFeeMap> reponseArray =[];   // Storing API response || later showing test fee in table format
 
   GetTestFeeMap? getTestFeeObj;
 
@@ -448,7 +447,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         AllPathLabTestModel dataModel = allPathLabTestModelFromJson(response.body);
         print(dataModel.partner.length);
         for (final item in dataModel.partner) {
-        print(item.partnerName);
+        print("This are the hte LAB name :${item.partnerName}");
         }
 
         List<Partner> arrData = dataModel.partner; // this "partner" is actual json array of data[]
@@ -473,8 +472,9 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
       final dataModel = dataModelFromJson(response.body);
       print(dataModel.data.length);
       for (final item in dataModel.data) {
-        print("This is hte test name :${item.testName}");
+        print("This are hte test names :${item.testName}");
       }
+      
 
       List<Datum> arrData = dataModel.data;
       return arrData;
@@ -499,7 +499,9 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
         getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
-         reponseArray.add(getTestFeeObj!);
+        setState(() {
+          reponseArray.add(getTestFeeObj!);
+        });
 
       } else {
         throw Exception("Faild to fetch");
@@ -684,12 +686,11 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                                   .toList()
                                   .cast<DropdownMenuItem<Datum>>(),
                               onChanged: (value) {
-                                print("This is the value : ${value!.testName}");
+                                print("This is the TestName : ${value!.testName}");
                                 print("This is the EncTestId : ${value.testId}");
-                                testName = value.testName;
                                 setState(() {
                                   encTestId = value.testId;
-                                  // testName = value.testName;
+                                   testName = value.testName;
                                   _selectedTest = value;
                                 });
                                 //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
@@ -701,20 +702,14 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                   ),
                 ),
         
-                Container(
-                  child: Column(
-                    children: [
-                      OutlinedButton(
-                        onPressed: (){
-                          setState(() {
-                             GetTestFee();
-                          });
-                            //  GetTestFee();
-                        }, 
-                        child:Text("Add"))
-                    ],
-                  ),
-                ),
+                OutlinedButton(
+                  onPressed: (){
+                    setState(() {
+                       //GetTestFee();
+                    });
+                        GetTestFee();
+                  }, 
+                  child:Text("Add")),
         
                
           
@@ -751,43 +746,24 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                     columns: <DataColumn>[
                       //DataColumn(label: Text("encPartnerId")),
                       //DataColumn(label: Text("encTestId")),
-                     // DataColumn(label: Text("TestName")),
+                      DataColumn(label: Text("TestName")),
                       DataColumn(label: Text("Fee")),
                       DataColumn(label: Text("Discounted Fee")),
                       DataColumn(label: Text("Booking Fee")),
                     ],
                     
-                     rows:reponseArray.map((testData){
+                     rows:reponseArray.map((testRowData){
                       return DataRow(
                         cells: [
-                         // DataCell(Text(testName ?? '')),
-                          DataCell(Text(testData.fee ?? '')),
-                          DataCell(Text(testData.discountedFee ?? '')),
-                          DataCell(Text(testData.bookingFee ?? ''))
+                          DataCell(Text(testName)),
+                          DataCell(Text(testRowData.fee ?? '')),
+                          DataCell(Text(testRowData.discountedFee ?? '')),
+                          DataCell(Text(testRowData.bookingFee ?? ''))
                         ]
                       );
                     }).toList()
                 ),
-        
-        
-                // Table(
-                //   border: TableBorder.all(color: Colors.black),
-                //    columnWidths: {
-                //         0: FixedColumnWidth(100.0),
-                //         1: FixedColumnWidth(100.0)
-                //       },
-                //       children: [
-                //         //for ( var item in getTestFeeObj )
-                //         TableRow(
-                //           children: [
-                //             Text(getTestFeeObj?.fee ?? '', style: TextStyle(color: Colors.amber),)
-                //           ]
-                //         )
-                //       ],
-                // )
-        
-        
-        
+   
         
               ],
             ),
@@ -796,49 +772,6 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
       ),
     );
   }
-
-
-
-
-
-
-
-
-
-  //  Future<void> GetTestFee() async {
-  //   var jsonResponse;
-  //   if (encTestId.isNotEmpty) {
-  //     var response = await http.post(
-  //         Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestFee"),
-  //         body: ({
-  //           'EncPartnerId': encLabId,
-  //           'EncTestId': encTestId,
-
-  //         }));
-  //     if (response.statusCode == 200) {
-  //       print("Correct");
-  //       print(response.body);
-  //       jsonResponse = json.decode(response.body.toString());
-  //       print(jsonResponse);
-  //       getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
-
-  //     } else {
-  //       throw Exception("Faild to fetch");
-  //     }
-  //   } else {
-  //     throw Exception("Faild to fetch");
-  //   }
-  //   //throw Exception("Faild to fetch");
-  //   return GetTestFee();
-  // }
-
-
-
-
-
-
-
-
 
 
 
