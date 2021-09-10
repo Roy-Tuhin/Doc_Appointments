@@ -364,8 +364,45 @@ import 'package:http/http.dart' as http;
 import 'package:medbo/Booking/PathologicalMultipleBooking/testModel.dart';
 
 import 'AllPathLabTestModel.dart';
+import 'GetTestFeeModel.dart';
 // import 'Models/labModel.dart';
 // import 'Models/testModel.dart';
+
+
+
+class GetTestFeeMap {
+String? encPartnerId;
+String? encTestId;
+String? fee;
+String? discountedFee;
+String? bookingFee;
+
+GetTestFeeMap(
+  {this.encPartnerId,
+  this.encTestId,
+  this.fee,
+  this.discountedFee,
+  this.bookingFee});
+
+GetTestFeeMap.fromJson(Map<String, dynamic> json) {
+  encPartnerId = json['EncPartnerId'];
+  encTestId = json['EncTestId'];
+  fee = json['Fee'];
+  discountedFee = json['DiscountedFee'];
+  bookingFee = json['BookingFee'];
+}
+
+Map<String, dynamic> toJson() {
+  final Map<String, dynamic> data = new Map<String, dynamic>();
+  data['EncPartnerId'] = this.encPartnerId;
+  data['EncTestId'] = this.encTestId;
+  data['Fee'] = this.fee;
+  data['DiscountedFee'] = this.discountedFee;
+  data['BookingFee'] = this.bookingFee;
+  return data;
+ }
+}
+
 
 
 class MultipleTestBooking extends StatefulWidget {
@@ -376,12 +413,17 @@ class MultipleTestBooking extends StatefulWidget {
 }
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
+
+  GetTestFeeMap? getTestFeeObj;
+
    Partner? _selectedLab;
    Datum? _selectedTest;
    Future? getAllPathLabResults;
    Future? getTestByLabResult;
 
   String encLabId = '';
+  String encTestId = '';
+  String testName ='';
 
   void initState() {
     super.initState();
@@ -392,11 +434,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
   String _selectedDate = DateTime.now().toString();
 
   Future<List<Partner>> allPathLab() async {
-
-
-
-
-var jsonResponse;
+      var jsonResponse;
   
       var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllPathLab"),
           body: ({
@@ -412,8 +450,6 @@ var jsonResponse;
         print(dataModel.partner.length);
         for (final item in dataModel.partner) {
         print(item.partnerName);
- 
-        
         }
 
         List<Partner> arrData = dataModel.partner; // this "partner" is actual json array of data[]
@@ -432,7 +468,8 @@ var jsonResponse;
   }
 
   Future<List<Datum>> getTestByLab() async {
-    print("This is the Id :$encLabId");
+    print("This is the LabId :$encLabId");
+    print("This is the EncTestId :$encTestId");
     _selectedTest = null as Datum;
     var response = await http.post(
         Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestByLab"),
@@ -546,28 +583,31 @@ var jsonResponse;
                     if (snapshot.hasData) {
                       List<Partner> data =
                           snapshot.hasData ? snapshot.data : [];
-                      return DropdownButton<Partner>(
-                        value: _selectedLab,
-                        hint: Text("Select Lab"),
-                        //underline: SizedBox(),
-                        //isExpanded: true,
-                        items: data
-                            .map((Partner data) => DropdownMenuItem<Partner>(
-                                  child: Text("${data.partnerName}"),
-                                  value: data,
-                                ))
-                            .toList()
-                            .cast<DropdownMenuItem<Partner>>(),
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedLab = value!;
+                      return Padding(
+                        padding: const EdgeInsets.only(left:20.0, right: 150),
+                        child: DropdownButton<Partner>(
+                          value: _selectedLab,
+                          hint: Text("Select Lab"),
+                          //underline: SizedBox(),
+                          isExpanded: true,
+                          items: data
+                              .map((Partner data) => DropdownMenuItem<Partner>(
+                                    child: Text("${data.partnerName}"),
+                                    value: data,
+                                  ))
+                              .toList()
+                              .cast<DropdownMenuItem<Partner>>(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedLab = value!;
 
-                            encLabId = value.encPartnerId;
-                            getTestByLabResult = getTestByLab();
-                          });
-                          //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
-                          // GetTestByLab();
-                        },
+                              encLabId = value.encPartnerId;
+                              getTestByLabResult = getTestByLab();
+                            });
+                            //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
+                            // GetTestByLab();
+                          },
+                        ),
                       );
                     }
                     return Text("Waiting for Internet Connection");
@@ -597,41 +637,145 @@ var jsonResponse;
                       return CircularProgressIndicator();
                     }
                     if (snapshot.hasError) {
-                      return Text("Select a Lab for your Test");
+                      return Text("Something wrong");
                     }
 
                     if (snapshot.hasData) {
                       List<Datum> data = snapshot.hasData ? snapshot.data : [];
 
-                      return DropdownButton<Datum>(
-                          value: _selectedTest,
-                          hint: Text(""),
-                          //underline: SizedBox(),
-                          //isExpanded: true,
-                          items: data
-                              .map((Datum data) => DropdownMenuItem<Datum>(
-                                    child: Text("${data.testName}"),
-                                    value: data,
-                                  ))
-                              .toList()
-                              .cast<DropdownMenuItem<Datum>>(),
-                          onChanged: (value) {
-                            print("This is the value : ${value!.testName}");
-                            setState(() {
-                              _selectedTest = value!;
-                            });
-                            //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
-                          });
+                      return Padding(
+                        padding: const EdgeInsets.only(left:20.0, right: 150),
+                        child: DropdownButton<Datum>(
+                            value: _selectedTest,
+                            hint: Text(""),
+                            //underline: SizedBox(),
+                            isExpanded: true,
+                            items: data
+                                .map((Datum data) => DropdownMenuItem<Datum>(
+                                      child: Text("${data.testName}"),
+                                      value: data,
+                                    ))
+                                .toList()
+                                .cast<DropdownMenuItem<Datum>>(),
+                            onChanged: (value) {
+                              print("This is the value : ${value!.testName}");
+                              print("This is the EncTestId : ${value.testId}");
+                              setState(() {
+                                encTestId = value.testId;
+                                testName = value.testName;
+                                _selectedTest = value;
+                                //GetTestFee();
+                              });
+                              //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
+                            }),
+                      );
                     }
                     return Text("Waiting for Internet Connection");
                   },
                 ),
               ),
+
+              Container(
+                child: Column(
+                  children: [
+                    OutlinedButton(
+                      onPressed: (){
+                        setState(() {
+                       
+                        });
+                           GetTestFee();
+                        
+                      }, 
+                      child:Text("Add"))
+                  ],
+                ),
+              ),
+
+             
+
+             
+              DataTable(
+                columns: <DataColumn>[
+                  //DataColumn(label: Text("encPartnerId")),
+                  //DataColumn(label: Text("encTestId")),
+                  DataColumn(label: Text("TestName")),
+                  DataColumn(label: Text("Fee")),
+                   DataColumn(label: Text("Discounted Fee")),
+                    DataColumn(label: Text("Booking Fee")),
+                ],
+               rows: <DataRow>[
+                DataRow(
+                   cells: <DataCell>[
+                  // DataCell(Text(user?.encPartnerId ?? 'encPartnerId')),
+                  // DataCell(Text(user?.encTestId ?? 'encPartnerId')),
+                   DataCell(Text(testName?? '')),
+                  DataCell(Text(getTestFeeObj?.fee ?? '')),
+                  DataCell(Text(getTestFeeObj?.discountedFee ?? '')),
+                  DataCell(Text(getTestFeeObj?.bookingFee ?? '')),
+                 ],
+                )
+               ]
+               )
             ],
           ),
         ),
       ),
     );
   }
+
+
+
+
+
+
+
+
+
+    GetTestFee() async {
+    var jsonResponse;
+    if (encTestId.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestFee"),
+          body: ({
+            'EncPartnerId': encLabId,
+            'EncTestId': encTestId,
+
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+        getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
+        
+        // //Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
+        //  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Test Added")));
+
+
+         //GetTestFeeModel dataModel = getTestFeeModelFromJson(response.body);
+        // print(dataModel.fee);
+
+
+
+      } else {
+        throw Exception("Faild to fetch");
+      }
+    } else {
+      throw Exception("Faild to fetch");
+    }
+    //throw Exception("Faild to fetch");
+    return GetTestFee();
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
 
