@@ -414,6 +414,8 @@ class MultipleTestBooking extends StatefulWidget {
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
   List<TableRow> tableRows = [];
+  final rows = <TableRow>[];
+  List<GetTestFeeMap> reponseArray =[];
 
   GetTestFeeMap? getTestFeeObj;
 
@@ -497,6 +499,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
         getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
+         reponseArray.add(getTestFeeObj!);
 
       } else {
         throw Exception("Faild to fetch");
@@ -505,7 +508,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
       throw Exception("Faild to fetch");
     }
     //throw Exception("Faild to fetch");
-    return GetTestFee();
+    //return GetTestFee();
   }
 
 //=====================================================================================================================================================================================
@@ -518,229 +521,276 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  title: Text("Booking Information",
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    title: Text("Booking Information",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: blockSizeHorizontal * 5,
+                          fontFamily: 'Poppins',
+                          color: Theme.of(context).primaryColor,
+                        )),
+                    subtitle: Text("Preferred Visit Date"),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 0, right: 150),
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue[50],
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DateTimePicker(
+                      initialValue: DateTime.now().toString(),
+                      //initialValue:'', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
+                      type: DateTimePickerType.date,
+                      dateLabelText: 'Select Date',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 5,
+                        fontSize: blockSizeHorizontal * 3.5,
                         fontFamily: 'Poppins',
-                        color: Theme.of(context).primaryColor,
-                      )),
-                  subtitle: Text("Preferred Visit Date"),
+                        color: Colors.green,
+                        letterSpacing: 2.0,
+                      ),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(Duration(days: 30)),
+                      // This will add one year from current date
+                      validator: (value) {
+                        return null;
+                      },
+                      onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          setState(() {
+                            _selectedDate = value;
+                          });
+                        }
+                      },
+                      onSaved: (value) {
+                        if (value.isNotEmpty) {
+                          _selectedDate = value;
+                        }
+                      },
+                    ),
+                  ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20),
-                padding: EdgeInsets.only(left: 0, right: 150),
-                decoration: BoxDecoration(
-                  color: Colors.lightBlue[50],
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: DateTimePicker(
-                    initialValue: DateTime.now().toString(),
-                    //initialValue:'', // initialValue or controller.text can be null, empty or a DateTime string otherwise it will throw an error.
-                    type: DateTimePickerType.date,
-                    dateLabelText: 'Select Date',
+        
+        //=========================================================== INITIAL drop down======================================================================================
+        
+                ListTile(
+                  title: Text(
+                    "Select Pathological Lab",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: blockSizeHorizontal * 3.5,
+                      fontSize: blockSizeHorizontal * 4.0,
                       fontFamily: 'Poppins',
-                      color: Colors.green,
-                      letterSpacing: 2.0,
+                      color: Theme.of(context).primaryColor,
                     ),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(Duration(days: 30)),
-                    // This will add one year from current date
-                    validator: (value) {
-                      return null;
-                    },
-                    onChanged: (value) {
-                      if (value.isNotEmpty) {
-                        setState(() {
-                          _selectedDate = value;
-                        });
+                  ),
+                ),
+        
+                Container(
+                  child: FutureBuilder<List<Partner>>(
+                    future: getAllPathLabResults as Future<List<Partner>>,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return CircularProgressIndicator();
                       }
-                    },
-                    onSaved: (value) {
-                      if (value.isNotEmpty) {
-                        _selectedDate = value;
+                      if (snapshot.hasError) {
+                        return Text("Somthing went wrong");
                       }
-                    },
-                  ),
-                ),
-              ),
-
-//=========================================================== INITIAL drop down======================================================================================
-
-              ListTile(
-                title: Text(
-                  "Select Pathological Lab",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: blockSizeHorizontal * 4.0,
-                    fontFamily: 'Poppins',
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-
-              Container(
-                child: FutureBuilder<List<Partner>>(
-                  future: getAllPathLabResults as Future<List<Partner>>,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
-                      return CircularProgressIndicator();
-                    }
-                    if (snapshot.hasError) {
-                      return Text("Somthing went wrong");
-                    }
-
-                    if (snapshot.hasData) {
-                      List<Partner> data =
-                          snapshot.hasData ? snapshot.data : [];
-                      return Padding(
-                        padding: const EdgeInsets.only(left:20.0, right: 150),
-                        child: DropdownButton<Partner>(
-                          value: _selectedLab,
-                          hint: Text("Select Lab"),
-                          //underline: SizedBox(),
-                          isExpanded: true,
-                          items: data
-                              .map((Partner data) => DropdownMenuItem<Partner>(
-                                    child: Text("${data.partnerName}"),
-                                    value: data,
-                                  ))
-                              .toList()
-                              .cast<DropdownMenuItem<Partner>>(),
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedLab = value!;
-
-                              encLabId = value.encPartnerId;
-                              getTestByLabResult = getTestByLab();
-                            });
-                            //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
-                            // GetTestByLab();
-                          },
-                        ),
-                      );
-                    }
-                    return Text("Waiting for Internet Connection");
-                  },
-                ),
-              ),
-
-//=========================================================== Dependent drop down===============================================================================================
-
-              ListTile(
-                title: Text(
-                  "Test Name",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: blockSizeHorizontal * 4.0,
-                    fontFamily: 'Poppins',
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-
-              Container(
-                child: FutureBuilder<List<Datum>>(
-                  future: getTestByLabResult as Future<List<Datum>>,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
-                      return CircularProgressIndicator();
-                    }
-                    if (snapshot.hasError) {
-                      return Text("Something wrong");
-                    }
-
-                    if (snapshot.hasData) {
-                      List<Datum> data = snapshot.hasData ? snapshot.data : [];
-
-                      return Padding(
-                        padding: const EdgeInsets.only(left:20.0, right: 150),
-                        child: DropdownButton<Datum>(
-                            value: _selectedTest,
-                            hint: Text(""),
+        
+                      if (snapshot.hasData) {
+                        List<Partner> data =
+                            snapshot.hasData ? snapshot.data : [];
+                        return Padding(
+                          padding: const EdgeInsets.only(left:20.0, right: 150),
+                          child: DropdownButton<Partner>(
+                            value: _selectedLab,
+                            hint: Text("Select Lab"),
                             //underline: SizedBox(),
                             isExpanded: true,
                             items: data
-                                .map((Datum data) => DropdownMenuItem<Datum>(
-                                      child: Text("${data.testName}"),
+                                .map((Partner data) => DropdownMenuItem<Partner>(
+                                      child: Text("${data.partnerName}"),
                                       value: data,
                                     ))
                                 .toList()
-                                .cast<DropdownMenuItem<Datum>>(),
+                                .cast<DropdownMenuItem<Partner>>(),
                             onChanged: (value) {
-                              print("This is the value : ${value!.testName}");
-                              print("This is the EncTestId : ${value.testId}");
                               setState(() {
-                                encTestId = value.testId;
-                                testName = value.testName;
-                                _selectedTest = value;
-                                //GetTestFee();
+                                _selectedLab = value!;
+        
+                                encLabId = value.encPartnerId;
+                                getTestByLabResult = getTestByLab();
                               });
                               //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
-                            }),
+                              // GetTestByLab();
+                            },
+                          ),
+                        );
+                      }
+                      return Text("Waiting for Internet Connection");
+                    },
+                  ),
+                ),
+        
+        //=========================================================== Dependent drop down===============================================================================================
+        
+                ListTile(
+                  title: Text(
+                    "Test Name",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: blockSizeHorizontal * 4.0,
+                      fontFamily: 'Poppins',
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ),
+        
+                Container(
+                  child: FutureBuilder<List<Datum>>(
+                    future: getTestByLabResult as Future<List<Datum>>,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return CircularProgressIndicator();
+                      }
+                      if (snapshot.hasError) {
+                        return Text("Something wrong");
+                      }
+        
+                      if (snapshot.hasData) {
+                        List<Datum> data = snapshot.hasData ? snapshot.data : [];
+        
+                        return Padding(
+                          padding: const EdgeInsets.only(left:20.0, right: 150),
+                          child: DropdownButton<Datum>(
+                              value: _selectedTest,
+                              hint: Text(""),
+                              //underline: SizedBox(),
+                              isExpanded: true,
+                              items: data
+                                  .map((Datum data) => DropdownMenuItem<Datum>(
+                                        child: Text("${data.testName}"),
+                                        value: data,
+                                      ))
+                                  .toList()
+                                  .cast<DropdownMenuItem<Datum>>(),
+                              onChanged: (value) {
+                                print("This is the value : ${value!.testName}");
+                                print("This is the EncTestId : ${value.testId}");
+                                testName = value.testName;
+                                setState(() {
+                                  encTestId = value.testId;
+                                  // testName = value.testName;
+                                  _selectedTest = value;
+                                });
+                                //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
+                              }),
+                        );
+                      }
+                      return Text("Waiting for Internet Connection");
+                    },
+                  ),
+                ),
+        
+                Container(
+                  child: Column(
+                    children: [
+                      OutlinedButton(
+                        onPressed: (){
+                          setState(() {
+                             GetTestFee();
+                          });
+                            //  GetTestFee();
+                        }, 
+                        child:Text("Add"))
+                    ],
+                  ),
+                ),
+        
+               
+          
+               
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: DataTable(
+                //     columnSpacing: 13.0,
+                //     columns: <DataColumn>[
+                //       //DataColumn(label: Text("encPartnerId")),
+                //       //DataColumn(label: Text("encTestId")),
+                //       DataColumn(label: Text("TestName")),
+                //       DataColumn(label: Text("Fee")),
+                //       DataColumn(label: Text("Discounted Fee")),
+                //       DataColumn(label: Text("Booking Fee")),
+                //     ],
+                //    rows: <DataRow>[
+                //     DataRow(
+                //        cells: <DataCell>[
+                //       // DataCell(Text(user?.encPartnerId ?? 'encPartnerId')),
+                //       // DataCell(Text(user?.encTestId ?? 'encPartnerId')),
+                //       DataCell(Container(child: Text(testName?? '',overflow: TextOverflow.ellipsis))),
+                //       DataCell(Text(getTestFeeObj?.fee ?? '')),
+                //       DataCell(Text(getTestFeeObj?.discountedFee ?? '')),
+                //       DataCell(Text(getTestFeeObj?.bookingFee ?? '')),
+                //      ],
+                //     )
+                //    ]
+                //    ),
+                // ),
+        
+                DataTable(
+                   columnSpacing: 13.0,
+                    columns: <DataColumn>[
+                      //DataColumn(label: Text("encPartnerId")),
+                      //DataColumn(label: Text("encTestId")),
+                     // DataColumn(label: Text("TestName")),
+                      DataColumn(label: Text("Fee")),
+                      DataColumn(label: Text("Discounted Fee")),
+                      DataColumn(label: Text("Booking Fee")),
+                    ],
+                    
+                     rows:reponseArray.map((testData){
+                      return DataRow(
+                        cells: [
+                         // DataCell(Text(testName ?? '')),
+                          DataCell(Text(testData.fee ?? '')),
+                          DataCell(Text(testData.discountedFee ?? '')),
+                          DataCell(Text(testData.bookingFee ?? ''))
+                        ]
                       );
-                    }
-                    return Text("Waiting for Internet Connection");
-                  },
+                    }).toList()
                 ),
-              ),
-
-              Container(
-                child: Column(
-                  children: [
-                    OutlinedButton(
-                      onPressed: (){
-                        setState(() {
-                        });
-                           GetTestFee();
-                      }, 
-                      child:Text("Add"))
-                  ],
-                ),
-              ),
-
-             
-  
-             
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  columnSpacing: 13.0,
-                  columns: <DataColumn>[
-                    //DataColumn(label: Text("encPartnerId")),
-                    //DataColumn(label: Text("encTestId")),
-                    DataColumn(label: Text("TestName")),
-                    DataColumn(label: Text("Fee")),
-                    DataColumn(label: Text("Discounted Fee")),
-                    DataColumn(label: Text("Booking Fee")),
-                  ],
-                 rows: <DataRow>[
-                  DataRow(
-                     cells: <DataCell>[
-                    // DataCell(Text(user?.encPartnerId ?? 'encPartnerId')),
-                    // DataCell(Text(user?.encTestId ?? 'encPartnerId')),
-                    DataCell(Container(child: Text(testName?? '',overflow: TextOverflow.ellipsis))),
-                    DataCell(Text(getTestFeeObj?.fee ?? '')),
-                    DataCell(Text(getTestFeeObj?.discountedFee ?? '')),
-                    DataCell(Text(getTestFeeObj?.bookingFee ?? '')),
-                   ],
-                  )
-                 ]
-                 ),
-              )
-            ],
+        
+        
+                // Table(
+                //   border: TableBorder.all(color: Colors.black),
+                //    columnWidths: {
+                //         0: FixedColumnWidth(100.0),
+                //         1: FixedColumnWidth(100.0)
+                //       },
+                //       children: [
+                //         //for ( var item in getTestFeeObj )
+                //         TableRow(
+                //           children: [
+                //             Text(getTestFeeObj?.fee ?? '', style: TextStyle(color: Colors.amber),)
+                //           ]
+                //         )
+                //       ],
+                // )
+        
+        
+        
+        
+              ],
+            ),
           ),
         ),
       ),
