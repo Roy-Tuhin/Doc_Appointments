@@ -504,7 +504,11 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
         setState(() {
           reponseArray.add(getTestFeeObj!); // Adding data to my Arraylist
+          feeSum=0;
+          discountSum=0;
+          bookingSum=0;
           for(GetTestFeeMap elem in reponseArray){
+            
                   feeSum += elem.fee! ;
                   discountSum += elem.discountedFee! ; // Doing calculation here
                   bookingSum += elem.bookingFee! ;
@@ -807,7 +811,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                     child: 
                     Row(
                       children: [
-                        Text("Total Fee: ${feeSum}\nTotal DiscountedFee:  ${discountSum}\nTotal BookingFee:  ${bookingSum}" ),
+                        Text("Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}" ),
                         //  Text(discountSum ),
                         //   Text(bookingSum ),
                       ],
