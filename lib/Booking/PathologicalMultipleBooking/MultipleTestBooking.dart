@@ -354,19 +354,14 @@
 
 
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_app/Patner.dart';
-// import 'package:flutter_app/dataModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbo/Booking/PathologicalMultipleBooking/testModel.dart';
-
 import 'AllPathLabTestModel.dart';
 import 'GetTestFeeModel.dart';
-// import 'Models/labModel.dart';
-// import 'Models/testModel.dart';
-
 
 
 class GetTestFeeMap {
@@ -415,6 +410,9 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
  
   List<GetTestFeeMap> reponseArray =[];   // Storing API response || later showing test fee in table format
+   String feeSum = "" ;
+  String discountSum = "";
+  String bookingSum = "";
 
   GetTestFeeMap? getTestFeeObj;
 
@@ -500,7 +498,15 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         print(jsonResponse);
         getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
         setState(() {
-          reponseArray.add(getTestFeeObj!);
+          reponseArray.add(getTestFeeObj!); // Adding data to my Arraylist
+          for(GetTestFeeMap elem in reponseArray){
+                  feeSum += elem.fee! ;
+                  discountSum += elem.discountedFee! ; // Doing calculation here
+                  bookingSum += elem.bookingFee! ;
+                }
+                print(feeSum);
+                print(discountSum);
+                print(discountSum);
         });
 
       } else {
@@ -746,7 +752,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                     columns: <DataColumn>[
                       //DataColumn(label: Text("encPartnerId")),
                       //DataColumn(label: Text("encTestId")),
-                      DataColumn(label: Text("TestName")),
+                     // DataColumn(label: Text("TestName")),
                       DataColumn(label: Text("Fee")),
                       DataColumn(label: Text("Discounted Fee")),
                       DataColumn(label: Text("Booking Fee")),
@@ -755,7 +761,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                      rows:reponseArray.map((testRowData){
                       return DataRow(
                         cells: [
-                          DataCell(Text(testName)),
+                          //DataCell(Text(testName)),
                           DataCell(Text(testRowData.fee ?? '')),
                           DataCell(Text(testRowData.discountedFee ?? '')),
                           DataCell(Text(testRowData.bookingFee ?? ''))
@@ -763,6 +769,19 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                       );
                     }).toList()
                 ),
+
+
+
+                Container(
+                  child: 
+                  Row(
+                    children: [
+                      Text("${feeSum}\n ${discountSum}  \n ${bookingSum}" ),
+                      //  Text(discountSum ),
+                      //   Text(bookingSum ),
+                    ],
+                  ),
+                )
    
         
               ],
