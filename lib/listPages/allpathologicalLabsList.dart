@@ -6,9 +6,10 @@ import 'package:medbo/models/allPathTestModel.dart';
 import 'package:medbo/models/pathTestDetailsModel.dart';
 import 'package:medbo/onTapScreens/pathLabDetails.dart';
 import 'package:medbo/parsing/allPathTests.dart';
-
 import '../screen_helper/clip_path.dart';
+
 class PathologicalLabDetails extends StatefulWidget {
+  const PathologicalLabDetails({Key? key}) : super(key: key);
 
   @override
   _PathologicalLabDetailsState createState() => _PathologicalLabDetailsState();
@@ -16,15 +17,14 @@ class PathologicalLabDetails extends StatefulWidget {
 
 class _PathologicalLabDetailsState extends State<PathologicalLabDetails> {
   late List<Datum> pathList = [];
-  List<Datum> finalPathList=[];
+  List<Datum> finalPathList = [];
   late bool _loadPathList = true;
 
   PathTestList PList = PathTestList();
   Future<void> getPathTest() async {
     finalPathList = await PList.getPathTest();
     setState(() {
-
-      pathList=finalPathList;
+      pathList = finalPathList;
     });
     // print(_datum[0].doctorId);
     // print(finalDatum.length);
@@ -42,6 +42,7 @@ class _PathologicalLabDetailsState extends State<PathologicalLabDetails> {
     }
   }
 
+  //==============================================================================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,85 +55,127 @@ class _PathologicalLabDetailsState extends State<PathologicalLabDetails> {
               colors: [
                 Theme.of(context).primaryColor,
                 Theme.of(context).accentColor
-              ] ,
+              ],
             ),
           ),
         ),
-        title: Text('Pathological Lab',style: TextStyle(fontFamily: 'Roboto_Condensed',),),
+        title: Text(
+          'Pathological Lab',
+          style: TextStyle(
+            fontFamily: 'Roboto_Condensed',
+          ),
+        ),
       ),
+//==================================================================================================
+
       body: Container(
+        width: MediaQuery.of(context).size.width,
         color: Colors.lightBlue[50],
-        child: Stack(
+        child: Column(
           children: [
-            // ClipPath(
-            //   clipper: MyClipper(),
-            //   child: Container(
-            //     height: 400,
-            //     width: MediaQuery.of(context).size.height,
-            //     decoration: BoxDecoration(
-            //       gradient: LinearGradient(
-            //         begin: Alignment.topLeft,
-            //         end: Alignment.center,
-            //         colors: [
-            //           Theme.of(context).primaryColor,
-            //           Theme.of(context).accentColor
-            //         ] ,
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            _searchBar(),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PathologicalSingleTestBookingPage())); //=========== single Test
+                },
+                child: Text("Make your Own Test and Book")),
 
-            Stack(
-              children: [
-                Container(
-                  // color: Colors.green,
-                  // height: 500,
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    children: [
-                      _searchBar(),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MultipleTestBooking())); //=========== Pathological Multiple Test
+                },
+                child: Text("Book more than one Test")),
 
-                      ElevatedButton(
-                        onPressed: (){
-                           Navigator.push(context,MaterialPageRoute(builder: (context) => PathologicalSingleTestBookingPage()));//=========== single Test
-                        }, 
-                        child: 
-                        Text("Make your Own Test and Book")
-                        ),
-                      
-                        ElevatedButton(
-                          onPressed: (){
-                             Navigator.push(context,MaterialPageRoute(builder: (context) => MultipleTestBooking ()));//=========== Pathological Multiple Test
-                          }, 
-                          child: 
-                          Text("Book more than one Test")
-                        ),
-
-                      Expanded(
-                        child: ListView.separated(
-                          padding: EdgeInsets.all(15),
-                          scrollDirection: Axis.vertical,
-                          itemCount: pathList== null ? 0 : pathList.length,
-                          itemBuilder: (BuildContext context,int index){
-                            maxline:1;
-                            return _listItem(index);
-
-                          },
-                          separatorBuilder: (BuildContext context, int index)=>const Divider(
-                            color: Colors.transparent,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+            Expanded(
+              child: ListView.separated(
+                padding: EdgeInsets.all(15),
+                scrollDirection: Axis.vertical,
+                itemCount: pathList == null ? 0 : pathList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  maxline:
+                  1;
+                  return _listItem(index);
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  color: Colors.transparent,
                 ),
-              ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
+
+
+
+
+
+
+
+
+
+
+  
+_listItem(index) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  PathTestDetails(encId: pathList[index].encTestId)));
+    },
+    child: Container(
+      height: 80,
+      width: MediaQuery.of(context).size.width,
+      // margin: EdgeInsets.only(left:15.0,),
+      // color: Colors.blue,
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(15),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.center,
+          colors: [
+            Theme.of(context).primaryColor,
+            Theme.of(context).accentColor
+          ],
+        ),
+      ),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '${pathList[index].testName}',
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: Colors.white),
+              ),
+            ),
+          ]),
+    ),
+  );
+}
+
+
+//====================================================================================
+
+
 
   _searchBar(){
     return Container(
@@ -170,40 +213,7 @@ class _PathologicalLabDetailsState extends State<PathologicalLabDetails> {
     );
   }
 
-  _listItem(index){
-    return InkWell(
-      onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => PathTestDetails(encId: pathList[index].encTestId)));},
-      child: Container(
-        height: 80,
-        width: MediaQuery.of(context).size.width,
-        // margin: EdgeInsets.only(left:15.0,),
-        // color: Colors.blue,
-        decoration: BoxDecoration(
 
-          shape:BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(15),
-          gradient:LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.center,
-            colors: [
-              Theme.of(context).primaryColor,
-              Theme.of(context).accentColor
-            ] ,
-          ),
-        ),
-        child: Expanded(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('${pathList[index].testName}',style: TextStyle(fontFamily: 'Poppins',fontWeight: FontWeight.bold,fontSize: 17,color: Colors.white),),
-                ),
-              ]
-          ),
-        ),
-      ),
-    );
-  }
+
+
 }
