@@ -354,7 +354,6 @@
 
 
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -541,19 +540,22 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    title: Text("Booking Information",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: blockSizeHorizontal * 5,
-                          fontFamily: 'Poppins',
-                          color: Theme.of(context).primaryColor,
-                        )),
-                    subtitle: Text("Preferred Visit Date"),
+                  child: ShowUp(
+                     delay: delayAmount+400,
+                    child: ListTile(
+                      title: Text("Booking Information",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: blockSizeHorizontal * 5,
+                            fontFamily: 'Poppins',
+                            color: Theme.of(context).primaryColor,
+                          )),
+                      subtitle: Text("Preferred Visit Date"),
+                    ),
                   ),
                 ),
                 ShowUp(
-                  delay: delayAmount,
+                  delay: delayAmount+450,
                   child: Container(
                     margin: EdgeInsets.only(left: 20),
                     padding: EdgeInsets.only(left: 0, right: 150),
@@ -601,7 +603,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         //=========================================================== INITIAL drop down======================================================================================
         
                 ShowUp(
-                  delay: delayAmount+200,
+                  delay: delayAmount+500,
                   child: ListTile(
                     title: Text(
                       "Select Pathological Lab",
@@ -729,14 +731,17 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                   ),
                 ),
         
-                OutlinedButton(
-                  onPressed: (){
-                    setState(() {
-                       //GetTestFee();
-                    });
-                        GetTestFee();
-                  }, 
-                  child:Text("Add")),
+                ShowUp(
+                   delay: delayAmount+900,
+                  child: OutlinedButton(
+                    onPressed: (){
+                      setState(() {
+                         //GetTestFee();
+                      });
+                          GetTestFee();
+                    }, 
+                    child:Text("Add")),
+                ),
         
                
           
@@ -785,9 +790,9 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                         return DataRow(
                           cells: [
                             //DataCell(Text(testName)),
-                            DataCell(Text (testRowData.fee!.toString() ?? '')),
-                            DataCell(Text(testRowData.discountedFee !.toString() ?? '')),
-                            DataCell(Text(testRowData.bookingFee!.toString() ?? ''))
+                            DataCell(Text (testRowData.fee!.toString() )),
+                            DataCell(Text(testRowData.discountedFee !.toString() )),
+                            DataCell(Text(testRowData.bookingFee!.toString()  ))
                           ]
                         );
                       }).toList()
@@ -796,14 +801,17 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
 
 
-                Container(
-                  child: 
-                  Row(
-                    children: [
-                      Text("${feeSum}\n ${discountSum}  \n ${bookingSum}" ),
-                      //  Text(discountSum ),
-                      //   Text(bookingSum ),
-                    ],
+                ShowUp(
+                  delay: delayAmount+ 1050,
+                  child: Container(
+                    child: 
+                    Row(
+                      children: [
+                        Text("Total Fee: ${feeSum}\nTotal DiscountedFee:  ${discountSum}\nTotal BookingFee:  ${bookingSum}" ),
+                        //  Text(discountSum ),
+                        //   Text(bookingSum ),
+                      ],
+                    ),
                   ),
                 )
    
