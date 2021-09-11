@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:medbo/API/Search/SearchApiResponse.dart';
 import 'package:medbo/API/Search/afterSearchPage.dart';
+import 'package:medbo/Animation/showupAnimation.dart';
 import 'package:medbo/models/AllDieticianModel.dart';
 import 'package:medbo/onTapScreens/DietcianDetails.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
@@ -27,6 +28,7 @@ class Home2 extends StatefulWidget {
 }
 
 class _Home2State extends State<Home2> {
+   int delayAmount = 500;
 
    var searchController = TextEditingController();
 //======================================================================================================================================================================
@@ -211,7 +213,8 @@ class _Home2State extends State<Home2> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: userField(),
+                        child: ShowUp(delay: delayAmount,
+                        child: userField()),
                         ),
                         // Expanded(
                         // child: ElevatedButton (
@@ -234,7 +237,8 @@ class _Home2State extends State<Home2> {
 
                  //SizedBox(height: 20,),
                  
-                imageCarousel,
+                ShowUp(delay: delayAmount+700,
+                child: imageCarousel),
                 SizedBox(height: 20,),
                 // Container(//===================================================1st=======================================================
                 //  color: Colors.blue,
@@ -394,203 +398,209 @@ class _Home2State extends State<Home2> {
 
 
 
-                SizedBox(
-                  height: blockSizeVertical*5.2,
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left:8.0),
-                      child: Text(
-                        'Doctors',
-                        style: TextStyle(
-                            fontSize: blockSizeHorizontal*4.5,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins',
-                            //fontFamily: 'Poppins',
-                            color: Theme.of(context).primaryColor),
+                ShowUp(
+                  delay: delayAmount+800,
+                  child: SizedBox(
+                    height: blockSizeVertical*5.2,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left:8.0),
+                        child: Text(
+                          'Doctors',
+                          style: TextStyle(
+                              fontSize: blockSizeHorizontal*4.5,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins',
+                              //fontFamily: 'Poppins',
+                              color: Theme.of(context).primaryColor),
+                        ),
                       ),
                     ),
                   ),
                 ),
 
-                Container(//=============================================Doc containers==================================================
-                  //=============================================================2nd row  All doc coming==========================================================================
-                  //onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorDetails()));},
-                  height: blockSizeVertical*38,
-                  //width: double.infinity,
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                    itemCount: docList == null ? 0 : docList.length, ///////
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      width: blockSizeHorizontal*40,//================================== white "container" width
-                      margin: EdgeInsets.all(10),
-                      child: Stack(children: [
-                        Column(
-                          //=================================================================================================doc image horizonal============================================
-                          children: [
-                            Padding(//====================images 
-                              padding: const EdgeInsets.all(5.0),
-                              child: ClipRRect(
-                                 borderRadius: BorderRadius.circular(14.0),
-                                child: Image(
-                                  image: NetworkImage(
-                                    docList[index].doctorImage,
-                                  ),
-                                  fit: BoxFit.cover,
-                                  height: blockSizeVertical*18,
-                                  width: blockSizeHorizontal*50,
-                                ),
-                              ),
-                            ),
-                            // SizedBox(height: 5),
-                            // Padding(
-                            //   padding: const EdgeInsets.all(8.0),
-                            //   child: Center(
-                            //     child: Text(
-                            //       '${docList[index].doctorName}',
-                            //       style: TextStyle(
-                            //           fontFamily: 'Roboto_Condensed',
-                            //           color: Theme.of(context).primaryColor,
-                            //           fontWeight: FontWeight.bold,
-                            //           fontSize: 20),
-                            //       textAlign: TextAlign.center,
-                            //     ),
-                            //   ),
-                            // ),
-
-
-
-                            // SizedBox(height: 10),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 5.0),
-                            //   child: Text(
-                            //     (() {
-                            //       var str =
-                            //           docList[index].specialisation.toString();
-                            //       if (str.length > 3) {
-                            //         return '${docList[index].specialisation.toString().substring(0, 20)} ' +
-                            //             '...';
-                            //       }
-
-                            //       return "${docList[index].specialisation}";
-                            //     })(),
-                            //     // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
-
-                            //     style: TextStyle(
-                            //       fontSize: 12,
-                            //       fontFamily: 'Roboto_Condensed',
-                            //       color: Theme.of(context).primaryColor,
-                            //     ),
-                            //     textAlign: TextAlign.center,
-                            //   ),
-                            // ),
-
-                            /////////////////////////////////
-
-                            SizedBox(height: blockSizeVertical*0.5),
-
-                            
-                            Text(
-                                  '${docList[index].doctorName}',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: blockSizeHorizontal*3),
-                                  textAlign: TextAlign.center,
-                                  maxLines:1
-                                ),
-
-
-                                 SizedBox(height: blockSizeVertical*0.5),
-
-
-                                Text(
-                                  
-                                (() {
-                                  var str =
-                                      docList[index].specialisation.toString();
-                                  if (str.length > 3) {
-                                    return '${docList[index].specialisation.toString().substring(0, 20)} ' +
-                                        '...';
-                                  }
-
-                                  return "${docList[index].specialisation}";
-                                })(),
-                                // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
-
-                                style: TextStyle(
-                                  fontSize: blockSizeHorizontal*2.5,
-                                  fontFamily: 'Poppins',
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                                overflow: TextOverflow.clip,
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                              ),
-
-
-
-                             SizedBox(height: blockSizeVertical*0.5),
-
-
-
-                            
-                          ],
-                          
+                ShowUp(
+                   delay: delayAmount+900,
+                  child: Container(//=============================================Doc containers==================================================
+                    //=============================================================2nd row  All doc coming==========================================================================
+                    //onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorDetails()));},
+                    height: blockSizeVertical*38,
+                    //width: double.infinity,
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                      itemCount: docList == null ? 0 : docList.length, ///////
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        Positioned(
-                            bottom: 5,
-                          left: 5,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left:15.0, bottom: 5),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(//===============================================================================================================================================
-                                        builder: (context) => DoctorDetails(
-                                            encId:
-                                                docList[index].encDoctorId)));
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: blockSizeVertical*5,
-                                width: blockSizeHorizontal*30,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.topRight,
-                                    colors: [
-                                      Theme.of(context).primaryColor,
-                                      Theme.of(context).accentColor
-                                    ],
+                        width: blockSizeHorizontal*40,//================================== white "container" width
+                        margin: EdgeInsets.all(10),
+                        child: Stack(children: [
+                          Column(
+                            //=================================================================================================doc image horizonal============================================
+                            children: [
+                              Padding(//====================images 
+                                padding: const EdgeInsets.all(5.0),
+                                child: ClipRRect(
+                                   borderRadius: BorderRadius.circular(14.0),
+                                  child: Image(
+                                    image: NetworkImage(
+                                      docList[index].doctorImage,
+                                    ),
+                                    fit: BoxFit.cover,
+                                    height: blockSizeVertical*18,
+                                    width: blockSizeHorizontal*50,
                                   ),
                                 ),
-                                child: Text(
-                                  'Show Details',
+                              ),
+                              // SizedBox(height: 5),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(8.0),
+                              //   child: Center(
+                              //     child: Text(
+                              //       '${docList[index].doctorName}',
+                              //       style: TextStyle(
+                              //           fontFamily: 'Roboto_Condensed',
+                              //           color: Theme.of(context).primaryColor,
+                              //           fontWeight: FontWeight.bold,
+                              //           fontSize: 20),
+                              //       textAlign: TextAlign.center,
+                              //     ),
+                              //   ),
+                              // ),
+                
+                
+                
+                              // SizedBox(height: 10),
+                              // Padding(
+                              //   padding:
+                              //       const EdgeInsets.symmetric(horizontal: 5.0),
+                              //   child: Text(
+                              //     (() {
+                              //       var str =
+                              //           docList[index].specialisation.toString();
+                              //       if (str.length > 3) {
+                              //         return '${docList[index].specialisation.toString().substring(0, 20)} ' +
+                              //             '...';
+                              //       }
+                
+                              //       return "${docList[index].specialisation}";
+                              //     })(),
+                              //     // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
+                
+                              //     style: TextStyle(
+                              //       fontSize: 12,
+                              //       fontFamily: 'Roboto_Condensed',
+                              //       color: Theme.of(context).primaryColor,
+                              //     ),
+                              //     textAlign: TextAlign.center,
+                              //   ),
+                              // ),
+                
+                              /////////////////////////////////
+                
+                              SizedBox(height: blockSizeVertical*0.5),
+                
+                              
+                              Text(
+                                    '${docList[index].doctorName}',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: blockSizeHorizontal*3),
+                                    textAlign: TextAlign.center,
+                                    maxLines:1
+                                  ),
+                
+                
+                                   SizedBox(height: blockSizeVertical*0.5),
+                
+                
+                                  Text(
+                                    
+                                  (() {
+                                    var str =
+                                        docList[index].specialisation.toString();
+                                    if (str.length > 3) {
+                                      return '${docList[index].specialisation.toString().substring(0, 20)} ' +
+                                          '...';
+                                    }
+                
+                                    return "${docList[index].specialisation}";
+                                  })(),
+                                  // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
+                
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: blockSizeHorizontal*2.7,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: blockSizeHorizontal*2.5,
                                     fontFamily: 'Poppins',
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  overflow: TextOverflow.clip,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                ),
+                
+                
+                
+                               SizedBox(height: blockSizeVertical*0.5),
+                
+                
+                
+                              
+                            ],
+                            
+                          ),
+                          Positioned(
+                              bottom: 5,
+                            left: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left:15.0, bottom: 5),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(//===============================================================================================================================================
+                                          builder: (context) => DoctorDetails(
+                                              encId:
+                                                  docList[index].encDoctorId)));
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: blockSizeVertical*5,
+                                  width: blockSizeHorizontal*30,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.circular(10),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.topRight,
+                                      colors: [
+                                        Theme.of(context).primaryColor,
+                                        Theme.of(context).accentColor
+                                      ],
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Show Details',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: blockSizeHorizontal*2.7,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Poppins',
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ]),
+                        ]),
+                      ),
                     ),
                   ),
                 ),
@@ -605,20 +615,23 @@ class _Home2State extends State<Home2> {
                 
                 
                 
-                SizedBox(
-                  height: blockSizeVertical*6.2,
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left:8.0),
-                      child: Text(
-                        'Surgical Package',
-                        style: TextStyle(
-                            fontSize: blockSizeHorizontal*4.1,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor),
+                ShowUp(
+                   delay: delayAmount+1000,
+                  child: SizedBox(
+                    height: blockSizeVertical*6.2,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left:8.0),
+                        child: Text(
+                          'Surgical Package',
+                          style: TextStyle(
+                              fontSize: blockSizeHorizontal*4.1,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
+                        ),
                       ),
                     ),
                   ),
