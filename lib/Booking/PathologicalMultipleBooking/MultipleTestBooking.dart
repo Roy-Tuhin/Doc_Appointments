@@ -814,17 +814,9 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         //print(jsonResponse);
 
         getTestFeeObj = GetTestFeeMap.fromJson(jsonResponse);
-        // for (var i = 0; i < reponseArray.length; i++) {
-        //       //eNcTestIdInList=eNcTestIdInList.add(reponseArray[i].encTestId);
-        //       eNcTestIdInList+=(reponseArray[i].encTestId!);
-
-        //       testFeeinLIST= (reponseArray[i].fee);
-        //       testDiscountFeeInLIST=(reponseArray[i].discountedFee)!;
-        //       testBookingFeeiNlIST=(reponseArray[i].bookingFee)!;
-        //       }
         setState(() {
-          reponseArray.add(
-              getTestFeeObj!); // Adding data to my Arraylist 'reponseArray'
+          reponseArray.add(getTestFeeObj!); // Adding data to my Arraylist 'reponseArray'
+
           feeSum = 0;
           discountSum = 0;
           bookingSum = 0;
@@ -836,45 +828,31 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
           testBookingFeeiNlIST='';
 
 
-          for (var i = 0; i < reponseArray.length; i++) {
-            //eNcTestIdInList=eNcTestIdInList.add(reponseArray[i].encTestId);
-            eNcTestIdInList += (reponseArray[i].encTestId!);
-            if (i < reponseArray.length - 1) eNcTestIdInList += ",";
-  //===================================================================================
+                  for (var i = 0; i < reponseArray.length; i++) {
+                    //eNcTestIdInList=eNcTestIdInList.add(reponseArray[i].encTestId);
+                    eNcTestIdInList += (reponseArray[i].encTestId!);
+                    if (i < reponseArray.length - 1) eNcTestIdInList += ",";
+          //===================================================================================
 
-            testFeeinLIST += (reponseArray[i].fee!).toString();
-              if (i < reponseArray.length - 1) testFeeinLIST += ",";
-   //===================================================================================
-
-
-            testDiscountFeeInLIST += (reponseArray[i].discountedFee).toString();
-              if (i < reponseArray.length - 1) testDiscountFeeInLIST += ",";
-   //===================================================================================
+                    testFeeinLIST += (reponseArray[i].fee!.toString());
+                      if (i < reponseArray.length - 1) testFeeinLIST += ",";
+          //===================================================================================
 
 
-            testBookingFeeiNlIST = (reponseArray[i].bookingFee).toString();
-               if (i < reponseArray.length - 1) testBookingFeeiNlIST += ",";
-          }
-          print(testFeeinLIST);
+                    testDiscountFeeInLIST += (reponseArray[i].discountedFee!.toString());
+                      if (i < reponseArray.length - 1) testDiscountFeeInLIST += ",";
+          //===================================================================================
+
+
+                    testBookingFeeiNlIST += (reponseArray[i].bookingFee!.toString());
+                      if (i < reponseArray.length - 1) testBookingFeeiNlIST += ",";
+                  }
 
           for (GetTestFeeMap elemInList in reponseArray) {
             feeSum += elemInList.fee!;
             discountSum += elemInList.discountedFee!; // Doing calculation here
             bookingSum += elemInList.bookingFee!;
-
-            // eNcTestIdInList =elemInList.encTestId!;
-            // testFeeinLIST= elemInList.fee!;
-            // testDiscountFeeInLIST = elemInList.discountedFee!;
-            // testBookingFeeiNlIST = elemInList.bookingFee!;
-//===============================================================================================================
-            print(
-                "Storing Test Id in list:  ${elemInList.encTestId}"); //Test id stroring in list after hiting ADD button
-//===============================================================================================================
-
           }
-          print(feeSum);
-          print(discountSum);
-          print(bookingSum);
         });
       } else {
         throw Exception("Faild to fetch");
@@ -900,17 +878,19 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
             'VisitDate': _selectedDate,
             'EncUserId': EncUserId,
 
-            // "Fee": testFeeinLIST.toString(),
-            // "DiscountedFee": testDiscountFeeInLIST.toString(),
-            // "BookingFee": testBookingFeeiNlIST.toString(),
+            "Fee": testFeeinLIST.toString(),
+            "DiscountedFee": testDiscountFeeInLIST.toString(),
+            "BookingFee": testBookingFeeiNlIST.toString(),
+
+
             "TotalFee": feeSum.toString(),
             "TotalDiscountedFee": discountSum.toString(),
             "TotalBookingFee": bookingSum.toString(),
 
 
-             "Fee": "500,300",
-            "DiscountedFee" : "450,200",
-            "BookingFee" :  "200,150",
+            //  "Fee": "500,300",
+            // "DiscountedFee" : "450,200",
+            // "BookingFee" :  "200,150",
           }));
       if (response.statusCode == 200) {
         print("Correct");
