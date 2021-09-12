@@ -19,16 +19,12 @@
 //  Partner? _selectedLab;
 //  Datum? _selectedTest;
 
-
 //   String encLabId = '';
-
 
 //   void initState(){
 //   super.initState();
 //   AllPathLab();
 // }
-
-
 
 //   String _selectedDate = DateTime.now().toString();
 //   final List<String> allLabList = [
@@ -122,7 +118,6 @@
 
 //               //==============================================================================
 
-
 //                             ListTile(
 //                                 title: Text(
 //                                   "Select Pathological Lab",
@@ -134,7 +129,6 @@
 //                                   ),
 //                                 ),
 //                               ),
-
 
 //                Container(
 //                       child: FutureBuilder<List<Partner>>(
@@ -164,15 +158,15 @@
 //                             setState(() {
 //                                _selectedLab=value;
 //                               encLabId = value!.encPartnerId;
-//                               GetTestByLab(); 
+//                               GetTestByLab();
 //                             });
 //                             //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
-//                            // GetTestByLab(); 
+//                            // GetTestByLab();
 
 //                           },
-                          
+
 //                           );
-                              
+
 //                             }
 //                           return Text("Waiting for Internet Connection");
 //                         },
@@ -180,7 +174,6 @@
 //                     ),
 
 //                     //=========================================================== Dependent drop down===================================
-
 
 //                          ListTile(
 //                                 title: Text(
@@ -223,21 +216,12 @@
 //                             //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
 
 //                           });
-                              
+
 //                             }
 //                           return Text("Waiting for Internet Connection");
 //                         },
 //                       ),
 //                     ),
-
-
-
-
-
-
-
-
-
 
 //               // ListTile(
 //               //   title: Text(
@@ -277,14 +261,12 @@
 //   }
 //   //==========================================================================================================================================================================
 
-
-
 //   Future<List<Partner>> AllPathLab() async {
 //     var jsonResponse;
-  
+
 //       var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllPathLab"),
 //           body: ({
-            
+
 //           }));
 //       if (response.statusCode == 200) {
 //         print("Correct");
@@ -296,8 +278,7 @@
 //         print(dataModel.partner.length);
 //         for (final item in dataModel.partner) {
 //         print(item.partnerName);
- 
-        
+
 //         }
 
 //         List<Partner> arrData = dataModel.partner; // this "partner" is actual json array of data[]
@@ -306,17 +287,14 @@
 //         print("Wrong URL");
 //         throw Exception("Faild to fetch");
 //       }
-    
-//   }
 
+//   }
 
 // //==========================================================================================================================================================================
 
-
-
 //   Future<List<Datum>> GetTestByLab() async {
 //     var jsonResponse;
-  
+
 //       var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestByLab"),
 //           body: ({
 //             "EncId": encLabId
@@ -330,7 +308,7 @@
 
 //         DependentDropDownModel dataModel = dependentDropDownModelFromJson(response.body);
 //         print(dataModel.data.length);
-//         for (final item in dataModel.data) 
+//         for (final item in dataModel.data)
 //         print(item.testName);
 //        // print(item.testId);
 
@@ -340,18 +318,10 @@
 //         print("Wrong URL");
 //         throw Exception("Faild to fetch");
 //       }
-    
+
 //   }
 
-
-
-
-
 // }
-
-
-
-
 
 import 'dart:convert';
 // import 'dart:html';
@@ -365,44 +335,41 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'AllPathLabTestModel.dart';
 import 'GetTestFeeModel.dart';
 
-
 class GetTestFeeMap {
-String? encPartnerId;
-String? encTestId;
-int? fee;
-int? discountedFee;
-int? bookingFee;
+  String? encPartnerId;
+  String? encTestId;
+  int? fee;
+  int? discountedFee;
+  int? bookingFee;
 
-GetTestFeeMap(
-  {this.encPartnerId,
-  this.encTestId,
-  this.fee,
-  this.discountedFee,
-  this.bookingFee});
+  GetTestFeeMap(
+      {this.encPartnerId,
+      this.encTestId,
+      this.fee,
+      this.discountedFee,
+      this.bookingFee});
 
-GetTestFeeMap.fromJson(Map<String, dynamic> json) {
-  encPartnerId = json['EncPartnerId'];
-  encTestId = json['EncTestId'];
-  //fee = json['Fee'];
-  fee = int.parse(json['Fee']);
- // discountedFee = json['DiscountedFee'];
- discountedFee = int.parse(json['DiscountedFee']);
-  //bookingFee = json['BookingFee'];
-  bookingFee = int.parse(json['BookingFee']);
+  GetTestFeeMap.fromJson(Map<String, dynamic> json) {
+    encPartnerId = json['EncPartnerId'];
+    encTestId = json['EncTestId'];
+    //fee = json['Fee'];
+    fee = int.parse(json['Fee']);
+    // discountedFee = json['DiscountedFee'];
+    discountedFee = int.parse(json['DiscountedFee']);
+    //bookingFee = json['BookingFee'];
+    bookingFee = int.parse(json['BookingFee']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['EncPartnerId'] = this.encPartnerId;
+    data['EncTestId'] = this.encTestId;
+    data['Fee'] = this.fee;
+    data['DiscountedFee'] = this.discountedFee;
+    data['BookingFee'] = this.bookingFee;
+    return data;
+  }
 }
-
-Map<String, dynamic> toJson() {
-  final Map<String, dynamic> data = new Map<String, dynamic>();
-  data['EncPartnerId'] = this.encPartnerId;
-  data['EncTestId'] = this.encTestId;
-  data['Fee'] = this.fee;
-  data['DiscountedFee'] = this.discountedFee;
-  data['BookingFee'] = this.bookingFee;
-  return data;
- }
-}
-
-
 
 class MultipleTestBooking extends StatefulWidget {
   //const MultipleTestBooking({required Key key}) : super(key: key);
@@ -412,55 +379,38 @@ class MultipleTestBooking extends StatefulWidget {
 }
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
-
-
-
-  
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
-String Name="";
-String EncUserId="";
+  String Name = "";
+  String EncUserId = "";
 
 // void initState(){
 //   super.initState();
 //   getCred();
 // }
 
-void getCred() async{
-  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  setState(() {
-    Name = pref.getString("userEmail");
-    EncUserId= pref.getString("encId");
-  });
-
-}
+  void getCred() async {
+    //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      Name = pref.getString("userEmail");
+      EncUserId = pref.getString("encId");
+    });
+  }
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
-
-
-
-
-
-
-
-
-
-
-
-
 
   int delayAmount = 500;
 
- 
-  List<GetTestFeeMap> reponseArray =[];   // Storing API response || later showing test fee in table format
-   int feeSum =0;
-  int discountSum =0;
-  int bookingSum =0 ;
+  List<GetTestFeeMap> reponseArray =
+      []; // Storing API response || later showing test fee in table format
+  int feeSum = 0;
+  int discountSum = 0;
+  int bookingSum = 0;
 
-  String eNcTestIdInList='';
-  int? testFeeinLIST;
-  int? testDiscountFeeInLIST;
-  int? testBookingFeeiNlIST;
+  String eNcTestIdInList = '';
+  String testFeeinLIST='';
+  String testDiscountFeeInLIST='';
+  String testBookingFeeiNlIST='';
 
   // String actualFee ='';
   // String actualDiscountFee='';
@@ -468,14 +418,14 @@ void getCred() async{
 
   GetTestFeeMap? getTestFeeObj;
 
-   Partner? _selectedLab;
-   Datum? _selectedTest;
-   Future? getAllPathLabResults;
-   Future? getTestByLabResult;
+  Partner? _selectedLab;
+  Datum? _selectedTest;
+  Future? getAllPathLabResults;
+  Future? getTestByLabResult;
 
   String encLabId = '';
   String encTestId = '';
-  String testName ='';
+  String testName = '';
 
   void initState() {
     getCred();
@@ -485,8 +435,6 @@ void getCred() async{
   }
 
   String _selectedDate = DateTime.now().toString();
-
-
 
 //=====================================================================================================================================================================================
   @override
@@ -505,7 +453,7 @@ void getCred() async{
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShowUp(
-                     delay: delayAmount,
+                    delay: delayAmount,
                     child: ListTile(
                       title: Text("Booking Information",
                           style: TextStyle(
@@ -519,7 +467,7 @@ void getCred() async{
                   ),
                 ),
                 ShowUp(
-                  delay: delayAmount+450,
+                  delay: delayAmount + 450,
                   child: Container(
                     margin: EdgeInsets.only(left: 20),
                     padding: EdgeInsets.only(left: 0, right: 150),
@@ -563,11 +511,11 @@ void getCred() async{
                     ),
                   ),
                 ),
-        
-        //=========================================================== INITIAL drop down======================================================================================
-        
+
+                //=========================================================== INITIAL drop down======================================================================================
+
                 ShowUp(
-                  delay: delayAmount+500,
+                  delay: delayAmount + 500,
                   child: ListTile(
                     title: Text(
                       "Select Pathological Lab",
@@ -580,7 +528,7 @@ void getCred() async{
                     ),
                   ),
                 ),
-        
+
                 ShowUp(
                   delay: 0,
                   child: Container(
@@ -593,26 +541,33 @@ void getCred() async{
                         if (snapshot.hasError) {
                           return Text("Somthing went wrong");
                         }
-                        
+
                         if (snapshot.hasData) {
                           List<Partner> data =
                               snapshot.hasData ? snapshot.data : [];
                           return Padding(
-                            padding: const EdgeInsets.only(left:20.0, right: 150),
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 150),
                             child: DropdownButton<Partner>(
-                              value: _selectedLab,//USER SELECTED DROPDOWN ITEM VALUE
+                              value:
+                                  _selectedLab, //USER SELECTED DROPDOWN ITEM VALUE
                               hint: Text("Select Lab"),
                               //underline: SizedBox(),
                               isExpanded: true,
-                              items: data.map((Partner data) => DropdownMenuItem<Partner>(
+                              items: data
+                                  .map((Partner data) =>
+                                      DropdownMenuItem<Partner>(
                                         child: Text("${data.partnerName}"),
                                         value: data,
-                                        )).toList().cast<DropdownMenuItem<Partner>>(),
+                                      ))
+                                  .toList()
+                                  .cast<DropdownMenuItem<Partner>>(),
                               onChanged: (val) {
                                 setState(() {
                                   _selectedLab = val!;
-                        
-                                  encLabId = val.encPartnerId; //===== Passing encLabId to my next API function
+
+                                  encLabId = val
+                                      .encPartnerId; //===== Passing encLabId to my next API function
                                   getTestByLabResult = getTestByLab();
                                 });
                                 //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
@@ -626,11 +581,11 @@ void getCred() async{
                     ),
                   ),
                 ),
-        
-        //=========================================================== Dependent drop down===============================================================================================
-        
+
+                //=========================================================== Dependent drop down===============================================================================================
+
                 ShowUp(
-                  delay: delayAmount+600,
+                  delay: delayAmount + 600,
                   child: ListTile(
                     title: Text(
                       "Test Name",
@@ -643,7 +598,7 @@ void getCred() async{
                     ),
                   ),
                 ),
-        
+
                 ShowUp(
                   delay: 0,
                   child: Container(
@@ -656,33 +611,39 @@ void getCred() async{
                         if (snapshot.hasError) {
                           return Text("Something wrong");
                         }
-                        
+
                         if (snapshot.hasData) {
-                          List<Datum> data = snapshot.hasData ? snapshot.data : [];
-                        
+                          List<Datum> data =
+                              snapshot.hasData ? snapshot.data : [];
+
                           return Padding(
-                            padding: const EdgeInsets.only(left:20.0, right: 150),
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 150),
                             child: DropdownButton<Datum>(
                                 value: _selectedTest,
                                 hint: Text(""),
                                 //underline: SizedBox(),
                                 isExpanded: true,
                                 items: data
-                                    .map((Datum data) => DropdownMenuItem<Datum>(
-                                          child: Text("${data.testName}"),
-                                          value: data,
-                                        ))
+                                    .map(
+                                        (Datum data) => DropdownMenuItem<Datum>(
+                                              child: Text("${data.testName}"),
+                                              value: data,
+                                            ))
                                     .toList()
                                     .cast<DropdownMenuItem<Datum>>(),
                                 onChanged: (value) {
-                                  print("This is the TestName : ${value!.testName}");
-                                  print("This is the EncTestId which is need to get Test Fee : ${value.testId}");
+                                  print(
+                                      "This is the TestName : ${value!.testName}");
+                                  print(
+                                      "This is the EncTestId which is need to get Test Fee : ${value.testId}");
                                   setState(() {
                                     // actualFee= value.testFee;
                                     // actualDiscountFee= value.discountedFee;
                                     // actualBookingFee= value.bookingFee;
-                                    encTestId = value.testId; // == SELCTED TEST from drop down 'encTestId' needed for to get Test Fee
-                                     testName = value.testName;
+                                    encTestId = value
+                                        .testId; // == SELCTED TEST from drop down 'encTestId' needed for to get Test Fee
+                                    testName = value.testName;
                                     _selectedTest = value;
                                   });
                                   //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
@@ -694,26 +655,24 @@ void getCred() async{
                     ),
                   ),
                 ),
-                SizedBox(height: 50,),
+                SizedBox(
+                  height: 50,
+                ),
 
                 // Container(
                 //   color: Colors.blueGrey,
                 //   child: Text(actualFee, style: TextStyle(fontSize: 20, color: Colors.black),)),
-        
+
                 ShowUp(
-                   delay: delayAmount+900,
+                  delay: delayAmount + 900,
                   child: OutlinedButton(
-                    onPressed: (){
-                      setState(() {
-                      });
-                          GetTestFee();
-                    }, 
-                    child:Text("Add")),
+                      onPressed: () {
+                        setState(() {});
+                        GetTestFee();
+                      },
+                      child: Text("Add")),
                 ),
-        
-               
-          
-               
+
                 // SingleChildScrollView(
                 //   scrollDirection: Axis.horizontal,
                 //   child: DataTable(
@@ -740,11 +699,11 @@ void getCred() async{
                 //    ]
                 //    ),
                 // ),
-        
+
                 ShowUp(
-                  delay: delayAmount+1000,
+                  delay: delayAmount + 1000,
                   child: DataTable(
-                     columnSpacing: 13.0,
+                      columnSpacing: 13.0,
                       columns: <DataColumn>[
                         //DataColumn(label: Text("encPartnerId")),
                         //DataColumn(label: Text("encTestId")),
@@ -753,43 +712,32 @@ void getCred() async{
                         DataColumn(label: Text("Discounted Fee")),
                         DataColumn(label: Text("Booking Fee")),
                       ],
-                      
-                       rows:reponseArray.map((testRowData){
-                        return DataRow(
-                          cells: [
-                            DataCell(Text(testName)),
-                            DataCell(Text (testRowData.fee!.toString() )),
-                            DataCell(Text(testRowData.discountedFee !.toString() )),
-                            DataCell(Text(testRowData.bookingFee!.toString()  ))
-                          ]
-                        );
-                      }).toList()
-                  ),
+                      rows: reponseArray.map((testRowData) {
+                        return DataRow(cells: [
+                          DataCell(Text(testName)),
+                          DataCell(Text(testRowData.fee!.toString())),
+                          DataCell(Text(testRowData.discountedFee!.toString())),
+                          DataCell(Text(testRowData.bookingFee!.toString()))
+                        ]);
+                      }).toList()),
                 ),
 
-
-
                 ShowUp(
-                  delay: delayAmount+ 1050,
+                  delay: delayAmount + 1050,
                   child: ListTile(
-                    title: Text("Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}" ),
+                    title: Text(
+                        "Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}"),
                   ),
                 ),
 
-
-
-
-
-
                 ShowUp(
-                  delay: delayAmount+ 1100,
-                  child: OutlinedButton(onPressed: (){
-                    SaveMultipleTestBooking();
-                  },
-                   child: Text("Save Mutiple bookking")),
+                  delay: delayAmount + 1100,
+                  child: OutlinedButton(
+                      onPressed: () {
+                        SaveMultipleTestBooking();
+                      },
+                      child: Text("Save Mutiple bookking")),
                 )
-   
-        
               ],
             ),
           ),
@@ -798,33 +746,31 @@ void getCred() async{
     );
   }
 
-
-
-
-
-
 //============================================================================All Lab list API=============================================================================================
   Future<List<Partner>> allPathLab() async {
-      var jsonResponse;
-      var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllPathLab"),
-          body: ({  }));
-      if (response.statusCode == 200) {
-        print("Correct");
-        jsonResponse = json.decode(response.body.toString());
-        print(jsonResponse);
+    var jsonResponse;
+    var response = await http.post(
+        Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllPathLab"),
+        body: ({}));
+    if (response.statusCode == 200) {
+      print("Correct");
+      jsonResponse = json.decode(response.body.toString());
+      print(jsonResponse);
 
-        AllPathLabTestModel dataModel = allPathLabTestModelFromJson(response.body);
-        print(dataModel.partner.length);
-        for (final item in dataModel.partner) {
+      AllPathLabTestModel dataModel =
+          allPathLabTestModelFromJson(response.body);
+      print(dataModel.partner.length);
+      for (final item in dataModel.partner) {
         print("This are the hte LAB name :${item.partnerName}");
-        }
-
-        List<Partner> arrData = dataModel.partner; // this "partner" is actual json array of data[]
-        return arrData;
-      } else {
-        print("Wrong URL");
-        throw Exception("Faild to fetch");
       }
+
+      List<Partner> arrData =
+          dataModel.partner; // this "partner" is actual json array of data[]
+      return arrData;
+    } else {
+      print("Wrong URL");
+      throw Exception("Faild to fetch");
+    }
   }
 //============================================================== Dependent Test dropdown list Api =======================================================================================
 
@@ -832,10 +778,9 @@ void getCred() async{
     print("This is the LabId :$encLabId");
     print("This is the EncTestId :$encTestId");
     _selectedTest = null as Datum;
-    var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestByLab"),
-        body: ({
-          "EncId": encLabId
-          }));
+    var response = await http.post(
+        Uri.parse("http://medbo.digitalicon.in/api/medboapi/GetTestByLab"),
+        body: ({"EncId": encLabId}));
 
     if (response.statusCode == 200) {
       final dataModel = dataModelFromJson(response.body);
@@ -844,7 +789,6 @@ void getCred() async{
         print("This are hte test names :${item.testName}");
         print("This are hte test EncTestId :${item.encTestId}");
       }
-      
 
       List<Datum> arrData = dataModel.data;
       return arrData;
@@ -852,8 +796,9 @@ void getCred() async{
 
     return [];
   }
+
 //=====================================================================Get Test Fee Api===================================================================================================
-   Future<void> GetTestFee() async {
+  Future<void> GetTestFee() async {
     var jsonResponse;
     if (encTestId.isNotEmpty) {
       var response = await http.post(
@@ -861,42 +806,76 @@ void getCred() async{
           body: ({
             'EncPartnerId': encLabId,
             'EncTestId': encTestId,
-
           }));
       if (response.statusCode == 200) {
         print("Correct");
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
-        print(jsonResponse);
+        //print(jsonResponse);
 
+        getTestFeeObj = GetTestFeeMap.fromJson(jsonResponse);
+        // for (var i = 0; i < reponseArray.length; i++) {
+        //       //eNcTestIdInList=eNcTestIdInList.add(reponseArray[i].encTestId);
+        //       eNcTestIdInList+=(reponseArray[i].encTestId!);
 
-        getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
+        //       testFeeinLIST= (reponseArray[i].fee);
+        //       testDiscountFeeInLIST=(reponseArray[i].discountedFee)!;
+        //       testBookingFeeiNlIST=(reponseArray[i].bookingFee)!;
+        //       }
         setState(() {
-          reponseArray.add(getTestFeeObj!); // Adding data to my Arraylist
-          feeSum=0;
-          discountSum=0;
-          bookingSum=0;
+          reponseArray.add(
+              getTestFeeObj!); // Adding data to my Arraylist 'reponseArray'
+          feeSum = 0;
+          discountSum = 0;
+          bookingSum = 0;
 
-          for(GetTestFeeMap elemInList in reponseArray){
-            
-                  feeSum += elemInList.fee! ;
-                  discountSum += elemInList.discountedFee! ; // Doing calculation here
-                  bookingSum += elemInList.bookingFee! ;
 
-                  eNcTestIdInList =elemInList.encTestId!;
-                  testFeeinLIST= elemInList.fee!;
-                  testDiscountFeeInLIST = elemInList.discountedFee!;
-                  testBookingFeeiNlIST = elemInList.bookingFee!;
+          eNcTestIdInList = '';
+          testFeeinLIST='';
+          testDiscountFeeInLIST='';
+          testBookingFeeiNlIST='';
+
+
+          for (var i = 0; i < reponseArray.length; i++) {
+            //eNcTestIdInList=eNcTestIdInList.add(reponseArray[i].encTestId);
+            eNcTestIdInList += (reponseArray[i].encTestId!);
+            if (i < reponseArray.length - 1) eNcTestIdInList += ",";
+  //===================================================================================
+
+            testFeeinLIST += (reponseArray[i].fee!).toString();
+              if (i < reponseArray.length - 1) testFeeinLIST += ",";
+   //===================================================================================
+
+
+            testDiscountFeeInLIST += (reponseArray[i].discountedFee).toString();
+              if (i < reponseArray.length - 1) testDiscountFeeInLIST += ",";
+   //===================================================================================
+
+
+            testBookingFeeiNlIST = (reponseArray[i].bookingFee).toString();
+               if (i < reponseArray.length - 1) testBookingFeeiNlIST += ",";
+          }
+          print(testFeeinLIST);
+
+          for (GetTestFeeMap elemInList in reponseArray) {
+            feeSum += elemInList.fee!;
+            discountSum += elemInList.discountedFee!; // Doing calculation here
+            bookingSum += elemInList.bookingFee!;
+
+            // eNcTestIdInList =elemInList.encTestId!;
+            // testFeeinLIST= elemInList.fee!;
+            // testDiscountFeeInLIST = elemInList.discountedFee!;
+            // testBookingFeeiNlIST = elemInList.bookingFee!;
 //===============================================================================================================
-                  print("Storing Test Id in list:  ${elemInList.encTestId}"); //Test id stroring in list after hiting ADD button 
+            print(
+                "Storing Test Id in list:  ${elemInList.encTestId}"); //Test id stroring in list after hiting ADD button
 //===============================================================================================================
 
-                }
-                print(feeSum);
-                print(discountSum);
-                print(bookingSum);
+          }
+          print(feeSum);
+          print(discountSum);
+          print(bookingSum);
         });
-
       } else {
         throw Exception("Faild to fetch");
       }
@@ -909,43 +888,29 @@ void getCred() async{
 
 //================================================================== SaveMultipleTestBooking =============================================================================================
 
-
   Future<void> SaveMultipleTestBooking() async {
     var jsonResponse;
     if (encTestId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveMultipleTestBooking"),
+          Uri.parse(
+              "http://medbo.digitalicon.in/api/medboapi/SaveMultipleTestBooking"),
           body: ({
-            'EncPartnerId':encLabId,
-            'EncDoctorId': eNcTestIdInList,  // .toString(), 
+            'EncPartnerId': encLabId,
+            'EncDoctorId': eNcTestIdInList .toString(),
             'VisitDate': _selectedDate,
-            // 'Fee': getTestFeeObj!.fee.toString(),
-            // 'DiscountedFee': getTestFeeObj!.discountedFee,
-            // 'BookingFee': getTestFeeObj!.bookingFee.toString(),
-            //================================
-            // 'TotalFee': feeSum .toString(),
-            // 'TotalDiscountedFee' : discountSum .toString(),
-            // 'TotalBookingFee' : bookingSum .toString(),
-            'EncUserId' : EncUserId,
-            
-            // "EncDoctorId": "I3uXyzcuDZf21SSe5fHnSQ==,7Ch2aVnhokZtRWyJtuDA/A==",   //test id
-            // "EncPartnerId": "0aruO0FbYOu5IerRBxdT8w==",
-            // "EncUserId": "bbA/HajfPdswT0fhhiMvEg==",
-            // "VisitDate": "09/12/2021",
-            "Fee": testFeeinLIST.toString(),
-            "DiscountedFee" : testDiscountFeeInLIST.toString(),
-            "BookingFee" :  testBookingFeeiNlIST.toString(),
-            "TotalFee" :feeSum.toString(),
+            'EncUserId': EncUserId,
+
+            // "Fee": testFeeinLIST.toString(),
+            // "DiscountedFee": testDiscountFeeInLIST.toString(),
+            // "BookingFee": testBookingFeeiNlIST.toString(),
+            "TotalFee": feeSum.toString(),
             "TotalDiscountedFee": discountSum.toString(),
-            "TotalBookingFee" : bookingSum.toString(),
+            "TotalBookingFee": bookingSum.toString(),
 
 
-            //  "Fee": "500",
-            // "DiscountedFee" : "450",
-            // "BookingFee" :  "200",
-            // "TotalFee" :"0",
-            // "TotalDiscountedFee": "0",
-            // "TotalBookingFee" : "0"
+             "Fee": "500,300",
+            "DiscountedFee" : "450,200",
+            "BookingFee" :  "200,150",
           }));
       if (response.statusCode == 200) {
         print("Correct");
@@ -954,14 +919,12 @@ void getCred() async{
         print(jsonResponse);
         //Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Please select from available dates")));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Please select from available dates")));
         throw Exception("Faild to fetch");
       }
     } else {
       throw Exception("Faild to fetch");
     }
   }
-
 }
-
