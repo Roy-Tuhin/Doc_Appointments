@@ -330,8 +330,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbo/Animation/showupAnimation.dart';
+import 'package:medbo/Booking/DieticianAfterDateSelect/DieticianAfterDateSelectPage.dart';
 import 'package:medbo/Booking/PathologicalMultipleBooking/testModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../DieticianEncBookingIdModel.dart';
 import 'AllPathLabTestModel.dart';
 import 'GetTestFeeModel.dart';
 
@@ -638,11 +640,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                                   print(
                                       "This is the EncTestId which is need to get Test Fee : ${value.testId}");
                                   setState(() {
-                                    // actualFee= value.testFee;
-                                    // actualDiscountFee= value.discountedFee;
-                                    // actualBookingFee= value.bookingFee;
-                                    encTestId = value
-                                        .testId; // == SELCTED TEST from drop down 'encTestId' needed for to get Test Fee
+                                    encTestId = value.testId; // == SELCTED TEST from drop down 'encTestId' needed for to get Test Fee
                                     testName = value.testName;
                                     _selectedTest = value;
                                   });
@@ -707,14 +705,14 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                       columns: <DataColumn>[
                         //DataColumn(label: Text("encPartnerId")),
                         //DataColumn(label: Text("encTestId")),
-                        DataColumn(label: Text("TestName")),
+                        // DataColumn(label: Text("TestName")),
                         DataColumn(label: Text("Fee")),
                         DataColumn(label: Text("Discounted Fee")),
                         DataColumn(label: Text("Booking Fee")),
                       ],
                       rows: reponseArray.map((testRowData) {
                         return DataRow(cells: [
-                          DataCell(Text(testName)),
+                          // DataCell(Text(testName)),
                           DataCell(Text(testRowData.fee!.toString())),
                           DataCell(Text(testRowData.discountedFee!.toString())),
                           DataCell(Text(testRowData.bookingFee!.toString()))
@@ -722,21 +720,36 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                       }).toList()),
                 ),
 
+                SizedBox(height: 30,),
+
                 ShowUp(
                   delay: delayAmount + 1050,
-                  child: ListTile(
-                    title: Text(
-                        "Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}"),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left:80.0),
+                    child: ListTile(
+                      title: Text(
+                          "Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}", style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: blockSizeHorizontal * 3.5,
+                                    fontFamily: 'Poppins',
+                                    color: Colors.green.shade200,
+                                  ),),
+                    ),
                   ),
                 ),
 
+                SizedBox(height: 30,),
+
                 ShowUp(
                   delay: delayAmount + 1100,
-                  child: OutlinedButton(
-                      onPressed: () {
-                        SaveMultipleTestBooking();
-                      },
-                      child: Text("Save Mutiple bookking")),
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: OutlinedButton(
+                        onPressed: () {
+                          SaveMultipleTestBooking();
+                        },
+                        child: Text("Save Mutiple bookking")),
+                  ),
                 )
               ],
             ),
@@ -848,6 +861,8 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                       if (i < reponseArray.length - 1) testBookingFeeiNlIST += ",";
                   }
 
+                  print(testBookingFeeiNlIST);
+
           for (GetTestFeeMap elemInList in reponseArray) {
             feeSum += elemInList.fee!;
             discountSum += elemInList.discountedFee!; // Doing calculation here
@@ -897,7 +912,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
-        //Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Please select from available dates")));
