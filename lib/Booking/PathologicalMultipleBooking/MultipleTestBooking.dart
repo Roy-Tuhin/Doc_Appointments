@@ -500,7 +500,7 @@ void getCred() async{
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ShowUp(
-                     delay: delayAmount+400,
+                     delay: delayAmount,
                     child: ListTile(
                       title: Text("Booking Information",
                           style: TextStyle(
@@ -577,7 +577,7 @@ void getCred() async{
                 ),
         
                 ShowUp(
-                  delay: delayAmount+400,
+                  delay: 0,
                   child: Container(
                     child: FutureBuilder<List<Partner>>(
                       future: getAllPathLabResults as Future<List<Partner>>,
@@ -640,7 +640,7 @@ void getCred() async{
                 ),
         
                 ShowUp(
-                  delay: delayAmount+800,
+                  delay: 0,
                   child: Container(
                     child: FutureBuilder<List<Datum>>(
                       future: getTestByLabResult as Future<List<Datum>>,
@@ -700,7 +700,6 @@ void getCred() async{
                   child: OutlinedButton(
                     onPressed: (){
                       setState(() {
-                         //GetTestFee();
                       });
                           GetTestFee();
                     }, 
@@ -765,31 +764,25 @@ void getCred() async{
 
 
 
-                ListTile(
-                  title: Text("Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}" ),
-                ),
-
-
-
                 ShowUp(
                   delay: delayAmount+ 1050,
-                  child: Container(
-                    child: 
-                    Row(
-                      children: [
-                        Text("Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}" ),
-                        //  Text(discountSum ),
-                        //   Text(bookingSum ),
-                      ],
-                    ),
+                  child: ListTile(
+                    title: Text("Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}" ),
                   ),
                 ),
 
 
-                OutlinedButton(onPressed: (){
-                  SaveMultipleTestBooking();
-                },
-                 child: Text("Save Mutiple bookking"))
+
+
+
+
+                ShowUp(
+                  delay: delayAmount+ 1100,
+                  child: OutlinedButton(onPressed: (){
+                    SaveMultipleTestBooking();
+                  },
+                   child: Text("Save Mutiple bookking")),
+                )
    
         
               ],
@@ -883,7 +876,7 @@ void getCred() async{
                   discountSum += elem.discountedFee! ; // Doing calculation here
                   bookingSum += elem.bookingFee! ;
 //===============================================================================================================
-                  print(elem.encTestId); //Test id stroring in list after hiting ADD button 
+                  print("Storing Test Id in list:  ${elem.encTestId}"); //Test id stroring in list after hiting ADD button 
 //===============================================================================================================
 
                 }
@@ -914,14 +907,25 @@ void getCred() async{
             'EncPartnerId':encLabId,
             'EncDoctorId': encTestId,
             'VisitDate': _selectedDate,
-            // 'Fee': actualFee,
-            // 'DiscountedFee': actualDiscountFee,
-            // 'BookingFee': actualBookingFee,
+            // 'Fee': getTestFeeObj!.fee.toString(),
+            // 'DiscountedFee': getTestFeeObj!.discountedFee,
+            // 'BookingFee': getTestFeeObj!.bookingFee.toString(),
             //================================
-            'TotalFee': feeSum as String,
-            'TotalDiscountedFee' : discountSum as String,
-            'TotalBookingFee' : bookingSum as String,
+            // 'TotalFee': feeSum .toString(),
+            // 'TotalDiscountedFee' : discountSum .toString(),
+            // 'TotalBookingFee' : bookingSum .toString(),
             'EncUserId' : EncUserId,
+            
+            // "EncDoctorId": "I3uXyzcuDZf21SSe5fHnSQ==,7Ch2aVnhokZtRWyJtuDA/A==",   //test id
+            // "EncPartnerId": "0aruO0FbYOu5IerRBxdT8w==",
+            // "EncUserId": "bbA/HajfPdswT0fhhiMvEg==",
+            // "VisitDate": "09/12/2021",
+            // "Fee": "500,300",
+            // "DiscountedFee" : "450,200",
+            // "BookingFee" :  "200,150",
+            // "TotalFee" :"800",
+            // "TotalDiscountedFee": "650",
+            // "TotalBookingFee" : "350"
           }));
       if (response.statusCode == 200) {
         print("Correct");
