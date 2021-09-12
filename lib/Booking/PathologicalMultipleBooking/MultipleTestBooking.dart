@@ -457,6 +457,11 @@ void getCred() async{
   int discountSum =0;
   int bookingSum =0 ;
 
+  String eNcTestIdInList='';
+  int? testFeeinLIST;
+  int? testDiscountFeeInLIST;
+  int? testBookingFeeiNlIST;
+
   // String actualFee ='';
   // String actualDiscountFee='';
   // String actualBookingFee='';
@@ -863,6 +868,8 @@ void getCred() async{
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
+
+
         getTestFeeObj=GetTestFeeMap.fromJson(jsonResponse);
         setState(() {
           reponseArray.add(getTestFeeObj!); // Adding data to my Arraylist
@@ -870,13 +877,18 @@ void getCred() async{
           discountSum=0;
           bookingSum=0;
 
-          for(GetTestFeeMap elem in reponseArray){
+          for(GetTestFeeMap elemInList in reponseArray){
             
-                  feeSum += elem.fee! ;
-                  discountSum += elem.discountedFee! ; // Doing calculation here
-                  bookingSum += elem.bookingFee! ;
+                  feeSum += elemInList.fee! ;
+                  discountSum += elemInList.discountedFee! ; // Doing calculation here
+                  bookingSum += elemInList.bookingFee! ;
+
+                  eNcTestIdInList =elemInList.encTestId!;
+                  testFeeinLIST= elemInList.fee!;
+                  testDiscountFeeInLIST = elemInList.discountedFee!;
+                  testBookingFeeiNlIST = elemInList.bookingFee!;
 //===============================================================================================================
-                  print("Storing Test Id in list:  ${elem.encTestId}"); //Test id stroring in list after hiting ADD button 
+                  print("Storing Test Id in list:  ${elemInList.encTestId}"); //Test id stroring in list after hiting ADD button 
 //===============================================================================================================
 
                 }
@@ -905,7 +917,7 @@ void getCred() async{
           Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveMultipleTestBooking"),
           body: ({
             'EncPartnerId':encLabId,
-            'EncDoctorId': encTestId,
+            'EncDoctorId': eNcTestIdInList,  // .toString(), 
             'VisitDate': _selectedDate,
             // 'Fee': getTestFeeObj!.fee.toString(),
             // 'DiscountedFee': getTestFeeObj!.discountedFee,
@@ -920,12 +932,20 @@ void getCred() async{
             // "EncPartnerId": "0aruO0FbYOu5IerRBxdT8w==",
             // "EncUserId": "bbA/HajfPdswT0fhhiMvEg==",
             // "VisitDate": "09/12/2021",
-            // "Fee": "500,300",
-            // "DiscountedFee" : "450,200",
-            // "BookingFee" :  "200,150",
-            // "TotalFee" :"800",
-            // "TotalDiscountedFee": "650",
-            // "TotalBookingFee" : "350"
+            "Fee": testFeeinLIST.toString(),
+            "DiscountedFee" : testDiscountFeeInLIST.toString(),
+            "BookingFee" :  testBookingFeeiNlIST.toString(),
+            "TotalFee" :feeSum.toString(),
+            "TotalDiscountedFee": discountSum.toString(),
+            "TotalBookingFee" : bookingSum.toString(),
+
+
+            //  "Fee": "500",
+            // "DiscountedFee" : "450",
+            // "BookingFee" :  "200",
+            // "TotalFee" :"0",
+            // "TotalDiscountedFee": "0",
+            // "TotalBookingFee" : "0"
           }));
       if (response.statusCode == 200) {
         print("Correct");
