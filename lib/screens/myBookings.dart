@@ -45,11 +45,15 @@ class _MyBookingsState extends State<MyBookings> {
             future: UserBookingRecordAPI(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                return Center(heightFactor: 90,
-                  child: CircularProgressIndicator());
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(58.0),
+                    child: Container(
+                      child: CircularProgressIndicator()),
+                  ));
               }
               if (snapshot.hasError) {
-                return Text("Somthing went wrong");
+                return Text("No Booking data found / Somthing went wrong");
               }
       
               if(snapshot.hasData){
@@ -61,6 +65,24 @@ class _MyBookingsState extends State<MyBookings> {
                                   itemBuilder: (BuildContext context, int index) {
       
                                     return Container(
+                                      margin: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            // color: Color(0xFF3E64FF),
+                            color: Colors.lightBlue[50],
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            boxShadow: [
+                              BoxShadow(
+                                //color: Color(0xFF3E64FF).withOpacity(0.3),
+                                color: Colors.grey.withOpacity(0.9),
+                                offset: const Offset(
+                                  0.0,
+                                  5.0,
+                                ),
+                                blurRadius: 3.0,
+                                spreadRadius: 0.5,
+                              ),
+                            ]),
                                       child: Column(
                                         children: [
                                           ListTile(

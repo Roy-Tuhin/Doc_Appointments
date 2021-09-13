@@ -1,22 +1,27 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:medbo/BookingList/MyTestRequestModel.dart';
 import 'package:medbo/BookingList/UserBookingRecordModel.dart';
+import 'package:medbo/models/DieticianModel/My_TestRequest_Model/TestRequestDetailsModel.dart';
 import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'myTestReqDetailsPage.dart';
-
-class MyTestRquestPage extends StatefulWidget {
-  const MyTestRquestPage({Key? key}) : super(key: key);
+class MyTestReqDetailsPage extends StatefulWidget {
+  //const MyTestReqDetailsPage(encBookingId, {Key? key}) : super(key: key);
+  var encBookingId;
+  MyTestReqDetailsPage(
+    this.encBookingId,
+  );
 
   @override
-  _MyTestRquestPageState createState() => _MyTestRquestPageState();
+  _MyTestReqDetailsPageState createState() =>
+      _MyTestReqDetailsPageState(this.encBookingId);
 }
 
-class _MyTestRquestPageState extends State<MyTestRquestPage> {
+class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
+  var encBookingIdRef;
+  _MyTestReqDetailsPageState(this.encBookingIdRef);
   //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
   String Name = "";
@@ -25,7 +30,7 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
   void initState() {
     super.initState();
     getCred();
-    MyTestRequestAPI();
+    TestRequestDetailsAPI();
   }
 
   void getCred() async {
@@ -41,34 +46,15 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topCenter,
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).accentColor
-              ],
-            ),
-          ),
-        ),
-        title: Text(
-          'My Test Request',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-          ),
-        ),
-      ),
       drawer: SideDrawer(),
       body: SingleChildScrollView(
         child: Container(
           child: FutureBuilder(
-            future: MyTestRequestAPI(),
+            future: TestRequestDetailsAPI(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                return CircularProgressIndicator();
+                return Center(
+                    heightFactor: 90, child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
                 return Text("Somthing went wrong");
@@ -105,20 +91,14 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
                             ListTile(
                               title: Text(
                                   "Booking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}"),
-                              trailing: ElevatedButton(
+                                   trailing: ElevatedButton(
                                 onPressed: () {
                                   //MyTestReqDetailsPage(snapshot.data[index].encBookingId);
-                                  Navigator.push(
-                                    context,
-                                    new MaterialPageRoute(
-                                        builder: (context) =>
-                                            new MyTestReqDetailsPage(snapshot.data[index].encBookingId)),
-                                  );
+                                  //Navigator.push(context, new MaterialPageRoute( builder: (context) => new MyTestReqDetailsPage(snapshot.data[index].encBookingId)), );
                                 },
-                                child: Text("Details"),
+                                child: Text("Accept"),
                               ),
-                              subtitle: Text(
-                                  "Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\n Paid Amount  : ${snapshot.data[index].paidAmt} "),
+                              subtitle: Text(" Booking Date : ${snapshot.data[index].bookingDate}\n Visit Date : ${snapshot.data[index].visitDate}\n TotalBookingFee  : ${snapshot.data[index].totalBookingFee}\n Paid Amount  : ${snapshot.data[index].paidAmt} "),
                             )
                             //Text(snapshot.data[index].visitDate),
                           ],
@@ -135,13 +115,14 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
     );
   }
 
-  Future<List<TestRequest>> MyTestRequestAPI() async {
+  Future<List<TRequestDetails>> TestRequestDetailsAPI() async {
     var jsonResponse;
-    if (EncUserId.isNotEmpty) {
+    if (encBookingIdRef.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/MyTestRequest"),
+          Uri.parse(
+              "http://medbo.digitalicon.in/api/medboapi/TestRequestDetail"),
           body: ({
-            "EncId": EncUserId,
+            "EncId": encBookingIdRef,
           }));
       if (response.statusCode == 200) {
         print("Correct");
@@ -150,12 +131,12 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
         print(jsonResponse);
         //Navigator.push(context, MaterialPageRoute(builder: (context)=>ConfirmPaymentPage(rresponse: DocVisitDaysModel.fromJson(jsonResponse))));
 
-        MyTestRequestModel dataModel =
-            myTestRequestModelFromJson(response.body);
+        TestRequestDetailsModel dataModel =
+            testRequestDetailsModelFromJson(response.body);
         print(dataModel.data.length);
         for (final item in dataModel.data) print(item.patientName);
 
-        List<TestRequest> arrData =
+        List<TRequestDetails> arrData =
             dataModel.data; // this data is actuall json array of data[]
         //print(arrData[1].visitDate);
         return arrData;
