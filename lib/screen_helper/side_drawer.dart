@@ -4,60 +4,44 @@ import 'package:flutter_session/flutter_session.dart';
 // import 'package:medbo/screens/home.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:medbo/API/Login/ApiResponse.dart';
+import 'package:medbo/screens/myBookings.dart';
+import 'package:medbo/screens/myTestRequestPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medbo/login_n_registration/login.dart';
 
-
-
 class SideDrawer extends StatefulWidget {
-  
   const SideDrawer({Key? key}) : super(key: key);
-
-
 
   @override
   _SideDrawerState createState() => _SideDrawerState();
 }
 
 class _SideDrawerState extends State<SideDrawer> {
-
-
-
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
-String Name="";
+  String Name = "";
+  String EncUserId = "";
 
-void initState(){
-  super.initState();
-  getCred();
-}
+  void initState() {
+    super.initState();
+    getCred();
+  }
 
-void getCred() async{
-  //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF 
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  setState(() {
-    Name = pref.getString("userEmail");
-  });
-
-}
+  void getCred() async {
+    //HERE WE FETCH OUR CREDENTIALS FROM SHARED PREF
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      Name = pref.getString("userEmail");
+      EncUserId = pref.getString("encId");
+    });
+  }
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
-
-
-
-
-
-
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Drawer(//==================================================Drawer
+      child: Drawer(
+        //==================================================Drawer
         // child: Text('drawer'),
         child: SingleChildScrollView(
           child: Column(
@@ -66,13 +50,13 @@ void getCred() async{
                 padding: EdgeInsets.all(20),
                 // color: Theme.of(context).primaryColor,
                 decoration: BoxDecoration(
-                  gradient:LinearGradient(
+                  gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.center,
                     colors: [
                       Theme.of(context).primaryColor,
                       Theme.of(context).accentColor
-                    ] ,
+                    ],
                   ),
                 ),
                 child: Center(
@@ -88,15 +72,15 @@ void getCred() async{
                       Container(
                         width: 100,
                         height: 100,
-        
                         margin: EdgeInsets.only(top: 30),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                            image: AssetImage("assets/images/medbo-doctors.png"),
+                            image:
+                                AssetImage("assets/images/medbo-doctors.png"),
                             fit: BoxFit.contain,
                           ),
-                          border: Border.all(color: Colors.white,width: 4),
+                          border: Border.all(color: Colors.white, width: 4),
                         ),
                       ),
                       Column(
@@ -104,24 +88,21 @@ void getCred() async{
                         children: [
                           Text(
                             'Welcome',
-                            style: TextStyle(fontSize: 16, color: Colors.white,fontFamily: 'Poppins'),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontFamily: 'Poppins'),
                           ),
                           // Text(
                           //   'android.studio@android.com',
                           //   style: TextStyle(color: Colors.white),
                           // ),
-        
-        
-        
-        
-                         Text(
-                           " ${Name}",
-                            style: TextStyle(color: Colors.white,fontFamily: 'Poppins'),
-                           ),
-        
-        
-                    
-        
+
+                          Text(
+                            " ${Name}",
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: 'Poppins'),
+                          ),
                         ],
                       ),
                     ],
@@ -132,26 +113,32 @@ void getCred() async{
                 leading: Icon(Icons.home, color: Theme.of(context).accentColor),
                 title: Text(
                   'Home',
-                  style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold,),
-                ),
-                onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed('/');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.design_services,
-                    color: Theme.of(context).accentColor),
-                title: Text(
-                  'Services',
-                  style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold,),
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed('/services');
-                  
-                }
+                  Navigator.of(context).pushNamed('/');
+                },
               ),
+              ListTile(
+                  leading: Icon(Icons.design_services,
+                      color: Theme.of(context).accentColor),
+                  title: Text(
+                    'Services',
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/services');
+                  }),
               ListTile(
                 leading: Icon(
                   Icons.person,
@@ -159,7 +146,11 @@ void getCred() async{
                 ),
                 title: Text(
                   'About',
-                  style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold,),
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -183,13 +174,75 @@ void getCred() async{
                     Icon(Icons.settings, color: Theme.of(context).accentColor),
                 title: Text(
                   'Setting',
-                  style: TextStyle(color: Theme.of(context).accentColor,fontFamily: 'Poppins',fontWeight: FontWeight.bold,),
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed('/settings');
                 },
               ),
+
+
+
+
+
+              ListTile(
+                leading:
+                    Icon(Icons.book_online, color: Theme.of(context).accentColor),
+                title: Text(
+                  'My Bookings',
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  //Navigator.of(context).pushNamed('/myBookings');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                      builder: (context) => new MyBookings(),
+                    ),
+                  );
+                },
+              ),
+
+
+
+              ListTile(
+                leading:
+                    Icon(Icons.request_page_outlined,color: Theme.of(context).accentColor),
+                title: Text(
+                  'My Test Request',
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  //Navigator.of(context).pushNamed('/myBookings');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                      builder: (context) => new MyTestRquestPage(),
+                    ),
+                  );
+                },
+              ),
+
+
+
+
+
+
             ],
           ),
         ),

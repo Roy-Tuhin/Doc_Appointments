@@ -401,6 +401,10 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
   }
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
+
+bool absoreTap = false;
+bool enabled_Item= false;
+
   int delayAmount = 500;
 
   List<GetTestFeeMap> reponseArray =
@@ -550,31 +554,35 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                           return Padding(
                             padding:
                                 const EdgeInsets.only(left: 20.0, right: 150),
-                            child: DropdownButton<Partner>(
-                              value:
-                                  _selectedLab, //USER SELECTED DROPDOWN ITEM VALUE
-                              hint: Text("Select Lab"),
-                              //underline: SizedBox(),
-                              isExpanded: true,
-                              items: data
-                                  .map((Partner data) =>
-                                      DropdownMenuItem<Partner>(
-                                        child: Text("${data.partnerName}"),
-                                        value: data,
-                                      ))
-                                  .toList()
-                                  .cast<DropdownMenuItem<Partner>>(),
-                              onChanged: (val) {
-                                setState(() {
-                                  _selectedLab = val!;
-
-                                  encLabId = val
-                                      .encPartnerId; //===== Passing encLabId to my next API function
-                                  getTestByLabResult = getTestByLab();
-                                });
-                                //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
-                                // GetTestByLab();
-                              },
+                            child: AbsorbPointer(
+                               absorbing: absoreTap,
+                              child: DropdownButton<Partner>(
+                                value:
+                                    _selectedLab, //USER SELECTED DROPDOWN ITEM VALUE
+                                hint: Text("Select Lab"),
+                                //underline: SizedBox(),
+                                isExpanded: true,
+                                items: data
+                                    .map((Partner data) =>
+                                        DropdownMenuItem<Partner>(
+                                          child: Text("${data.partnerName}"),
+                                          value: data,
+                                        ))
+                                    .toList()
+                                    .cast<DropdownMenuItem<Partner>>(),
+                                onChanged: (val) {
+                                  setState(() {
+                                    _selectedLab = val!;
+                                    absoreTap = true; 
+                            
+                                    encLabId = val
+                                        .encPartnerId; //===== Passing encLabId to my next API function
+                                    getTestByLabResult = getTestByLab();
+                                  });
+                                  //GetTestByLab(value!.encPartnerId); // passing encid to my next API function
+                                  // GetTestByLab();
+                                },
+                              ),
                             ),
                           );
                         }
@@ -622,6 +630,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                             padding:
                                 const EdgeInsets.only(left: 20.0, right: 150),
                             child: DropdownButton<Datum>(
+                              //enabled= enabled_Item,
                                 value: _selectedTest,
                                 hint: Text(""),
                                 //underline: SizedBox(),
@@ -630,6 +639,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                                     .map(
                                         (Datum data) => DropdownMenuItem<Datum>(
                                               child: Text("${data.testName}"),
+                                             // enabled: data.testId != _selectedTest,
                                               value: data,
                                             ))
                                     .toList()
