@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:medbo/BookingList/UserBookingRecordModel.dart';
+import 'package:medbo/models/DieticianModel/My_TestRequest_Model/Accept_Proposal_Model.dart';
 import 'package:medbo/models/DieticianModel/My_TestRequest_Model/TestRequestDetailsModel.dart';
 import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'AcceptTest_ProposalPage.dart';
 
 class MyTestReqDetailsPage extends StatefulWidget {
   //const MyTestReqDetailsPage(encBookingId, {Key? key}) : super(key: key);
@@ -93,6 +96,7 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
                                   "Booking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}"),
                                    trailing: ElevatedButton(
                                 onPressed: () {
+                                  AcceptTestProposal();
                                   //MyTestReqDetailsPage(snapshot.data[index].encBookingId);
                                   //Navigator.push(context, new MaterialPageRoute( builder: (context) => new MyTestReqDetailsPage(snapshot.data[index].encBookingId)), );
                                 },
@@ -146,6 +150,40 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
       }
     } else {
       throw Exception("Faild to fetch?");
+    }
+  }
+
+  /////////////////////////////////////////After login Response//////////////////////
+  Future<void> AcceptTestProposal() async {
+    var jsonResponse;
+    if (encBookingIdRef.isNotEmpty) {
+      var response = await http.post(
+          Uri.parse("http://medbo.digitalicon.in/api/medboapi/AcceptTestProposal"),
+          body: ({
+            'EncId': encBookingIdRef,
+          }));
+      if (response.statusCode == 200) {
+        print("Correct");
+        print(response.body);
+        jsonResponse = json.decode(response.body.toString());
+        print(jsonResponse);
+         //Navigator.push(context, MaterialPageRoute(builder: (context)=>AcceptTestProposalPage(rresponse: AcceptProposalModel.fromJson(jsonResponse))));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(" ${jsonResponse['Message']}"),
+          backgroundColor: Color(0xFF00b3a4),
+        ));
+
+      } else {
+        print("Wronggooooooooooooooooooooooooooo");
+        print(response.body);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Invalid credentials")));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Blank field is not allowed"),
+        backgroundColor: Color(0xFFAF0404),
+      ));
     }
   }
 }
