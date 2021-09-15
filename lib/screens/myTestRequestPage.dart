@@ -68,10 +68,13 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
             future: MyTestRequestAPI(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                return CircularProgressIndicator();
+                return Center(child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Container(child: CircularProgressIndicator()),
+                ));
               }
               if (snapshot.hasError) {
-                return Text("Somthing went wrong");
+                return Text("No Booking found from this Account / Somthing went wrong");
               }
 
               if (snapshot.hasData) {

@@ -233,7 +233,7 @@ void getCred() async{
                         }
                       },
                       onSaved: (value) {
-                        if (value.isNotEmpty) {
+                        if (value!.isNotEmpty) {
                           _selectedDate = value;
                         }
                       },

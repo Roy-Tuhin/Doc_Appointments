@@ -509,7 +509,7 @@ bool enabled_Item= false;
                           }
                         },
                         onSaved: (value) {
-                          if (value.isNotEmpty) {
+                          if (value!.isNotEmpty) {
                             _selectedDate = value;
                           }
                         },

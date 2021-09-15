@@ -124,7 +124,7 @@ class _MyBookingsState extends State<MyBookings> {
       var response = await http.post(
           Uri.parse("http://medbo.digitalicon.in/api/medboapi/UserBookingRecord"),
           body: ({
-            "EncUserId": EncUserId,
+            "EncId": EncUserId,
           }));
       if (response.statusCode == 200) {
         print("Correct");
