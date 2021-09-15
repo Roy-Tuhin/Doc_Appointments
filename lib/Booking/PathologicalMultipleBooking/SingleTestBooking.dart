@@ -15,6 +15,7 @@ class PathologicalSingleTestBookingPage extends StatefulWidget {
 }
 
 class _PathologicalSingleTestBookingPageState extends State<PathologicalSingleTestBookingPage> {
+  final ImagePicker _picker = ImagePicker();
 
   late Future<File> imageFile;
 
@@ -164,7 +165,8 @@ class _PathologicalSingleTestBookingPageState extends State<PathologicalSingleTe
                  child: OutlinedButton(
                     child: Text("Choose File"),
                     onPressed: (){
-                      pickImageFromGallery(ImageSource.gallery);
+                      //pickImageFromGallery(ImageSource.gallery);
+                      filePicker() ;
                     },
                   ),
                ),
@@ -182,5 +184,17 @@ class _PathologicalSingleTestBookingPageState extends State<PathologicalSingleTe
       ),
       
     );
+  }
+
+
+
+
+
+
+
+
+
+  void  filePicker() async{
+   //final XFile? image = await _picker.getImage(source: ImageSource.gallery);
   }
 }
