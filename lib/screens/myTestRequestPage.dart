@@ -74,7 +74,7 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
                 ));
               }
               if (snapshot.hasError) {
-                return Text("No Booking found from this Account / Somthing went wrong");
+                return Text("No Booking found from this Account");
               }
 
               if (snapshot.hasData) {
@@ -121,7 +121,7 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
                                 child: Text("Details"),
                               ),
                               subtitle: Text(
-                                  "Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\n Paid Amount  : ${snapshot.data[index].paidAmt} "),
+                                  "Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt} "),
                             )
                             //Text(snapshot.data[index].visitDate),
                           ],

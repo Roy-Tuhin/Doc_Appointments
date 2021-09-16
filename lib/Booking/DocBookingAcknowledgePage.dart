@@ -129,7 +129,7 @@ void getCred() async{
                       ),
                       ListTile(
                         title: Text(
-                          "Doc Name: ${widget.rresponse.doctorName}\n Patient Name: $Name",
+                          "Doc Name: ${widget.rresponse.doctorName}\nPatient Name: $Name",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: blockSizeHorizontal * 5,

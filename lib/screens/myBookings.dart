@@ -53,7 +53,7 @@ class _MyBookingsState extends State<MyBookings> {
                   ));
               }
               if (snapshot.hasError) {
-                return Text("No Booking data found / Somthing went wrong");
+                return Text("No Booking data found");
               }
       
               if(snapshot.hasData){

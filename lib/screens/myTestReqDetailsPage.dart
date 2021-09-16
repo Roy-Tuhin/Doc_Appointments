@@ -102,7 +102,7 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
                                 },
                                 child: Text("Accept"),
                               ),
-                              subtitle: Text(" Booking Date : ${snapshot.data[index].bookingDate}\n Visit Date : ${snapshot.data[index].visitDate}\n TotalBookingFee  : ${snapshot.data[index].totalBookingFee}\n Paid Amount  : ${snapshot.data[index].paidAmt} "),
+                              subtitle: Text("Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt} "),
                             )
                             //Text(snapshot.data[index].visitDate),
                           ],

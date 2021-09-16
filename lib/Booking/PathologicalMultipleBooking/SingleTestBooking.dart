@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-// import 'package:file_picker/file_picker.dart';
+ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -11,6 +11,13 @@ import 'package:medbo/Booking/DieticianAfterDateSelect/DieticianAfterDateSelectP
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../DieticianEncBookingIdModel.dart';
+
+import 'package:path/path.dart' as Path;
+import 'package:async/async.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
+import 'package:http_parser/http_parser.dart'; 
 
 class PathologicalSingleTestBookingPage extends StatefulWidget {
   PathologicalSingleTestBookingPage() : super();
@@ -24,6 +31,8 @@ class _PathologicalSingleTestBookingPageState
     extends State<PathologicalSingleTestBookingPage> {
   final ImagePicker _picker = ImagePicker();
   File? image;
+
+   var testTextController = TextEditingController();
 
   //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
@@ -165,7 +174,123 @@ void initState(){
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: [ 
+                                          ListTile(
+                        title: Text(
+                      "Required Tests",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: blockSizeHorizontal * 5,
+                        fontFamily: 'Poppins',
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 13, right: 13),
+                      child: TextFormField(
+                        controller: testTextController,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Poppins',
+                        ),
+                        //controller: searchController,
+                        onChanged: (text) {
+                          setState(
+                            () {
+                              // textLength = text.length;
+                            },
+                          );
+                        },
+
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black12),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20),
+                            ),
+                          ),
+
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors
+                                    .black12 //greenAccent//Color(0xFF425c5a),
+                                ),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20),
+                            ),
+                          ),
+
+                          errorBorder: OutlineInputBorder(
+                            //  borderSide: BorderSide(color: Colors.red[100]),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20),
+                            ),
+                          ),
+
+                          // suffixIcon: IconButton(
+                          // icon: Icon(Icons.search, color: Colors.white,size: 34,),
+                          // onPressed: (){
+                          //   //searchByUser();
+                          //   },//=============================================================
+                          // ),
+
+                          // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
+                          //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
+
+                          labelText: 'Test Name',
+                          labelStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Colors.blueGrey, //Color(0xFF425c5a),
+                            fontWeight: FontWeight.normal,
+                            letterSpacing: 2.0,
+                            fontSize: 11.0,
+                          ),
+                          //hintText: 'Ex : Dental or Sugar Check up etc',
+                          hintStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Colors.white38, //Color(0xFF425c5a),
+                            fontWeight: FontWeight.normal,
+                            letterSpacing: 2.0,
+                            fontSize: 9.0,
+                          ),
+                          //filled: true,
+                          //fillColor: Colors.grey[200],
+                          prefixIcon: Icon(
+                            Icons.face,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+
+                        //keyboardType: TextInputType.number,
+                        // inputFormatters: [
+                        //   //only numeric keyboard.
+                        //  // LengthLimitingTextInputFormatter(6), //only 6 digit
+                        //  // WhitelistingTextInputFormatter.digitsOnly,
+                        // ],
+
+                        // validator: (String value) {
+                        //   if (value.length < 6) {
+                        //     return 'Enter your vaild 6 digit User ID';
+                        //   }
+                        //   return null;
+                        // },                                                                              // Active button validation
+                      ),
+                    ),
+
+
+
+
+
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
@@ -191,14 +316,24 @@ void initState(){
                       SizedBox(
                         height: 20,
                       ),
-                      image == null? Text("No image  found"): Image.file(File(image!.path),width: 150,fit: BoxFit.cover,),
+                      Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: image == null? Text("No file chosen"): Image.file(File(image!.path),width: 150,fit: BoxFit.cover,),
+                      ),
 
-                                       ElevatedButton(
+                     Center(
+                       child: ElevatedButton(
                    onPressed: (){
-                     SaveCustomTestBooking();
+                       SaveCustomTestBooking();
+                 },
 
-                 }, 
-                 child: Text("Save")),
+                   style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Color(0xFF79a0be)),
+                                 padding: MaterialStateProperty.all(EdgeInsets.only(left:50,right: 50)),
+                          ), 
+                 child: Text("Next")),
+                     ),
                     ],
                   ),
                 ),
@@ -219,6 +354,7 @@ void initState(){
   }
 
   //=================================================================================================
+  // http.MultipartRequest('POST', Uri.parse(url));
 
   Future<void> SaveCustomTestBooking() async {
     var jsonResponse;
@@ -229,7 +365,8 @@ void initState(){
           body: ({
             'VisitDate': _selectedDate,
             'EncUserId': EncUserId,
-            'UserFile':  image != null ? 'data:image/png;base64,' + base64Encode(image!.readAsBytesSync()) : '',
+            //'UserFile':  image != null ? 'data:image/png;base64,' + base64Encode(image!.readAsBytesSync()) : '',
+            'Description':testTextController.text
           }));
       if (response.statusCode == 200) {
         print("Correct");
@@ -237,13 +374,70 @@ void initState(){
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
         Navigator.push(context, MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage(rresponse:DieticianEncBookingIdModel.fromJson(jsonResponse),)));
-      } else {
+       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Somthing went wrong")));
         throw Exception("Faild to fetch");
+
       }
-    } else {
-      throw Exception("Check Your body parameter");
     }
   }
 }
+
+
+
+
+
+
+//  Future<void> SaveCustomTestBooking() async {
+
+//     var stream = new http.ByteStream(new http.ByteStream(image!.openRead()));
+//       var length = await image!.length();
+
+
+//     var jsonResponse;
+//     if (EncUserId.isNotEmpty) {
+//        var postUri = Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking");
+//       var request  = http.MultipartRequest('POST',postUri);
+//       request .fields['VisitDate'] = _selectedDate;
+//       request .fields['EncUserId'] = EncUserId;
+//       request.files.add(new http.MultipartFile.fromBytes('image', await File.fromUri(Uri.parse("<path/to/image>")).readAsBytes(), contentType: new MediaType('image', 'jpeg')));
+
+//        request.send().then((response){
+//          if (response.statusCode == 200) {
+
+//            print("Uploaded!");
+//             Navigator.push(context, MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage(rresponse:DieticianEncBookingIdModel.fromJson(jsonResponse),)));
+           
+//        } else {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//             SnackBar(content: Text("Somthing went wrong")));
+//         throw Exception("Faild to fetch");
+
+//        }
+//        }
+//      // var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking"),
+//           // body: ({
+//           //   'VisitDate':_selectedDate,
+//           //   'EncUserId':EncUserId,
+//           //   'UserFile':image!.readAsBytesSync().toString(),//!= null ? 'data:image/png;base64,' + base64Encode(image!.readAsBytesSync()) : ''
+//           // }));
+//       // if (response.statusCode == 200) {
+//       //   print("Correct");
+//       //   print(response.body);
+//       //   jsonResponse = json.decode(response.body.toString());
+//       //   print(jsonResponse);
+//       //   Navigator.push(context, MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage(rresponse:DieticianEncBookingIdModel.fromJson(jsonResponse),)));
+//       // } else {
+//       //   ScaffoldMessenger.of(context).showSnackBar(
+//       //       SnackBar(content: Text("Somthing went wrong")));
+//       //   throw Exception("Faild to fetch");
+//       // }
+//     // } else {
+//     //   throw Exception("Check Your body parameter");
+//     // }
+  
+
+//        );}
+//   }
+  
