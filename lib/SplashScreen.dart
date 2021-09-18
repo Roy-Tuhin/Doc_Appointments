@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'API/Login/loginAtFirst.dart';
 import 'main.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -70,6 +71,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   _onDoneLoading() async {
     Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => MyApp()));
+        .pushReplacement(MaterialPageRoute(builder: (context) => LoginAtFirst()));
   }
 }

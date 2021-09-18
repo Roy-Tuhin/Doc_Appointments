@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
       //  home: LoginAtFirst(),
       initialRoute: '/',
       routes: {
-         '/': (_) => LoginAtFirst(),
+        '/': (_) => SplashScreen(),
+         '/LoginAtFirst': (_) => LoginAtFirst(),
         '/Home2': (_) => Home2(),
         '/services': (_) => Services(),
         '/about': (_) => About(),

@@ -169,22 +169,6 @@ class _SideDrawerState extends State<SideDrawer> {
               //     Navigator.of(context).pushNamed('/blogs');
               //   },
               // ),
-              ListTile(
-                leading:
-                    Icon(Icons.settings, color: Theme.of(context).accentColor),
-                title: Text(
-                  'Setting',
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed('/settings');
-                },
-              ),
 
 
 
@@ -237,6 +221,27 @@ class _SideDrawerState extends State<SideDrawer> {
                   );
                 },
               ),
+
+
+
+
+                            ListTile(
+                leading:
+                    Icon(Icons.settings, color: Theme.of(context).accentColor),
+                title: Text(
+                  'Setting',
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/settings');
+                },
+              ),
+
 
 
 
