@@ -71,7 +71,7 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: Color(0XFFF3F1F5),
+            //backgroundColor: Color(0XFFF3F1F5),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -104,75 +104,87 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
         color: Color(0xFF02475E),),
       ),
       drawer: SideDrawer(),
-      body: SingleChildScrollView(
-        child: Container(
-          child: FutureBuilder(
-            future: TestRequestDetailsAPI(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                return Center(
-                    heightFactor: 90, child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Text("Somthing went wrong");
-              }
-
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                       margin: EdgeInsets.only(top:20, left: 5, right: 5, bottom: 5),
-                          padding: EdgeInsets.only(top:20, left: 5, right: 5,bottom: 20),
-                        decoration: BoxDecoration(
-                            // color: Color(0xFF3E64FF),
-                            //color: Colors.lightBlue[50],
-                            color: _colors[index % _colors.length],
-                            borderRadius: BorderRadius.all(Radius.circular(24)),
-                            boxShadow: [
-                              BoxShadow(
-                                //color: Color(0xFF3E64FF).withOpacity(0.3),
-                                color: Colors.grey.withOpacity(0.9),
-                                offset: const Offset(
-                                  0.0,
-                                  5.0,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            child: FutureBuilder(
+              future: TestRequestDetailsAPI(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Center(
+                      heightFactor: 90, child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Text("Somthing went wrong");
+                }
+      
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                         margin: EdgeInsets.only(top:20, left: 5, right: 5, bottom: 5),
+                            padding: EdgeInsets.only(top:20, left: 5, right: 5,bottom: 20),
+                          decoration: BoxDecoration(
+                              // color: Color(0xFF3E64FF),
+                              //color: Colors.lightBlue[50],
+                              color: _colors[index % _colors.length],
+                              borderRadius: BorderRadius.all(Radius.circular(24)),
+                              boxShadow: [
+                                BoxShadow(
+                                  //color: Color(0xFF3E64FF).withOpacity(0.3),
+                                  color: Colors.grey.withOpacity(0.9),
+                                  offset: const Offset(
+                                    0.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 3.0,
+                                  spreadRadius: 0.5,
                                 ),
-                                blurRadius: 3.0,
-                                spreadRadius: 0.5,
-                              ),
-                            ]),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              title: Text(
-                                  "Booking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}",style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w700, fontSize: 15),),
-                                   trailing: ElevatedButton(
-                                onPressed: () {
-                                  AcceptTestProposal();
-                                  //MyTestReqDetailsPage(snapshot.data[index].encBookingId);
-                                  //Navigator.push(context, new MaterialPageRoute( builder: (context) => new MyTestReqDetailsPage(snapshot.data[index].encBookingId)), );
-                                },
-                                child: Text("Accept"),
-                              ),
-                              subtitle: Text("Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt} ",
-                                style: TextStyle(
-                                                 color: Colors.white70,
-                                                fontFamily: 'Poppins',
-                                               ),
-                              ),
-                            )
-                            //Text(snapshot.data[index].visitDate),
-                          ],
-                        ),
-                      );
-                    });
-              }
-
-              return Text("Waiting for Internet Connection");
-            },
+                              ]),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Text(
+                                    "Requested Test : ${snapshot.data[index].extra5}\nBooking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}",style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w700, fontSize: 15),),
+                                     trailing: ElevatedButton(
+                                  onPressed: () {
+                                    AcceptTestProposal();
+                                    //MyTestReqDetailsPage(snapshot.data[index].encBookingId);
+                                    //Navigator.push(context, new MaterialPageRoute( builder: (context) => new MyTestReqDetailsPage(snapshot.data[index].encBookingId)), );
+                                  },
+                                  style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Color(0xFF79a0be)),
+                                          padding: MaterialStateProperty.all(
+                                              EdgeInsets.only(left: 5, right: 5)),
+                                        ),
+                                  child: Text("Accept",style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Poppins',
+                                        ),),
+                                ),
+                                subtitle: Text("Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt}\nAcceptStatus:  : ${snapshot.data[index].acceptStatus}\nAcceptDate:  : ${snapshot.data[index].acceptDate}  ",
+                                  style: TextStyle(
+                                                   color: Colors.white70,
+                                                  fontFamily: 'Poppins',
+                                                 ),
+                                ),
+                              )
+                              //Text(snapshot.data[index].visitDate),
+                            ],
+                          ),
+                        );
+                      });
+                }
+      
+                return Text("Waiting for Internet Connection");
+              },
+            ),
           ),
         ),
       ),

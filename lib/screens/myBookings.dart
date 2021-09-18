@@ -5,6 +5,7 @@ import 'package:medbo/Animation/showupAnimation.dart';
 import 'package:medbo/BookingList/UserBookingRecordModel.dart';
 import 'package:medbo/screen_helper/side_drawer.dart';
 import 'package:http/http.dart' as http;
+import 'package:medbo/screens2.dart/home2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyBookings extends StatefulWidget {
@@ -106,7 +107,49 @@ class _MyBookingsState extends State<MyBookings> {
                     ));
                 }
                 if (snapshot.hasError) {
-                  return Text("No Booking data found");
+                  return Container(
+                    child: Stack(
+                      children:[ Image.asset(
+                                "assets/images/14_No Search Results.png",
+                                fit: BoxFit.cover,
+                              ),
+
+                                 Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.15,
+            left: MediaQuery.of(context).size.width * 0.3,
+            right: MediaQuery.of(context).size.width * 0.3,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 13),
+                    blurRadius: 25,
+                    color: Color(0xFF5666C2).withOpacity(0.17),
+                  ),
+                ],
+              ),
+              child: FlatButton(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                onPressed: () {
+                  Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new Home2()),
+                                        );
+                },
+                child: Text(
+                  "Book".toUpperCase(),
+                ),
+              ),
+            ),
+          )
+                              
+                              ]
+                    ),
+                  );
                 }
         
                 if(snapshot.hasData){
