@@ -106,28 +106,26 @@ class _PathologicalSingleTestBookingPageState
           flexibleSpace: Padding(
             padding: const EdgeInsets.only(top:20.0),
             child: Center(
-              child: Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Own Test ',
-                          style: TextStyle(
-                fontFamily: 'Poppins',
-                color: Color(0xFF09948e),
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                          ),),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Own Test ',
+                        style: TextStyle(
+              fontFamily: 'Poppins',
+              color: Color(0xFF09948e),
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+                        ),),
               
               
-                  Text('Request',style: TextStyle(
-                fontFamily: 'Poppins',
-                  color: Color(0xFFf1c57d),
-                fontWeight: FontWeight.w700,
-                 fontSize: 20,
-                          ),),
-                ],
-                          ),
-              ),
+                Text('Request',style: TextStyle(
+              fontFamily: 'Poppins',
+                color: Color(0xFFf1c57d),
+              fontWeight: FontWeight.w700,
+               fontSize: 20,
+                        ),),
+              ],
+                        ),
               // decoration: BoxDecoration(
               //   gradient: LinearGradient(
               //     begin: Alignment.topLeft,
