@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:medbo/Animation/showupAnimation.dart';
 import 'package:medbo/BookingList/MyTestRequestModel.dart';
 import 'package:medbo/BookingList/UserBookingRecordModel.dart';
 import 'package:medbo/screen_helper/side_drawer.dart';
@@ -17,6 +18,26 @@ class MyTestRquestPage extends StatefulWidget {
 }
 
 class _MyTestRquestPageState extends State<MyTestRquestPage> {
+  int delayAmount = 500;
+
+  final _colors = [
+    // Colors.blue.withOpacity(0.1),
+    // Colors.red.withOpacity(0.1),
+    // Colors.yellow.withOpacity(0.1),
+    // Colors.green.withOpacity(0.1),
+
+    Color(0xff6DC8F3).withOpacity(0.3),
+    Color(0xffFFB157).withOpacity(0.3),
+    Color(0xffFF5B95).withOpacity(0.3),
+    Color(0xffD76EF5).withOpacity(0.3),
+    Color(0xff42E695).withOpacity(0.3),
+
+    // Color(0xff6DC8F3),
+    // Color(0xffFFB157),
+    // Color(0xffFF5B95),
+    // Color(0xffD76EF5),
+    // Color(0xff42E695),
+  ];
   //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
   String Name = "";
@@ -41,97 +62,153 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0XFFF3F1F5),
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topCenter,
-              colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).accentColor
-              ],
-            ),
-          ),
-        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.topCenter,
+        //       colors: [
+        //         Color(0xffFAF3F3).withOpacity(0.3),
+        //         Color(0xffFAF3F3).withOpacity(0.3),
+        //        // Theme.of(context).accentColor
+        //       ],
+        //     ),
+        //   ),
+        // ),
         title: Text(
           'My Test Request',
           style: TextStyle(
-            fontFamily: 'Poppins',
-          ),
+              fontFamily: 'Poppins',
+              color: Color(0xFF02475E),
+              fontWeight: FontWeight.w700),
+        ),
+        centerTitle: true,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          color: Color(0xFF02475E),
         ),
       ),
-      drawer: SideDrawer(),
-      body: SingleChildScrollView(
-        child: Container(
-          child: FutureBuilder(
-            future: MyTestRequestAPI(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                return Center(child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Container(child: CircularProgressIndicator()),
-                ));
-              }
-              if (snapshot.hasError) {
-                return Text("No Booking found from this Account");
-              }
+      //drawer: SideDrawer(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            //color: Colors.blue,
+            child: FutureBuilder(
+              future: MyTestRequestAPI(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Center(
+                      child: Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Container(child: CircularProgressIndicator()),
+                  ));
+                }
+                if (snapshot.hasError) {
+                  return Text("No Booking found from this Account");
+                }
 
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        margin: EdgeInsets.all(20),
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            // color: Color(0xFF3E64FF),
-                            color: Colors.lightBlue[50],
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
-                            boxShadow: [
-                              BoxShadow(
-                                //color: Color(0xFF3E64FF).withOpacity(0.3),
-                                color: Colors.grey.withOpacity(0.9),
-                                offset: const Offset(
-                                  0.0,
-                                  5.0,
-                                ),
-                                blurRadius: 3.0,
-                                spreadRadius: 0.5,
-                              ),
-                            ]),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              title: Text(
-                                  "Booking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}"),
-                              trailing: ElevatedButton(
-                                onPressed: () {
-                                  //MyTestReqDetailsPage(snapshot.data[index].encBookingId);
-                                  Navigator.push(
-                                    context,
-                                    new MaterialPageRoute(
-                                        builder: (context) =>
-                                            new MyTestReqDetailsPage(snapshot.data[index].encBookingId)),
-                                  );
-                                },
-                                child: Text("Details"),
-                              ),
-                              subtitle: Text(
-                                  "Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt} "),
-                            )
-                            //Text(snapshot.data[index].visitDate),
-                          ],
-                        ),
-                      );
-                    });
-              }
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ShowUp(
+                          delay: delayAmount,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: 20, left: 5, right: 5, bottom: 5),
+                            padding: EdgeInsets.only(
+                                top: 20, left: 5, right: 5, bottom: 20),
+                            decoration: BoxDecoration(
+                                // color: Color(0xFF3E64FF),
+                                //color: Colors.lightBlue[50],
+                                color: _colors[index % _colors.length],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(24)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    //color: Color(0xFF3E64FF).withOpacity(0.3),
+                                    color: Colors.grey.withOpacity(0.9),
+                                    offset: const Offset(
+                                      0.0,
+                                      5.0,
+                                    ),
+                                    blurRadius: 3.0,
+                                    spreadRadius: 0.5,
+                                  ),
+                                ]),
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: ShowUp(
+                                    delay: delayAmount + 200,
+                                    child: Text(
+                                      "Booking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}",
+                                      style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  trailing: ShowUp(
+                                    delay: delayAmount + 1000,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        //MyTestReqDetailsPage(snapshot.data[index].encBookingId);
+                                        Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new MyTestReqDetailsPage(
+                                                      snapshot.data[index]
+                                                          .encBookingId)),
+                                        );
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color(0xFF79a0be)),
+                                        padding: MaterialStateProperty.all(
+                                            EdgeInsets.only(left: 5, right: 5)),
+                                      ),
+                                      child: Text("Details",style: TextStyle(
+                                        color: Colors.white70,
+                                        fontFamily: 'Poppins',
+                                      ),),
+                                    ),
+                                  ),
+                                  subtitle: ShowUp(
+                                    delay: delayAmount + 500,
+                                    child: Text(
+                                      "Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt} ",
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontFamily: 'Poppins',
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                //Text(snapshot.data[index].visitDate),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                }
 
-              return Text("Waiting for Internet Connection");
-            },
+                return Text("Waiting for Internet Connection");
+              },
+            ),
           ),
         ),
       ),

@@ -25,6 +25,28 @@ class MyTestReqDetailsPage extends StatefulWidget {
 class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
   var encBookingIdRef;
   _MyTestReqDetailsPageState(this.encBookingIdRef);
+
+
+   final _colors = [
+    // Colors.blue.withOpacity(0.1),
+    // Colors.red.withOpacity(0.1),
+    // Colors.yellow.withOpacity(0.1),
+    // Colors.green.withOpacity(0.1),
+
+    // Color(0xff6DC8F3).withOpacity(0.3),
+    // Color(0xffFFB157).withOpacity(0.3),
+    // Color(0xffFF5B95).withOpacity(0.3),
+    // Color(0xffD76EF5).withOpacity(0.3),
+    Color(0xff42E695).withOpacity(0.3),
+
+    // Color(0xff6DC8F3),
+    // Color(0xffFFB157),
+    // Color(0xffFF5B95),
+    // Color(0xffD76EF5),
+    // Color(0xff42E695),
+
+
+  ];
   //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
   String Name = "";
@@ -49,6 +71,38 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            backgroundColor: Color(0XFFF3F1F5),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.topCenter,
+        //       colors: [
+        //         Color(0xffFAF3F3).withOpacity(0.3),
+        //         Color(0xffFAF3F3).withOpacity(0.3),
+        //        // Theme.of(context).accentColor
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        title: Text(
+          'Test Request Details',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+             color: Color(0xFF02475E),
+            fontWeight: FontWeight.w700
+          ),
+        ),
+        centerTitle: true,
+        leading: BackButton(onPressed: (){
+          Navigator.of(context).pop(true);
+        },
+        color: Color(0xFF02475E),),
+      ),
       drawer: SideDrawer(),
       body: SingleChildScrollView(
         child: Container(
@@ -71,12 +125,13 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        margin: EdgeInsets.all(20),
-                        padding: EdgeInsets.all(10),
+                       margin: EdgeInsets.only(top:20, left: 5, right: 5, bottom: 5),
+                          padding: EdgeInsets.only(top:20, left: 5, right: 5,bottom: 20),
                         decoration: BoxDecoration(
                             // color: Color(0xFF3E64FF),
-                            color: Colors.lightBlue[50],
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            //color: Colors.lightBlue[50],
+                            color: _colors[index % _colors.length],
+                            borderRadius: BorderRadius.all(Radius.circular(24)),
                             boxShadow: [
                               BoxShadow(
                                 //color: Color(0xFF3E64FF).withOpacity(0.3),
@@ -93,7 +148,7 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
                           children: [
                             ListTile(
                               title: Text(
-                                  "Booking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}"),
+                                  "Booking for : ${snapshot.data[index].bookingFor}\nPatient Name : ${snapshot.data[index].patientName}",style: TextStyle(fontFamily: 'Poppins', color: Colors.white, fontWeight: FontWeight.w700, fontSize: 15),),
                                    trailing: ElevatedButton(
                                 onPressed: () {
                                   AcceptTestProposal();
@@ -102,7 +157,12 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
                                 },
                                 child: Text("Accept"),
                               ),
-                              subtitle: Text("Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt} "),
+                              subtitle: Text("Booking Date : ${snapshot.data[index].bookingDate}\nVisit Date : ${snapshot.data[index].visitDate}\nTotalBookingFee  : ${snapshot.data[index].totalBookingFee}\nPaid Amount  : ${snapshot.data[index].paidAmt} ",
+                                style: TextStyle(
+                                                 color: Colors.white70,
+                                                fontFamily: 'Poppins',
+                                               ),
+                              ),
                             )
                             //Text(snapshot.data[index].visitDate),
                           ],
