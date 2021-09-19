@@ -381,6 +381,38 @@ class MultipleTestBooking extends StatefulWidget {
 }
 
 class _MultipleTestBookingState extends State<MultipleTestBooking> {
+//====================================================================================================================================
+  List<GetTestFeeMap> selectedFeesList = [];
+
+  onSelectedRow(bool selected, GetTestFeeMap testRowData) async {
+    setState(() {
+      if (selected) {
+        selectedFeesList.add(testRowData);
+      } else {
+        selectedFeesList.remove(testRowData);
+      }
+    });
+  } //=================
+
+  deleteSelectedFunction() async {
+    setState(() {
+      if (selectedFeesList.isNotEmpty) {
+        List<GetTestFeeMap> temp = [];
+        temp.addAll(selectedFeesList);
+        for (GetTestFeeMap testFeeMap in temp) {
+          reponseArray.remove(testFeeMap);
+          selectedFeesList.remove(testFeeMap);
+
+          setState(() {
+            feeSum -= testFeeMap.fee!;
+            discountSum -= testFeeMap.discountedFee!;
+            bookingSum -= testFeeMap.bookingFee!;
+          });
+        }
+      }
+    });
+  }
+
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
   String Name = "";
@@ -401,9 +433,8 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
   }
 //=====================================================================================S H O W   USER  DETIALS IN APP DRAWER WITH SHARED PREFERENCES====================================================
 
-
-bool absoreTap = false;
-bool enabled_Item= false;
+  bool absoreTap = false;
+  bool enabled_Item = false;
 
   int delayAmount = 500;
 
@@ -414,9 +445,9 @@ bool enabled_Item= false;
   int bookingSum = 0;
 
   String eNcTestIdInList = '';
-  String testFeeinLIST='';
-  String testDiscountFeeInLIST='';
-  String testBookingFeeiNlIST='';
+  String testFeeinLIST = '';
+  String testDiscountFeeInLIST = '';
+  String testBookingFeeiNlIST = '';
 
   // String actualFee ='';
   // String actualDiscountFee='';
@@ -434,6 +465,7 @@ bool enabled_Item= false;
   String testName = '';
 
   void initState() {
+    selectedFeesList = [];
     getCred();
     super.initState();
     getAllPathLabResults = allPathLab();
@@ -451,6 +483,69 @@ bool enabled_Item= false;
     var blockSizeVertical = (screenHeight / 100);
 
     return Scaffold(
+      backgroundColor: Color(0XFFF3F1F5),
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Multiple Test ',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      color: Color(0xFF09948e),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    'Booking',
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      color: Color(0xFFf1c57d),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+              // decoration: BoxDecoration(
+              //   gradient: LinearGradient(
+              //     begin: Alignment.topLeft,
+              //     end: Alignment.topCenter,
+              //     colors: [
+              //       Color(0xffFAF3F3).withOpacity(0.3),
+              //       Color(0xffFAF3F3).withOpacity(0.3),
+              //      // Theme.of(context).accentColor
+              //     ],
+              //   ),
+              // ),
+            ),
+          ),
+          // title: Text(
+          //   'Own Test Request',
+          //   style: TextStyle(
+          //     fontFamily: 'Poppins',
+          //      color: Color(0xFF02475E),
+          //     fontWeight: FontWeight.w700
+          //   ),
+          // ),
+          centerTitle: true,
+          leading: BackButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            color: Color(0xFF02475E),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -555,7 +650,7 @@ bool enabled_Item= false;
                             padding:
                                 const EdgeInsets.only(left: 20.0, right: 150),
                             child: AbsorbPointer(
-                               absorbing: absoreTap,
+                              absorbing: absoreTap,
                               child: DropdownButton<Partner>(
                                 value:
                                     _selectedLab, //USER SELECTED DROPDOWN ITEM VALUE
@@ -573,8 +668,8 @@ bool enabled_Item= false;
                                 onChanged: (val) {
                                   setState(() {
                                     _selectedLab = val!;
-                                    absoreTap = true; 
-                            
+                                    absoreTap = true;
+
                                     encLabId = val
                                         .encPartnerId; //===== Passing encLabId to my next API function
                                     getTestByLabResult = getTestByLab();
@@ -630,7 +725,7 @@ bool enabled_Item= false;
                             padding:
                                 const EdgeInsets.only(left: 20.0, right: 150),
                             child: DropdownButton<Datum>(
-                              //enabled= enabled_Item,
+                                //enabled= enabled_Item,
                                 value: _selectedTest,
                                 hint: Text(""),
                                 //underline: SizedBox(),
@@ -639,7 +734,7 @@ bool enabled_Item= false;
                                     .map(
                                         (Datum data) => DropdownMenuItem<Datum>(
                                               child: Text("${data.testName}"),
-                                             // enabled: data.testId != _selectedTest,
+                                              // enabled: data.testId != _selectedTest,
                                               value: data,
                                             ))
                                     .toList()
@@ -650,7 +745,8 @@ bool enabled_Item= false;
                                   print(
                                       "This is the EncTestId which is need to get Test Fee : ${value.testId}");
                                   setState(() {
-                                    encTestId = value.testId; // == SELCTED TEST from drop down 'encTestId' needed for to get Test Fee
+                                    encTestId = value
+                                        .testId; // == SELCTED TEST from drop down 'encTestId' needed for to get Test Fee
                                     testName = value.testName;
                                     _selectedTest = value;
                                   });
@@ -711,44 +807,192 @@ bool enabled_Item= false;
                 ShowUp(
                   delay: delayAmount + 1000,
                   child: DataTable(
-                      columnSpacing: 13.0,
+                    decoration: BoxDecoration(
+                                       color: Color(0xFFf7f9fa),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                    headingRowColor: MaterialStateColor.resolveWith((states) => Colors.teal),
+                      showCheckboxColumn: true,
+                      columnSpacing: 10.0,
                       columns: <DataColumn>[
                         //DataColumn(label: Text("encPartnerId")),
                         //DataColumn(label: Text("encTestId")),
                         // DataColumn(label: Text("TestName")),
-                        DataColumn(label: Text("Fee")),
-                        DataColumn(label: Text("Discounted Fee")),
-                        DataColumn(label: Text("Booking Fee")),
+                        DataColumn(label: Text("Actual Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),),
+                        DataColumn(label: Text("Discounted Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),)),
+                        DataColumn(label: Text("Booking Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),)),
+
+                        // DataColumn(label: Text("")),
                       ],
                       rows: reponseArray.map((testRowData) {
-                        return DataRow(cells: [
-                          // DataCell(Text(testName)),
-                          DataCell(Text(testRowData.fee!.toString())),
-                          DataCell(Text(testRowData.discountedFee!.toString())),
-                          DataCell(Text(testRowData.bookingFee!.toString()))
-                        ]);
+                        return DataRow(
+                            selected: selectedFeesList.contains(testRowData),
+                            onSelectChanged: (b) {
+                              onSelectedRow(b!,
+                                  testRowData); //function which pass 2 two parameter
+                            },
+                            cells: [
+                              // DataCell(Text(testName)),
+                              DataCell(Center(
+                                  child: Container(
+                                      alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfdf4f7),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Text('₹ ${testRowData.fee!.toString()}',style: TextStyle(color: Color(0xFFc23b5d),fontFamily: 'Poppins',fontWeight: FontWeight.bold),)))),
+
+
+
+
+
+
+                              DataCell(Center(
+                                  child: Container(
+                                     alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfef6e5),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Text(
+                                        '₹ ${testRowData.discountedFee!.toString()}',style: TextStyle(color: Color(0xFFf6c53e),fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
+                                  ))),
+
+
+
+
+
+
+                              DataCell(Center(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFecf8f4),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Text(
+                                        '₹ ${testRowData.bookingFee!.toString()}', style: TextStyle(color: Color(0xFF54a98c),fontFamily: 'Poppins',fontWeight: FontWeight.bold),),
+                                  ))),
+
+                              // DataCell(Center(
+                              //   child: IconButton(
+                              //     onPressed: () {
+                              //             deleteSelectedFunction();
+                              //           },
+                              //     icon: const Icon(Icons.delete),
+                              //     color: Colors.red,
+                              //     // icon: Image.asset(
+                              //     //  "assets/images/medbo.png",
+                              //     //   fit: BoxFit.cover,
+                              //     // ),
+                              //   ),
+                              // ),
+                              // ),
+                            ]);
                       }).toList()),
                 ),
 
-                SizedBox(height: 30,),
-
-                ShowUp(
-                  delay: delayAmount + 1050,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left:80.0),
-                    child: ListTile(
-                      title: Text(
-                          "Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}", style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: blockSizeHorizontal * 3.5,
-                                    fontFamily: 'Poppins',
-                                    color: Colors.green.shade200,
-                                  ),),
-                    ),
-                  ),
+                SizedBox(
+                  height: 10,
                 ),
 
-                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Padding(
+                    //   padding: EdgeInsets.all(20.0),
+                    //   child: OutlinedButton(
+                    //     onPressed: () {},
+                    //     child: Text('SELECTED ${selectedFeesList.length}'),
+                    //   ),
+                    // ),
+                    Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: OutlinedButton(
+                        onPressed: selectedFeesList.isEmpty
+                            ? null
+                            : () {
+                                deleteSelectedFunction();
+                              },
+                        child: Text('DELETE SELECTED'),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                      decoration: BoxDecoration(
+                                       color: Color(0xFFdcf7e3),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                    headingRowColor: MaterialStateColor.resolveWith((states) => Colors.teal),
+                    columnSpacing: 13.0, columns: <DataColumn>[
+                    DataColumn(label: Text("Total Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold))),
+                    DataColumn(label: Text("Total Discounted Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold))),
+                    DataColumn(label: Container(
+                      child: Text("Total Booking Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold)))),
+                  ], rows: <DataRow>[
+                    DataRow(
+                      cells: <DataCell>[
+                        DataCell(
+                            Container(child: Center(child: Text('$feeSum')))),
+
+
+
+
+                        DataCell(Center(child: Text('$discountSum'))),
+
+
+
+
+                        DataCell(Center(child: Container(
+                         alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 20,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xffa0d0d6),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                          child: Text(' $bookingSum',style: TextStyle(color: Colors.white,fontFamily: 'Poppins'),)))),
+                      ],
+                    )
+                  ]),
+                ),
+
+                // ShowUp(
+                //   delay: delayAmount + 1050,
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(left:80.0),
+                //     child: ListTile(
+                //       title: Text(
+                //           "Total Fee: ${feeSum}\nTotal Discounted Fee:  ${discountSum}\nTotal Booking Fee:  ${bookingSum}", style: TextStyle(
+                //                     fontWeight: FontWeight.bold,
+                //                     fontSize: blockSizeHorizontal * 3.5,
+                //                     fontFamily: 'Poppins',
+                //                     color: Colors.green.shade200,
+                //                   ),),
+                //     ),
+                //   ),
+                // ),
+
+                SizedBox(
+                  height: 30,
+                ),
 
                 ShowUp(
                   delay: delayAmount + 1100,
@@ -838,40 +1082,38 @@ bool enabled_Item= false;
 
         getTestFeeObj = GetTestFeeMap.fromJson(jsonResponse);
         setState(() {
-          reponseArray.add(getTestFeeObj!); // Adding data to my Arraylist 'reponseArray'
+          reponseArray.add(
+              getTestFeeObj!); // Adding data to my Arraylist 'reponseArray'
 
           feeSum = 0;
           discountSum = 0;
           bookingSum = 0;
 
-
           eNcTestIdInList = '';
-          testFeeinLIST='';
-          testDiscountFeeInLIST='';
-          testBookingFeeiNlIST='';
+          testFeeinLIST = '';
+          testDiscountFeeInLIST = '';
+          testBookingFeeiNlIST = '';
 
+          for (var i = 0; i < reponseArray.length; i++) {
+            //eNcTestIdInList=eNcTestIdInList.add(reponseArray[i].encTestId);
+            eNcTestIdInList += (reponseArray[i].encTestId!);
+            if (i < reponseArray.length - 1) eNcTestIdInList += ",";
+            //===================================================================================
 
-                  for (var i = 0; i < reponseArray.length; i++) {
-                    //eNcTestIdInList=eNcTestIdInList.add(reponseArray[i].encTestId);
-                    eNcTestIdInList += (reponseArray[i].encTestId!);
-                    if (i < reponseArray.length - 1) eNcTestIdInList += ",";
-          //===================================================================================
+            testFeeinLIST += (reponseArray[i].fee!.toString());
+            if (i < reponseArray.length - 1) testFeeinLIST += ",";
+            //===================================================================================
 
-                    testFeeinLIST += (reponseArray[i].fee!.toString());
-                      if (i < reponseArray.length - 1) testFeeinLIST += ",";
-          //===================================================================================
+            testDiscountFeeInLIST +=
+                (reponseArray[i].discountedFee!.toString());
+            if (i < reponseArray.length - 1) testDiscountFeeInLIST += ",";
+            //===================================================================================
 
+            testBookingFeeiNlIST += (reponseArray[i].bookingFee!.toString());
+            if (i < reponseArray.length - 1) testBookingFeeiNlIST += ",";
+          }
 
-                    testDiscountFeeInLIST += (reponseArray[i].discountedFee!.toString());
-                      if (i < reponseArray.length - 1) testDiscountFeeInLIST += ",";
-          //===================================================================================
-
-
-                    testBookingFeeiNlIST += (reponseArray[i].bookingFee!.toString());
-                      if (i < reponseArray.length - 1) testBookingFeeiNlIST += ",";
-                  }
-
-                  print(testBookingFeeiNlIST);
+          print(testBookingFeeiNlIST);
 
           for (GetTestFeeMap elemInList in reponseArray) {
             feeSum += elemInList.fee!;
@@ -899,7 +1141,7 @@ bool enabled_Item= false;
               "http://medbo.digitalicon.in/api/medboapi/SaveMultipleTestBooking"),
           body: ({
             'EncPartnerId': encLabId,
-            'EncDoctorId': eNcTestIdInList .toString(),
+            'EncDoctorId': eNcTestIdInList.toString(),
             'VisitDate': _selectedDate,
             'EncUserId': EncUserId,
 
@@ -907,11 +1149,9 @@ bool enabled_Item= false;
             "DiscountedFee": testDiscountFeeInLIST.toString(),
             "BookingFee": testBookingFeeiNlIST.toString(),
 
-
             "TotalFee": feeSum.toString(),
             "TotalDiscountedFee": discountSum.toString(),
             "TotalBookingFee": bookingSum.toString(),
-
 
             //  "Fee": "500,300",
             // "DiscountedFee" : "450,200",
@@ -922,7 +1162,13 @@ bool enabled_Item= false;
         print(response.body);
         jsonResponse = json.decode(response.body.toString());
         print(jsonResponse);
-        Navigator.push(context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage( rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DieticianAfterDateSelectPage(
+                      rresponse:
+                          DieticianEncBookingIdModel.fromJson(jsonResponse),
+                    )));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Please select from available dates")));

@@ -202,7 +202,7 @@ class _Home2State extends State<Home2> {
                 dividerColor: Colors.white,
                 iconTheme: IconThemeData(color: Colors.white)),
             child: PopupMenuButton<int>(
-              color: Colors.black,
+              color:  Theme.of(context).primaryColor,
               itemBuilder: (context) => [
                 PopupMenuItem<int>(value: 0, child: Text("Setting", style:TextStyle(fontFamily: 'Poppins'))),
                 PopupMenuItem<int>(value: 1, child: Text("Profile",style:TextStyle(fontFamily: 'Poppins'))),
