@@ -7,7 +7,11 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:medbo/API/Login/ProgressHUD.dart';
 import 'package:medbo/Booking/DieticianAfterDateSelect/DieticianAfterDateSelectPage.dart';
+import 'package:medbo/models/DocBookingAcknowledgement.dart';
+import 'package:medbo/screens/myTestReqDetailsPage.dart';
+import 'package:medbo/screens2.dart/home2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../DieticianEncBookingIdModel.dart';
@@ -18,6 +22,9 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:http_parser/http_parser.dart';
+import 'package:flutter/scheduler.dart';
+
+import '../DocBookingAcknowledgePage.dart';
 
 class PathologicalSingleTestBookingPage extends StatefulWidget {
   PathologicalSingleTestBookingPage() : super();
@@ -27,11 +34,109 @@ class PathologicalSingleTestBookingPage extends StatefulWidget {
       _PathologicalSingleTestBookingPageState();
 }
 
-class _PathologicalSingleTestBookingPageState
-    extends State<PathologicalSingleTestBookingPage> {
+class _PathologicalSingleTestBookingPageState extends State<PathologicalSingleTestBookingPage> {
+  bool isApiCallProcess = false;
+   File ?path;
+
+   static final String uploadEndPoint= 'http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking';
+
+   Future<File> ? file;
+  String status ='';
+  String ?base64Image;
+  File ? tmpFile;
+  String errorMessage = 'Error Uploading Image';
+
+  chooseImage(){
+    setState(() {
+      file = ImagePicker.pickImage(source: ImageSource.gallery);
+    });
+  }
+
+
+
+// setStatus(String message){
+//   setState(() {
+//     status = message;
+//   });
+// }
+
+//   startUpload(){
+//     setStatus('Uploading Image');
+//     if(null==tmpFile){
+//       setStatus(errorMessage);
+//       return;
+//     }
+
+//     String fileName = tmpFile!.path.split('/').last;
+//     upload(fileName);
+//   }
+
+
+
+
+//   upload(String fileName){
+//     var jsonResponse;
+//     http.post(Uri.parse('http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking'), body:{
+//             'VisitDate': _selectedDate,
+//             'EncUserId': EncUserId,
+//             'Description': testTextController.text,
+//             'UserFile':  fileContentBase64,
+
+//     }).then((result){
+//       setStatus(result.statusCode==200?
+//        result.body: errorMessage);
+
+//        if(result.statusCode== 200){
+//           jsonResponse = json.decode(result.body.toString());
+//           Navigator.push(context,MaterialPageRoute( builder: (context) => DieticianAfterDateSelectPage(rresponse:DieticianEncBookingIdModel.fromJson(jsonResponse),)));
+//        }
+//     }).catchError((error){
+//         setStatus(errorMessage);
+//     });
+
+//   }
+
+
+
+
+//    showImage(){
+//     return FutureBuilder<File>(
+//       future: file,
+//       builder: (BuildContext context, AsyncSnapshot<File> snapshot){
+//         if(snapshot.connectionState== ConnectionState.done
+//          && null != snapshot.data){
+
+//            tmpFile = snapshot.data;
+//            base64Image = base64Encode(snapshot.data!.readAsBytesSync());
+
+
+//           return Flexible(
+//             child: Image.file(snapshot.data as File,
+//              //width: 150,
+//             fit: BoxFit.cover,
+//             )
+//             );
+//         }else if (null != snapshot.error){
+//           return const Text(
+//             'error picking image',textAlign: TextAlign.center,
+//             );
+//         }else{
+//           return const Text(
+//             'No image selected',textAlign: TextAlign.center,
+//             );
+//         }
+//       },
+//     );
+//   }
+
+
+
+
   var _formKey = GlobalKey<FormState>();
   final ImagePicker _picker = ImagePicker();
   File? image;
+  var fileContent;
+  var fileContentBase64;
 
   var testTextController = TextEditingController();
 
@@ -86,8 +191,16 @@ class _PathologicalSingleTestBookingPageState
 //=============================================================================================
   String _selectedDate = DateTime.now().toString();
 
+   Widget build(BuildContext context) {
+    return ProgressHUD(
+      child: _uiSetup(context),
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget  _uiSetup(BuildContext context) {
     // final List<Widget> children = <Widget>[];//////
 
     var screenWidth = MediaQuery.of(context).size.width;
@@ -372,33 +485,89 @@ class _PathologicalSingleTestBookingPageState
                                 )),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child: OutlinedButton(
-                            child: Text("Choose File"),
-                            onPressed: () {
-                              //pickImageFromGallery(ImageSource.gallery);
-                              filePicker();
-                            },
-                          ),
+                        Column(
+                           crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: OutlinedButton(
+                                child: Text("Choose File", style: TextStyle(fontFamily: 'Poppins', fontSize: 13),),
+                                onPressed: () {
+                                  //pickImageFromGallery(ImageSource.gallery);
+                                  filePicker();
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 20,
                         ),
+
+
+                        //===========================================================================================
+
+
+        //                 Container(
+        //                   height: 300,
+        // width: double.infinity,
+        // // color: Colors.red,
+        //                   padding: EdgeInsets.all(30.0),
+        //                   child: Column(
+        //                     crossAxisAlignment: CrossAxisAlignment.stretch,
+        //                     children: [
+        //                       OutlinedButton(
+        //                         onPressed: chooseImage,
+        //                         child: Text("choose Image"),
+
+        //                       ),
+
+        //                        SizedBox(height: 20.0,),
+
+        //                        showImage(),
+
+
+        //                         OutlinedButton(
+        //                         onPressed: startUpload,
+        //                         child: Text("Upload Image"),
+
+        //                       ),
+
+
+        //                         SizedBox(height: 20.0,),
+
+
+        //                         Text(status,textAlign: TextAlign.center),
+        //                     ],
+        //                   ),
+        //                 ),
+
+
+
+
+
+
                         Padding(
                           padding: const EdgeInsets.all(18.0),
-                          child: image == null
-                              ? Text("No file chosen")
-                              : Image.file(
-                                  File(image!.path),
-                                  width: 150,
-                                  fit: BoxFit.cover,
-                                ),
+                          child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              image == null
+                                  ? Text("No file chosen")
+                                  : Image.file(
+                                      File(image!.path),
+                                      width: 150,
+                                      height: 150,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ],
+                          ),
                         ),
                         Center(
                           child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
+                                   isApiCallProcess = true;
                                   if (_formKey.currentState!.validate()) {
                                     SaveCustomTestBooking();
                                   }
@@ -431,99 +600,70 @@ class _PathologicalSingleTestBookingPageState
     print(selectedImage!.path);
     setState(() {
       image = selectedImage;
+      
+       fileContent = image!.readAsBytesSync();
+       fileContentBase64 = base64.encode(fileContent); 
+       print(fileContentBase64.substring(0, 100)); 
+       
     });
   }
 
   //=================================================================================================
-  // http.MultipartRequest('POST', Uri.parse(url));
+ 
 
-  Future<void> SaveCustomTestBooking() async {
+
+    Future<void> SaveCustomTestBooking() async {
     var jsonResponse;
     if (EncUserId.isNotEmpty) {
-      var response = await http.post(
-          Uri.parse(
-              "http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking"),
-          body: ({
-            'VisitDate': _selectedDate,
-            'EncUserId': EncUserId,
-            //'UserFile':  image as String,
-            'Description': testTextController.text
-          }));
-      if (response.statusCode == 200) {
-        print("Correct");
-        print(response.body);
-        jsonResponse = json.decode(response.body.toString());
+      var response = http.MultipartRequest('POST',Uri.parse("https://medbo.in/json/SaveCustomTestBooking"));
+
+      response.fields['VisitDate'] = _selectedDate;
+      response.fields['EncUserId'] = EncUserId;
+      response.fields['Description'] = testTextController.text;
+
+      response.files.add(new http.MultipartFile.fromBytes(
+        "UserFile", File(image!.path).readAsBytesSync(),
+        filename:"Image.jpg",
+        contentType: MediaType('image', 'jpg')));
+
+
+
+      response.send().then((response) async {
+      if (response.statusCode == 200){
+        isApiCallProcess = false;
+        var respBody = await response.stream.bytesToString();
+        jsonResponse = json.decode(respBody.toString());
+        print(respBody);
         print(jsonResponse);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DieticianAfterDateSelectPage(
-                      rresponse:
-                          DieticianEncBookingIdModel.fromJson(jsonResponse),
-                    )));
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Somthing went wrong")));
-        throw Exception("Faild to fetch");
+        print("Uploaded!");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Booked"),
+              backgroundColor: Color(0xFF00b3a4),
+              ));
+
+
+
+               Navigator.push( context,MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage(rresponse: DieticianEncBookingIdModel.fromJson(jsonResponse),)));
+
+            // Navigator.push(context,new MaterialPageRoute( builder: (context) =>new MyTestReqDetailsPage(jsonResponse),));
+          //Navigator.push(context,new MaterialPageRoute( builder: (context) =>new Home2(),));
+
+      } else{
+        isApiCallProcess = false;
+         ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Somthing went wrong"),
+              //backgroundColor: Color(0xFF00b3a4),
+              ));
       }
+    });
+
+
     }
-  }
+    }
 }
 
 
 
-
-
-
-//  Future<void> SaveCustomTestBooking() async {
-
-//     var stream = new http.ByteStream(new http.ByteStream(image!.openRead()));
-//       var length = await image!.length();
-
-
-//     var jsonResponse;
-//     if (EncUserId.isNotEmpty) {
-//        var postUri = Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking");
-//       var request  = http.MultipartRequest('POST',postUri);
-//       request .fields['VisitDate'] = _selectedDate;
-//       request .fields['EncUserId'] = EncUserId;
-//       request.files.add(new http.MultipartFile.fromBytes('image', await File.fromUri(Uri.parse("<path/to/image>")).readAsBytes(), contentType: new MediaType('image', 'jpeg')));
-
-//        request.send().then((response){
-//          if (response.statusCode == 200) {
-
-//            print("Uploaded!");
-//             Navigator.push(context, MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage(rresponse:DieticianEncBookingIdModel.fromJson(jsonResponse),)));
-           
-//        } else {
-//         ScaffoldMessenger.of(context).showSnackBar(
-//             SnackBar(content: Text("Somthing went wrong")));
-//         throw Exception("Faild to fetch");
-
-//        }
-//        }
-//      // var response = await http.post(Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking"),
-//           // body: ({
-//           //   'VisitDate':_selectedDate,
-//           //   'EncUserId':EncUserId,
-//           //   'UserFile':image!.readAsBytesSync().toString(),//!= null ? 'data:image/png;base64,' + base64Encode(image!.readAsBytesSync()) : ''
-//           // }));
-//       // if (response.statusCode == 200) {
-//       //   print("Correct");
-//       //   print(response.body);
-//       //   jsonResponse = json.decode(response.body.toString());
-//       //   print(jsonResponse);
-//       //   Navigator.push(context, MaterialPageRoute(builder: (context) => DieticianAfterDateSelectPage(rresponse:DieticianEncBookingIdModel.fromJson(jsonResponse),)));
-//       // } else {
-//       //   ScaffoldMessenger.of(context).showSnackBar(
-//       //       SnackBar(content: Text("Somthing went wrong")));
-//       //   throw Exception("Faild to fetch");
-//       // }
-//     // } else {
-//     //   throw Exception("Check Your body parameter");
-//     // }
-  
-
-//        );}
-//   }
-  
