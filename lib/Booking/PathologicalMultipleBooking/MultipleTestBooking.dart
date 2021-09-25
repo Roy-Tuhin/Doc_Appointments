@@ -340,6 +340,7 @@ import 'GetTestFeeModel.dart';
 class GetTestFeeMap {
   String? encPartnerId;
   String? encTestId;
+  String? testName;
   int? fee;
   int? discountedFee;
   int? bookingFee;
@@ -347,6 +348,7 @@ class GetTestFeeMap {
   GetTestFeeMap(
       {this.encPartnerId,
       this.encTestId,
+      this.testName,
       this.fee,
       this.discountedFee,
       this.bookingFee});
@@ -354,6 +356,7 @@ class GetTestFeeMap {
   GetTestFeeMap.fromJson(Map<String, dynamic> json) {
     encPartnerId = json['EncPartnerId'];
     encTestId = json['EncTestId'];
+    testName = json['TestName'];
     //fee = json['Fee'];
     fee = int.parse(json['Fee']);
     // discountedFee = json['DiscountedFee'];
@@ -366,6 +369,7 @@ class GetTestFeeMap {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['EncPartnerId'] = this.encPartnerId;
     data['EncTestId'] = this.encTestId;
+    data['TestName'] = this.testName;
     data['Fee'] = this.fee;
     data['DiscountedFee'] = this.discountedFee;
     data['BookingFee'] = this.bookingFee;
@@ -813,13 +817,14 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                                       borderRadius: BorderRadius.circular(50),
                                     ),
                     headingRowColor: MaterialStateColor.resolveWith((states) => Colors.teal),
-                      showCheckboxColumn: true,
-                      columnSpacing: 10.0,
+                      showCheckboxColumn: false,
+                      columnSpacing: 5.0,
                       columns: <DataColumn>[
                         //DataColumn(label: Text("encPartnerId")),
                         //DataColumn(label: Text("encTestId")),
                         // DataColumn(label: Text("TestName")),
-                        DataColumn(label: Text("Actual Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),),
+                        DataColumn(label: Text("Test",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),)),
+                        DataColumn(label: Text("Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),),),
                         DataColumn(label: Text("Discounted Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),)),
                         DataColumn(label: Text("Booking Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),)),
 
@@ -833,7 +838,22 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                                   testRowData); //function which pass 2 two parameter
                             },
                             cells: [
-                              // DataCell(Text(testName)),
+
+
+                                DataCell(Center(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: blockSizeVertical * 6,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFecf8f4),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Text(
+                                        '${testRowData.testName!.toString()}', style: TextStyle(color: Color(0xFF54a98c),fontFamily: 'Poppins',fontWeight: FontWeight.bold, ), textAlign: TextAlign.center,),
+                                  ))),
+                              
                               DataCell(Center(
                                   child: Container(
                                       alignment: Alignment.center,

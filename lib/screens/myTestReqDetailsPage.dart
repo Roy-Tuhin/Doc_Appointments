@@ -174,8 +174,15 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
                                                   fontFamily: 'Poppins',
                                                  ),
                                 ),
-                              )
+                              ),
                               //Text(snapshot.data[index].visitDate),
+
+                               Container(
+                                //  height: 100,
+                                //  width: 100,
+                                child: Image.network(snapshot.data[index].extra2,),
+                                
+                                  ),
                             ],
                           ),
                         );
