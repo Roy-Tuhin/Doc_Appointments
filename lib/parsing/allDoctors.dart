@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 
 class AllDoctorsList {
   static const String url =
-      'http://medbo.digitalicon.in/api/medboapi/alldoctor';
+      'https://medbo.in/api/medboapi/alldoctor';
   Dio dio = Dio();
 
   Future<List<Datum>> getDocs() async {//======================= fetchData

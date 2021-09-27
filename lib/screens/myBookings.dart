@@ -244,7 +244,7 @@ class _MyBookingsState extends State<MyBookings> {
     var jsonResponse;
     if (EncUserId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/UserBookingRecord"),
+          Uri.parse("https://medbo.in/api/medboapi/UserBookingRecord"),
           body: ({
             "EncId": EncUserId,
           }));

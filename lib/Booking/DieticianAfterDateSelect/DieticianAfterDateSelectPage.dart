@@ -113,7 +113,7 @@ class _DieticianAfterDateSelectPageState extends State<DieticianAfterDateSelectP
     var jsonResponse;
     if (widget.rresponse.encBookingId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/PaymentDetails"),
+          Uri.parse("https://medbo.in/api/medboapi/PaymentDetails"),
           body: ({
             'EncId': widget.rresponse.encBookingId,
           }));

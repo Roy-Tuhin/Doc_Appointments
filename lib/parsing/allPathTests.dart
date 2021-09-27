@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 
 class PathTestList {
   static const String url =
-      'http://medbo.digitalicon.in/api/medboapi/allpathologicaltest';
+      'https://medbo.in/api/medboapi/allpathologicaltest';
   Dio dio = Dio();
 
   Future<List<Datum>> getPathTest() async {

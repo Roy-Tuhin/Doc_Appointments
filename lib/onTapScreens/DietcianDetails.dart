@@ -356,7 +356,7 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
     var jsonResponse;
 
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/DietDetails"),
+          Uri.parse("https://medbo.in/api/medboapi/DietDetails"),
           body: ({
             'EncId': encDietcianIdRef,
           }));

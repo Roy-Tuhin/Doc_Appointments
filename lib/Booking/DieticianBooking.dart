@@ -445,7 +445,7 @@ void getCred() async{
     var jsonResponse;
     if (widget.encDieticianId.isNotEmpty && widget.dieticianAllPartnerData.encPartnerId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/DietVisitDay"),
+          Uri.parse("https://medbo.in/api/medboapi/DietVisitDay"),
           body: ({
             'EncPartnerId': widget.dieticianAllPartnerData.encPartnerId,
             'EncDoctorId': widget.encDieticianId,
@@ -482,7 +482,7 @@ void getCred() async{
     var jsonResponse;
     if (widget.dieticianAllPartnerData.encPartnerId.isNotEmpty && widget.encDieticianId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveDietBooking"),
+          Uri.parse("https://medbo.in/api/medboapi/SaveDietBooking"),
           body: ({
             'EncPartnerId': widget.dieticianAllPartnerData.encPartnerId,
             'EncDoctorId': widget.encDieticianId,

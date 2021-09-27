@@ -1265,7 +1265,7 @@ class _Home2State extends State<Home2> {
     var jsonResponse;
     if (searchController.text.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/searchResult"),
+          Uri.parse("https://medbo.in/api/medboapi/searchResult"),
           body: ({
             'SearchKey': searchController.text,
           }));
@@ -1312,7 +1312,7 @@ class _Home2State extends State<Home2> {
     var jsonResponse;
 
     var response = await http.post(
-        Uri.parse("http://medbo.digitalicon.in/api/medboapi/AllDietician"),
+        Uri.parse("https://medbo.in/api/medboapi/AllDietician"),
         body: ({
           //'SearchKey': searchController.text,
         }));

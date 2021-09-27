@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 
 class AllSurgPackList {
   static const String url =
-      'http://medbo.digitalicon.in/api/medboapi/allsurgicalpackage';
+      'https://medbo.in/api/medboapi/allsurgicalpackage';
   Dio dio = Dio();
 
   Future<List<Data>> getSPList() async {

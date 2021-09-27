@@ -263,7 +263,7 @@ class _MyTestRquestPageState extends State<MyTestRquestPage> {
     var jsonResponse;
     if (EncUserId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/MyTestRequest"),
+          Uri.parse("https://medbo.in/api/medboapi/MyTestRequest"),
           body: ({
             "EncId": EncUserId,
           }));

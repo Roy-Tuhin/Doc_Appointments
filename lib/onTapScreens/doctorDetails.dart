@@ -14,7 +14,7 @@ class DoctorDetails extends StatefulWidget {
 
 class _DoctorDetailsState extends State<DoctorDetails> {
   late final DocVisitDaysModel rresponse;
-  static String url = "http://medbo.digitalicon.in/api/medboapi/doctdetails";
+  static String url = "https://medbo.in/api/medboapi/doctdetails";
   Dio dio = Dio();
   DoctorData _docData = DoctorData(
       doctorId: '',

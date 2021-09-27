@@ -444,7 +444,7 @@ class _RegistrationState extends State<Registration> {
     print(data);
 
      String body = json.encode(data);
-    var url = 'http://medbo.digitalicon.in/api/medboapi/userreg';
+    var url = 'https://medbo.in/api/medboapi/userreg';
     var response = await http.post(
      Uri.parse(url),
       body: body,

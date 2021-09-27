@@ -199,7 +199,7 @@ class _PaymentAmountDetailsPageState
     var jsonResponse;
     if (widget.rresponse.encBookingId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/DoPayment"),
+          Uri.parse("https://medbo.in/api/medboapi/DoPayment"),
           body: ({
              'EncId': widget.rresponse.encBookingId,
 

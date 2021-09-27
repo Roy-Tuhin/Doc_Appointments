@@ -440,7 +440,7 @@ class _LoginAtFirstState extends State<LoginAtFirst> {
     var jsonResponse;
     if (passwordontroller.text.isNotEmpty && emailController.text.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/login"),
+          Uri.parse("https://medbo.in/api/medboapi/login"),
           body: ({
             'LoginId': emailController.text,
             'Password': passwordontroller.text

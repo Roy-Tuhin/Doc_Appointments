@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen>
                 // image:DecorationImage(
                 //     image:new AssetImage('assets/images/logo.png')
                 ),
-            child: Image.asset('assets/images/logo.png'),
+            child: Image.asset('assets/images/playstore.png'),
           ),
         ),
       ),

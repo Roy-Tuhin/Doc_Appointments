@@ -38,7 +38,7 @@ class _PathologicalSingleTestBookingPageState extends State<PathologicalSingleTe
   bool isApiCallProcess = false;
    File ?path;
 
-   static final String uploadEndPoint= 'http://medbo.digitalicon.in/api/medboapi/SaveCustomTestBooking';
+   static final String uploadEndPoint= 'https://medbo.in/api/medboapi/SaveCustomTestBooking';
 
    Future<File> ? file;
   String status ='';
@@ -637,11 +637,11 @@ class _PathologicalSingleTestBookingPageState extends State<PathologicalSingleTe
         print(jsonResponse);
         print("Uploaded!");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Booked"),
-              backgroundColor: Color(0xFF00b3a4),
-              ));
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: Text("Booked"),
+        //       backgroundColor: Color(0xFF00b3a4),
+        //       ));
 
 
 

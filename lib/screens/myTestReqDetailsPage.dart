@@ -203,7 +203,7 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
     if (encBookingIdRef.isNotEmpty) {
       var response = await http.post(
           Uri.parse(
-              "http://medbo.digitalicon.in/api/medboapi/TestRequestDetail"),
+              "https://medbo.in/api/medboapi/TestRequestDetail"),
           body: ({
             "EncId": encBookingIdRef,
           }));
@@ -237,7 +237,7 @@ class _MyTestReqDetailsPageState extends State<MyTestReqDetailsPage> {
     var jsonResponse;
     if (encBookingIdRef.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/AcceptTestProposal"),
+          Uri.parse("https://medbo.in/api/medboapi/AcceptTestProposal"),
           body: ({
             'EncId': encBookingIdRef,
           }));

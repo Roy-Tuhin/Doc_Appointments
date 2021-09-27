@@ -711,7 +711,7 @@ void getCred() async{
     var jsonResponse;
     if (surgicalPartnerDataRef.encPartnerId.isNotEmpty && SurgicalPackDataRef.encPackageId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveSurgicalBooking"),
+          Uri.parse("https://medbo.in/api/medboapi/SaveSurgicalBooking"),
           body: ({
             'EncPartnerId':surgicalPartnerDataRef.encPartnerId,
             'EncDoctorId': SurgicalPackDataRef.encPackageId,

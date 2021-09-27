@@ -422,7 +422,7 @@ void getCred() async{
     if (partnerDataRef.encPartnerId.isNotEmpty &&
         docDataRef.encDoctorId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/DoctorVisitDay"),
+          Uri.parse("https://medbo.in/api/medboapi/DoctorVisitDay"),
           body: ({
             'EncPartnerId': partnerDataRef.encPartnerId,
             'EncDoctorId': docDataRef.encDoctorId,
@@ -459,7 +459,7 @@ void getCred() async{
     if (partnerDataRef.encPartnerId.isNotEmpty &&
         docDataRef.encDoctorId.isNotEmpty) {
       var response = await http.post(
-          Uri.parse("http://medbo.digitalicon.in/api/medboapi/SaveDoctBooking"),
+          Uri.parse("https://medbo.in/api/medboapi/SaveDoctBooking"),
           body: ({
             'EncUserId' : EncUserId,
             'EncPartnerId': partnerDataRef.encPartnerId,

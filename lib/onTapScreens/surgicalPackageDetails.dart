@@ -14,7 +14,7 @@ class SurgPackDetails extends StatefulWidget {
 
 class _SurgPackDetailsState extends State<SurgPackDetails> {
 
-  static String url="http://medbo.digitalicon.in/api/medboapi/surgicaldetails";
+  static String url="https://medbo.in/api/medboapi/surgicaldetails";
   Dio dio = Dio();
 
   SurgicalData _surgicalData=SurgicalData(

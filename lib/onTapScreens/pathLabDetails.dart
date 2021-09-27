@@ -14,7 +14,7 @@ class PathTestDetails extends StatefulWidget {
 
 class _PathTestDetailsState extends State<PathTestDetails> {
 
-  static String url="http://medbo.digitalicon.in/api/medboapi/pathologicaltestdetails";
+  static String url="https://medbo.in/api/medboapi/pathologicaltestdetails";
   Dio dio = Dio();
   TestData _pathTestData=TestData(
       testId: '',

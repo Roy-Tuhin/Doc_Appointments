@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 
 class HlthChkUpList {
   static const String url =
-      'http://medbo.digitalicon.in/api/medboapi/allhealthckeckup';
+      'https://medbo.in/api/medboapi/allhealthckeckup';
   Dio dio = Dio();
 
   Future<List<Datum>> getHlthChkUps() async {

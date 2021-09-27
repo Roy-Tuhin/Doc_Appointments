@@ -14,7 +14,7 @@ class HlthChkUpDetails extends StatefulWidget {
 
 class _HlthChkUpDetailsState extends State<HlthChkUpDetails> {
 
-  static String url="http://medbo.digitalicon.in/api/medboapi/healthdetails";
+  static String url="https://medbo.in/api/medboapi/healthdetails";
   Dio dio = Dio();
 
   HealthData _healthData= HealthData(
