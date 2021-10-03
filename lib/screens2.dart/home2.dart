@@ -7,7 +7,12 @@ import 'package:medbo/API/Search/SearchApiResponse.dart';
 import 'package:medbo/API/Search/afterSearchPage.dart';
 import 'package:medbo/Animation/showupAnimation.dart';
 import 'package:medbo/models/AllDieticianModel.dart';
+import 'package:medbo/models/DocRefactor/AllDocRefactorModel.dart';
+import 'package:medbo/models/HealthCheckUpRefacModel/AllHealthCheckUpModel.dart';
+import 'package:medbo/models/PathRefacModel/AllPathTestModel.dart';
+import 'package:medbo/models/SurgPackRefactor/AllSurgPackModel.dart';
 import 'package:medbo/onTapScreens/DietcianDetails.dart';
+import 'package:medbo/onTapScreens/Doc_Details_Page/DocDetailsRefactorPage.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
 import 'package:medbo/onTapScreens/healthchkupDetails.dart';
 import 'package:medbo/onTapScreens/lastVisit.dart';
@@ -635,6 +640,375 @@ class _Home2State extends State<Home2> {
 
                   //=============================================================Doc list end===========================================================================
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  //============================================================= New Doc list ===========================================================================
+
+                                   Container(
+                    height: blockSizeVertical * 6.2,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Doc Refactor',
+                          style: TextStyle(
+                              fontSize: blockSizeHorizontal * 4.1,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                  
+
+
+                                    Container(
+                    height: blockSizeVertical * 38, //38
+                    //color: Colors.blueAccent,
+                    child: FutureBuilder(
+                      future: AllDocRefacApi(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.connectionState !=ConnectionState.done) {
+                          return Center(child: CircularProgressIndicator(backgroundColor: Colors.cyanAccent,));
+                        }
+                        if (snapshot.hasError) {
+                          return Text("Waiting for internet Connection...");
+                        }
+
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              width: blockSizeHorizontal * 40,
+                              margin: EdgeInsets.all(10),
+                              child: Stack(children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        //====================images
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: ClipRRect(
+                                           borderRadius: BorderRadius.circular(14.0),
+                                          child:
+                                          Image(
+                                            image: NetworkImage(
+                                              snapshot.data[index].doctorImage,
+                                            ),
+                                            fit: BoxFit.cover,
+                                            height: blockSizeVertical*18,
+                                            width: blockSizeHorizontal*50,
+                                          ),
+                                        ),
+                                      ),
+
+
+                                      SizedBox(height: blockSizeVertical * 0.5),
+
+
+
+
+                                      Text(
+                                        '${snapshot.data[index].doctorName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: blockSizeHorizontal * 3.5,
+                                          fontFamily: 'Poppins',
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+
+
+
+
+                                      SizedBox(height: blockSizeVertical * 0.8),
+
+
+
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        // color: Colors.green,
+                                        child: Center(
+                                          child: Text(
+                                            'Specialisation : ${snapshot.data[index].specialisation}', //put email
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                // fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                    blockSizeHorizontal * 2.5,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                          ),
+                                        ),
+                                      ),
+
+
+
+
+                                      
+                                    ]),
+                                Positioned(
+                                  bottom: 5,
+                                  left: 2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, bottom: 5),
+                                    child: InkWell(
+                                      onTap: () {
+                                         //Navigator.push(context,MaterialPageRoute(builder: (context) =>DoctorDetails(encId:snapshot.data[index].encDoctorId)));
+                                        Navigator.push(context,MaterialPageRoute(builder: (context) =>DocDetailsRefactorPage(snapshot.data[index].encDoctorId)));
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: blockSizeVertical * 5,
+                                        width: blockSizeHorizontal * 30,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.topRight,
+                                            colors: [
+                                              Theme.of(context).primaryColor,
+                                              Theme.of(context).accentColor
+                                            ],
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Show Details',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: blockSizeHorizontal * 2.7,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          );
+                        }
+                        return Text("Error while calling");
+                      },
+                    ),
+                  ),
+
+
+                  //============================================================= New Doc list end===========================================================================
+
+
+
+
+
+
+                  //=============================================================Surgical refactor================================================================
+
+                  Container(
+                    height: blockSizeVertical * 6.2,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Surgical Package Refactor',
+                          style: TextStyle(
+                              fontSize: blockSizeHorizontal * 4.1,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    height: blockSizeVertical * 30, //38
+                    //color: Colors.blueAccent,
+                    child: FutureBuilder(
+                      future: AllSurgPackRefacApi(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.connectionState !=ConnectionState.done) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return Text("Waiting for internet Connection...");
+                        }
+
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              width: blockSizeHorizontal * 40,
+                              margin: EdgeInsets.all(10),
+                              child: Stack(children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        //====================images
+                                        padding: const EdgeInsets.all(5.0),
+                                        // child: ClipRRect(
+                                        //    borderRadius: BorderRadius.circular(14.0),
+                                        //   child:
+                                        //   Image(
+                                        //     // image: NetworkImage(
+                                        //     //   snapshot.data[index].image,
+                                        //     // ),
+                                        //     fit: BoxFit.cover,
+                                        //     height: blockSizeVertical*18,
+                                        //     width: blockSizeHorizontal*50,
+                                        //   ),
+                                        // ),
+                                      ),
+                                      SizedBox(height: blockSizeVertical * 0.5),
+                                      Text(
+                                        '${snapshot.data[index].packageName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: blockSizeHorizontal * 3.5,
+                                          fontFamily: 'Poppins',
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: blockSizeVertical * 0.8),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        // color: Colors.green,
+                                        child: Center(
+                                          child: Text(
+                                            'Description : ${snapshot.data[index].description}', //put email
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                // fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                    blockSizeHorizontal * 2.5,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 4,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                Positioned(
+                                  bottom: 5,
+                                  left: 2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, bottom: 5),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DietcianDetailsPage(
+                                                        snapshot.data[index]
+                                                            .encDietId,
+                                                        snapshot.data[index]
+                                                            .dietName)));
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: blockSizeVertical * 5,
+                                        width: blockSizeHorizontal * 30,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.topRight,
+                                            colors: [
+                                              Theme.of(context).primaryColor,
+                                              Theme.of(context).accentColor
+                                            ],
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Show Details',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: blockSizeHorizontal * 2.7,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          );
+                        }
+                        return Text("Error while calling");
+                      },
+                    ),
+                  ),
+
+
+                  //=============================================================Surgical refac End===================================================================
+
+
+
+
+
+
+
+
+
+
+
                   ShowUp(
                     delay: delayAmount + 1000,
                     child: SizedBox(
@@ -877,6 +1251,171 @@ class _Home2State extends State<Home2> {
 
                   //============================================================================Pathological end=================================
 
+
+
+
+                  //==================================================================================path refactor===============================================
+
+
+                   Container(
+                    height: blockSizeVertical * 6.2,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Path Details Refactor',
+                          style: TextStyle(
+                              fontSize: blockSizeHorizontal * 4.1,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    height: blockSizeVertical * 30, //38
+                    //color: Colors.blueAccent,
+                    child: FutureBuilder(
+                      future: AllPathTestRefacApi(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.connectionState !=ConnectionState.done) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return Text("Waiting for internet Connection...");
+                        }
+
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              width: blockSizeHorizontal * 40,
+                              margin: EdgeInsets.all(10),
+                              child: Stack(children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        //====================images
+                                        padding: const EdgeInsets.all(5.0),
+                                        // child: ClipRRect(
+                                        //    borderRadius: BorderRadius.circular(14.0),
+                                        //   child:
+                                        //   Image(
+                                        //     // image: NetworkImage(
+                                        //     //   snapshot.data[index].image,
+                                        //     // ),
+                                        //     fit: BoxFit.cover,
+                                        //     height: blockSizeVertical*18,
+                                        //     width: blockSizeHorizontal*50,
+                                        //   ),
+                                        // ),
+                                      ),
+                                      SizedBox(height: blockSizeVertical * 0.5),
+                                      Text(
+                                        '${snapshot.data[index].testName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: blockSizeHorizontal * 3.5,
+                                          fontFamily: 'Poppins',
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: blockSizeVertical * 0.8),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        // color: Colors.green,
+                                        child: Center(
+                                          // child: Text(
+                                          //   'Email : ${snapshot.data[index].testName}', //put email
+                                          //   style: TextStyle(
+                                          //       fontFamily: 'Poppins',
+                                          //       // fontWeight: FontWeight.bold,
+                                          //       fontSize:
+                                          //           blockSizeHorizontal * 2.5,
+                                          //       color: Theme.of(context)
+                                          //           .primaryColor),
+                                          //   textAlign: TextAlign.center,
+                                          //   maxLines: 4,
+                                          // ),
+                                        ),
+                                      ),
+                                    ]),
+                                Positioned(
+                                  bottom: 5,
+                                  left: 2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, bottom: 5),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DietcianDetailsPage(
+                                                        snapshot.data[index]
+                                                            .encDietId,
+                                                        snapshot.data[index]
+                                                            .dietName)));
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: blockSizeVertical * 5,
+                                        width: blockSizeHorizontal * 30,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.topRight,
+                                            colors: [
+                                              Theme.of(context).primaryColor,
+                                              Theme.of(context).accentColor
+                                            ],
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Show Details',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: blockSizeHorizontal * 2.7,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          );
+                        }
+                        return Text("Error while calling");
+                      },
+                    ),
+                  ),
+
+                  
+                  //========================================================================path refac end========================================================
+
                   //================================================================= AllDietician() ========================================================================
                   Container(
                     height: blockSizeVertical * 6.2,
@@ -1033,6 +1572,168 @@ class _Home2State extends State<Home2> {
                       },
                     ),
                   ),
+
+                  //========================================================================================
+
+
+                  //========================================================================================================All HealthCheckup Refact===========================
+
+                             Container(
+                    height: blockSizeVertical * 6.2,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Health Checkups Refac',
+                          style: TextStyle(
+                              fontSize: blockSizeHorizontal * 4.1,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    height: blockSizeVertical * 30, //38
+                    //color: Colors.blueAccent,
+                    child: FutureBuilder(
+                      future: AllHealthCheckUpRefacApi(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.connectionState !=ConnectionState.done) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return Text("Waiting for internet Connection...");
+                        }
+
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              width: blockSizeHorizontal * 40,
+                              margin: EdgeInsets.all(10),
+                              child: Stack(children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        //====================images
+                                        padding: const EdgeInsets.all(5.0),
+                                        // child: ClipRRect(
+                                        //    borderRadius: BorderRadius.circular(14.0),
+                                        //   child:
+                                        //   Image(
+                                        //     // image: NetworkImage(
+                                        //     //   snapshot.data[index].image,
+                                        //     // ),
+                                        //     fit: BoxFit.cover,
+                                        //     height: blockSizeVertical*18,
+                                        //     width: blockSizeHorizontal*50,
+                                        //   ),
+                                        // ),
+                                      ),
+                                      SizedBox(height: blockSizeVertical * 0.5),
+                                      Text(
+                                        '${snapshot.data[index].healthName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: blockSizeHorizontal * 3.5,
+                                          fontFamily: 'Poppins',
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(height: blockSizeVertical * 0.8),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        // color: Colors.green,
+                                        child: Center(
+                                          child: Text(
+                                            'Test Names : ${snapshot.data[index].testName}', //put email
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                // fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                    blockSizeHorizontal * 2.5,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 4,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                Positioned(
+                                  bottom: 5,
+                                  left: 2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0, bottom: 5),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DietcianDetailsPage(
+                                                        snapshot.data[index]
+                                                            .encDietId,
+                                                        snapshot.data[index]
+                                                            .dietName)));
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: blockSizeVertical * 5,
+                                        width: blockSizeHorizontal * 30,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.rectangle,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.topRight,
+                                            colors: [
+                                              Theme.of(context).primaryColor,
+                                              Theme.of(context).accentColor
+                                            ],
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Show Details',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: blockSizeHorizontal * 2.7,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          );
+                        }
+                        return Text("Error while calling");
+                      },
+                    ),
+                  ),
+                  //=============================================================================================All HealthCheckup Refac end====================================
 
                   SizedBox(
                     height: blockSizeVertical * 6.2,
@@ -1337,6 +2038,133 @@ class _Home2State extends State<Home2> {
     }
     //return AllDietician();
   }
+
+
+
+  //==================================================================== Doc Api ========================================================================
+    Future<List<DocInfoList>> AllDocRefacApi() async {
+    var jsonResponse;
+
+    var response = await http.post(
+        Uri.parse("https://medbo.in/api/medboapi/alldoctor"),
+        body: ({
+        }));
+    if (response.statusCode == 200) {
+      print("Correct");
+      print(response.body);
+      jsonResponse = json.decode(response.body.toString());
+      print(jsonResponse);
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterSearchPage(rresponse: SearchApiResponse.fromJson(jsonResponse))));
+      AllDocRefactorModel dataModel = allDocRefactorModelFromJson(response.body); //Model file
+      print(dataModel.data.length);
+      for (final item in dataModel.data) print(item.doctorName);
+
+      List<DocInfoList> arrData =
+          dataModel.data; // this data is actuall json array of data[]
+      //print(arrData[1].dietName);
+      return arrData;
+    } else {
+      print("Wrong Url");
+      print(response.body);
+      throw Exception("Faild to fetch");
+    }
+  }
+  //==================================================================== Doc Api End =====================================================================
+
+
+    //==================================================================== SurgPack Api ========================================================================
+        Future<List<SurgPackInfoList>> AllSurgPackRefacApi() async {
+    var jsonResponse;
+
+    var response = await http.post(
+        Uri.parse("https://medbo.in/api/medboapi/allsurgicalpackage"),
+        body: ({
+        }));
+    if (response.statusCode == 200) {
+      print("Correct");
+      print(response.body);
+      jsonResponse = json.decode(response.body.toString());
+      print(jsonResponse);
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterSearchPage(rresponse: SearchApiResponse.fromJson(jsonResponse))));
+      AllSurgPackModel dataModel = allSurgPackModelFromJson(response.body); //Model file
+      print(dataModel.data.length);
+      for (final item in dataModel.data) print(item.packageName);
+
+      List<SurgPackInfoList> arrData =
+          dataModel.data; // this data is actuall json array of data[]
+      //print(arrData[1].dietName);
+      return arrData;
+    } else {
+      print("Wrong Url");
+      print(response.body);
+      throw Exception("Faild to fetch");
+    }
+  }
+  //==================================================================== SurgPack Api end ========================================================================
+
+
+  //================================================================================================Path APi======================================================
+          Future<List<PathTestListRefac>> AllPathTestRefacApi() async {
+    var jsonResponse;
+
+    var response = await http.post(
+        Uri.parse("https://medbo.in/api/medboapi/allpathologicaltest"),
+        body: ({
+        }));
+    if (response.statusCode == 200) {
+      print("Correct");
+      print(response.body);
+      jsonResponse = json.decode(response.body.toString());
+      print(jsonResponse);
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterSearchPage(rresponse: SearchApiResponse.fromJson(jsonResponse))));
+      AllPathTestModel dataModel = allPathTestModelFromJson(response.body); //Model file
+      print(dataModel.data.length);
+      for (final item in dataModel.data) print(item.testName);
+
+      List<PathTestListRefac> arrData =
+          dataModel.data; // this data is actuall json array of data[]
+      //print(arrData[1].dietName);
+      return arrData;
+    } else {
+      print("Wrong Url");
+      print(response.body);
+      throw Exception("Faild to fetch");
+    }
+  }
+  //================================================================================================Path Api end==================================================
+
+
+  //====================================================================================================================Health Api===============================
+
+            Future<List<HealthCheckUpListRefac>> AllHealthCheckUpRefacApi() async {
+    var jsonResponse;
+
+    var response = await http.post(
+        Uri.parse("https://medbo.in/api/medboapi/allhealthckeckup"),
+        body: ({
+        }));
+    if (response.statusCode == 200) {
+      print("Correct");
+      print(response.body);
+      jsonResponse = json.decode(response.body.toString());
+      print(jsonResponse);
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=>AfterSearchPage(rresponse: SearchApiResponse.fromJson(jsonResponse))));
+      AllHealthCheckUpModel dataModel = allHealthCheckUpModelFromJson(response.body); //Model file
+      print(dataModel.data.length);
+      for (final item in dataModel.data) print(item.healthName);
+
+      List<HealthCheckUpListRefac> arrData =
+          dataModel.data; // this data is actuall json array of data[]
+      //print(arrData[1].dietName);
+      return arrData;
+    } else {
+      print("Wrong Url");
+      print(response.body);
+      throw Exception("Faild to fetch");
+    }
+  }
+  //====================================================================================================================Health api end ==========================
+
 
   // Future<void> dietcianDetailsApi() async {
   //   var jsonResponse;

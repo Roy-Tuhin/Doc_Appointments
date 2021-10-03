@@ -511,10 +511,7 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                         return DataRow(
                             selected: selectedFeesList.contains(testRowData),
                             onSelectChanged: (b) {
-                              setState(() {
-                                onSelectedRow(b!,testRowData); //function which pass 2 two parameter
-                              });
-                              
+                              onSelectedRow(b!,testRowData); //function which pass 2 two parameter
                             },
                             cells: [
 
