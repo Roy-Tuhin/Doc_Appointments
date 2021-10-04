@@ -13,6 +13,9 @@ import 'package:medbo/models/PathRefacModel/AllPathTestModel.dart';
 import 'package:medbo/models/SurgPackRefactor/AllSurgPackModel.dart';
 import 'package:medbo/onTapScreens/DietcianDetails.dart';
 import 'package:medbo/onTapScreens/Doc_Details_Page/DocDetailsRefactorPage.dart';
+import 'package:medbo/onTapScreens/Health_Details_Page/HealthDetailsPageRef.dart';
+import 'package:medbo/onTapScreens/Path_Details_Page/PathTestDetailsPage.dart';
+import 'package:medbo/onTapScreens/Surgical_Details_Page/SurgicalDetailsRefacPage.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
 import 'package:medbo/onTapScreens/healthchkupDetails.dart';
 import 'package:medbo/onTapScreens/lastVisit.dart';
@@ -440,203 +443,203 @@ class _Home2State extends State<Home2> {
 
                   //==========================================End of 1st block=======================
 
-                  ShowUp(
-                    delay: delayAmount + 800,
-                    child: SizedBox(
-                      height: blockSizeVertical * 5.2,
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            'Doctors',
-                            style: TextStyle(
-                                fontSize: blockSizeHorizontal * 4.5,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Poppins',
-                                //fontFamily: 'Poppins',
-                                color: Theme.of(context).primaryColor),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // ShowUp(
+                  //   delay: delayAmount + 800,
+                  //   child: SizedBox(
+                  //     height: blockSizeVertical * 5.2,
+                  //     child: Container(
+                  //       padding: EdgeInsets.all(5),
+                  //       alignment: Alignment.topLeft,
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.only(left: 8.0),
+                  //         child: Text(
+                  //           'Doctors',
+                  //           style: TextStyle(
+                  //               fontSize: blockSizeHorizontal * 4.5,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontFamily: 'Poppins',
+                  //               //fontFamily: 'Poppins',
+                  //               color: Theme.of(context).primaryColor),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
 
-                  ShowUp(
-                    delay: delayAmount + 900,
-                    child: Container(
-                      //=============================================Doc containers==================================================
-                      //=============================================================2nd row  All doc coming==========================================================================
-                      //onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorDetails()));},
-                      height: blockSizeVertical * 38,
-                      //width: double.infinity,
-                      child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: docList == null ? 0 : docList.length, ///////
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          width: blockSizeHorizontal *
-                              40, //================================== white "container" width
-                          margin: EdgeInsets.all(10),
-                          child: Stack(children: [
-                            Column(
-                              //=================================================================================================doc image horizonal============================================
-                              children: [
-                                Padding(
-                                  //====================images
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(14.0),
-                                    child: Image(
-                                      image: NetworkImage(
-                                        docList[index].doctorImage,
-                                      ),
-                                      fit: BoxFit.cover,
-                                      height: blockSizeVertical * 18,
-                                      width: blockSizeHorizontal * 50,
-                                    ),
-                                  ),
-                                ),
-                                // SizedBox(height: 5),
-                                // Padding(
-                                //   padding: const EdgeInsets.all(8.0),
-                                //   child: Center(
-                                //     child: Text(
-                                //       '${docList[index].doctorName}',
-                                //       style: TextStyle(
-                                //           fontFamily: 'Roboto_Condensed',
-                                //           color: Theme.of(context).primaryColor,
-                                //           fontWeight: FontWeight.bold,
-                                //           fontSize: 20),
-                                //       textAlign: TextAlign.center,
-                                //     ),
-                                //   ),
-                                // ),
+                  // ShowUp(
+                  //   delay: delayAmount + 900,
+                  //   child: Container(
+                  //     //=============================================Doc containers==================================================
+                  //     //=============================================================2nd row  All doc coming==========================================================================
+                  //     //onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorDetails()));},
+                  //     height: blockSizeVertical * 38,
+                  //     //width: double.infinity,
+                  //     child: ListView.builder(
+                  //       physics: BouncingScrollPhysics(),
+                  //       shrinkWrap: true,
+                  //       itemCount: docList == null ? 0 : docList.length, ///////
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemBuilder: (context, index) => Container(
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.white,
+                  //           borderRadius: BorderRadius.circular(10),
+                  //         ),
+                  //         width: blockSizeHorizontal *
+                  //             40, //================================== white "container" width
+                  //         margin: EdgeInsets.all(10),
+                  //         child: Stack(children: [
+                  //           Column(
+                  //             //=================================================================================================doc image horizonal============================================
+                  //             children: [
+                  //               Padding(
+                  //                 //====================images
+                  //                 padding: const EdgeInsets.all(5.0),
+                  //                 child: ClipRRect(
+                  //                   borderRadius: BorderRadius.circular(14.0),
+                  //                   child: Image(
+                  //                     image: NetworkImage(
+                  //                       docList[index].doctorImage,
+                  //                     ),
+                  //                     fit: BoxFit.cover,
+                  //                     height: blockSizeVertical * 18,
+                  //                     width: blockSizeHorizontal * 50,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //               // SizedBox(height: 5),
+                  //               // Padding(
+                  //               //   padding: const EdgeInsets.all(8.0),
+                  //               //   child: Center(
+                  //               //     child: Text(
+                  //               //       '${docList[index].doctorName}',
+                  //               //       style: TextStyle(
+                  //               //           fontFamily: 'Roboto_Condensed',
+                  //               //           color: Theme.of(context).primaryColor,
+                  //               //           fontWeight: FontWeight.bold,
+                  //               //           fontSize: 20),
+                  //               //       textAlign: TextAlign.center,
+                  //               //     ),
+                  //               //   ),
+                  //               // ),
 
-                                // SizedBox(height: 10),
-                                // Padding(
-                                //   padding:
-                                //       const EdgeInsets.symmetric(horizontal: 5.0),
-                                //   child: Text(
-                                //     (() {
-                                //       var str =
-                                //           docList[index].specialisation.toString();
-                                //       if (str.length > 3) {
-                                //         return '${docList[index].specialisation.toString().substring(0, 20)} ' +
-                                //             '...';
-                                //       }
+                  //               // SizedBox(height: 10),
+                  //               // Padding(
+                  //               //   padding:
+                  //               //       const EdgeInsets.symmetric(horizontal: 5.0),
+                  //               //   child: Text(
+                  //               //     (() {
+                  //               //       var str =
+                  //               //           docList[index].specialisation.toString();
+                  //               //       if (str.length > 3) {
+                  //               //         return '${docList[index].specialisation.toString().substring(0, 20)} ' +
+                  //               //             '...';
+                  //               //       }
 
-                                //       return "${docList[index].specialisation}";
-                                //     })(),
-                                //     // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
+                  //               //       return "${docList[index].specialisation}";
+                  //               //     })(),
+                  //               //     // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
 
-                                //     style: TextStyle(
-                                //       fontSize: 12,
-                                //       fontFamily: 'Roboto_Condensed',
-                                //       color: Theme.of(context).primaryColor,
-                                //     ),
-                                //     textAlign: TextAlign.center,
-                                //   ),
-                                // ),
+                  //               //     style: TextStyle(
+                  //               //       fontSize: 12,
+                  //               //       fontFamily: 'Roboto_Condensed',
+                  //               //       color: Theme.of(context).primaryColor,
+                  //               //     ),
+                  //               //     textAlign: TextAlign.center,
+                  //               //   ),
+                  //               // ),
 
-                                /////////////////////////////////
+                  //               /////////////////////////////////
 
-                                SizedBox(height: blockSizeVertical * 0.5),
+                  //               SizedBox(height: blockSizeVertical * 0.5),
 
-                                Text('${docList[index].doctorName}',
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: Theme.of(context).primaryColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: blockSizeHorizontal * 3),
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1),
+                  //               Text('${docList[index].doctorName}',
+                  //                   style: TextStyle(
+                  //                       fontFamily: 'Poppins',
+                  //                       color: Theme.of(context).primaryColor,
+                  //                       fontWeight: FontWeight.bold,
+                  //                       fontSize: blockSizeHorizontal * 3),
+                  //                   textAlign: TextAlign.center,
+                  //                   maxLines: 1),
 
-                                SizedBox(height: blockSizeVertical * 0.5),
+                  //               SizedBox(height: blockSizeVertical * 0.5),
 
-                                Text(
-                                  (() {
-                                    var str = docList[index]
-                                        .specialisation
-                                        .toString();
-                                    if (str.length > 3) {
-                                      return '${docList[index].specialisation.toString().substring(0, 20)} ' +
-                                          '...';
-                                    }
+                  //               Text(
+                  //                 (() {
+                  //                   var str = docList[index]
+                  //                       .specialisation
+                  //                       .toString();
+                  //                   if (str.length > 3) {
+                  //                     return '${docList[index].specialisation.toString().substring(0, 20)} ' +
+                  //                         '...';
+                  //                   }
 
-                                    return "${docList[index].specialisation}";
-                                  })(),
-                                  // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
+                  //                   return "${docList[index].specialisation}";
+                  //                 })(),
+                  //                 // '${docList[index].specialisation.toString().substring(0,3)} '+ '...',
 
-                                  style: TextStyle(
-                                    fontSize: blockSizeHorizontal * 2.5,
-                                    fontFamily: 'Poppins',
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  overflow: TextOverflow.clip,
-                                  maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                ),
+                  //                 style: TextStyle(
+                  //                   fontSize: blockSizeHorizontal * 2.5,
+                  //                   fontFamily: 'Poppins',
+                  //                   color: Theme.of(context).primaryColor,
+                  //                 ),
+                  //                 overflow: TextOverflow.clip,
+                  //                 maxLines: 1,
+                  //                 textAlign: TextAlign.center,
+                  //               ),
 
-                                SizedBox(height: blockSizeVertical * 0.5),
-                              ],
-                            ),
-                            Positioned(
-                              bottom: 5,
-                              left: 5,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 15.0, bottom: 5),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            //===============================================================================================================================================
-                                            builder: (context) => DoctorDetails(
-                                                encId: docList[index]
-                                                    .encDoctorId)));
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: blockSizeVertical * 5,
-                                    width: blockSizeHorizontal * 30,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(10),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.topRight,
-                                        colors: [
-                                          Theme.of(context).primaryColor,
-                                          Theme.of(context).accentColor
-                                        ],
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'Show Details',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: blockSizeHorizontal * 2.7,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Poppins',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                    ),
-                  ),
+                  //               SizedBox(height: blockSizeVertical * 0.5),
+                  //             ],
+                  //           ),
+                  //           Positioned(
+                  //             bottom: 5,
+                  //             left: 5,
+                  //             child: Padding(
+                  //               padding: const EdgeInsets.only(
+                  //                   left: 15.0, bottom: 5),
+                  //               child: InkWell(
+                  //                 onTap: () {
+                  //                   Navigator.push(
+                  //                       context,
+                  //                       MaterialPageRoute(
+                  //                           //===============================================================================================================================================
+                  //                           builder: (context) => DoctorDetails(
+                  //                               encId: docList[index]
+                  //                                   .encDoctorId)));
+                  //                 },
+                  //                 child: Container(
+                  //                   alignment: Alignment.center,
+                  //                   height: blockSizeVertical * 5,
+                  //                   width: blockSizeHorizontal * 30,
+                  //                   decoration: BoxDecoration(
+                  //                     shape: BoxShape.rectangle,
+                  //                     borderRadius: BorderRadius.circular(10),
+                  //                     gradient: LinearGradient(
+                  //                       begin: Alignment.topLeft,
+                  //                       end: Alignment.topRight,
+                  //                       colors: [
+                  //                         Theme.of(context).primaryColor,
+                  //                         Theme.of(context).accentColor
+                  //                       ],
+                  //                     ),
+                  //                   ),
+                  //                   child: Text(
+                  //                     'Show Details',
+                  //                     style: TextStyle(
+                  //                       color: Colors.white,
+                  //                       fontSize: blockSizeHorizontal * 2.7,
+                  //                       fontWeight: FontWeight.bold,
+                  //                       fontFamily: 'Poppins',
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ]),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
 
                   //=============================================================Doc list end===========================================================================
 
@@ -951,11 +954,7 @@ class _Home2State extends State<Home2> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    DietcianDetailsPage(
-                                                        snapshot.data[index]
-                                                            .encDietId,
-                                                        snapshot.data[index]
-                                                            .dietName)));
+                                                    SurgicalDetailsRefacPage(snapshot.data[index].encPackageId)));
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
@@ -1009,252 +1008,252 @@ class _Home2State extends State<Home2> {
 
 
 
-                  ShowUp(
-                    delay: delayAmount + 1000,
-                    child: SizedBox(
-                      height: blockSizeVertical * 6.2,
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            'Surgical Package',
-                            style: TextStyle(
-                                fontSize: blockSizeHorizontal * 4.1,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    //=============================================================================================Surgical Package whole box=================================================
-                    height: blockSizeVertical * 30, //38
-                    child: ListView.builder(
-                      itemCount: surglist == null ? 0 : surglist.length,
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        width: blockSizeHorizontal * 40,
-                        margin: EdgeInsets.all(10),
-                        child: Stack(children: [
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  '${surglist[index].packageName}',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: blockSizeHorizontal * 3.5,
-                                    fontFamily: 'Poppins',
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              SizedBox(height: blockSizeVertical * 0.8),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                // color: Colors.green,
-                                child: Text(
-                                  '${surglist[index].description}',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: blockSizeHorizontal * 2.5,
-                                      color: Theme.of(context).primaryColor),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 4,
-                                ),
-                              ),
-                            ],
-                          ),
+                  // ShowUp(
+                  //   delay: delayAmount + 1000,
+                  //   child: SizedBox(
+                  //     height: blockSizeVertical * 6.2,
+                  //     child: Container(
+                  //       padding: EdgeInsets.all(5),
+                  //       alignment: Alignment.topLeft,
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.only(left: 8.0),
+                  //         child: Text(
+                  //           'Surgical Package',
+                  //           style: TextStyle(
+                  //               fontSize: blockSizeHorizontal * 4.1,
+                  //               fontFamily: 'Poppins',
+                  //               fontWeight: FontWeight.bold,
+                  //               color: Theme.of(context).primaryColor),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   //=============================================================================================Surgical Package whole box=================================================
+                  //   height: blockSizeVertical * 30, //38
+                  //   child: ListView.builder(
+                  //     itemCount: surglist == null ? 0 : surglist.length,
+                  //     scrollDirection: Axis.horizontal,
+                  //     physics: BouncingScrollPhysics(),
+                  //     itemBuilder: (context, index) => Container(
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(10),
+                  //       ),
+                  //       width: blockSizeHorizontal * 40,
+                  //       margin: EdgeInsets.all(10),
+                  //       child: Stack(children: [
+                  //         Column(
+                  //           children: [
+                  //             Padding(
+                  //               padding: const EdgeInsets.all(8.0),
+                  //               child: Text(
+                  //                 '${surglist[index].packageName}',
+                  //                 style: TextStyle(
+                  //                   fontWeight: FontWeight.bold,
+                  //                   fontSize: blockSizeHorizontal * 3.5,
+                  //                   fontFamily: 'Poppins',
+                  //                   color: Theme.of(context).primaryColor,
+                  //                 ),
+                  //                 textAlign: TextAlign.center,
+                  //               ),
+                  //             ),
+                  //             SizedBox(height: blockSizeVertical * 0.8),
+                  //             Container(
+                  //               padding: EdgeInsets.symmetric(horizontal: 10),
+                  //               // color: Colors.green,
+                  //               child: Text(
+                  //                 '${surglist[index].description}',
+                  //                 style: TextStyle(
+                  //                     fontFamily: 'Poppins',
+                  //                     // fontWeight: FontWeight.bold,
+                  //                     fontSize: blockSizeHorizontal * 2.5,
+                  //                     color: Theme.of(context).primaryColor),
+                  //                 textAlign: TextAlign.center,
+                  //                 maxLines: 4,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
 
-                          // InkWell(
-                          //   onTap: (){  },
-                          //   child:
-                          Positioned(
-                            bottom: 5,
-                            left: 2,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 15.0, bottom: 5),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SurgPackDetails(
-                                              encId: surglist[index]
-                                                  .encPackageId)));
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: blockSizeVertical * 5,
-                                  width: blockSizeHorizontal * 30,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(10),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.topRight,
-                                      colors: [
-                                        Theme.of(context).primaryColor,
-                                        Theme.of(context).accentColor
-                                      ],
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Show Details',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: blockSizeHorizontal * 2.7,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Poppins',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
-                  ),
+                  //         // InkWell(
+                  //         //   onTap: (){  },
+                  //         //   child:
+                  //         Positioned(
+                  //           bottom: 5,
+                  //           left: 2,
+                  //           child: Padding(
+                  //             padding:
+                  //                 const EdgeInsets.only(left: 15.0, bottom: 5),
+                  //             child: InkWell(
+                  //               onTap: () {
+                  //                 Navigator.push(
+                  //                     context,
+                  //                     MaterialPageRoute(
+                  //                         builder: (context) => SurgPackDetails(
+                  //                             encId: surglist[index]
+                  //                                 .encPackageId)));
+                  //               },
+                  //               child: Container(
+                  //                 alignment: Alignment.center,
+                  //                 height: blockSizeVertical * 5,
+                  //                 width: blockSizeHorizontal * 30,
+                  //                 decoration: BoxDecoration(
+                  //                   shape: BoxShape.rectangle,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                   gradient: LinearGradient(
+                  //                     begin: Alignment.topLeft,
+                  //                     end: Alignment.topRight,
+                  //                     colors: [
+                  //                       Theme.of(context).primaryColor,
+                  //                       Theme.of(context).accentColor
+                  //                     ],
+                  //                   ),
+                  //                 ),
+                  //                 child: Text(
+                  //                   'Show Details',
+                  //                   style: TextStyle(
+                  //                     color: Colors.white,
+                  //                     fontSize: blockSizeHorizontal * 2.7,
+                  //                     fontWeight: FontWeight.bold,
+                  //                     fontFamily: 'Poppins',
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ]),
+                  //     ),
+                  //   ),
+                  // ),
 
                   //============================================================================Surgical end=================================
 
-                  Container(
-                    height: blockSizeVertical * 6.2,
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text(
-                          'Pathological Tests',
-                          style: TextStyle(
-                              fontSize: blockSizeHorizontal * 4.1,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: blockSizeVertical * 30, //38
-                    child: ListView.builder(
-                      itemCount: pathList == null ? 0 : pathList.length,
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        width: blockSizeHorizontal * 40,
-                        margin: EdgeInsets.all(10),
-                        child: Stack(children: [
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    '${pathList[index].testName}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: blockSizeHorizontal * 3.5,
-                                      fontFamily: 'Poppins',
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                SizedBox(height: blockSizeVertical * 0.8),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  // color: Colors.green,
-                                  child: Center(
-                                    child: Text(
-                                      '',
-                                      //'${pathList[index].testId}',
-                                      style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          // fontWeight: FontWeight.bold,
-                                          fontSize: blockSizeHorizontal * 2.5,
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                      textAlign: TextAlign.center,
-                                      maxLines: 4,
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                          Positioned(
-                            bottom: 5,
-                            left: 2,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 15.0, bottom: 5),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PathTestDetails(
-                                              encId:
-                                                  pathList[index].encTestId)));
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: blockSizeVertical * 5,
-                                  width: blockSizeHorizontal * 30,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(10),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.topRight,
-                                      colors: [
-                                        Theme.of(context).primaryColor,
-                                        Theme.of(context).accentColor
-                                      ],
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Show Details',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: blockSizeHorizontal * 2.7,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Poppins',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   height: blockSizeVertical * 6.2,
+                  //   child: Container(
+                  //     padding: EdgeInsets.all(5),
+                  //     alignment: Alignment.topLeft,
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.only(left: 8.0),
+                  //       child: Text(
+                  //         'Pathological Tests',
+                  //         style: TextStyle(
+                  //             fontSize: blockSizeHorizontal * 4.1,
+                  //             fontFamily: 'Poppins',
+                  //             fontWeight: FontWeight.bold,
+                  //             color: Theme.of(context).primaryColor),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   height: blockSizeVertical * 30, //38
+                  //   child: ListView.builder(
+                  //     itemCount: pathList == null ? 0 : pathList.length,
+                  //     scrollDirection: Axis.horizontal,
+                  //     physics: BouncingScrollPhysics(),
+                  //     itemBuilder: (context, index) => Container(
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(10),
+                  //       ),
+                  //       width: blockSizeHorizontal * 40,
+                  //       margin: EdgeInsets.all(10),
+                  //       child: Stack(children: [
+                  //         Column(
+                  //             crossAxisAlignment: CrossAxisAlignment.center,
+                  //             children: [
+                  //               Padding(
+                  //                 padding: const EdgeInsets.all(8.0),
+                  //                 child: Text(
+                  //                   '${pathList[index].testName}',
+                  //                   style: TextStyle(
+                  //                     fontWeight: FontWeight.bold,
+                  //                     fontSize: blockSizeHorizontal * 3.5,
+                  //                     fontFamily: 'Poppins',
+                  //                     color: Theme.of(context).primaryColor,
+                  //                   ),
+                  //                   textAlign: TextAlign.center,
+                  //                 ),
+                  //               ),
+                  //               SizedBox(height: blockSizeVertical * 0.8),
+                  //               Container(
+                  //                 padding: EdgeInsets.symmetric(horizontal: 10),
+                  //                 // color: Colors.green,
+                  //                 child: Center(
+                  //                   child: Text(
+                  //                     '',
+                  //                     //'${pathList[index].testId}',
+                  //                     style: TextStyle(
+                  //                         fontFamily: 'Poppins',
+                  //                         // fontWeight: FontWeight.bold,
+                  //                         fontSize: blockSizeHorizontal * 2.5,
+                  //                         color:
+                  //                             Theme.of(context).primaryColor),
+                  //                     textAlign: TextAlign.center,
+                  //                     maxLines: 4,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ]),
+                  //         Positioned(
+                  //           bottom: 5,
+                  //           left: 2,
+                  //           child: Padding(
+                  //             padding:
+                  //                 const EdgeInsets.only(left: 15.0, bottom: 5),
+                  //             child: InkWell(
+                  //               onTap: () {
+                  //                 Navigator.push(
+                  //                     context,
+                  //                     MaterialPageRoute(
+                  //                         builder: (context) => PathTestDetails(
+                  //                             encId:
+                  //                                 pathList[index].encTestId)));
+                  //               },
+                  //               child: Container(
+                  //                 alignment: Alignment.center,
+                  //                 height: blockSizeVertical * 5,
+                  //                 width: blockSizeHorizontal * 30,
+                  //                 decoration: BoxDecoration(
+                  //                   shape: BoxShape.rectangle,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                   gradient: LinearGradient(
+                  //                     begin: Alignment.topLeft,
+                  //                     end: Alignment.topRight,
+                  //                     colors: [
+                  //                       Theme.of(context).primaryColor,
+                  //                       Theme.of(context).accentColor
+                  //                     ],
+                  //                   ),
+                  //                 ),
+                  //                 child: Text(
+                  //                   'Show Details',
+                  //                   style: TextStyle(
+                  //                     color: Colors.white,
+                  //                     fontSize: blockSizeHorizontal * 2.7,
+                  //                     fontWeight: FontWeight.bold,
+                  //                     fontFamily: 'Poppins',
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ]),
+                  //     ),
+                  //   ),
+                  // ),
 
                   //============================================================================Pathological end=================================
 
 
 
 
-                  //==================================================================================path refactor===============================================
+                  //=========================================================path refactor===============================================
 
 
                    Container(
@@ -1265,7 +1264,7 @@ class _Home2State extends State<Home2> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          'Path Details Refactor',
+                          'Pathological Test Refactor',
                           style: TextStyle(
                               fontSize: blockSizeHorizontal * 4.1,
                               fontFamily: 'Poppins',
@@ -1368,11 +1367,7 @@ class _Home2State extends State<Home2> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    DietcianDetailsPage(
-                                                        snapshot.data[index]
-                                                            .encDietId,
-                                                        snapshot.data[index]
-                                                            .dietName)));
+                                                    PathTestDetailsPageRef(snapshot.data[index].encTestId)));
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
@@ -1414,9 +1409,9 @@ class _Home2State extends State<Home2> {
                   ),
 
                   
-                  //========================================================================path refac end========================================================
+                  //=========================================================path refac end========================================================
 
-                  //================================================================= AllDietician() ========================================================================
+                  //=========================================================================AllDietician() ========================================================================
                   Container(
                     height: blockSizeVertical * 6.2,
                     child: Container(
@@ -1442,9 +1437,9 @@ class _Home2State extends State<Home2> {
                     child: FutureBuilder(
                       future: AllDietician(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        // if (snapshot.connectionState !=ConnectionState.done) {
-                        //   return CircularProgressIndicator();
-                        // }
+                        if (snapshot.connectionState !=ConnectionState.done) {
+                          return Center(child: CircularProgressIndicator());
+                        }
                         if (snapshot.hasError) {
                           return Text("Waiting for internet Connection...");
                         }
@@ -1573,7 +1568,7 @@ class _Home2State extends State<Home2> {
                     ),
                   ),
 
-                  //========================================================================================
+                  //===========================================================================AllDietician End()=======================================
 
 
                   //========================================================================================================All HealthCheckup Refact===========================
@@ -1689,11 +1684,7 @@ class _Home2State extends State<Home2> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    DietcianDetailsPage(
-                                                        snapshot.data[index]
-                                                            .encDietId,
-                                                        snapshot.data[index]
-                                                            .dietName)));
+                                                    HealthDetailsPageRef(snapshot.data[index].encHealthPartnerId)));
                                       },
                                       child: Container(
                                         alignment: Alignment.center,
@@ -1733,122 +1724,122 @@ class _Home2State extends State<Home2> {
                       },
                     ),
                   ),
-                  //=============================================================================================All HealthCheckup Refac end====================================
+                  //=======================================================================================================All HealthCheckup Refac end====================================
 
-                  SizedBox(
-                    height: blockSizeVertical * 6.2,
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text(
-                          'Health Checkups',
-                          style: TextStyle(
-                              fontSize: blockSizeHorizontal * 4.1,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: blockSizeVertical * 30, //38
-                    child: ListView.builder(
-                      itemCount: chkUpList == null ? 0 : chkUpList.length,
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        width: blockSizeHorizontal * 40,
-                        margin: EdgeInsets.all(10),
-                        child: Stack(children: [
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  '${chkUpList[index].healthName}',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: blockSizeHorizontal * 3.5,
-                                    fontFamily: 'Poppins',
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              SizedBox(height: blockSizeVertical * 0.8),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                // color: Colors.green,
-                                child: Text(
-                                  '${chkUpList[index].testName}',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: blockSizeHorizontal * 2.5,
-                                      color: Theme.of(context).primaryColor),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 4,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Positioned(
-                            //===========================================================================show details button
-                            bottom: 5,
-                            left: 5,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 15.0, bottom: 5),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              HlthChkUpDetails(
-                                                  encId: chkUpList[index]
-                                                      .encHealthPartnerId)));
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: blockSizeVertical * 5,
-                                  width: blockSizeHorizontal * 30,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(10),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.topRight,
-                                      colors: [
-                                        Theme.of(context).primaryColor,
-                                        Theme.of(context).accentColor
-                                      ],
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Show Details',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: blockSizeHorizontal * 2.7,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Poppins',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: blockSizeVertical * 6.2,
+                  //   child: Container(
+                  //     padding: EdgeInsets.all(5),
+                  //     alignment: Alignment.topLeft,
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.only(left: 8.0),
+                  //       child: Text(
+                  //         'Health Checkups',
+                  //         style: TextStyle(
+                  //             fontSize: blockSizeHorizontal * 4.1,
+                  //             fontFamily: 'Poppins',
+                  //             fontWeight: FontWeight.bold,
+                  //             color: Theme.of(context).primaryColor),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   height: blockSizeVertical * 30, //38
+                  //   child: ListView.builder(
+                  //     itemCount: chkUpList == null ? 0 : chkUpList.length,
+                  //     scrollDirection: Axis.horizontal,
+                  //     physics: BouncingScrollPhysics(),
+                  //     itemBuilder: (context, index) => Container(
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(10),
+                  //       ),
+                  //       width: blockSizeHorizontal * 40,
+                  //       margin: EdgeInsets.all(10),
+                  //       child: Stack(children: [
+                  //         Column(
+                  //           children: [
+                  //             Padding(
+                  //               padding: const EdgeInsets.all(8.0),
+                  //               child: Text(
+                  //                 '${chkUpList[index].healthName}',
+                  //                 style: TextStyle(
+                  //                   fontWeight: FontWeight.bold,
+                  //                   fontSize: blockSizeHorizontal * 3.5,
+                  //                   fontFamily: 'Poppins',
+                  //                   color: Theme.of(context).primaryColor,
+                  //                 ),
+                  //                 textAlign: TextAlign.center,
+                  //               ),
+                  //             ),
+                  //             SizedBox(height: blockSizeVertical * 0.8),
+                  //             Container(
+                  //               padding: EdgeInsets.symmetric(horizontal: 10),
+                  //               // color: Colors.green,
+                  //               child: Text(
+                  //                 '${chkUpList[index].testName}',
+                  //                 style: TextStyle(
+                  //                     fontFamily: 'Poppins',
+                  //                     // fontWeight: FontWeight.bold,
+                  //                     fontSize: blockSizeHorizontal * 2.5,
+                  //                     color: Theme.of(context).primaryColor),
+                  //                 textAlign: TextAlign.center,
+                  //                 maxLines: 4,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         Positioned(
+                  //           //===========================================================================show details button
+                  //           bottom: 5,
+                  //           left: 5,
+                  //           child: Padding(
+                  //             padding:
+                  //                 const EdgeInsets.only(left: 15.0, bottom: 5),
+                  //             child: InkWell(
+                  //               onTap: () {
+                  //                 Navigator.push(
+                  //                     context,
+                  //                     MaterialPageRoute(
+                  //                         builder: (context) =>
+                  //                             HlthChkUpDetails(
+                  //                                 encId: chkUpList[index]
+                  //                                     .encHealthPartnerId)));
+                  //               },
+                  //               child: Container(
+                  //                 alignment: Alignment.center,
+                  //                 height: blockSizeVertical * 5,
+                  //                 width: blockSizeHorizontal * 30,
+                  //                 decoration: BoxDecoration(
+                  //                   shape: BoxShape.rectangle,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                   gradient: LinearGradient(
+                  //                     begin: Alignment.topLeft,
+                  //                     end: Alignment.topRight,
+                  //                     colors: [
+                  //                       Theme.of(context).primaryColor,
+                  //                       Theme.of(context).accentColor
+                  //                     ],
+                  //                   ),
+                  //                 ),
+                  //                 child: Text(
+                  //                   'Show Details',
+                  //                   style: TextStyle(
+                  //                     color: Colors.white,
+                  //                     fontSize: blockSizeHorizontal * 2.7,
+                  //                     fontWeight: FontWeight.bold,
+                  //                     fontFamily: 'Poppins',
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ]),
+                  //     ),
+                  //   ),
+                  // ),
                 ]),
               ],
             ),

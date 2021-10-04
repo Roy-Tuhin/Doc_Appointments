@@ -1,21 +1,21 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:medbo/Booking/DocBooking.dart';
-import 'package:medbo/models/DocRefactor/DocDetailsRefactorModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:medbo/Booking/SurgicalPackBooking.dart';
+import 'package:medbo/models/SurgPackRefactor/SurgicalPackageDetailsRefactorModel.dart';
 
-class DocDetailsRefactorPage extends StatefulWidget {
-  var docEncId;
-  DocDetailsRefactorPage(this.docEncId);
+
+class SurgicalDetailsRefacPage extends StatefulWidget {
+  var encPackageId;
+  SurgicalDetailsRefacPage(this.encPackageId);
 
   @override
-  _DocDetailsRefactorPageState createState() =>
-      _DocDetailsRefactorPageState(this.docEncId);
+  _SurgicalDetailsRefacPageState createState() => _SurgicalDetailsRefacPageState(this.encPackageId);
 }
 
-class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
-  final _colors = [
+class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
+    final _colors = [
     // Colors.blue.withOpacity(0.1),
     // Colors.red.withOpacity(0.1),
     // Colors.yellow.withOpacity(0.1),
@@ -33,9 +33,8 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
     // Color(0xffD76EF5),
     // Color(0xff42E695),
   ];
-
-  var docEncIdRef;
-  _DocDetailsRefactorPageState(this.docEncIdRef);
+  var encPackageIdRef;
+  _SurgicalDetailsRefacPageState(this.encPackageIdRef);
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -43,7 +42,7 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
     var blockSizeHorizontal = (screenWidth / 100);
     var blockSizeVertical = (screenHeight / 100);
     return Scaffold(
-      appBar: AppBar(
+       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
@@ -61,11 +60,12 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
           color: Color(0xFF02475E),
         ),
       ),
+
       body: SafeArea(
         child: Container(
           height: blockSizeVertical * 100, //38
           child: FutureBuilder(
-            future: DocDetailsApi(),
+            future: SurgicalPackageDetailsRefacApi(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return Center(child: CircularProgressIndicator());
@@ -81,29 +81,29 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                   children: [
                     Row(
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                            color: Color(0xFFffecdd),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                            child: ClipRRect(
-                               borderRadius: BorderRadius.circular(34.0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.network(snapshot.data.doctorData.doctorImage,
-                                fit: BoxFit.cover,
-                                    height: blockSizeVertical * 20,
-                                    width: blockSizeHorizontal*30
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Container(
+                        //     decoration: BoxDecoration(
+                        //                     color: Color(0xFFffecdd),
+                        //                     borderRadius:
+                        //                         BorderRadius.circular(15)),
+                        //     child: ClipRRect(
+                        //        borderRadius: BorderRadius.circular(34.0),
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: Image.network(snapshot.data.doctorData.doctorImage,
+                        //         fit: BoxFit.cover,
+                        //             height: blockSizeVertical * 20,
+                        //             width: blockSizeHorizontal*30
+                        //             ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
                         Container(
                           width: MediaQuery.of(context).size.width - 222,
                           height: blockSizeVertical * 20,
@@ -112,11 +112,11 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                snapshot.data.doctorData.doctorName,
-                                style: TextStyle(fontSize: 32),maxLines: 1,
+                                snapshot.data.surgicalData.packageName,
+                                style: TextStyle(fontSize: 32),maxLines: 5,
                               ),
                               Text(
-                                snapshot.data.doctorData.specialisation,
+                                snapshot.data.surgicalData.description,
                                 style:
                                     TextStyle(fontSize: 19, color: Colors.grey),maxLines: 2,
                               ),
@@ -255,49 +255,62 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                         fontSize: blockSizeVertical * 2),
                                   ),
                                 ),
+
+
+                                 Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    snapshot.data.partnerData[index].partnerAddress,
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: blockSizeVertical * 2),
+                                  ),
+                                ),
                                 //  Text(snapshot.data.partnerData[index].dayList[0].dayName),
       
                                 SizedBox(
                                   height: 10,
                                 ),
       
-                                for (var dayInfo
-                                    in snapshot.data.partnerData[index].dayList)
-                                  Container(
-                                      child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          dayInfo.dayName,
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: blockSizeVertical * 2),
-                                        ),
-                                        SizedBox(width: 50,),
-                                        Text(
-                                          dayInfo.timeFrom,
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: blockSizeVertical * 2),
-                                        ),
-                                        SizedBox(width: 10,),
+                                // for (var dayInfo
+                                //     in snapshot.data.partnerData[index].dayList)
+                                  // Container(
+                                  //     child: Padding(
+                                  //   padding: const EdgeInsets.all(8.0),
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Text(
+                                  //         dayInfo.dayName,
+                                  //         style: TextStyle(
+                                  //             fontFamily: 'Poppins',
+                                  //             color: Colors.white,
+                                  //             fontWeight: FontWeight.w700,
+                                  //             fontSize: blockSizeVertical * 2),
+                                  //       ),
+                                  //       SizedBox(width: 50,),
+                                  //       Text(
+                                  //         dayInfo.timeFrom,
+                                  //         style: TextStyle(
+                                  //             fontFamily: 'Poppins',
+                                  //             color: Colors.white,
+                                  //             fontWeight: FontWeight.w700,
+                                  //             fontSize: blockSizeVertical * 2),
+                                  //       ),
+                                  //       SizedBox(width: 10,),
       
-                                        Text(
-                                          dayInfo.timeTo,
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: blockSizeVertical * 2),
-                                        ),
-                                      ],
-                                    ),
-                                  )),
+                                  //       Text(
+                                  //         dayInfo.timeTo,
+                                  //         style: TextStyle(
+                                  //             fontFamily: 'Poppins',
+                                  //             color: Colors.white,
+                                  //             fontWeight: FontWeight.w700,
+                                  //             fontSize: blockSizeVertical * 2),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // )),
 
                                   Center(
                                     child: Container(
@@ -318,9 +331,9 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              DocBooking(   snapshot.data.partnerData[index],  snapshot.data.doctorData,)));
+                                                              SurgicalPackBooking( snapshot.data.surgicalData, snapshot.data.partnerData[index])));
                                         },
-                                        child: Text("Book Appointment")))
+                                        child: Text("Book Now")))
                               ],
                             ),
                           ),
@@ -336,35 +349,32 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
           ),
         ),
       ),
+      
     );
   }
 
-  Future<DocDetailsRefactorModel> DocDetailsApi() async {
+
+
+
+
+
+
+   // ignore: non_constant_identifier_names
+   Future<SurgicalPackageDetailsRefactorModel> SurgicalPackageDetailsRefacApi() async {
     var jsonResponse;
 
     var response = await http.post(
-        Uri.parse("https://medbo.in/api/medboapi/doctdetails"),
-        body: ({"EncId": docEncIdRef}));
+        Uri.parse("https://medbo.in/api/medboapi/surgicaldetails"),
+        body: ({"EncId": encPackageIdRef}));
     if (response.statusCode == 200) {
       print("Correct");
       print(response.body);
       jsonResponse = json.decode(response.body.toString());
       print(jsonResponse);
 
-      DocDetailsRefactorModel dataModel =
-          docDetailsRefactorModelFromJson(response.body);
+      SurgicalPackageDetailsRefactorModel dataModel = surgicalPackageDetailsRefactorModelFromJson(response.body);
       return dataModel;
-      // print(dataModel.partnerData.length);
-      // for (final item in dataModel.partnerData){
-      //  print(item.partnerName);
-      //  print(item.fee);
-      //  print(item.dayList);
-      //  print(dataModel.doctorData);
-      // }
 
-      // List<PartnerData> arrData =
-      //     dataModel.partnerData; // this data is actuall json array of data[]
-      // return arrData;
     } else {
       print("Wrong Url");
       print(response.body);

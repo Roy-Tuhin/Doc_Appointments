@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:medbo/main.dart';
+import 'package:medbo/onTapScreens/Doc_Details_Page/DocDetailsRefactorPage.dart';
+import 'package:medbo/onTapScreens/Health_Details_Page/HealthDetailsPageRef.dart';
+import 'package:medbo/onTapScreens/Path_Details_Page/PathTestDetailsPage.dart';
 import 'package:medbo/onTapScreens/surgicalPackageDetails.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
 import 'package:medbo/onTapScreens/healthchkupDetails.dart';
@@ -104,23 +107,23 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
                               //======================================patha search redirect===============================
                               if(item.resultFor=='T'&& item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetails(encId:'IujyQXg8KZg8asLvK/FS7g==')));  
+                                 PathTestDetailsPageRef('IujyQXg8KZg8asLvK/FS7g==')));  
                               }//new test
                               else if(item.resultFor=='T'&& item.encId=='U4exk+vfMGrn7cjNUa/PBw=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetails(encId:'U4exk+vfMGrn7cjNUa/PBw==')));  
+                                 PathTestDetailsPageRef('U4exk+vfMGrn7cjNUa/PBw==')));  
 
                               }else if(item.resultFor=='T'&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ==')));  
+                                 PathTestDetailsPageRef('I3uXyzcuDZf21SSe5fHnSQ==')));  
 
                               }else if(item.resultFor=='T'&& item.encId=='B909+U0FIAHIs+sl3IYTvQ=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetails(encId:'B909+U0FIAHIs+sl3IYTvQ==')));  
+                                 PathTestDetailsPageRef('B909+U0FIAHIs+sl3IYTvQ==')));  
 
                               }else if(item.resultFor=='T'&& item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
+                                 PathTestDetailsPageRef('7Ch2aVnhokZtRWyJtuDA/A==')));  
                               }
 
 
@@ -132,23 +135,23 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
                               else if( item.encId=='fXVmzecGStqrhx1PmIgwlQ=='&&item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DoctorDetails(encId:'fXVmzecGStqrhx1PmIgwlQ==')));  
+                                 DocDetailsRefactorPage('fXVmzecGStqrhx1PmIgwlQ==')));  
 
                               }else if( item.encId=='pEl2B9kuumKRxIxLJO76eQ=='&&item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DoctorDetails(encId:'pEl2B9kuumKRxIxLJO76eQ=='))); 
+                                 DocDetailsRefactorPage('pEl2B9kuumKRxIxLJO76eQ=='))); 
 
                               }else if( item.encId=='kFgorcFF0G6RQD4W+LwWnQ=='&&item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DoctorDetails(encId:'kFgorcFF0G6RQD4W+LwWnQ=='))); 
+                                 DocDetailsRefactorPage('kFgorcFF0G6RQD4W+LwWnQ=='))); 
 
                               }else if(item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&& item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DoctorDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ==')));
+                                 DocDetailsRefactorPage('I3uXyzcuDZf21SSe5fHnSQ==')));
 
                               }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&& item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DoctorDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
+                                 DocDetailsRefactorPage('7Ch2aVnhokZtRWyJtuDA/A==')));  
                               }
 
 
@@ -161,19 +164,19 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
                             else if( item.encId=='q8O8YMzYKXSB4RtkX4k7Lw=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HlthChkUpDetails(encId:'q8O8YMzYKXSB4RtkX4k7Lw==')));  
+                                HealthDetailsPageRef('q8O8YMzYKXSB4RtkX4k7Lw==')));  
 
                               }else if( item.encId=='VKo7nNHPtalBOZv4YpBZFg=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HlthChkUpDetails(encId:'VKo7nNHPtalBOZv4YpBZFg==')));
+                                HealthDetailsPageRef('VKo7nNHPtalBOZv4YpBZFg==')));
 
                               }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HlthChkUpDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A=='))); 
+                                HealthDetailsPageRef('7Ch2aVnhokZtRWyJtuDA/A=='))); 
 
                               }else if( item.encId=='eYwtNBXR6P/JDtsIwr+Bvw=='&&item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HlthChkUpDetails(encId:'eYwtNBXR6P/JDtsIwr+Bvw==')));  
+                                HealthDetailsPageRef('eYwtNBXR6P/JDtsIwr+Bvw==')));  
                               }
 
 
