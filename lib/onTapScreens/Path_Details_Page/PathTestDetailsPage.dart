@@ -71,49 +71,52 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                 return Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
-                return  Center(
-                   child: Container(
-                      child: Stack(
-                        children:[ Image.asset(
-                                  "assets/images/10_Connection Lost.png",
-                                  fit: BoxFit.cover,
-                                ),
-
-                                   Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.15,
-            left: MediaQuery.of(context).size.width * 0.3,
-            right: MediaQuery.of(context).size.width * 0.3,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 13),
-                      blurRadius: 25,
-                      color: Color(0xFF5666C2).withOpacity(0.17),
-                    ),
-                ],
-              ),
-              child: ElevatedButton(
-                          onPressed: (){Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed('/');},
-                          style: TextButton.styleFrom(
-                            // backgroundColor: Color(0xFF6CD8D1),
-                            elevation: 0,
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                             // side: BorderSide(color: Color(0xFF6CD8D1)),
+                return Center(
+                  child: Container(
+                    child: Stack(children: [
+                      Image.asset(
+                        "assets/images/10_Connection Lost.png",
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        bottom: MediaQuery.of(context).size.height * 0.15,
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        right: MediaQuery.of(context).size.width * 0.3,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 13),
+                                blurRadius: 25,
+                                color: Color(0xFF5666C2).withOpacity(0.17),
+                              ),
+                            ],
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamed('/');
+                            },
+                            style: TextButton.styleFrom(
+                              // backgroundColor: Color(0xFF6CD8D1),
+                              elevation: 0,
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                                // side: BorderSide(color: Color(0xFF6CD8D1)),
+                              ),
+                            ),
+                            child: Text(
+                              "Try Again",
+                              style: TextStyle(
+                                  color: Colors.black, fontFamily: 'Poppins'),
                             ),
                           ),
-                          child: Text("Try Again",style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),),
                         ),
-            ),
-          )
-                                
-                                ]
-                      ),
-                    ),
-                 );
+                      )
+                    ]),
+                  ),
+                );
               }
 
               if (snapshot.hasData) {
@@ -157,8 +160,12 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                               children: <Widget>[
                                 Text(
                                   snapshot.data.testData.testName,
-                                  style:  TextStyle(fontWeight: FontWeight.bold,
-                          fontSize: blockSizeHorizontal * 5, fontFamily: 'Poppins',  color: Theme.of(context).primaryColor,),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: blockSizeHorizontal * 5,
+                                    fontFamily: 'Poppins',
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                                   maxLines: 3,
                                 ),
                                 // Text(
@@ -361,73 +368,157 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                 // )),
 
                                 Center(
-                                   child: Container(
-                                      child: Row(
-                                        children: [
+                                  child: Container(
+                                    child: Row(
+                                      children: [
                                         Container(
-                                                alignment: Alignment.center,
-                                    height: blockSizeVertical * 5,
-                                    width: blockSizeHorizontal * 17,
-                                    decoration: BoxDecoration(
-                                       color: Color(0xFFfdf4f7),
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                          child: Text( 'Actual Fee\n${snapshot.data.partnerData[index].fee}',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Color(0xFFc23b5d),
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: blockSizeVertical * 1.5),),),
-                                        SizedBox(width: 10,),
-      
-                                        Container(
-                                            alignment: Alignment.center,
-                                    height: blockSizeVertical * 5,
-                                    width: blockSizeHorizontal * 17,
-                                    decoration: BoxDecoration(
-                                       color: Color(0xFFfef6e5),
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                          child: Text(
-                                            'Discount Fee\n ${snapshot.data.partnerData[index].discountedFee}',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Color(0xFFf6c53e),
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: blockSizeVertical * 1.5),
+                                          alignment: Alignment.center,
+                                          height: blockSizeVertical * 6,
+                                          width: blockSizeHorizontal * 20,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFfdf4f7),
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: Container(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Actual Fee',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFc23b5d),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                                Text(
+                                                  '₹ ${snapshot.data.partnerData[index].fee}',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFc23b5d),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-      
-      
-                                         SizedBox(width: 10,),
-      
+                                        SizedBox(
+                                          width: 10,
+                                        ),
                                         Container(
-                                           alignment: Alignment.center,
-                                    height: blockSizeVertical * 5,
-                                    width: blockSizeHorizontal * 17,
-                                    decoration: BoxDecoration(
-                                       color: Color(0xFFecf8f4),
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                          child: Text(
-                                             'Booking Fee\n ${snapshot.data.partnerData[index].bookingFee}',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Color(0xFF54a98c),
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: blockSizeVertical * 1.5),
+                                          alignment: Alignment.center,
+                                          height: blockSizeVertical * 6,
+                                          width: blockSizeHorizontal * 20,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFfef6e5),
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: Container(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Discount Fee',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFf6c53e),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                                Text(
+                                                  '₹ ${snapshot.data.partnerData[index].discountedFee}',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFf6c53e),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-
-                                      ],),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: blockSizeVertical * 6,
+                                          width: blockSizeHorizontal * 20,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFecf8f4),
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: Container(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Booking Fee',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFF54a98c),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                                Text(
+                                                  '₹ ${snapshot.data.partnerData[index].bookingFee}',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFF54a98c),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                  ),
                                 ),
+
+                                SizedBox(height: blockSizeVertical * 10),
 
                                 Center(
                                     child: ElevatedButton(
+                                        style: TextButton.styleFrom(
+                                          //backgroundColor: Color(0xFF6CD8D1),
+                                          elevation: 0,
+                                          backgroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            // side: BorderSide(color: Color(0xFF6CD8D1)),
+                                          ),
+                                        ),
                                         onPressed: () {
                                           Navigator.push(
                                               context,
@@ -440,7 +531,10 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                                                   .partnerData[
                                                               index])));
                                         },
-                                        child: Text("Book Now")))
+                                        child: Container(
+                                          width: blockSizeHorizontal*70,
+                                          height: blockSizeVertical*7,
+                                          child: Center(child: Text("Book Now", style: TextStyle(fontFamily: 'Poppins',color: Colors.black),)))))
                               ],
                             ),
                           ),

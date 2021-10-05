@@ -160,85 +160,91 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                               children: <Widget>[
                                 Text(
                                   snapshot.data.healthData.healthName,
-                                  style: TextStyle(fontWeight: FontWeight.bold,
-                          fontSize: blockSizeHorizontal * 5, fontFamily: 'Poppins',  color: Theme.of(context).primaryColor,),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: blockSizeHorizontal * 5,
+                                    fontFamily: 'Poppins',
+                                    color: Theme.of(context).primaryColor,
+                                  ),
                                   maxLines: 3,
                                 ),
                                 Text(
                                   snapshot.data.healthData.testName,
                                   style: TextStyle(
-                                      fontSize: blockSizeVertical*2, color: Colors.grey,fontFamily: 'Poppins'),
+                                      fontSize: blockSizeVertical * 2,
+                                      color: Colors.grey,
+                                      fontFamily: 'Poppins'),
                                   maxLines: 2,
                                 ),
                                 SizedBox(
-                                  height: blockSizeVertical*5,
+                                  height: blockSizeVertical * 5,
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(right: 16),
-                                      child: Container(
-                                        height: 45,
-                                        width: 45,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xFFffecdd),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.mail,
-                                          ),
-                                          iconSize: 20,
-                                          color: Color(0xFFfbb97c),
-                                          splashColor: Colors.green,
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                    ),
-                                    //===============================================
-                                    Container(
-                                      margin: EdgeInsets.only(right: 16),
-                                      child: Container(
-                                        height: 45,
-                                        width: 45,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xFFffecdd),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.call,
-                                          ),
-                                          iconSize: 20,
-                                          color: Color(0xffF69383),
-                                          splashColor: Colors.green,
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                    ), //=========================================
+                                // Row(
+                                //   children: [
+                                //     Container(
+                                //       margin: EdgeInsets.only(right: 16),
+                                //       child: Container(
+                                //         height: 45,
+                                //         width: 45,
+                                //         decoration: BoxDecoration(
+                                //             color: Color(0xFFffecdd),
+                                //             borderRadius:
+                                //                 BorderRadius.circular(15)),
+                                //         child: IconButton(
+                                //           icon: Icon(
+                                //             Icons.mail,
+                                //           ),
+                                //           iconSize: 20,
+                                //           color: Color(0xFFfbb97c),
+                                //           splashColor: Colors.green,
+                                //           onPressed: () {},
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     //===============================================
+                                //     Container(
+                                //       margin: EdgeInsets.only(right: 16),
+                                //       child: Container(
+                                //         height: 45,
+                                //         width: 45,
+                                //         decoration: BoxDecoration(
+                                //             color: Color(0xFFffecdd),
+                                //             borderRadius:
+                                //                 BorderRadius.circular(15)),
+                                //         child: IconButton(
+                                //           icon: Icon(
+                                //             Icons.call,
+                                //           ),
+                                //           iconSize: 20,
+                                //           color: Color(0xffF69383),
+                                //           splashColor: Colors.green,
+                                //           onPressed: () {},
+                                //         ),
+                                //       ),
+                                //     ), //=========================================
 
-                                    Container(
-                                      margin: EdgeInsets.only(right: 16),
-                                      child: Container(
-                                        height: 45,
-                                        width: 45,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xFFffecdd),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.video_call,
-                                          ),
-                                          iconSize: 20,
-                                          color: Color(0xFFfbb97c),
-                                          splashColor: Colors.green,
-                                          onPressed: () {},
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                //     Container(
+                                //       margin: EdgeInsets.only(right: 16),
+                                //       child: Container(
+                                //         height: 45,
+                                //         width: 45,
+                                //         decoration: BoxDecoration(
+                                //             color: Color(0xFFffecdd),
+                                //             borderRadius:
+                                //                 BorderRadius.circular(15)),
+                                //         child: IconButton(
+                                //           icon: Icon(
+                                //             Icons.video_call,
+                                //           ),
+                                //           iconSize: 20,
+                                //           color: Color(0xFFfbb97c),
+                                //           splashColor: Colors.green,
+                                //           onPressed: () {},
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                               ],
                             ),
                           ),
@@ -246,7 +252,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                       ],
                     ),
                     SizedBox(
-                      height:blockSizeVertical* 0.5,
+                      height: blockSizeVertical * 0.5,
                     ),
 
                     // CircleAvatar(
@@ -321,7 +327,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                 //  Text(snapshot.data.partnerData[index].dayList[0].dayName),
 
                                 SizedBox(
-                                  height: blockSizeVertical*2,
+                                  height: blockSizeVertical * 2,
                                 ),
 
                                 // for (var dayInfo
@@ -368,68 +374,131 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                       children: [
                                         Container(
                                           alignment: Alignment.center,
-                                          height: blockSizeVertical * 5,
-                                          width: blockSizeHorizontal * 17,
+                                          height: blockSizeVertical * 6,
+                                          width: blockSizeHorizontal * 20,
                                           decoration: BoxDecoration(
                                             color: Color(0xFFfdf4f7),
                                             shape: BoxShape.rectangle,
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                           ),
-                                          child: Text(
-                                            'Actual Fee\n${snapshot.data.partnerData[index].fee}',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Color(0xFFc23b5d),
-                                                fontWeight: FontWeight.w700,
-                                                fontSize:
-                                                    blockSizeVertical * 1.5),
+                                          child: Container(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Actual Fee',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFc23b5d),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                                Text(
+                                                  '₹ ${snapshot.data.partnerData[index].fee}',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFc23b5d),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         SizedBox(
-                                          width: blockSizeHorizontal*2,
+                                          width: blockSizeHorizontal * 2,
                                         ),
                                         Container(
                                           alignment: Alignment.center,
-                                          height: blockSizeVertical * 5,
-                                          width: blockSizeHorizontal * 17,
+                                          height: blockSizeVertical * 6,
+                                          width: blockSizeHorizontal * 20,
                                           decoration: BoxDecoration(
                                             color: Color(0xFFfef6e5),
                                             shape: BoxShape.rectangle,
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                           ),
-                                          child: Text(
-                                            'Discount Fee\n ${snapshot.data.partnerData[index].discountedFee}',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Color(0xFFf6c53e),
-                                                fontWeight: FontWeight.w700,
-                                                fontSize:
-                                                    blockSizeVertical * 1.5),
+                                          child: Container(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Discount Fee',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFf6c53e),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                                Text(
+                                                  '₹ ${snapshot.data.partnerData[index].discountedFee}',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFFf6c53e),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         SizedBox(
-                                          width: blockSizeHorizontal*2,
+                                          width: blockSizeHorizontal * 2,
                                         ),
                                         Container(
                                           alignment: Alignment.center,
-                                          height: blockSizeVertical * 5,
-                                          width: blockSizeHorizontal * 17,
+                                          height: blockSizeVertical * 6,
+                                          width: blockSizeHorizontal * 20,
                                           decoration: BoxDecoration(
                                             color: Color(0xFFecf8f4),
                                             shape: BoxShape.rectangle,
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                           ),
-                                          child: Text(
-                                            'Booking Fee\n ${snapshot.data.partnerData[index].bookingFee}',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Color(0xFF54a98c),
-                                                fontWeight: FontWeight.w700,
-                                                fontSize:
-                                                    blockSizeVertical * 1.5),
+                                          child: Container(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Booking Fee',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFF54a98c),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                                Text(
+                                                  '₹ ${snapshot.data.partnerData[index].bookingFee}',
+                                                  style: TextStyle(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFF54a98c),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize:
+                                                          blockSizeVertical *
+                                                              1.5),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -437,8 +506,20 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                   ),
                                 ),
 
+                                SizedBox(height: blockSizeVertical * 10),
+
                                 Center(
                                     child: ElevatedButton(
+                                        style: TextButton.styleFrom(
+                                          //backgroundColor: Color(0xFF6CD8D1),
+                                          elevation: 0,
+                                          backgroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            // side: BorderSide(color: Color(0xFF6CD8D1)),
+                                          ),
+                                        ),
                                         onPressed: () {
                                           Navigator.push(
                                               context,
@@ -451,7 +532,15 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                                   .partnerData[
                                                               index])));
                                         },
-                                        child: Text("Book Now")))
+                                        child: Container(
+                                            width: blockSizeHorizontal * 70,
+                                            height: blockSizeVertical * 7,
+                                            child: Center(
+                                                child: Text(
+                                              "Book Now",
+                                              style: TextStyle(
+                                                  fontFamily: 'Poppins',color: Colors.black),
+                                            )))))
                               ],
                             ),
                           ),
