@@ -7,6 +7,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medbo/API/Login/loginAtFirst.dart';
 import 'package:medbo/API/Search/SearchApiResponse.dart';
 import 'package:medbo/API/Search/afterSearchPage.dart';
@@ -155,12 +156,17 @@ class _Home2State extends State<Home2> {
         actions: <Widget>[
           ElevatedButton(
             // method to exit application programitacally
-            onPressed: (){Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed('/');},
-            child: Text("Retry"),
+            onPressed: () => SystemChannels.platform.invokeMethod('SystemNavigator.pop'),
+            // onPressed: (){
+            //   //  Navigator.of(context).pop();
+            //   //  Navigator.of(context).pushNamed('/');
+            //   SystemChannels.platform.invokeMethod('Systemnavigator.pop');
+            //   },
+            child: Text("Exit"),
           ),
         ],
       ),
+      barrierDismissible: false
     );
       } else if (_previousResult == ConnectivityResult.none) {
         checkinternet().then((result) {
@@ -768,7 +774,9 @@ class _Home2State extends State<Home2> {
                       future: AllDocRefacApi(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState !=ConnectionState.done) {
-                          return Center(child: CircularProgressIndicator(backgroundColor: Colors.cyanAccent,));
+                          return Center(
+                            child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+                            //CircularProgressIndicator(backgroundColor: Colors.cyanAccent,));
                         }
                         if (snapshot.hasError) {
                           return Text("Waiting for internet Connection...");
@@ -945,7 +953,9 @@ class _Home2State extends State<Home2> {
                       future: AllSurgPackRefacApi(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState !=ConnectionState.done) {
-                          return Center(child: CircularProgressIndicator());
+                          return Center(
+                            child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+                            // CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
                           return Text("Waiting for internet Connection...");
@@ -1358,7 +1368,8 @@ class _Home2State extends State<Home2> {
                       future: AllPathTestRefacApi(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState !=ConnectionState.done) {
-                          return Center(child: CircularProgressIndicator());
+                          return Center(child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+                          //CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
                           return Text("Waiting for internet Connection...");
@@ -1514,7 +1525,8 @@ class _Home2State extends State<Home2> {
                       future: AllDietician(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState !=ConnectionState.done) {
-                          return Center(child: CircularProgressIndicator());
+                          return Center(child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+                          //CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
                           return Text("Waiting for internet Connection...");
@@ -1675,7 +1687,8 @@ class _Home2State extends State<Home2> {
                       future: AllHealthCheckUpRefacApi(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.connectionState !=ConnectionState.done) {
-                          return Center(child: CircularProgressIndicator());
+                          return Center(child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+                          //CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
                           return Text("Waiting for internet Connection...");

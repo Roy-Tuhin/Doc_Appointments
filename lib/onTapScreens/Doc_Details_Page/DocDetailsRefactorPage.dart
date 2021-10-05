@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medbo/Booking/DocBooking.dart';
 import 'package:medbo/models/DocRefactor/DocDetailsRefactorModel.dart';
 import 'package:http/http.dart' as http;
@@ -23,10 +24,10 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
     // Colors.green.withOpacity(0.1),
 
     Color(0xff6DC8F3).withOpacity(0.3),
-    Color(0xffFFB157).withOpacity(0.3),
+    Color(0xff42E695).withOpacity(0.3),
     Color(0xffFF5B95).withOpacity(0.3),
     Color(0xffD76EF5).withOpacity(0.3),
-    Color(0xff42E695).withOpacity(0.3),
+    
 
     // Color(0xff6DC8F3),
     // Color(0xffFFB157),
@@ -69,7 +70,9 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
             future: DocDetailsApi(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+               // CircularProgressIndicator());
               }
               if (snapshot.hasError) {
                 return Center(
@@ -312,21 +315,21 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                           .data.partnerData[index].partnerName,
                                       style: TextStyle(
                                           fontFamily: 'Poppins',
-                                          color: Colors.white,
+                                          color: Theme.of(context).primaryColor,
                                           fontWeight: FontWeight.w700,
-                                          fontSize: blockSizeVertical * 3),
+                                          fontSize: blockSizeVertical * 2.5),
                                     ),
                                   ),
 
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(left:8.0),
                                     child: Text(
-                                      '📍${snapshot.data.partnerData[index].partnerAddress}',
+                                      'Location: \t${snapshot.data.partnerData[index].partnerAddress}📍',
                                       style: TextStyle(
                                           fontFamily: 'Poppins',
-                                          color: Colors.white,
+                                          color: Theme.of(context).primaryColor,
                                           fontWeight: FontWeight.w700,
-                                          fontSize: blockSizeVertical * 3),
+                                          fontSize: blockSizeVertical * 2),
                                     ),
                                   ),
 
@@ -348,148 +351,226 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          Text(
-                                            '${dayInfo.dayName} \nFrom : ${dayInfo.timeFrom} - ${dayInfo.timeTo} ',
-                                            style: TextStyle(
-                                                fontFamily: 'Poppins',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w700,
-                                                fontSize:
-                                                    blockSizeVertical * 2),
-                                          ),
-                                          // SizedBox(
-                                          //   width: 10,
-                                          // ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            height: blockSizeVertical * 6,
-                                            width: blockSizeHorizontal * 20,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFfdf4f7),
-                                              shape: BoxShape.rectangle,
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                            ),
+                                          Flexible(
+                                            fit: FlexFit.tight,
                                             child: Container(
+                                              //color: Colors.amberAccent,
+                                              child: Text(
+                                                '${dayInfo.dayName}\n${dayInfo.timeFrom} - ${dayInfo.timeTo} ',
+                                                style: TextStyle(
+                                                    fontFamily: 'Poppins',
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize:
+                                                        blockSizeVertical * 1.5),
+                                              ),
+                                            ),
+                                          ),
+
+
+
+
+
+
+
+
+
+
+
+
+                                          SizedBox(
+                                            width: 1,
+                                          ),
+                                          Flexible(
+                                             fit: FlexFit.tight,
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              height: blockSizeVertical * 5,
+                                              width: blockSizeHorizontal * 17,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFfdf4f7),
+                                                shape: BoxShape.rectangle,
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                              ),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                    'Actual Fee',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFFc23b5d),
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize:
-                                                            blockSizeVertical *
-                                                                1.5),
+                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        'Actual Fee',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xFFc23b5d),
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  Text(
-                                                    '₹ ${snapshot.data.partnerData[index].fee}',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFFc23b5d),
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize:
-                                                            blockSizeVertical *
-                                                                1.5),
+                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        '₹ ${snapshot.data.partnerData[index].fee}',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xFFc23b5d),
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                           ),
-                                          // SizedBox(
-                                          //   width: 10,
-                                          // ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            height: blockSizeVertical * 6,
-                                            width: blockSizeHorizontal * 20,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFfef6e5),
-                                              shape: BoxShape.rectangle,
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                            ),
+
+                                          
+
+
+
+
+
+
+
+
+
+
+
+
+                                          
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Flexible(
+                                            fit: FlexFit.tight,
                                             child: Container(
+                                              alignment: Alignment.center,
+                                              height: blockSizeVertical * 5,
+                                              width: blockSizeHorizontal * 17,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFfef6e5),
+                                                shape: BoxShape.rectangle,
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                              ),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                    'Discount Fee',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFFf6c53e),
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize:
-                                                            blockSizeVertical *
-                                                                1.4),
+                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        'Discount Fee',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xFFf6c53e),
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  Text(
-                                                    '₹ ${snapshot.data.partnerData[index].discountedFee}',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFFf6c53e),
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize:
-                                                            blockSizeVertical *
-                                                                1.5),
+                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        '₹ ${snapshot.data.partnerData[index].discountedFee}',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xFFf6c53e),
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                           ),
-                                          // SizedBox(
-                                          //   width: 10,
-                                          // ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            height: blockSizeVertical * 6,
-                                            width: blockSizeHorizontal * 20,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFecf8f4),
-                                              shape: BoxShape.rectangle,
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                            ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+
+
+
+
+
+
+
+
+
+
+
+                                          
+                                          Flexible(
+                                            fit: FlexFit.tight,
                                             child: Container(
+                                              alignment: Alignment.center,
+                                              height: blockSizeVertical * 5,
+                                              width: blockSizeHorizontal * 17,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFecf8f4),
+                                                shape: BoxShape.rectangle,
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                              ),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                    'Booking Fee',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFF54a98c),
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize:
-                                                            blockSizeVertical *
-                                                                1.5),
+                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        'Booking Fee',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xFF54a98c),
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
                                                   ),
-                                                  Text(
-                                                    '₹ ${snapshot.data.partnerData[index].bookingFee}',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFF54a98c),
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize:
-                                                            blockSizeVertical *
-                                                                1.5),
+                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        '₹ ${snapshot.data.partnerData[index].bookingFee}',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xFF54a98c),
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -499,17 +580,7 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                       ),
                                     )),
 
-                                  // Center(
-                                  //   child: Container(
-                                  //     child: Column(
-                                  //       children: [
-                                  //       Text( snapshot.data.partnerData[index].fee),
-                                  //       Text( snapshot.data.partnerData[index].discountedFee),
-                                  //       Text( snapshot.data.partnerData[index].bookingFee),
-
-                                  //     ],),
-                                  //   ),
-                                  // ),
+                                  
 
                                   Center(
                                       child: ElevatedButton(

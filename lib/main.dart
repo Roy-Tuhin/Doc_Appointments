@@ -109,10 +109,13 @@ ConnectivityResult previous;
           Center(
             child: ElevatedButton(
               // method to exit application programitacally
-             // onPressed: () => SystemChannels.platform.invokeMethod('SystemNavigator.pop'),
-             onPressed: (){Navigator.of(context).pop();
-                      Navigator.of(context).pushNamed('/');},
-              child: Text("Try Again"),
+              onPressed: () => SystemChannels.platform.invokeMethod('SystemNavigator.pop'),
+            //  onPressed: (){
+            //     Navigator.of(context).pop();
+            //   // Navigator.of(context).pushNamed('/');
+            //   //SystemChannels.platform.invokeMethod('Systemnavigator.pop');
+            //   },
+              child: Text("Exit"),
             ),
           ),
         ],

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 import 'package:medbo/Booking/DieticianBooking.dart';
 import 'package:medbo/models/DietDetailsModel.dart';
 
@@ -91,9 +92,10 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                           future: dietcianDetailsApi(),
 
                           builder: (BuildContext context, AsyncSnapshot snapshot) {
-                            // if (snapshot.connectionState !=ConnectionState.done) {
-                            //   return CircularProgressIndicator();
-                            // }
+                            if (snapshot.connectionState !=ConnectionState.done) {
+                              return Center(child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+                              //CircularProgressIndicator());
+                            }
                             if (snapshot.hasError) {
                               return Text("Somthing went wrong");
                             }
@@ -310,7 +312,8 @@ class _DietcianDetailsPageState extends State<DietcianDetailsPage> {
                         ]),
                       );
                     }
-                            return Center(child: CircularProgressIndicator());
+                            return Center(child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json'));
+                            //CircularProgressIndicator());
                             //Text("Error while calling");
                           },
 

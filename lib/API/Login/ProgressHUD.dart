@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ProgressHUD extends StatelessWidget {
 
@@ -29,7 +30,8 @@ class ProgressHUD extends StatelessWidget {
             child: ModalBarrier(dismissible: false, color: color),
           ),
           new Center(
-            child: new CircularProgressIndicator()
+            child:  Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json')
+            //new CircularProgressIndicator()
           ),
         ],
       );
