@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbo/Booking/PathalogicalBookingPage.dart';
 import 'package:medbo/models/PathRefacModel/PathTestDetailsRefactorModel.dart';
+import 'package:medbo/screens2.dart/home2.dart';
 
 class PathTestDetailsPageRef extends StatefulWidget {
   var encPathTestId;
@@ -70,7 +71,49 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                 return Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
-                return Text("Error...");
+                return  Center(
+                   child: Container(
+                      child: Stack(
+                        children:[ Image.asset(
+                                  "assets/images/10_Connection Lost.png",
+                                  fit: BoxFit.cover,
+                                ),
+
+                                   Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.15,
+            left: MediaQuery.of(context).size.width * 0.3,
+            right: MediaQuery.of(context).size.width * 0.3,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 13),
+                      blurRadius: 25,
+                      color: Color(0xFF5666C2).withOpacity(0.17),
+                    ),
+                ],
+              ),
+              child: ElevatedButton(
+                          onPressed: (){Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/');},
+                          style: TextButton.styleFrom(
+                            // backgroundColor: Color(0xFF6CD8D1),
+                            elevation: 0,
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                             // side: BorderSide(color: Color(0xFF6CD8D1)),
+                            ),
+                          ),
+                          child: Text("Try Again",style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),),
+                        ),
+            ),
+          )
+                                
+                                ]
+                      ),
+                    ),
+                 );
               }
 
               if (snapshot.hasData) {
@@ -105,7 +148,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                         // ),
                         Container(
                           width: MediaQuery.of(context).size.width - 12,
-                          height: blockSizeVertical * 20,
+                          height: blockSizeVertical * 25,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
@@ -114,7 +157,8 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                               children: <Widget>[
                                 Text(
                                   snapshot.data.testData.testName,
-                                  style: TextStyle(fontSize: 28),
+                                  style:  TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: blockSizeHorizontal * 5, fontFamily: 'Poppins',  color: Theme.of(context).primaryColor,),
                                   maxLines: 3,
                                 ),
                                 // Text(
@@ -317,18 +361,69 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                 // )),
 
                                 Center(
-                                  child: Container(
-                                    child: Column(
-                                      children: [
-                                        Text(snapshot
-                                            .data.partnerData[index].fee),
-                                        Text(snapshot.data.partnerData[index]
-                                            .discountedFee),
-                                        Text(snapshot.data.partnerData[index]
-                                            .bookingFee),
-                                      ],
+                                   child: Container(
+                                      child: Row(
+                                        children: [
+                                        Container(
+                                                alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfdf4f7),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
                                     ),
-                                  ),
+                                          child: Text( 'Actual Fee\n${snapshot.data.partnerData[index].fee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFFc23b5d),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: blockSizeVertical * 1.5),),),
+                                        SizedBox(width: 10,),
+      
+                                        Container(
+                                            alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfef6e5),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                          child: Text(
+                                            'Discount Fee\n ${snapshot.data.partnerData[index].discountedFee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFFf6c53e),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: blockSizeVertical * 1.5),
+                                          ),
+                                        ),
+      
+      
+                                         SizedBox(width: 10,),
+      
+                                        Container(
+                                           alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFecf8f4),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                          child: Text(
+                                             'Booking Fee\n ${snapshot.data.partnerData[index].bookingFee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFF54a98c),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: blockSizeVertical * 1.5),
+                                          ),
+                                        ),
+
+                                      ],),
+                                    ),
                                 ),
 
                                 Center(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:medbo/Booking/DocBooking.dart';
 import 'package:medbo/models/DocRefactor/DocDetailsRefactorModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:medbo/screens2.dart/home2.dart';
 
 class DocDetailsRefactorPage extends StatefulWidget {
   var docEncId;
@@ -71,7 +72,49 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                 return Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
-                return Text("Error...");
+                return  Center(
+                   child: Container(
+                      child: Stack(
+                        children:[ Image.asset(
+                                  "assets/images/10_Connection Lost.png",
+                                  fit: BoxFit.cover,
+                                ),
+      
+                                   Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.15,
+            left: MediaQuery.of(context).size.width * 0.3,
+            right: MediaQuery.of(context).size.width * 0.3,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 13),
+                      blurRadius: 25,
+                      color: Color(0xFF5666C2).withOpacity(0.17),
+                    ),
+                ],
+              ),
+              child: ElevatedButton(
+                          onPressed: (){Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/');},
+                          style: TextButton.styleFrom(
+                            // backgroundColor: Color(0xFF6CD8D1),
+                            elevation: 0,
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                             // side: BorderSide(color: Color(0xFF6CD8D1)),
+                            ),
+                          ),
+                          child: Text("Try Again",style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),),
+                        ),
+            ),
+          )
+                                
+                                ]
+                      ),
+                    ),
+                 );
               }
       
               if (snapshot.hasData) {
@@ -105,7 +148,7 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                           width: 10,
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width - 222,
+                          width: MediaQuery.of(context).size.width - 200,
                           height: blockSizeVertical * 20,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -113,12 +156,13 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                             children: <Widget>[
                               Text(
                                 snapshot.data.doctorData.doctorName,
-                                style: TextStyle(fontSize: 32),maxLines: 1,
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: blockSizeHorizontal * 6, fontFamily: 'Poppins',  color: Theme.of(context).primaryColor,),maxLines: 1,
                               ),
                               Text(
                                 snapshot.data.doctorData.specialisation,
                                 style:
-                                    TextStyle(fontSize: 19, color: Colors.grey),maxLines: 2,
+                                    TextStyle(fontSize: 19, color: Colors.grey,fontFamily: 'Poppins'),maxLines: 2,
                               ),
       
                               SizedBox(
@@ -207,39 +251,35 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                     // Text(snapshot.data.doctorData.specialisation),
       
                     Expanded(
-                      child: Container(
-                        // decoration: BoxDecoration(
-                        //   color: Colors.amberAccent,
-                        //    borderRadius: BorderRadius.all(Radius.circular(24)),
-                        // ),
-                        child: ListView.builder(
-                           physics: BouncingScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                          itemCount: snapshot.data.partnerData.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Container(
-                            margin: EdgeInsets.only(
-                                top: 20, left: 5, right: 5, bottom: 5),
-                            padding: EdgeInsets.only(
-                                top: 20, left: 5, right: 5, bottom: 20),
-                            decoration: BoxDecoration(
-                                // color: Color(0xFF3E64FF),
-                                //color: Colors.lightBlue[50],
-                                color: _colors[index % _colors.length],
-                                borderRadius: BorderRadius.all(Radius.circular(24)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    //color: Color(0xFF3E64FF).withOpacity(0.3),
-                                    color: Colors.grey.withOpacity(0.9),
-                                    offset: const Offset(
-                                      0.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 3.0,
-                                    spreadRadius: 0.5,
+                      child: ListView.builder(
+                         physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                        itemCount: snapshot.data.partnerData.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            Container(
+                          margin: EdgeInsets.only(
+                              top: 20, left: 5, right: 5, bottom: 5),
+                          padding: EdgeInsets.only(
+                              top: 20, left: 5, right: 5, bottom: 20),
+                          decoration: BoxDecoration(
+                              // color: Color(0xFF3E64FF),
+                              //color: Colors.lightBlue[50],
+                              color: _colors[index % _colors.length],
+                              borderRadius: BorderRadius.all(Radius.circular(24)),
+                              boxShadow: [
+                                BoxShadow(
+                                  //color: Color(0xFF3E64FF).withOpacity(0.3),
+                                  color: Colors.grey.withOpacity(0.9),
+                                  offset: const Offset(
+                                    0.0,
+                                    5.0,
                                   ),
-                                ]),
+                                  blurRadius: 3.0,
+                                  spreadRadius: 0.5,
+                                ),
+                              ]),
+                          child: Container(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -252,10 +292,22 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                         fontFamily: 'Poppins',
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
-                                        fontSize: blockSizeVertical * 2),
+                                        fontSize: blockSizeVertical * 3),
                                   ),
                                 ),
-                                //  Text(snapshot.data.partnerData[index].dayList[0].dayName),
+      
+                                 Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                   '📍${ snapshot.data.partnerData[index].partnerAddress}',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: blockSizeVertical * 3),
+                                  ),
+                                ),
+                               
       
                                 SizedBox(
                                   height: 10,
@@ -265,20 +317,12 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                     in snapshot.data.partnerData[index].dayList)
                                   Container(
                                       child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(top:30.0, bottom: 30, left: 1, right: 1),
                                     child: Row(
+                                      mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(
-                                          dayInfo.dayName,
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: blockSizeVertical * 2),
-                                        ),
-                                        SizedBox(width: 50,),
-                                        Text(
-                                          dayInfo.timeFrom,
+                                          '${dayInfo.dayName} \nFrom : ${dayInfo.timeFrom} - ${dayInfo.timeTo} ' ,
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
                                               color: Colors.white,
@@ -287,29 +331,81 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                         ),
                                         SizedBox(width: 10,),
       
-                                        Text(
-                                          dayInfo.timeTo,
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: blockSizeVertical * 2),
+                                        Container(
+                                           alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfdf4f7),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                          child: Text(
+                                             'Actual Fee\n${snapshot.data.partnerData[index].fee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFFc23b5d),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: blockSizeVertical * 1.5),
+                                          ),
+                                        ),
+                                        SizedBox(width: 10,),
+      
+                                        Container(
+                                            alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfef6e5),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                          child: Text(
+                                            'Discount Fee\n ${snapshot.data.partnerData[index].discountedFee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFFf6c53e),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: blockSizeVertical * 1.5),
+                                          ),
+                                        ),
+      
+      
+                                         SizedBox(width: 10,),
+      
+                                        Container(
+                                           alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFecf8f4),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                          child: Text(
+                                             'Booking Fee\n ${snapshot.data.partnerData[index].bookingFee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFF54a98c),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: blockSizeVertical * 1.5),
+                                          ),
                                         ),
                                       ],
                                     ),
                                   )),
-
-                                  Center(
-                                    child: Container(
-                                      child: Column(
-                                        children: [
-                                        Text( snapshot.data.partnerData[index].fee),
-                                        Text( snapshot.data.partnerData[index].discountedFee),
-                                        Text( snapshot.data.partnerData[index].bookingFee),
-
-                                      ],),
-                                    ),
-                                  ),
+      
+                                  // Center(
+                                  //   child: Container(
+                                  //     child: Column(
+                                  //       children: [
+                                  //       Text( snapshot.data.partnerData[index].fee),
+                                  //       Text( snapshot.data.partnerData[index].discountedFee),
+                                  //       Text( snapshot.data.partnerData[index].bookingFee),
+      
+                                  //     ],),
+                                  //   ),
+                                  // ),
       
                                 Center(
                                     child: ElevatedButton(

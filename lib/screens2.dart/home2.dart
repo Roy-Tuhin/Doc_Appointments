@@ -1,7 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 import 'package:medbo/API/Login/loginAtFirst.dart';
 import 'package:medbo/API/Search/SearchApiResponse.dart';
 import 'package:medbo/API/Search/afterSearchPage.dart';
@@ -39,6 +44,18 @@ class Home2 extends StatefulWidget {
 }
 
 class _Home2State extends State<Home2> {
+     StreamSubscription? connectivitySubscription;
+     ConnectivityResult ?_previousResult;
+
+  bool dialogshown = false;
+
+
+  //   void dispose() {
+  //   super.dispose();
+  //   connectivitySubscription.cancel();
+  // }
+
+
   var scaffoldKey = GlobalKey<ScaffoldState>();
   int delayAmount = 500;
 
@@ -62,58 +79,110 @@ class _Home2State extends State<Home2> {
 
 //======================================================================================================================================================================
 
-  AllDoctorsList doctorList = AllDoctorsList(); // doctorList obj
-  Future<void> getDocs() async {
-    finaldocList = await doctorList
-        .getDocs(); // getDocs() is our function // calling function with the class obj ==> doctorList
-    setState(() {
-      docList = finaldocList;
-    });
-    // print(_datum[0].doctorId);
-    // print('doclist length:  ${finaldocList.length}');
-  }
+  // AllDoctorsList doctorList = AllDoctorsList(); // doctorList obj
+  // Future<void> getDocs() async {
+  //   finaldocList = await doctorList
+  //       .getDocs(); // getDocs() is our function // calling function with the class obj ==> doctorList
+  //   setState(() {
+  //     docList = finaldocList;
+  //   });
+  //   // print(_datum[0].doctorId);
+  //   // print('doclist length:  ${finaldocList.length}');
+  // }
 //======================================================================================================================================================================
 
-  AllSurgPackList sList = AllSurgPackList();
-  Future<void> getSPlist() async {
-    finalsurglist = await sList.getSPList();
-    setState(() {
-      surglist = finalsurglist;
-    });
-    // print(_datum[0].doctorId);
-    // print('surgListLength: ${finalsurglist.length}');
-  }
+  // AllSurgPackList sList = AllSurgPackList();
+  // Future<void> getSPlist() async {
+  //   finalsurglist = await sList.getSPList();
+  //   setState(() {
+  //     surglist = finalsurglist;
+  //   });
+  //   // print(_datum[0].doctorId);
+  //   // print('surgListLength: ${finalsurglist.length}');
+  // }
 //======================================================================================================================================================================
 
-  PathTestList PList = PathTestList();
-  Future<void> getPathTest() async {
-    finalPathList = await PList.getPathTest();
-    setState(() {
-      pathList = finalPathList;
-    });
-    // print(_datum[0].doctorId);
-    // print(finalDatum.length);
-  }
+  // PathTestList PList = PathTestList();
+  // Future<void> getPathTest() async {
+  //   finalPathList = await PList.getPathTest();
+  //   setState(() {
+  //     pathList = finalPathList;
+  //   });
+  //   // print(_datum[0].doctorId);
+  //   // print(finalDatum.length);
+  // }
 //======================================================================================================================================================================
 
-  HlthChkUpList HList = HlthChkUpList();
-  Future<void> getHList() async {
-    finalchkUpList = await HList.getHlthChkUps();
-    setState(() {
-      chkUpList = finalchkUpList;
-    });
-    // print(chkUpList[0].testName);
-    // print(finalchkUpList.length);
+  // HlthChkUpList HList = HlthChkUpList();
+  // Future<void> getHList() async {
+  //   finalchkUpList = await HList.getHlthChkUps();
+  //   setState(() {
+  //     chkUpList = finalchkUpList;
+  //   });
+  //   // print(chkUpList[0].testName);
+  //   // print(finalchkUpList.length);
+  // }
+
+
+
+
+
+
+    Future<bool> checkinternet() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return Future.value(true);
+      }
+    } on SocketException catch (_) {
+      return Future.value(false);
+    }
+    throw Exception(e);
   }
 
+@override
   void initState() {
-    //=====================================================init State
     super.initState();
 
-    getDocs();
-    getSPlist();
-    getPathTest();
-    getHList();
+    connectivitySubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult connresult) {
+      if (connresult == ConnectivityResult.none) {
+        dialogshown = true;
+         showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('ERROR'),
+        content: Text("No Internet Detected."),
+        actions: <Widget>[
+          ElevatedButton(
+            // method to exit application programitacally
+            onPressed: (){Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/');},
+            child: Text("Retry"),
+          ),
+        ],
+      ),
+    );
+      } else if (_previousResult == ConnectivityResult.none) {
+        checkinternet().then((result) {
+          if (result == true) {
+            if (dialogshown == true) {
+              dialogshown = false;
+              Navigator.pop(context);
+            }
+          }
+        });
+      }
+
+      _previousResult = connresult;
+    });
+
+    //=====================================================init State
+    
+
+    // getDocs();
+    // getSPlist();
+    // getPathTest();
+    // getHList();
     //AllDietician();
     // print(_datum[0].doctorId);
     // _initUser();
@@ -128,6 +197,13 @@ class _Home2State extends State<Home2> {
         _loadChkUpList = false;
       });
     }
+  }
+
+   @override
+  void dispose() {
+    super.dispose();
+
+    connectivitySubscription!.cancel();
   }
 
 //=================================================================================================built (BuildContext context)=====================================================================
@@ -672,7 +748,7 @@ class _Home2State extends State<Home2> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          'Doc Refactor',
+                          'Top Doctors',
                           style: TextStyle(
                               fontSize: blockSizeHorizontal * 4.1,
                               fontFamily: 'Poppins',
@@ -851,7 +927,7 @@ class _Home2State extends State<Home2> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          'Surgical Package Refactor',
+                          'Surgical Package ',
                           style: TextStyle(
                               fontSize: blockSizeHorizontal * 4.1,
                               fontFamily: 'Poppins',
@@ -1264,7 +1340,7 @@ class _Home2State extends State<Home2> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          'Pathological Test Refactor',
+                          'Pathological Tests',
                           style: TextStyle(
                               fontSize: blockSizeHorizontal * 4.1,
                               fontFamily: 'Poppins',
@@ -1581,7 +1657,7 @@ class _Home2State extends State<Home2> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          'Health Checkups Refac',
+                          'Health Checkups',
                           style: TextStyle(
                               fontSize: blockSizeHorizontal * 4.1,
                               fontFamily: 'Poppins',

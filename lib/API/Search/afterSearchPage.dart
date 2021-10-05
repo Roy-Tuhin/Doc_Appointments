@@ -6,6 +6,7 @@ import 'package:medbo/main.dart';
 import 'package:medbo/onTapScreens/Doc_Details_Page/DocDetailsRefactorPage.dart';
 import 'package:medbo/onTapScreens/Health_Details_Page/HealthDetailsPageRef.dart';
 import 'package:medbo/onTapScreens/Path_Details_Page/PathTestDetailsPage.dart';
+import 'package:medbo/onTapScreens/Surgical_Details_Page/SurgicalDetailsRefacPage.dart';
 import 'package:medbo/onTapScreens/surgicalPackageDetails.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
 import 'package:medbo/onTapScreens/healthchkupDetails.dart';
@@ -189,19 +190,19 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
                               else if( item.encId=='IujyQXg8KZg8asLvK/FS7g=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgPackDetails(encId:'IujyQXg8KZg8asLvK/FS7g=='))); 
+                               SurgicalDetailsRefacPage('IujyQXg8KZg8asLvK/FS7g=='))); 
 
                               }else if( item.encId=='B909+U0FIAHIs+sl3IYTvQ=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgPackDetails(encId:'B909+U0FIAHIs+sl3IYTvQ==')));  
+                               SurgicalDetailsRefacPage('B909+U0FIAHIs+sl3IYTvQ==')));  
 
                               }else if( item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgPackDetails(encId:'I3uXyzcuDZf21SSe5fHnSQ=='))); 
+                               SurgicalDetailsRefacPage('I3uXyzcuDZf21SSe5fHnSQ=='))); 
 
                               }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgPackDetails(encId:'7Ch2aVnhokZtRWyJtuDA/A==')));  
+                               SurgicalDetailsRefacPage('7Ch2aVnhokZtRWyJtuDA/A==')));  
                               }
 
 

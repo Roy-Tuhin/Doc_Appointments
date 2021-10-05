@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbo/Booking/HealthCheckUpBookingPage.dart';
 import 'package:medbo/models/HealthCheckUpRefacModel/HealthDetailsRefactorModel.dart';
+import 'package:medbo/screens2.dart/home2.dart';
 
 class HealthDetailsPageRef extends StatefulWidget {
   var encHealthPartnerId;
   HealthDetailsPageRef(this.encHealthPartnerId);
 
   @override
-  _HealthDetailsPageRefState createState() => _HealthDetailsPageRefState(this.encHealthPartnerId);
+  _HealthDetailsPageRefState createState() =>
+      _HealthDetailsPageRefState(this.encHealthPartnerId);
 }
 
 class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
-   final _colors = [
+  final _colors = [
     // Colors.blue.withOpacity(0.1),
     // Colors.red.withOpacity(0.1),
     // Colors.yellow.withOpacity(0.1),
@@ -69,7 +71,52 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                 return Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
-                return Text("Error...");
+                return Center(
+                  child: Container(
+                    child: Stack(children: [
+                      Image.asset(
+                        "assets/images/10_Connection Lost.png",
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        bottom: MediaQuery.of(context).size.height * 0.15,
+                        left: MediaQuery.of(context).size.width * 0.3,
+                        right: MediaQuery.of(context).size.width * 0.3,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 13),
+                                blurRadius: 25,
+                                color: Color(0xFF5666C2).withOpacity(0.17),
+                              ),
+                            ],
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamed('/');
+                            },
+                            style: TextButton.styleFrom(
+                              // backgroundColor: Color(0xFF6CD8D1),
+                              elevation: 0,
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                                // side: BorderSide(color: Color(0xFF6CD8D1)),
+                              ),
+                            ),
+                            child: Text(
+                              "Try Again",
+                              style: TextStyle(
+                                  color: Colors.black, fontFamily: 'Poppins'),
+                            ),
+                          ),
+                        ),
+                      )
+                    ]),
+                  ),
+                );
               }
 
               if (snapshot.hasData) {
@@ -104,7 +151,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                         // ),
                         Container(
                           width: MediaQuery.of(context).size.width - 12,
-                          height: blockSizeVertical * 20,
+                          height: blockSizeVertical * 23,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
@@ -113,19 +160,19 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                               children: <Widget>[
                                 Text(
                                   snapshot.data.healthData.healthName,
-                                  style: TextStyle(fontSize: 28),
+                                  style: TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: blockSizeHorizontal * 5, fontFamily: 'Poppins',  color: Theme.of(context).primaryColor,),
                                   maxLines: 3,
                                 ),
                                 Text(
                                   snapshot.data.healthData.testName,
-                                  style:
-                                      TextStyle(fontSize: 19, color: Colors.grey),maxLines: 2,
+                                  style: TextStyle(
+                                      fontSize: blockSizeVertical*2, color: Colors.grey,fontFamily: 'Poppins'),
+                                  maxLines: 2,
                                 ),
-
                                 SizedBox(
-                                  height: 40,
+                                  height: blockSizeVertical*5,
                                 ),
-
                                 Row(
                                   children: [
                                     Container(
@@ -199,7 +246,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height:blockSizeVertical* 0.5,
                     ),
 
                     // CircleAvatar(
@@ -274,7 +321,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                 //  Text(snapshot.data.partnerData[index].dayList[0].dayName),
 
                                 SizedBox(
-                                  height: 10,
+                                  height: blockSizeVertical*2,
                                 ),
 
                                 // for (var dayInfo
@@ -317,14 +364,74 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
 
                                 Center(
                                   child: Container(
-                                    child: Column(
+                                    child: Row(
                                       children: [
-                                        Text(snapshot
-                                            .data.partnerData[index].fee),
-                                        Text(snapshot.data.partnerData[index]
-                                            .discountedFee),
-                                        Text(snapshot.data.partnerData[index]
-                                            .bookingFee),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: blockSizeVertical * 5,
+                                          width: blockSizeHorizontal * 17,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFfdf4f7),
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: Text(
+                                            'Actual Fee\n${snapshot.data.partnerData[index].fee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFFc23b5d),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize:
+                                                    blockSizeVertical * 1.5),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: blockSizeHorizontal*2,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: blockSizeVertical * 5,
+                                          width: blockSizeHorizontal * 17,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFfef6e5),
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: Text(
+                                            'Discount Fee\n ${snapshot.data.partnerData[index].discountedFee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFFf6c53e),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize:
+                                                    blockSizeVertical * 1.5),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: blockSizeHorizontal*2,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: blockSizeVertical * 5,
+                                          width: blockSizeHorizontal * 17,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFecf8f4),
+                                            shape: BoxShape.rectangle,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: Text(
+                                            'Booking Fee\n ${snapshot.data.partnerData[index].bookingFee}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: Color(0xFF54a98c),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize:
+                                                    blockSizeVertical * 1.5),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -337,7 +444,12 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      HealthCheckUpBookingPage(snapshot.data.healthData, snapshot.data.partnerData[index])));
+                                                      HealthCheckUpBookingPage(
+                                                          snapshot
+                                                              .data.healthData,
+                                                          snapshot.data
+                                                                  .partnerData[
+                                                              index])));
                                         },
                                         child: Text("Book Now")))
                               ],
@@ -358,12 +470,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
     );
   }
 
-
-
-
-
-
-    Future<HealthDetailsRefactorModel> HeathDetailsRefacApi() async {
+  Future<HealthDetailsRefactorModel> HeathDetailsRefacApi() async {
     var jsonResponse;
 
     var response = await http.post(

@@ -612,21 +612,21 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                     //     onPressed: () {},
                     //     child: Text('SELECTED ${selectedFeesList.length}'),
                     //   ),
+                    // ),//==============================================================delete butoon=======================================
+                    // Padding(
+                    //   padding: EdgeInsets.all(20.0),
+                    //   child: OutlinedButton(
+                    //     onPressed: selectedFeesList.isEmpty
+                    //         ? null
+                    //         : () {
+                    //           setState(() {
+                    //              deleteSelectedFunction();
+                    //           });
+                    //             // deleteSelectedFunction();
+                    //           },
+                    //     child: Text('DELETE SELECTED'),
+                    //   ),
                     // ),
-                    Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: OutlinedButton(
-                        onPressed: selectedFeesList.isEmpty
-                            ? null
-                            : () {
-                              setState(() {
-                                 deleteSelectedFunction();
-                              });
-                                // deleteSelectedFunction();
-                              },
-                        child: Text('DELETE SELECTED'),
-                      ),
-                    ),
                   ],
                 ),
 
