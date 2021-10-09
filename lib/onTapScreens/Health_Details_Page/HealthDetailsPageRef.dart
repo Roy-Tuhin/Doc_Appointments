@@ -23,11 +23,12 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
     // Colors.yellow.withOpacity(0.1),
     // Colors.green.withOpacity(0.1),
 
-    Color(0xff6DC8F3).withOpacity(0.3),
-    Color(0xffFFB157).withOpacity(0.3),
-    Color(0xffFF5B95).withOpacity(0.3),
-    Color(0xffD76EF5).withOpacity(0.3),
-    Color(0xff42E695).withOpacity(0.3),
+    // Color(0xff6DC8F3).withOpacity(0.3),
+    // Color(0xffFFB157).withOpacity(0.3),
+    // Color(0xffFF5B95).withOpacity(0.3),
+    // Color(0xffD76EF5).withOpacity(0.3),
+    // Color(0xff42E695).withOpacity(0.3),
+    Colors.white,
 
     // Color(0xff6DC8F3),
     // Color(0xffFFB157),
@@ -64,6 +65,16 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
       ),
       body: SafeArea(
         child: Container(
+           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 13),
+                                blurRadius: 25,
+                                //color: Color(0xFF5666C2).withOpacity(0.17),
+                                color: Colors.lightBlue.withOpacity(0.17),
+                              ),
+                            ],
+                          ),
           height: blockSizeVertical * 100, //38
           child: FutureBuilder(
             future: HeathDetailsRefacApi(),
@@ -170,83 +181,101 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                   ),
                                   maxLines: 3,
                                 ),
-                                Text(
-                                  snapshot.data.healthData.testName,
-                                  style: TextStyle(
-                                      fontSize: blockSizeVertical * 2,
-                                      color: Colors.grey,
-                                      fontFamily: 'Poppins'),
-                                  maxLines: 2,
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  child: Text(
+                                    snapshot.data.healthData.testName,
+                                    style: TextStyle(
+                                        fontSize: blockSizeVertical * 2,
+                                        color: Colors.grey,
+                                        fontFamily: 'Poppins'),
+                                    maxLines: 8,
+                                  ),
                                 ),
                                 SizedBox(
                                   height: blockSizeVertical * 5,
                                 ),
-                                // Row(
-                                //   children: [
-                                //     Container(
-                                //       margin: EdgeInsets.only(right: 16),
-                                //       child: Container(
-                                //         height: 45,
-                                //         width: 45,
-                                //         decoration: BoxDecoration(
-                                //             color: Color(0xFFffecdd),
-                                //             borderRadius:
-                                //                 BorderRadius.circular(15)),
-                                //         child: IconButton(
-                                //           icon: Icon(
-                                //             Icons.mail,
-                                //           ),
-                                //           iconSize: 20,
-                                //           color: Color(0xFFfbb97c),
-                                //           splashColor: Colors.green,
-                                //           onPressed: () {},
-                                //         ),
-                                //       ),
-                                //     ),
-                                //     //===============================================
-                                //     Container(
-                                //       margin: EdgeInsets.only(right: 16),
-                                //       child: Container(
-                                //         height: 45,
-                                //         width: 45,
-                                //         decoration: BoxDecoration(
-                                //             color: Color(0xFFffecdd),
-                                //             borderRadius:
-                                //                 BorderRadius.circular(15)),
-                                //         child: IconButton(
-                                //           icon: Icon(
-                                //             Icons.call,
-                                //           ),
-                                //           iconSize: 20,
-                                //           color: Color(0xffF69383),
-                                //           splashColor: Colors.green,
-                                //           onPressed: () {},
-                                //         ),
-                                //       ),
-                                //     ), //=========================================
+                                Row(
+                                  children: [
+                                    Flexible(
+                                      fit:FlexFit.loose,
+                                      child: Container(
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Container(
+                                          height: 45,
+                                          width: 45,
+                                          decoration: BoxDecoration(
+                                              //color: Color(0xFFffecdd),
+                                              color: Theme.of(context).primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.mail,
+                                            ),
+                                            iconSize: 20,
+                                            //color: Color(0xFFfbb97c),
+                                            color: Colors.white,
+                                            splashColor: Colors.green,
+                                            onPressed: () {},
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    //===============================================
+                                     Flexible(
+                                      fit:FlexFit.loose,
+                                      child: Container(
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Container(
+                                          height: 45,
+                                          width: 45,
+                                          decoration: BoxDecoration(
+                                              //color: Color(0xFFffecdd),
+                                              color: Theme.of(context).primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.call,
+                                            ),
+                                            iconSize: 20,
+                                            //color: Color(0xffF69383),
+                                            color: Colors.white,
+                                            splashColor: Colors.green,
+                                            onPressed: () {},
+                                          ),
+                                        ),
+                                      ),
+                                    ), //=========================================
 
-                                //     Container(
-                                //       margin: EdgeInsets.only(right: 16),
-                                //       child: Container(
-                                //         height: 45,
-                                //         width: 45,
-                                //         decoration: BoxDecoration(
-                                //             color: Color(0xFFffecdd),
-                                //             borderRadius:
-                                //                 BorderRadius.circular(15)),
-                                //         child: IconButton(
-                                //           icon: Icon(
-                                //             Icons.video_call,
-                                //           ),
-                                //           iconSize: 20,
-                                //           color: Color(0xFFfbb97c),
-                                //           splashColor: Colors.green,
-                                //           onPressed: () {},
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
+                                     Flexible(
+                                      fit:FlexFit.loose,
+                                      child: Container(
+                                        margin: EdgeInsets.only(right: 16),
+                                        child: Container(
+                                          height: 45,
+                                          width: 45,
+                                          decoration: BoxDecoration(
+                                              //color: Color(0xFFffecdd),
+                                              color: Theme.of(context).primaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.video_call,
+                                            ),
+                                            iconSize: 20,
+                                            //color: Color(0xFFfbb97c),
+                                            color: Colors.white,
+                                            splashColor: Colors.green,
+                                            onPressed: () {},
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -308,7 +337,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                         .data.partnerData[index].partnerName,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w700,
                                         fontSize: blockSizeVertical * 2),
                                   ),
@@ -321,7 +350,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                         .data.partnerData[index].partnerAddress,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                         fontSize: blockSizeVertical * 2),
                                   ),
@@ -398,7 +427,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                         fontFamily: 'Poppins',
                                                         color: Color(0xFFc23b5d),
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w500,
                                                         fontSize:
                                                             blockSizeVertical *
                                                                 1.5),
@@ -414,7 +443,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                         fontFamily: 'Poppins',
                                                         color: Color(0xFFc23b5d),
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w500,
                                                         fontSize:
                                                             blockSizeVertical *
                                                                 1.5),
@@ -448,18 +477,39 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                 fit: FlexFit.tight,
                                                 child: Container(
                                                   child: Text(
-                                                    'Discount Fee',
+                                                    'Discount',
                                                     style: TextStyle(
                                                         fontFamily: 'Poppins',
-                                                        color: Color(0xFFf6c53e),
+                                                        color: Color(0xffF69383),
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w500,
                                                         fontSize:
                                                             blockSizeVertical *
                                                                 1.5),
                                                   ),
                                                 ),
                                               ),
+
+                                                                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        'Fee',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xffF69383),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
+                                                  ),
+
+
+
                                               Flexible(
                                                 fit: FlexFit.tight,
                                                 child: Container(
@@ -467,9 +517,9 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                     '₹ ${snapshot.data.partnerData[index].discountedFee}',
                                                     style: TextStyle(
                                                         fontFamily: 'Poppins',
-                                                        color: Color(0xFFf6c53e),
+                                                        color: Color(0xffF69383),
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w500,
                                                         fontSize:
                                                             blockSizeVertical *
                                                                 1.5),
@@ -508,7 +558,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                         fontFamily: 'Poppins',
                                                         color: Color(0xFF54a98c),
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w500,
                                                         fontSize:
                                                             blockSizeVertical *
                                                                 1.5),
@@ -524,7 +574,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                         fontFamily: 'Poppins',
                                                         color: Color(0xFF54a98c),
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w500,
                                                         fontSize:
                                                             blockSizeVertical *
                                                                 1.5),
@@ -546,7 +596,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                         style: TextButton.styleFrom(
                                           //backgroundColor: Color(0xFF6CD8D1),
                                           elevation: 0,
-                                          backgroundColor: Colors.white,
+                                          backgroundColor:  Theme.of(context).primaryColor,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(50),
@@ -572,7 +622,7 @@ class _HealthDetailsPageRefState extends State<HealthDetailsPageRef> {
                                                 child: Text(
                                               "Book Now",
                                               style: TextStyle(
-                                                  fontFamily: 'Poppins',color: Colors.black),
+                                                  fontFamily: 'Poppins',color: Colors.white),
                                             ),),),),),
                               ],
                             ),

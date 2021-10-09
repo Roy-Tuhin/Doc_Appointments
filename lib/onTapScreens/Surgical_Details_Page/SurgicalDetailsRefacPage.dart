@@ -23,11 +23,12 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
     // Colors.yellow.withOpacity(0.1),
     // Colors.green.withOpacity(0.1),
 
-    Color(0xff6DC8F3).withOpacity(0.3),
-    Color(0xffFFB157).withOpacity(0.3),
-    Color(0xffFF5B95).withOpacity(0.3),
-    Color(0xffD76EF5).withOpacity(0.3),
-    Color(0xff42E695).withOpacity(0.3),
+    // Color(0xff6DC8F3).withOpacity(0.3),
+    // Color(0xffFFB157).withOpacity(0.3),
+    // Color(0xffFF5B95).withOpacity(0.3),
+    // Color(0xffD76EF5).withOpacity(0.3),
+    // Color(0xff42E695).withOpacity(0.3),
+    Colors.white,
 
     // Color(0xff6DC8F3),
     // Color(0xffFFB157),
@@ -65,6 +66,16 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
 
       body: SafeArea(
         child: Container(
+            decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 13),
+                                blurRadius: 25,
+                                //color: Color(0xFF5666C2).withOpacity(0.17),
+                                color: Colors.lightBlue.withOpacity(0.17),
+                              ),
+                            ],
+                          ),
           height: blockSizeVertical * 100, //38
           child: FutureBuilder(
             future: SurgicalPackageDetailsRefacApi(),
@@ -149,7 +160,8 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                         // SizedBox(
                         //   width: 10,
                         // ),
-                        Expanded(
+                        Flexible(
+                          fit: FlexFit.tight,
                           child: Container(
                              //color: Colors.amber,
                             width: MediaQuery.of(context).size.width - 12,
@@ -175,16 +187,18 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                     height: 40,
                                   ),
                               
-                                  // Container(
-                                  //   child: Row(
-                                  //     children: [
-                                  //       Container(
+                                  // Row(
+                                  //   children: [
+                                  //     Flexible(
+                                  //       fit: FlexFit.loose,
+                                  //       child: Container(
                                   //         margin: EdgeInsets.only(right: 16),
                                   //         child: Container(
                                   //           height: 45,
                                   //           width: 45,
                                   //           decoration: BoxDecoration(
-                                  //               color: Color(0xFFffecdd),
+                                  //               //color: Color(0xFFffecdd),
+                                  //                color: Theme.of(context).primaryColor,
                                   //               borderRadius:
                                   //                   BorderRadius.circular(15)),
                                   //           child: IconButton(
@@ -192,56 +206,61 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                   //               Icons.mail,
                                   //             ),
                                   //             iconSize: 20,
-                                  //             color: Color(0xFFfbb97c),
+                                  //             //color: Color(0xFFfbb97c),
+                                  //             color: Colors.white,
                                   //             splashColor: Colors.green,
                                   //             onPressed: () {},
                                   //           ),
                                   //         ),
                                   //       ),
-                                  //       //===============================================
-                                  //       Container(
-                                  //         margin: EdgeInsets.only(right: 16),
-                                  //         child: Container(
-                                  //           height: 45,
-                                  //           width: 45,
-                                  //           decoration: BoxDecoration(
-                                  //               color: Color(0xFFffecdd),
-                                  //               borderRadius:
-                                  //                   BorderRadius.circular(15)),
-                                  //           child: IconButton(
-                                  //             icon: Icon(
-                                  //               Icons.call,
-                                  //             ),
-                                  //             iconSize: 20,
-                                  //             color: Color(0xffF69383),
-                                  //             splashColor: Colors.green,
-                                  //             onPressed: () {},
+                                  //     ),
+                                  //     //===============================================
+                                  //     Container(
+                                  //       margin: EdgeInsets.only(right: 16),
+                                  //       child: Container(
+                                  //         height: 45,
+                                  //         width: 45,
+                                  //         decoration: BoxDecoration(
+                                  //             //color: Color(0xFFffecdd),
+                                  //              color: Theme.of(context).primaryColor,
+                                  //             borderRadius:
+                                  //                 BorderRadius.circular(15)),
+                                  //         child: IconButton(
+                                  //           icon: Icon(
+                                  //             Icons.call,
                                   //           ),
-                                  //         ),
-                                  //       ),//=========================================
-                              
-                                  //       Container(
-                                  //         margin: EdgeInsets.only(right: 16),
-                                  //         child: Container(
-                                  //           height: 45,
-                                  //           width: 45,
-                                  //           decoration: BoxDecoration(
-                                  //               color: Color(0xFFffecdd),
-                                  //               borderRadius:
-                                  //                   BorderRadius.circular(15)),
-                                  //           child: IconButton(
-                                  //             icon: Icon(
-                                  //               Icons.video_call,
-                                  //             ),
-                                  //             iconSize: 20,
-                                  //             color: Color(0xFFfbb97c),
-                                  //             splashColor: Colors.green,
-                                  //             onPressed: () {},
-                                  //           ),
+                                  //           iconSize: 20,
+                                  //           //color: Color(0xffF69383),
+                                  //           color: Colors.white,
+                                  //           splashColor: Colors.green,
+                                  //           onPressed: () {},
                                   //         ),
                                   //       ),
-                                  //     ],
-                                  //   ),
+                                  //     ),//=========================================
+                                                            
+                                  //     Container(
+                                  //       margin: EdgeInsets.only(right: 16),
+                                  //       child: Container(
+                                  //         height: 45,
+                                  //         width: 45,
+                                  //         decoration: BoxDecoration(
+                                  //             //color: Color(0xFFffecdd),
+                                  //              color: Theme.of(context).primaryColor,
+                                  //             borderRadius:
+                                  //                 BorderRadius.circular(15)),
+                                  //         child: IconButton(
+                                  //           icon: Icon(
+                                  //             Icons.video_call,
+                                  //           ),
+                                  //           iconSize: 20,
+                                  //           //color: Color(0xFFfbb97c),
+                                  //           color: Colors.white,
+                                  //           splashColor: Colors.green,
+                                  //           onPressed: () {},
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ],
                                   // ),
                               
                                 ],
@@ -304,7 +323,7 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                     snapshot.data.partnerData[index].partnerName,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w700,
                                         fontSize: blockSizeVertical * 2),
                                   ),
@@ -317,7 +336,7 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                     snapshot.data.partnerData[index].partnerAddress,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                         fontSize: blockSizeVertical * 2),
                                   ),
@@ -436,15 +455,38 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                                   fit: FlexFit.tight,
                                                   child: Container(
                                                     child: Text(
-                                                      'Discount Fee',
+                                                      'Discount',
                                                       style: TextStyle(
                                                           fontFamily: 'Poppins',
-                                                          color: Color(0xFFf6c53e),
-                                                          fontWeight: FontWeight.w700,
+                                                          //color: Color(0xFFf6c53e),
+                                                          color:
+                                                                Color(0xffF69383),
+                                                          fontWeight: FontWeight.w500,
                                                           fontSize: blockSizeVertical * 1.5),
                                                     ),
                                                   ),
                                                 ),
+
+                                                Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        'Fee',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xffF69383),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
+                                                  ),
+
+
+
                                                 Flexible(
                                                   fit: FlexFit.tight,
                                                   child: Container(
@@ -452,8 +494,10 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                                       '₹ ${snapshot.data.partnerData[index].discountedFee}',
                                                       style: TextStyle(
                                                           fontFamily: 'Poppins',
-                                                          color: Color(0xFFf6c53e),
-                                                          fontWeight: FontWeight.w700,
+                                                          //color: Color(0xFFf6c53e),
+                                                          color:
+                                                                Color(0xffF69383),
+                                                          fontWeight: FontWeight.w500,
                                                           fontSize: blockSizeVertical * 1.5),
                                                     ),
                                                   ),
@@ -488,7 +532,7 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                                       style: TextStyle(
                                                           fontFamily: 'Poppins',
                                                           color: Color(0xFF54a98c),
-                                                          fontWeight: FontWeight.w700,
+                                                          fontWeight: FontWeight.w500,
                                                           fontSize: blockSizeVertical * 1.5),
                                                     ),
                                                   ),
@@ -502,7 +546,7 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                                       style: TextStyle(
                                                           fontFamily: 'Poppins',
                                                           color: Color(0xFF54a98c),
-                                                          fontWeight: FontWeight.w700,
+                                                          fontWeight: FontWeight.w500,
                                                           fontSize: blockSizeVertical * 1.5),
                                                                                                  ),
                                                    ),
@@ -523,7 +567,7 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                           style: TextButton.styleFrom(
                                    // backgroundColor: Color(0xFF6CD8D1),
                                           elevation: 0,
-                                          backgroundColor: Colors.white,
+                                          backgroundColor:  Theme.of(context).primaryColor,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(50),
@@ -540,7 +584,7 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
                                          child: Container(
                                           width: blockSizeHorizontal*70,
                                           height: blockSizeVertical*7,
-                                          child: Center(child: Text("Book Now", style: TextStyle(fontFamily: 'Poppins',color: Colors.black),)))))
+                                          child: Center(child: Text("Book Now", style: TextStyle(fontFamily: 'Poppins',color: Colors.white),)))))
                               ],
                             ),
                           ),

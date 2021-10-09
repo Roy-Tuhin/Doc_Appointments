@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medbo/Booking/paymentAmountDetails.dart';
 import 'package:medbo/main.dart';
 import 'package:medbo/models/DocBookingAcknowledgement.dart';
@@ -29,6 +30,10 @@ class _DieticianAfterDateSelectPageState extends State<DieticianAfterDateSelectP
   //  _SecondState(this.responseRef);
   @override
   Widget build(BuildContext context) {
+        var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var blockSizeHorizontal = (screenWidth / 100);
+    var blockSizeVertical = (screenHeight / 100);
     return Scaffold(
       backgroundColor: Color(0xFFd6ecfe),
       body: SafeArea(
@@ -76,17 +81,30 @@ class _DieticianAfterDateSelectPageState extends State<DieticianAfterDateSelectP
                     ),
                     Spacer(),
                     ElevatedButton(
+                        style: TextButton.styleFrom(
+                                          //backgroundColor: Color(0xFF6CD8D1),
+                                          elevation: 0,
+                                          backgroundColor: Theme.of(context).primaryColor,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            // side: BorderSide(color: Color(0xFF6CD8D1)),
+                                          ),),
+          
                         onPressed: () {
                           //PaymentDetails();
                           PaymentDetailsAmount();
                         },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Color(0xFF79a0be)),
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.only(left: 50, right: 50)),
-                        ),
-                        child: Text("Book Now")),
+                        // style: ButtonStyle(
+                        //   backgroundColor:
+                        //       MaterialStateProperty.all(Color(0xFF79a0be)),
+                        //   padding: MaterialStateProperty.all(
+                        //       EdgeInsets.only(left: 50, right: 50)),
+                        // ),
+                         child: Container(
+                                          width: blockSizeHorizontal*70,
+                                          height: blockSizeVertical*7,
+                                          child: Center(child: Text("Book Now", style: TextStyle(fontFamily: 'Poppins',color: Colors.white),)))),
                     Spacer(),
                   ],
                 ),
@@ -96,10 +114,12 @@ class _DieticianAfterDateSelectPageState extends State<DieticianAfterDateSelectP
             Expanded(
               flex: 3,
               child: Container(
-                child: Image.asset(
-                  "assets/images/medbo-doctors.png",
-                  fit: BoxFit.cover,
-                ),
+                child: 
+                // Image.asset(
+                //   "assets/images/medbo-doctors.png",
+                //   fit: BoxFit.cover,
+                // ),
+                Lottie.network('https://assets6.lottiefiles.com/private_files/lf30_brec9S.json')
               ),
             ),
             // now we create homePage
@@ -137,31 +157,4 @@ class _DieticianAfterDateSelectPageState extends State<DieticianAfterDateSelectP
     }
   }
 
-  // Future<void> PaymentDetails() async {
-  //   var jsonResponse;
-  //   if (widget.rresponse.encBookingId.isNotEmpty) {
-  //     var response = await http.post(
-  //         Uri.parse("http://medbo.digitalicon.in/api/medboapi/DoPayment"),
-  //         body: ({
-  //           'EncId': widget.rresponse.encBookingId,
-  //         }));
-  //     if (response.statusCode == 200) {
-  //       print("Correct");
-  //       print(response.body);
-  //       jsonResponse = json.decode(response.body.toString());
-  //       print(jsonResponse);
-  //       Navigator.push(
-  //           context,
-  //           MaterialPageRoute(
-  //               builder: (context) => DocBookingAcknowledgementPage(
-  //                   rresponse:
-  //                       DocBookingAcknowledgement.fromJson(jsonResponse))));
-  //     } else {
-  //       print("Wrong URL");
-  //       throw Exception("Faild to fetch");
-  //     }
-  //   } else {
-  //     throw Exception("Faild to fetch");
-  //   }
-  // }
 }

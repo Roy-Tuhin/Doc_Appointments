@@ -61,10 +61,12 @@ class Settings extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: blockSizeVertical*50,
                   //color: Colors.white,
-                  child: Image(
-                    image: AssetImage('assets/images/medbo-home-banner-removebg.png'),
-                    fit: BoxFit.contain,
-                  ),
+                  child:
+                  //  Image(
+                  //   image: AssetImage('assets/images/medbo-home-banner-removebg.png'),
+                  //   fit: BoxFit.contain,
+                  // ),
+                  Image.network('https://i.postimg.cc/Bnfh4268/medbo-home-banner-removebg.png'),
                 ),
               ),
               SizedBox(

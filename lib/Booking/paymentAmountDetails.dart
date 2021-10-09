@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medbo/main.dart';
 import 'package:medbo/models/DocBookingAcknowledgement.dart';
 import 'package:medbo/models/DocBookingModel.dart';
@@ -93,10 +94,11 @@ class _PaymentAmountDetailsPageState
                   ),
                   child: Column(
                     children: [
-                      Image.asset(
-                        "assets/images/payment2.png",
-                        fit: BoxFit.cover,
-                      ),
+                      // Image.asset(
+                      //   "assets/images/payment2.png",
+                      //   fit: BoxFit.cover,
+                      // ),
+                       Lottie.network('https://assets5.lottiefiles.com/packages/lf20_pu02tdjw.json',fit: BoxFit.cover,),
 
                       Center(
                         child: Row(

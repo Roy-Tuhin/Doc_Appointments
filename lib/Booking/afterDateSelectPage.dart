@@ -94,10 +94,12 @@ class _AfterDateSelectPageState extends State<AfterDateSelectPage> {
             Expanded(
               flex: 3,
               child: Container(
-                child: Image.asset(
-                  "assets/images/medbo-doctors.png",
-                  fit: BoxFit.cover,
-                ),
+                child: 
+                // Image.asset(
+                //   "assets/images/medbo-doctors.png",
+                //   fit: BoxFit.cover,
+                // ),
+                Image.network('https://i.postimg.cc/4N98DWJk/medbo-doctors.png',fit: BoxFit.cover,),
               ),
             ),
             // now we create homePage

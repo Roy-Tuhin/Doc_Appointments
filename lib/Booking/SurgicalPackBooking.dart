@@ -688,11 +688,23 @@ void getCred() async{
                 //       ),
                 //     ),
 
-                //     ElevatedButton(
-                //         onPressed: () {
-                //            SaveSurgicalBooking();
-                //         },
-                //         child: Text("Book Appointment")),
+                    ElevatedButton(
+                           style: TextButton.styleFrom(
+                                   // backgroundColor: Color(0xFF6CD8D1),
+                                          elevation: 0,
+                                          backgroundColor:  Theme.of(context).primaryColor,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            // side: BorderSide(color: Color(0xFF6CD8D1)),
+                                           ), ),
+                        onPressed: () {
+                           SaveSurgicalBooking();
+                        },
+                          child: Container(
+                                          width: blockSizeHorizontal*70,
+                                          height: blockSizeVertical*7,
+                                          child: Center(child: Text("Book Appointment", style: TextStyle(fontFamily: 'Poppins',color: Colors.white),)))),
                 //   ],
                 // ),
              // ),

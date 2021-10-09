@@ -78,8 +78,9 @@ class _SideDrawerState extends State<SideDrawer> {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               image:
-                                  AssetImage("assets/images/medbo-doctors.png"),
-                              fit: BoxFit.contain,
+                                  //AssetImage("assets/images/medbo-doctors.png"),
+                                   NetworkImage('https://i.postimg.cc/4N98DWJk/medbo-doctors.png'),
+                            fit: BoxFit.contain,
                             ),
                             border: Border.all(color: Colors.white, width: 4),
                           ),

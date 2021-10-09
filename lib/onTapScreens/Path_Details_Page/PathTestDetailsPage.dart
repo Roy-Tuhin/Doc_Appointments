@@ -25,11 +25,13 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
     // Colors.yellow.withOpacity(0.1),
     // Colors.green.withOpacity(0.1),
 
-    Color(0xff6DC8F3).withOpacity(0.3),
-    Color(0xffFFB157).withOpacity(0.3),
-    Color(0xffFF5B95).withOpacity(0.3),
-    Color(0xffD76EF5).withOpacity(0.3),
-    Color(0xff42E695).withOpacity(0.3),
+    // Color(0xff6DC8F3).withOpacity(0.3),
+    // Color(0xffFFB157).withOpacity(0.3),
+    // Color(0xffFF5B95).withOpacity(0.3),
+    // Color(0xffD76EF5).withOpacity(0.3),
+    // Color(0xff42E695).withOpacity(0.3),
+
+        Colors.white
 
     // Color(0xff6DC8F3),
     // Color(0xffFFB157),
@@ -64,6 +66,16 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
       ),
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 13),
+                                blurRadius: 25,
+                                //color: Color(0xFF5666C2).withOpacity(0.17),
+                                color: Colors.lightBlue.withOpacity(0.17),
+                              ),
+                            ],
+                          ),
           height: blockSizeVertical * 100, //38
           child: FutureBuilder(
             future: PathTestDetailsRefacApi(),
@@ -188,7 +200,8 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                         height: 45,
                                         width: 45,
                                         decoration: BoxDecoration(
-                                            color: Color(0xFFffecdd),
+                                            //color: Color(0xFFffecdd),
+                                            color: Theme.of(context).primaryColor,
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         child: IconButton(
@@ -196,7 +209,8 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                             Icons.mail,
                                           ),
                                           iconSize: 20,
-                                          color: Color(0xFFfbb97c),
+                                          //color: Color(0xFFfbb97c),
+                                          color: Colors.white,
                                           splashColor: Colors.green,
                                           onPressed: () {},
                                         ),
@@ -209,7 +223,8 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                         height: 45,
                                         width: 45,
                                         decoration: BoxDecoration(
-                                            color: Color(0xFFffecdd),
+                                            //color: Color(0xFFffecdd),
+                                            color: Theme.of(context).primaryColor,
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         child: IconButton(
@@ -217,7 +232,8 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                             Icons.call,
                                           ),
                                           iconSize: 20,
-                                          color: Color(0xffF69383),
+                                          //color: Color(0xffF69383),
+                                          color: Colors.white,
                                           splashColor: Colors.green,
                                           onPressed: () {},
                                         ),
@@ -230,7 +246,8 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                         height: 45,
                                         width: 45,
                                         decoration: BoxDecoration(
-                                            color: Color(0xFFffecdd),
+                                            //color: Color(0xFFffecdd),
+                                            color: Theme.of(context).primaryColor,
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         child: IconButton(
@@ -238,7 +255,8 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                             Icons.video_call,
                                           ),
                                           iconSize: 20,
-                                          color: Color(0xFFfbb97c),
+                                          //color: Color(0xFFfbb97c),
+                                          color: Colors.white,
                                           splashColor: Colors.green,
                                           onPressed: () {},
                                         ),
@@ -307,7 +325,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                         .data.partnerData[index].partnerName,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w700,
                                         fontSize: blockSizeVertical * 2),
                                   ),
@@ -320,7 +338,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                         .data.partnerData[index].partnerAddress,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                         fontSize: blockSizeVertical * 2),
                                   ),
@@ -398,7 +416,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                                           fontFamily: 'Poppins',
                                                           color: Color(0xFFc23b5d),
                                                           fontWeight:
-                                                              FontWeight.w700,
+                                                              FontWeight.w500,
                                                           fontSize:
                                                               blockSizeVertical *
                                                                   1.5),
@@ -414,7 +432,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                                           fontFamily: 'Poppins',
                                                           color: Color(0xFFc23b5d),
                                                           fontWeight:
-                                                              FontWeight.w700,
+                                                              FontWeight.w500,
                                                           fontSize:
                                                               blockSizeVertical *
                                                                   1.5),
@@ -448,18 +466,38 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                                   fit: FlexFit.tight,
                                                   child: Container(
                                                     child: Text(
-                                                      'Discount Fee',
+                                                      'Discount',
                                                       style: TextStyle(
                                                           fontFamily: 'Poppins',
-                                                          color: Color(0xFFf6c53e),
+                                                          //color: Color(0xFFf6c53e),
+                                                          color:
+                                                                Color(0xffF69383),
                                                           fontWeight:
-                                                              FontWeight.w700,
+                                                              FontWeight.w500,
                                                           fontSize:
                                                               blockSizeVertical *
                                                                   1.5),
                                                     ),
                                                   ),
                                                 ),
+
+                                                  Flexible(
+                                                    fit: FlexFit.tight,
+                                                    child: Container(
+                                                      child: Text(
+                                                        'Fee',
+                                                        style: TextStyle(
+                                                            fontFamily: 'Poppins',
+                                                            color:
+                                                                Color(0xffF69383),
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize:
+                                                                blockSizeVertical *
+                                                                    1.3),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 Flexible(
                                                   fit: FlexFit.tight,
                                                   child: Container(
@@ -467,9 +505,11 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                                       '₹ ${snapshot.data.partnerData[index].discountedFee}',
                                                       style: TextStyle(
                                                           fontFamily: 'Poppins',
-                                                          color: Color(0xFFf6c53e),
+                                                          //color: Color(0xFFf6c53e),
+                                                          color:
+                                                                Color(0xffF69383),
                                                           fontWeight:
-                                                              FontWeight.w700,
+                                                              FontWeight.w500,
                                                           fontSize:
                                                               blockSizeVertical *
                                                                   1.5),
@@ -508,7 +548,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                                           fontFamily: 'Poppins',
                                                           color: Color(0xFF54a98c),
                                                           fontWeight:
-                                                              FontWeight.w700,
+                                                              FontWeight.w500,
                                                           fontSize:
                                                               blockSizeVertical *
                                                                   1.5),
@@ -524,7 +564,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                                           fontFamily: 'Poppins',
                                                           color: Color(0xFF54a98c),
                                                           fontWeight:
-                                                              FontWeight.w700,
+                                                              FontWeight.w500,
                                                           fontSize:
                                                               blockSizeVertical *
                                                                   1.5),
@@ -547,7 +587,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                         style: TextButton.styleFrom(
                                           //backgroundColor: Color(0xFF6CD8D1),
                                           elevation: 0,
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: Theme.of(context).primaryColor,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(50),
@@ -569,7 +609,7 @@ class _PathTestDetailsPageRefState extends State<PathTestDetailsPageRef> {
                                         child: Container(
                                           width: blockSizeHorizontal*70,
                                           height: blockSizeVertical*7,
-                                          child: Center(child: Text("Book Now", style: TextStyle(fontFamily: 'Poppins',color: Colors.black),)))))
+                                          child: Center(child: Text("Book Now", style: TextStyle(fontFamily: 'Poppins',color: Colors.white),)))))
                               ],
                             ),
                           ),

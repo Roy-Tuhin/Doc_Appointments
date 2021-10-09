@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medbo/listPages/allHealthChkupList.dart';
 import 'package:medbo/listPages/allpathologicalLabsList.dart';
 import 'package:medbo/listPages/allSurgicalPackageList.dart';
@@ -103,10 +104,12 @@ class _ServicesState extends State<Services> {
                                 Container(
                                   height: 80,
                                   width: 80,
-                                  child: Image.asset(
-                                    'assets/images/medbo-doctors.png',
-                                    fit: BoxFit.contain,
-                                  ),
+                                  child:
+                                  //  Image.asset(
+                                  //   'assets/images/medbo-doctors.png',
+                                  //   fit: BoxFit.contain,
+                                  // ),
+                                  Lottie.network("https://assets5.lottiefiles.com/private_files/lf30_mubx246g.json")
                                 ),
                                 // SizedBox(height: 5,),
                                 Padding(
@@ -141,10 +144,12 @@ class _ServicesState extends State<Services> {
                                 Container(
                                   height: 80,
                                   width: 80,
-                                  child: Image.asset(
-                                    'assets/images/medbo-surgical-packages.png',
-                                    fit: BoxFit.contain,
-                                  ),
+                                  child: 
+                                  // Image.asset(
+                                  //   'assets/images/medbo-surgical-packages.png',
+                                  //   fit: BoxFit.contain,
+                                  // ),
+                                  Lottie.network("https://assets1.lottiefiles.com/private_files/lf30_brec9S.json")
                                 ),
                                 // SizedBox(height: 5,),
                                 Padding(
@@ -179,10 +184,12 @@ class _ServicesState extends State<Services> {
                                 Container(
                                   height: 80,
                                   width: 80,
-                                  child: Image.asset(
-                                    'assets/images/medbo-pathological-tests.png',
-                                    fit: BoxFit.contain,
-                                  ),
+                                  child: 
+                                  // Image.asset(
+                                  //   'assets/images/medbo-pathological-tests.png',
+                                  //   fit: BoxFit.contain,
+                                  // ),
+                                   Lottie.network("https://assets4.lottiefiles.com/packages/lf20_jSRN8A.json")
                                 ),
                                 // SizedBox(height: 5,),
                                 Padding(
@@ -217,10 +224,12 @@ class _ServicesState extends State<Services> {
                                 Container(
                                   height: 80,
                                   width: 80,
-                                  child: Image.asset(
-                                    'assets/images/medbo-health-checkups.png',
-                                    fit: BoxFit.contain,
-                                  ),
+                                  child:
+                                  //  Image.asset(
+                                  //   'assets/images/medbo-health-checkups.png',
+                                  //   fit: BoxFit.contain,
+                                  // ),
+                                 Lottie.network("https://assets7.lottiefiles.com/packages/lf20_vPnn3K.json")
                                 ),
                                 // SizedBox(height: 5,),
                                 Padding(

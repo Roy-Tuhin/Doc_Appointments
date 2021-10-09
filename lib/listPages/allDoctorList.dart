@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medbo/models/DocRefactor/AllDocRefactorModel.dart';
-import 'package:medbo/models/allDoctorsModel.dart';
+
 import 'package:medbo/onTapScreens/Doc_Details_Page/DocDetailsRefactorPage.dart';
 import 'package:medbo/onTapScreens/doctorDetails.dart';
-import 'package:medbo/parsing/allDoctors.dart';
+
 import 'package:http/http.dart' as http;
 
 import '../screen_helper/clip_path.dart';

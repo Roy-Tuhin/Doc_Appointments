@@ -281,450 +281,450 @@ void getCred() async{
               //=========================================================================
 
               Container(
-                margin: EdgeInsets.all(20),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    // color: Color(0xFF3E64FF),
-                    color: Colors.lightBlue[50],
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                    boxShadow: [
-                      BoxShadow(
-                        //color: Color(0xFF3E64FF).withOpacity(0.3),
-                        color: Colors.grey.withOpacity(0.9),
-                        offset: const Offset(
-                          0.0,
-                          5.0,
-                        ),
-                        blurRadius: 3.0,
-                        spreadRadius: 0.5,
-                      ),
-                    ]),
+                // margin: EdgeInsets.all(20),
+                // padding: EdgeInsets.all(10),
+                // decoration: BoxDecoration(
+                //     // color: Color(0xFF3E64FF),
+                //     color: Colors.lightBlue[50],
+                //     borderRadius: BorderRadius.all(Radius.circular(12)),
+                //     boxShadow: [
+                //       BoxShadow(
+                //         //color: Color(0xFF3E64FF).withOpacity(0.3),
+                //         color: Colors.grey.withOpacity(0.9),
+                //         offset: const Offset(
+                //           0.0,
+                //           5.0,
+                //         ),
+                //         blurRadius: 3.0,
+                //         spreadRadius: 0.5,
+                //       ),
+                //     ]),
 
 //===============================================================================================================
 
-                child: Column(
-                  children: [
-                    ListTile(
-                        title: Text(
-                      "Patient Information",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: blockSizeHorizontal * 5,
-                        fontFamily: 'Poppins',
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    )),
+                // child: Column(
+//                   children: [
+//                     ListTile(
+//                         title: Text(
+//                       "Patient Information",
+//                       style: TextStyle(
+//                         fontWeight: FontWeight.bold,
+//                         fontSize: blockSizeHorizontal * 5,
+//                         fontFamily: 'Poppins',
+//                         color: Theme.of(context).primaryColor,
+//                       ),
+//                     )),
 
-                    Padding(
-                      padding: const EdgeInsets.only(left: 13, right: 13),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Poppins',
-                        ),
-                        //controller: searchController,
-                        onChanged: (text) {
-                          setState(
-                            () {
-                              // textLength = text.length;
-                            },
-                          );
-                        },
+//                     Padding(
+//                       padding: const EdgeInsets.only(left: 13, right: 13),
+//                       child: TextFormField(
+//                         style: TextStyle(
+//                           color: Colors.black,
+//                           fontFamily: 'Poppins',
+//                         ),
+//                         //controller: searchController,
+//                         onChanged: (text) {
+//                           setState(
+//                             () {
+//                               // textLength = text.length;
+//                             },
+//                           );
+//                         },
 
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                         decoration: InputDecoration(
+//                           enabledBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(color: Colors.black12),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors
-                                    .black12 //greenAccent//Color(0xFF425c5a),
-                                ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           focusedBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(
+//                                 color: Colors
+//                                     .black12 //greenAccent//Color(0xFF425c5a),
+//                                 ),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          errorBorder: OutlineInputBorder(
-                            //  borderSide: BorderSide(color: Colors.red[100]),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           errorBorder: OutlineInputBorder(
+//                             //  borderSide: BorderSide(color: Colors.red[100]),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          // suffixIcon: IconButton(
-                          // icon: Icon(Icons.search, color: Colors.white,size: 34,),
-                          // onPressed: (){
-                          //   //searchByUser();
-                          //   },//=============================================================
-                          // ),
+//                           // suffixIcon: IconButton(
+//                           // icon: Icon(Icons.search, color: Colors.white,size: 34,),
+//                           // onPressed: (){
+//                           //   //searchByUser();
+//                           //   },//=============================================================
+//                           // ),
 
-                          // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
-                          //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
+//                           // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
+//                           //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
 
-                          labelText: 'Patient Name',
-                          labelStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.blueGrey, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 11.0,
-                          ),
-                          //hintText: 'Ex : Dental or Sugar Check up etc',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.white38, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 9.0,
-                          ),
-                          //filled: true,
-                          //fillColor: Colors.grey[200],
-                          prefixIcon: Icon(
-                            Icons.face,
-                            color: Colors.blueGrey,
-                          ),
-                        ),
+//                           labelText: 'Patient Name',
+//                           labelStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.blueGrey, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 11.0,
+//                           ),
+//                           //hintText: 'Ex : Dental or Sugar Check up etc',
+//                           hintStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.white38, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 9.0,
+//                           ),
+//                           //filled: true,
+//                           //fillColor: Colors.grey[200],
+//                           prefixIcon: Icon(
+//                             Icons.face,
+//                             color: Colors.blueGrey,
+//                           ),
+//                         ),
 
-                        //keyboardType: TextInputType.number,
-                        // inputFormatters: [
-                        //   //only numeric keyboard.
-                        //  // LengthLimitingTextInputFormatter(6), //only 6 digit
-                        //  // WhitelistingTextInputFormatter.digitsOnly,
-                        // ],
+//                         //keyboardType: TextInputType.number,
+//                         // inputFormatters: [
+//                         //   //only numeric keyboard.
+//                         //  // LengthLimitingTextInputFormatter(6), //only 6 digit
+//                         //  // WhitelistingTextInputFormatter.digitsOnly,
+//                         // ],
 
-                        // validator: (String value) {
-                        //   if (value.length < 6) {
-                        //     return 'Enter your vaild 6 digit User ID';
-                        //   }
-                        //   return null;
-                        // },                                                                              // Active button validation
-                      ),
-                    ),
+//                         // validator: (String value) {
+//                         //   if (value.length < 6) {
+//                         //     return 'Enter your vaild 6 digit User ID';
+//                         //   }
+//                         //   return null;
+//                         // },                                                                              // Active button validation
+//                       ),
+//                     ),
 
-//================================================= A D D R E S S ==================================================
+// //================================================= A D D R E S S ==================================================
 
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 13, right: 13, top: 13),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Poppins',
-                        ),
-                        //controller: searchController,
-                        onChanged: (text) {
-                          setState(
-                            () {
-                              // textLength = text.length;
-                            },
-                          );
-                        },
+//                     Padding(
+//                       padding:
+//                           const EdgeInsets.only(left: 13, right: 13, top: 13),
+//                       child: TextFormField(
+//                         style: TextStyle(
+//                           color: Colors.black,
+//                           fontFamily: 'Poppins',
+//                         ),
+//                         //controller: searchController,
+//                         onChanged: (text) {
+//                           setState(
+//                             () {
+//                               // textLength = text.length;
+//                             },
+//                           );
+//                         },
 
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                         decoration: InputDecoration(
+//                           enabledBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(color: Colors.black12),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors
-                                    .black12 //greenAccent//Color(0xFF425c5a),
-                                ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           focusedBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(
+//                                 color: Colors
+//                                     .black12 //greenAccent//Color(0xFF425c5a),
+//                                 ),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          errorBorder: OutlineInputBorder(
-                            //  borderSide: BorderSide(color: Colors.red[100]),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           errorBorder: OutlineInputBorder(
+//                             //  borderSide: BorderSide(color: Colors.red[100]),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          // suffixIcon: IconButton(
-                          // icon: Icon(Icons.search, color: Colors.white,size: 34,),
-                          // onPressed: (){
-                          //   //searchByUser();
-                          //   },//=============================================================
-                          // ),
+//                           // suffixIcon: IconButton(
+//                           // icon: Icon(Icons.search, color: Colors.white,size: 34,),
+//                           // onPressed: (){
+//                           //   //searchByUser();
+//                           //   },//=============================================================
+//                           // ),
 
-                          // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
-                          //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
+//                           // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
+//                           //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
 
-                          labelText: 'Address',
-                          labelStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.blueGrey, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 11.0,
-                          ),
-                          //hintText: 'Ex : Dental or Sugar Check up etc',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.white38, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 9.0,
-                          ),
-                          //filled: true,
-                          //fillColor: Colors.grey[200],
-                          prefixIcon: Icon(
-                            Icons.home,
-                            color: Colors.blueGrey,
-                          ),
-                        ),
+//                           labelText: 'Address',
+//                           labelStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.blueGrey, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 11.0,
+//                           ),
+//                           //hintText: 'Ex : Dental or Sugar Check up etc',
+//                           hintStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.white38, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 9.0,
+//                           ),
+//                           //filled: true,
+//                           //fillColor: Colors.grey[200],
+//                           prefixIcon: Icon(
+//                             Icons.home,
+//                             color: Colors.blueGrey,
+//                           ),
+//                         ),
 
-                        //keyboardType: TextInputType.number,
-                        // inputFormatters: [
-                        //   //only numeric keyboard.
-                        //  // LengthLimitingTextInputFormatter(6), //only 6 digit
-                        //  // WhitelistingTextInputFormatter.digitsOnly,
-                        // ],
+//                         //keyboardType: TextInputType.number,
+//                         // inputFormatters: [
+//                         //   //only numeric keyboard.
+//                         //  // LengthLimitingTextInputFormatter(6), //only 6 digit
+//                         //  // WhitelistingTextInputFormatter.digitsOnly,
+//                         // ],
 
-                        // validator: (String value) {
-                        //   if (value.length < 6) {
-                        //     return 'Enter your vaild 6 digit User ID';
-                        //   }
-                        //   return null;
-                        // },                                                                              // Active button validation
-                      ),
-                    ),
+//                         // validator: (String value) {
+//                         //   if (value.length < 6) {
+//                         //     return 'Enter your vaild 6 digit User ID';
+//                         //   }
+//                         //   return null;
+//                         // },                                                                              // Active button validation
+//                       ),
+//                     ),
 
-                    //=================================================PHONE ==================================================
+//                     //=================================================PHONE ==================================================
 
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 13, right: 13, top: 13),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Poppins',
-                        ),
-                        //controller: searchController,
-                        onChanged: (text) {
-                          setState(
-                            () {
-                              // textLength = text.length;
-                            },
-                          );
-                        },
+//                     Padding(
+//                       padding:
+//                           const EdgeInsets.only(left: 13, right: 13, top: 13),
+//                       child: TextFormField(
+//                         style: TextStyle(
+//                           color: Colors.black,
+//                           fontFamily: 'Poppins',
+//                         ),
+//                         //controller: searchController,
+//                         onChanged: (text) {
+//                           setState(
+//                             () {
+//                               // textLength = text.length;
+//                             },
+//                           );
+//                         },
 
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                         decoration: InputDecoration(
+//                           enabledBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(color: Colors.black12),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors
-                                    .black12 //greenAccent//Color(0xFF425c5a),
-                                ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           focusedBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(
+//                                 color: Colors
+//                                     .black12 //greenAccent//Color(0xFF425c5a),
+//                                 ),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          errorBorder: OutlineInputBorder(
-                            //  borderSide: BorderSide(color: Colors.red[100]),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           errorBorder: OutlineInputBorder(
+//                             //  borderSide: BorderSide(color: Colors.red[100]),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          // suffixIcon: IconButton(
-                          // icon: Icon(Icons.search, color: Colors.white,size: 34,),
-                          // onPressed: (){
-                          //   //searchByUser();
-                          //   },//=============================================================
-                          // ),
+//                           // suffixIcon: IconButton(
+//                           // icon: Icon(Icons.search, color: Colors.white,size: 34,),
+//                           // onPressed: (){
+//                           //   //searchByUser();
+//                           //   },//=============================================================
+//                           // ),
 
-                          // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
-                          //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
+//                           // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
+//                           //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
 
-                          labelText: 'Phone',
-                          labelStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.blueGrey, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 11.0,
-                          ),
-                          //hintText: 'Ex : Dental or Sugar Check up etc',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.white38, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 9.0,
-                          ),
-                          //filled: true,
-                          //fillColor: Colors.grey[200],
-                          prefixIcon: Icon(
-                            Icons.phone_android,
-                            color: Colors.blueGrey,
-                          ),
-                        ),
+//                           labelText: 'Phone',
+//                           labelStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.blueGrey, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 11.0,
+//                           ),
+//                           //hintText: 'Ex : Dental or Sugar Check up etc',
+//                           hintStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.white38, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 9.0,
+//                           ),
+//                           //filled: true,
+//                           //fillColor: Colors.grey[200],
+//                           prefixIcon: Icon(
+//                             Icons.phone_android,
+//                             color: Colors.blueGrey,
+//                           ),
+//                         ),
 
-                        keyboardType: TextInputType.number,
-                        // inputFormatters: [
-                        //   //only numeric keyboard.
-                        //  // LengthLimitingTextInputFormatter(6), //only 6 digit
-                        //  // WhitelistingTextInputFormatter.digitsOnly,
-                        // ],
+//                         keyboardType: TextInputType.number,
+//                         // inputFormatters: [
+//                         //   //only numeric keyboard.
+//                         //  // LengthLimitingTextInputFormatter(6), //only 6 digit
+//                         //  // WhitelistingTextInputFormatter.digitsOnly,
+//                         // ],
 
-                        // validator: (String value) {
-                        //   if (value.length < 6) {
-                        //     return 'Enter your vaild 6 digit User ID';
-                        //   }
-                        //   return null;
-                        // },                                                                              // Active button validation
-                      ),
-                    ),
+//                         // validator: (String value) {
+//                         //   if (value.length < 6) {
+//                         //     return 'Enter your vaild 6 digit User ID';
+//                         //   }
+//                         //   return null;
+//                         // },                                                                              // Active button validation
+//                       ),
+//                     ),
 
-                    //================================================= A G E ==================================================
+//                     //================================================= A G E ==================================================
 
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 13, right: 13, top: 13),
-                      child: TextFormField(
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Poppins',
-                        ),
-                        //controller: searchController,
-                        onChanged: (text) {
-                          setState(
-                            () {
-                              // textLength = text.length;
-                            },
-                          );
-                        },
+//                     Padding(
+//                       padding:
+//                           const EdgeInsets.only(left: 13, right: 13, top: 13),
+//                       child: TextFormField(
+//                         style: TextStyle(
+//                           color: Colors.black,
+//                           fontFamily: 'Poppins',
+//                         ),
+//                         //controller: searchController,
+//                         onChanged: (text) {
+//                           setState(
+//                             () {
+//                               // textLength = text.length;
+//                             },
+//                           );
+//                         },
 
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                         decoration: InputDecoration(
+//                           enabledBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(color: Colors.black12),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors
-                                    .black12 //greenAccent//Color(0xFF425c5a),
-                                ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           focusedBorder: OutlineInputBorder(
+//                             borderSide: BorderSide(
+//                                 color: Colors
+//                                     .black12 //greenAccent//Color(0xFF425c5a),
+//                                 ),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          errorBorder: OutlineInputBorder(
-                            //  borderSide: BorderSide(color: Colors.red[100]),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                            ),
-                          ),
+//                           errorBorder: OutlineInputBorder(
+//                             //  borderSide: BorderSide(color: Colors.red[100]),
+//                             borderRadius: BorderRadius.only(
+//                               bottomLeft: Radius.circular(20),
+//                               bottomRight: Radius.circular(20),
+//                               topRight: Radius.circular(20),
+//                               topLeft: Radius.circular(20),
+//                             ),
+//                           ),
 
-                          // suffixIcon: IconButton(
-                          // icon: Icon(Icons.search, color: Colors.white,size: 34,),
-                          // onPressed: (){
-                          //   //searchByUser();
-                          //   },//=============================================================
-                          // ),
+//                           // suffixIcon: IconButton(
+//                           // icon: Icon(Icons.search, color: Colors.white,size: 34,),
+//                           // onPressed: (){
+//                           //   //searchByUser();
+//                           //   },//=============================================================
+//                           // ),
 
-                          // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
-                          //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
+//                           // suffixIcon: Icon(textLength <= 5 ? Icons.cancel : Icons.check,
+//                           //     color: textLength >= 6 ? Colors.green : Colors.redAccent),
 
-                          labelText: 'Age',
-                          labelStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.blueGrey, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 11.0,
-                          ),
-                          //hintText: 'Ex : Dental or Sugar Check up etc',
-                          hintStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.white38, //Color(0xFF425c5a),
-                            fontWeight: FontWeight.normal,
-                            letterSpacing: 2.0,
-                            fontSize: 9.0,
-                          ),
-                          //filled: true,
-                          //fillColor: Colors.grey[200],
-                          prefixIcon: Icon(
-                            Icons.calendar_today,
-                            color: Colors.blueGrey,
-                          ),
-                        ),
+//                           labelText: 'Age',
+//                           labelStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.blueGrey, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 11.0,
+//                           ),
+//                           //hintText: 'Ex : Dental or Sugar Check up etc',
+//                           hintStyle: TextStyle(
+//                             fontFamily: 'Poppins',
+//                             color: Colors.white38, //Color(0xFF425c5a),
+//                             fontWeight: FontWeight.normal,
+//                             letterSpacing: 2.0,
+//                             fontSize: 9.0,
+//                           ),
+//                           //filled: true,
+//                           //fillColor: Colors.grey[200],
+//                           prefixIcon: Icon(
+//                             Icons.calendar_today,
+//                             color: Colors.blueGrey,
+//                           ),
+//                         ),
 
-                        keyboardType: TextInputType.number,
-                        // inputFormatters: [
-                        //   //only numeric keyboard.
-                        //  // LengthLimitingTextInputFormatter(6), //only 6 digit
-                        //  // WhitelistingTextInputFormatter.digitsOnly,
-                        // ],
+//                         keyboardType: TextInputType.number,
+//                         // inputFormatters: [
+//                         //   //only numeric keyboard.
+//                         //  // LengthLimitingTextInputFormatter(6), //only 6 digit
+//                         //  // WhitelistingTextInputFormatter.digitsOnly,
+//                         // ],
 
-                        // validator: (String value) {
-                        //   if (value.length < 6) {
-                        //     return 'Enter your vaild 6 digit User ID';
-                        //   }
-                        //   return null;
-                        // },                                                                              // Active button validation
-                      ),
-                    ),
-                  ],
-                ),
+//                         // validator: (String value) {
+//                         //   if (value.length < 6) {
+//                         //     return 'Enter your vaild 6 digit User ID';
+//                         //   }
+//                         //   return null;
+//                         // },                                                                              // Active button validation
+//                       ),
+//                     ),
+//                   ],
+                // ),
               ),
             
             
