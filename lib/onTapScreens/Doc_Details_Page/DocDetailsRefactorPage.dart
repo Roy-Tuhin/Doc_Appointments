@@ -187,7 +187,7 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                           fontFamily: 'Poppins',
                                           color: Theme.of(context).primaryColor,
                                         ),
-                                        maxLines: 3,
+                                        maxLines: 1,
                                       ),
                                       Text(
                                         snapshot.data.doctorData.specialisation,
@@ -195,7 +195,7 @@ class _DocDetailsRefactorPageState extends State<DocDetailsRefactorPage> {
                                             fontSize: blockSizeVertical * 2,
                                             color: Colors.grey,
                                             fontFamily: 'Poppins'),
-                                        maxLines: 8,
+                                        maxLines: 1, 
                                       ),
                                       SizedBox(
                                         height: blockSizeVertical * 5,

@@ -31,6 +31,7 @@ class _DietDetailsRefPageState extends State<DietDetailsRefPage> {
     var blockSizeHorizontal = (screenWidth / 100);
     var blockSizeVertical = (screenHeight / 100);
     return Scaffold(
+      backgroundColor: Color(0xFFd7e2f5),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -54,16 +55,16 @@ class _DietDetailsRefPageState extends State<DietDetailsRefPage> {
             child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 13),
-                    blurRadius: 25,
-                    //color: Color(0xFF5666C2).withOpacity(0.17),
-                    color: Colors.lightBlue.withOpacity(0.17),
-                  ),
-                ],
-              ),
+              // decoration: BoxDecoration(
+              //   boxShadow: [
+              //     BoxShadow(
+              //       offset: Offset(0, 13),
+              //       blurRadius: 25,
+              //       //color: Color(0xFF5666C2).withOpacity(0.17),
+              //       color: Colors.lightBlue.withOpacity(0.17),
+              //     ),
+              //   ],
+              // ),
               child: FutureBuilder(
                 future: dietcianDetailsApi(),
                 builder: (BuildContext context, AsyncSnapshot snapshot){

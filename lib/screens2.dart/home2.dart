@@ -767,7 +767,7 @@ class _Home2State extends State<Home2> {
                             // CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
-                          return Text("Waiting for internet Connection...");
+                          return Text("Somthing went wrong. Please try again");
                         }
 
                         if (snapshot.hasData) {
@@ -940,7 +940,7 @@ class _Home2State extends State<Home2> {
                           //CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
-                          return Text("Waiting for internet Connection...");
+                          return Text("Somthing went wrong. Please try again");
                         }
 
                         if (snapshot.hasData) {
@@ -1097,7 +1097,7 @@ class _Home2State extends State<Home2> {
                           //CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
-                          return Text("Waiting for internet Connection...");
+                          return Text("Somthing went wrong. Please try again");
                         }
 
                         if (snapshot.hasData) {
@@ -1119,22 +1119,22 @@ class _Home2State extends State<Home2> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        //====================images
-                                        padding: const EdgeInsets.all(5.0),
-                                        // child: ClipRRect(
-                                        //    borderRadius: BorderRadius.circular(14.0),
-                                        //   child:
-                                        //   Image(
-                                        //     // image: NetworkImage(
-                                        //     //   snapshot.data[index].image,
-                                        //     // ),
-                                        //     fit: BoxFit.cover,
-                                        //     height: blockSizeVertical*18,
-                                        //     width: blockSizeHorizontal*50,
-                                        //   ),
-                                        // ),
-                                      ),
+                                      // Padding(
+                                      //   //====================images
+                                      //   padding: const EdgeInsets.all(5.0),
+                                      //   child: ClipRRect(
+                                      //      borderRadius: BorderRadius.circular(14.0),
+                                      //     child:
+                                      //     Image(
+                                      //       image: NetworkImage(
+                                      //         snapshot.data[index].image,
+                                      //       ),
+                                      //       fit: BoxFit.cover,
+                                      //       height: blockSizeVertical*18,
+                                      //       width: blockSizeHorizontal*50,
+                                      //     ),
+                                      //   ),
+                                      // ),
                                       SizedBox(height: blockSizeVertical * 0.5),
                                       Text(
                                         '${snapshot.data[index].dietName}',
@@ -1258,7 +1258,7 @@ class _Home2State extends State<Home2> {
                           //CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
-                          return Text("Waiting for internet Connection...");
+                          return Text("Somthing went wrong. Please try again");
                         }
 
                         if (snapshot.hasData) {
