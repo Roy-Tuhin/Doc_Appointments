@@ -163,7 +163,7 @@ class _RegistrationState extends State<Registration> {
                         height: blockSizeVertical*30,
                         width: blockSizeHorizontal*100,
                         child:
-                        Image(image: AssetImage('assets/images/medbo-home-banner-removebg.png'),fit: BoxFit.contain,),
+                         Image.network('https://i.postimg.cc/Bnfh4268/medbo-home-banner-removebg.png'),
                       ),
                     ),
 

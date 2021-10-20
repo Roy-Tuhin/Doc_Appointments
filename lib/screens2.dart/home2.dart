@@ -588,7 +588,7 @@ class _Home2State extends State<Home2> {
                             CircularProgressIndicator(backgroundColor: Colors.cyanAccent,));
                         }
                         if (snapshot.hasError) {
-                          return Text("Waiting for internet Connection...");
+                          return Text("Something went wrong. Please check your internet and try again.");
                         }
 
                         if (snapshot.hasData) {
@@ -901,12 +901,6 @@ class _Home2State extends State<Home2> {
 
 
 
-
-
-
-
-
-
                   //=========================================================path refactor===============================================
 
 
@@ -1065,6 +1059,16 @@ class _Home2State extends State<Home2> {
 
                   
                   //=========================================================path refac end========================================================
+
+
+
+
+
+
+
+
+
+
 
                   //=========================================================================AllDietician() ========================================================================
                   Container(
@@ -1226,6 +1230,16 @@ class _Home2State extends State<Home2> {
                   //===========================================================================AllDietician End()=======================================
 
 
+
+
+
+
+
+
+
+
+
+
                   //========================================================================================================All HealthCheckup Refact===========================
 
                              Container(
@@ -1382,120 +1396,7 @@ class _Home2State extends State<Home2> {
                   ),
                   //=======================================================================================================All HealthCheckup Refac end====================================
 
-                  // SizedBox(
-                  //   height: blockSizeVertical * 6.2,
-                  //   child: Container(
-                  //     padding: EdgeInsets.all(5),
-                  //     alignment: Alignment.topLeft,
-                  //     child: Padding(
-                  //       padding: const EdgeInsets.only(left: 8.0),
-                  //       child: Text(
-                  //         'Health Checkups',
-                  //         style: TextStyle(
-                  //             fontSize: blockSizeHorizontal * 4.1,
-                  //             fontFamily: 'Poppins',
-                  //             fontWeight: FontWeight.bold,
-                  //             color: Theme.of(context).primaryColor),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // Container(
-                  //   height: blockSizeVertical * 30, //38
-                  //   child: ListView.builder(
-                  //     itemCount: chkUpList == null ? 0 : chkUpList.length,
-                  //     scrollDirection: Axis.horizontal,
-                  //     physics: BouncingScrollPhysics(),
-                  //     itemBuilder: (context, index) => Container(
-                  //       decoration: BoxDecoration(
-                  //         color: Colors.white,
-                  //         borderRadius: BorderRadius.circular(10),
-                  //       ),
-                  //       width: blockSizeHorizontal * 40,
-                  //       margin: EdgeInsets.all(10),
-                  //       child: Stack(children: [
-                  //         Column(
-                  //           children: [
-                  //             Padding(
-                  //               padding: const EdgeInsets.all(8.0),
-                  //               child: Text(
-                  //                 '${chkUpList[index].healthName}',
-                  //                 style: TextStyle(
-                  //                   fontWeight: FontWeight.bold,
-                  //                   fontSize: blockSizeHorizontal * 3.5,
-                  //                   fontFamily: 'Poppins',
-                  //                   color: Theme.of(context).primaryColor,
-                  //                 ),
-                  //                 textAlign: TextAlign.center,
-                  //               ),
-                  //             ),
-                  //             SizedBox(height: blockSizeVertical * 0.8),
-                  //             Container(
-                  //               padding: EdgeInsets.symmetric(horizontal: 10),
-                  //               // color: Colors.green,
-                  //               child: Text(
-                  //                 '${chkUpList[index].testName}',
-                  //                 style: TextStyle(
-                  //                     fontFamily: 'Poppins',
-                  //                     // fontWeight: FontWeight.bold,
-                  //                     fontSize: blockSizeHorizontal * 2.5,
-                  //                     color: Theme.of(context).primaryColor),
-                  //                 textAlign: TextAlign.center,
-                  //                 maxLines: 4,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         Positioned(
-                  //           //===========================================================================show details button
-                  //           bottom: 5,
-                  //           left: 5,
-                  //           child: Padding(
-                  //             padding:
-                  //                 const EdgeInsets.only(left: 15.0, bottom: 5),
-                  //             child: InkWell(
-                  //               onTap: () {
-                  //                 Navigator.push(
-                  //                     context,
-                  //                     MaterialPageRoute(
-                  //                         builder: (context) =>
-                  //                             HlthChkUpDetails(
-                  //                                 encId: chkUpList[index]
-                  //                                     .encHealthPartnerId)));
-                  //               },
-                  //               child: Container(
-                  //                 alignment: Alignment.center,
-                  //                 height: blockSizeVertical * 5,
-                  //                 width: blockSizeHorizontal * 30,
-                  //                 decoration: BoxDecoration(
-                  //                   shape: BoxShape.rectangle,
-                  //                   borderRadius: BorderRadius.circular(10),
-                  //                   gradient: LinearGradient(
-                  //                     begin: Alignment.topLeft,
-                  //                     end: Alignment.topRight,
-                  //                     colors: [
-                  //                       Theme.of(context).primaryColor,
-                  //                       Theme.of(context).accentColor
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //                 child: Text(
-                  //                   'Show Details',
-                  //                   style: TextStyle(
-                  //                     color: Colors.white,
-                  //                     fontSize: blockSizeHorizontal * 2.7,
-                  //                     fontWeight: FontWeight.bold,
-                  //                     fontFamily: 'Poppins',
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ]),
-                  //     ),
-                  //   ),
-                  // ),
+                 
                 ]),
               ],
             ),

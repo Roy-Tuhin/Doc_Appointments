@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:medbo/main.dart';
+import 'package:medbo/onTapScreens/Dietcian_Details_Page/Dietcian_Details_RefPage.dart';
 import 'package:medbo/onTapScreens/Doc_Details_Page/DocDetailsRefactorPage.dart';
 import 'package:medbo/onTapScreens/Health_Details_Page/HealthDetailsPageRef.dart';
 import 'package:medbo/onTapScreens/Path_Details_Page/PathTestDetailsPage.dart';
@@ -106,26 +107,26 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
 
                               //======================================patha search redirect===============================
-                              if(item.resultFor=='T'&& item.encId=='IujyQXg8KZg8asLvK/FS7g=='){
+                              if(item.resultFor=='T'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetailsPageRef('IujyQXg8KZg8asLvK/FS7g==')));  
+                                 PathTestDetailsPageRef( item.encId)));  
                               }//new test
-                              else if(item.resultFor=='T'&& item.encId=='U4exk+vfMGrn7cjNUa/PBw=='){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetailsPageRef('U4exk+vfMGrn7cjNUa/PBw==')));  
+                              // else if(item.resultFor=='T'&& item.encId=='U4exk+vfMGrn7cjNUa/PBw=='){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    PathTestDetailsPageRef('U4exk+vfMGrn7cjNUa/PBw==')));  
 
-                              }else if(item.resultFor=='T'&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetailsPageRef('I3uXyzcuDZf21SSe5fHnSQ==')));  
+                              // }else if(item.resultFor=='T'&& item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    PathTestDetailsPageRef('I3uXyzcuDZf21SSe5fHnSQ==')));  
 
-                              }else if(item.resultFor=='T'&& item.encId=='B909+U0FIAHIs+sl3IYTvQ=='){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetailsPageRef('B909+U0FIAHIs+sl3IYTvQ==')));  
+                              // }else if(item.resultFor=='T'&& item.encId=='B909+U0FIAHIs+sl3IYTvQ=='){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    PathTestDetailsPageRef('B909+U0FIAHIs+sl3IYTvQ==')));  
 
-                              }else if(item.resultFor=='T'&& item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 PathTestDetailsPageRef('7Ch2aVnhokZtRWyJtuDA/A==')));  
-                              }
+                              // }else if(item.resultFor=='T'&& item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    PathTestDetailsPageRef('7Ch2aVnhokZtRWyJtuDA/A==')));  
+                              // }
 
 
                               //================================Doctor search redirect====================================================================
@@ -134,26 +135,27 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
 
 
-                              else if( item.encId=='fXVmzecGStqrhx1PmIgwlQ=='&&item.resultFor=='D'){
+                              else if(item.resultFor=='D'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DocDetailsRefactorPage('fXVmzecGStqrhx1PmIgwlQ==')));  
+                                 DocDetailsRefactorPage(item.encId)));  
 
-                              }else if( item.encId=='pEl2B9kuumKRxIxLJO76eQ=='&&item.resultFor=='D'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DocDetailsRefactorPage('pEl2B9kuumKRxIxLJO76eQ=='))); 
-
-                              }else if( item.encId=='kFgorcFF0G6RQD4W+LwWnQ=='&&item.resultFor=='D'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DocDetailsRefactorPage('kFgorcFF0G6RQD4W+LwWnQ=='))); 
-
-                              }else if(item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&& item.resultFor=='D'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DocDetailsRefactorPage('I3uXyzcuDZf21SSe5fHnSQ==')));
-
-                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&& item.resultFor=='D'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                 DocDetailsRefactorPage('7Ch2aVnhokZtRWyJtuDA/A==')));  
                               }
+                              // else if( item.resultFor=='D'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    DocDetailsRefactorPage(item.encId))); 
+
+                              // }else if( item.resultFor=='D'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    DocDetailsRefactorPage(item.encId))); 
+
+                              // }else if(item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&& item.resultFor=='D'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    DocDetailsRefactorPage('I3uXyzcuDZf21SSe5fHnSQ==')));
+
+                              // }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&& item.resultFor=='D'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //    DocDetailsRefactorPage('7Ch2aVnhokZtRWyJtuDA/A==')));  
+                              // }
 
 
 
@@ -163,22 +165,23 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
 
 
 
-                            else if( item.encId=='q8O8YMzYKXSB4RtkX4k7Lw=='&&item.resultFor=='H'){
+                            else if( item.resultFor=='H'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HealthDetailsPageRef('q8O8YMzYKXSB4RtkX4k7Lw==')));  
+                                HealthDetailsPageRef(item.encId)));  
 
-                              }else if( item.encId=='VKo7nNHPtalBOZv4YpBZFg=='&&item.resultFor=='H'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HealthDetailsPageRef('VKo7nNHPtalBOZv4YpBZFg==')));
-
-                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='H'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HealthDetailsPageRef('7Ch2aVnhokZtRWyJtuDA/A=='))); 
-
-                              }else if( item.encId=='eYwtNBXR6P/JDtsIwr+Bvw=='&&item.resultFor=='H'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                HealthDetailsPageRef('eYwtNBXR6P/JDtsIwr+Bvw==')));  
                               }
+                              // else if( item.encId=='VKo7nNHPtalBOZv4YpBZFg=='&&item.resultFor=='H'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //   HealthDetailsPageRef('VKo7nNHPtalBOZv4YpBZFg==')));
+
+                              // }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='H'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //   HealthDetailsPageRef('7Ch2aVnhokZtRWyJtuDA/A=='))); 
+
+                              // }else if( item.encId=='eYwtNBXR6P/JDtsIwr+Bvw=='&&item.resultFor=='H'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //   HealthDetailsPageRef('eYwtNBXR6P/JDtsIwr+Bvw==')));  
+                              // }
 
 
 
@@ -188,21 +191,30 @@ class _AfterSearchPageState extends State<AfterSearchPage> {
                             //=============================Surgical search redirect=======================================================================
 
 
-                              else if( item.encId=='IujyQXg8KZg8asLvK/FS7g=='&&item.resultFor=='S'){
+                              else if( item.resultFor=='S'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgicalDetailsRefacPage('IujyQXg8KZg8asLvK/FS7g=='))); 
+                               SurgicalDetailsRefacPage(item.encId))); 
 
-                              }else if( item.encId=='B909+U0FIAHIs+sl3IYTvQ=='&&item.resultFor=='S'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgicalDetailsRefacPage('B909+U0FIAHIs+sl3IYTvQ==')));  
+                              }
+                              // else if( item.encId=='B909+U0FIAHIs+sl3IYTvQ=='&&item.resultFor=='S'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //  SurgicalDetailsRefacPage('B909+U0FIAHIs+sl3IYTvQ==')));  
 
-                              }else if( item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&&item.resultFor=='S'){
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgicalDetailsRefacPage('I3uXyzcuDZf21SSe5fHnSQ=='))); 
+                              // }else if( item.encId=='I3uXyzcuDZf21SSe5fHnSQ=='&&item.resultFor=='S'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //  SurgicalDetailsRefacPage('I3uXyzcuDZf21SSe5fHnSQ=='))); 
 
-                              }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='S'){
+                              // }else if( item.encId=='7Ch2aVnhokZtRWyJtuDA/A=='&&item.resultFor=='S'){
+                              //    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                              //  SurgicalDetailsRefacPage('7Ch2aVnhokZtRWyJtuDA/A==')));  
+                              // }
+
+
+
+                               else if( item.resultFor=='DT'){
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                               SurgicalDetailsRefacPage('7Ch2aVnhokZtRWyJtuDA/A==')));  
+                               DietDetailsRefPage(item.encId))); 
+
                               }
 
 

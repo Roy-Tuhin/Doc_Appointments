@@ -30,8 +30,9 @@ class ProgressHUD extends StatelessWidget {
             child: ModalBarrier(dismissible: false, color: color),
           ),
           new Center(
-            child:  Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json')
-            //new CircularProgressIndicator()
+            child:  
+            //Lottie.network('https://assets9.lottiefiles.com/packages/lf20_E3llVz.json')
+            new CircularProgressIndicator()
           ),
         ],
       );

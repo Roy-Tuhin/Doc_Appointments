@@ -45,6 +45,7 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
     var blockSizeHorizontal = (screenWidth / 100);
     var blockSizeVertical = (screenHeight / 100);
     return Scaffold(
+       backgroundColor: Colors.lightBlue[50],
        appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -66,16 +67,16 @@ class _SurgicalDetailsRefacPageState extends State<SurgicalDetailsRefacPage> {
 
       body: SafeArea(
         child: Container(
-            decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 13),
-                                blurRadius: 25,
-                                //color: Color(0xFF5666C2).withOpacity(0.17),
-                                color: Colors.lightBlue.withOpacity(0.17),
-                              ),
-                            ],
-                          ),
+            // decoration: BoxDecoration(
+            //                 boxShadow: [
+            //                   BoxShadow(
+            //                     offset: Offset(0, 13),
+            //                     blurRadius: 25,
+            //                     //color: Color(0xFF5666C2).withOpacity(0.17),
+            //                     color: Colors.lightBlue.withOpacity(0.17),
+            //                   ),
+            //                 ],
+            //               ),
           height: blockSizeVertical * 100, //38
           child: FutureBuilder(
             future: SurgicalPackageDetailsRefacApi(),

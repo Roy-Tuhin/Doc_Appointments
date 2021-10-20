@@ -211,7 +211,15 @@ class _DietDetailsRefPageState extends State<DietDetailsRefPage> {
                                                 //color: Color(0xFFfbb97c),
                                                 color: Colors.white,
                                                 splashColor: Colors.green,
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                   ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Not Available yet."),
+                                                    backgroundColor:
+                                                        Colors.deepPurple,
+                                                  ));
+                                                },
                                               ),
                                             ),
                                           ),
@@ -237,7 +245,15 @@ class _DietDetailsRefPageState extends State<DietDetailsRefPage> {
                                                 //color: Color(0xffF69383),
                                                 color: Colors.white,
                                                 splashColor: Colors.green,
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                   ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Not Available yet."),
+                                                    backgroundColor:
+                                                        Colors.deepPurple,
+                                                  ));
+                                                },
                                               ),
                                             ),
                                           ),
@@ -263,7 +279,15 @@ class _DietDetailsRefPageState extends State<DietDetailsRefPage> {
                                                 //color: Color(0xFFfbb97c),
                                                 color: Colors.white,
                                                 splashColor: Colors.green,
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                   ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "Not Available yet."),
+                                                    backgroundColor:
+                                                        Colors.deepPurple,
+                                                  ));
+                                                },
                                               ),
                                             ),
                                           ),

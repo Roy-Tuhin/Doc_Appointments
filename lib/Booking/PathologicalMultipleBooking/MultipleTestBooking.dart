@@ -487,118 +487,115 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
 
                 ShowUp(
                   delay: delayAmount + 1000,
-                  child: Flexible(
-                    fit: FlexFit.tight,
-                    child: DataTable(
-                      // decoration: BoxDecoration(
-                      //                    color: Color(0xFFf7f9fa),
-                      //                   shape: BoxShape.rectangle,
-                      //                   borderRadius: BorderRadius.circular(50),
-                      //                 ),
-                      headingRowColor: MaterialStateColor.resolveWith((states) => Colors.teal),
-                        showCheckboxColumn: false,
-                        columnSpacing: 20.0,
-                        columns: <DataColumn>[
-                          //DataColumn(label: Text("encPartnerId")),
-                          //DataColumn(label: Text("encTestId")),
-                          // DataColumn(label: Text("TestName")),
-                          DataColumn(label: Text("Test",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)),
-                          DataColumn(label: Text("Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal ,fontSize: blockSizeVertical*1.4),),),
-                          DataColumn(label: Text("Discounted\nFee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)),
-                          DataColumn(label: Text("Booking\nFee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)),
+                  child: DataTable(
+                    // decoration: BoxDecoration(
+                    //                    color: Color(0xFFf7f9fa),
+                    //                   shape: BoxShape.rectangle,
+                    //                   borderRadius: BorderRadius.circular(50),
+                    //                 ),
+                    headingRowColor: MaterialStateColor.resolveWith((states) => Theme.of(context).accentColor),
+                      showCheckboxColumn: false,
+                      columnSpacing: blockSizeHorizontal*4.5,
+                      columns: <DataColumn>[
+                        //DataColumn(label: Text("encPartnerId")),
+                        //DataColumn(label: Text("encTestId")),
+                        // DataColumn(label: Text("TestName")),
+                        DataColumn(label: Text("Test Names",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)),
+                        DataColumn(label: Text("Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal ,fontSize: blockSizeVertical*1.4),),),
+                        DataColumn(label: Text("Discounted\nFee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)),
+                        DataColumn(label: Text("Booking\nFee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)),
                   
-                          // DataColumn(label: Text("")),
-                        ],
-                        rows: reponseArray.map((testRowData) {
-                          return DataRow(
-                              selected: selectedFeesList.contains(testRowData),
-                              onSelectChanged: (b) {
-                                onSelectedRow(b!,testRowData); //function which pass 2 two parameter
-                              },
-                              cells: [
+                        // DataColumn(label: Text("")),
+                      ],
+                      rows: reponseArray.map((testRowData) {
+                        return DataRow(
+                            selected: selectedFeesList.contains(testRowData),
+                            onSelectChanged: (b) {
+                              onSelectedRow(b!,testRowData); //function which pass 2 two parameter
+                            },
+                            cells: [
                   
                   
-                                  DataCell(Center(
-                                    child: Container(
+                                DataCell(Center(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: blockSizeVertical * 6,
+                                    width: blockSizeHorizontal * 17,
+                                    // decoration: BoxDecoration(
+                                    //    color: Color(0xFFecf8f4),
+                                    //   shape: BoxShape.rectangle,
+                                    //   borderRadius: BorderRadius.circular(50),
+                                    // ),
+                                    child: Text(
+                                        '${testRowData.testName!.toString()}', style: TextStyle(color: Color(0xFF54a98c),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4 ), textAlign: TextAlign.center,),
+                                  ))),
+                              
+                              DataCell(Center(
+                                  child: Container(
                                       alignment: Alignment.center,
-                                      height: blockSizeVertical * 6,
-                                      width: blockSizeHorizontal * 17,
-                                      // decoration: BoxDecoration(
-                                      //    color: Color(0xFFecf8f4),
-                                      //   shape: BoxShape.rectangle,
-                                      //   borderRadius: BorderRadius.circular(50),
-                                      // ),
-                                      child: Text(
-                                          '${testRowData.testName!.toString()}', style: TextStyle(color: Color(0xFF54a98c),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4 ), textAlign: TextAlign.center,),
-                                    ))),
-                                
-                                DataCell(Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                      height: blockSizeVertical * 5,
-                                      width: blockSizeHorizontal * 17,
-                                      decoration: BoxDecoration(
-                                         color: Color(0xFFfdf4f7),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: Text('₹ ${testRowData.fee!.toString()}',style: TextStyle(color: Color(0xFFc23b5d),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)))),
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfdf4f7),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Text('₹ ${testRowData.fee!.toString()}',style: TextStyle(color: Color(0xFFc23b5d),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)))),
                   
                   
                   
                   
                   
                   
-                                DataCell(Center(
-                                    child: Container(
-                                       alignment: Alignment.center,
-                                      height: blockSizeVertical * 5,
-                                      width: blockSizeHorizontal * 17,
-                                      decoration: BoxDecoration(
-                                         color: Color(0xFFfef6e5),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: Text(
-                                          '₹ ${testRowData.discountedFee!.toString()}',style: TextStyle(color: Color(0xFFf6c53e),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),),
-                                    ))),
+                              DataCell(Center(
+                                  child: Container(
+                                     alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfef6e5),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Text(
+                                        '₹ ${testRowData.discountedFee!.toString()}',style: TextStyle(color: Color(0xFFf6c53e),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),),
+                                  ))),
                   
                   
                   
                   
                   
                   
-                                DataCell(Center(
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: blockSizeVertical * 5,
-                                      width: blockSizeHorizontal * 17,
-                                      decoration: BoxDecoration(
-                                         color: Color(0xFFecf8f4),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: Text(
-                                          '₹ ${testRowData.bookingFee!.toString()}', style: TextStyle(color: Color(0xFF54a98c),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),),
-                                    ))),
+                              DataCell(Center(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFecf8f4),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Text(
+                                        '₹ ${testRowData.bookingFee!.toString()}', style: TextStyle(color: Color(0xFF54a98c),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),),
+                                  ))),
                   
-                                // DataCell(Center(
-                                //   child: IconButton(
-                                //     onPressed: () {
-                                //             deleteSelectedFunction();
-                                //           },
-                                //     icon: const Icon(Icons.delete),
-                                //     color: Colors.red,
-                                //     // icon: Image.asset(
-                                //     //  "assets/images/medbo.png",
-                                //     //   fit: BoxFit.cover,
-                                //     // ),
-                                //   ),
-                                // ),
-                                // ),
-                              ]);
-                        }).toList()),
-                  ),
+                              // DataCell(Center(
+                              //   child: IconButton(
+                              //     onPressed: () {
+                              //             deleteSelectedFunction();
+                              //           },
+                              //     icon: const Icon(Icons.delete),
+                              //     color: Colors.red,
+                              //     // icon: Image.asset(
+                              //     //  "assets/images/medbo.png",
+                              //     //   fit: BoxFit.cover,
+                              //     // ),
+                              //   ),
+                              // ),
+                              // ),
+                            ]);
+                      }).toList()),
                 ),
 
                 SizedBox(
@@ -636,41 +633,62 @@ class _MultipleTestBookingState extends State<MultipleTestBooking> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
-                      decoration: BoxDecoration(
-                                       color: Color(0xFFdcf7e3),
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                    headingRowColor: MaterialStateColor.resolveWith((states) => Colors.teal),
-                    columnSpacing: 13.0, columns: <DataColumn>[
-                    DataColumn(label: Text("Total Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal))),
-                    DataColumn(label: Text("Total Discounted Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal))),
+                      // decoration: BoxDecoration(
+                      //                  color: Color(0xFFdcf7e3),
+                      //                 shape: BoxShape.rectangle,
+                      //                 borderRadius: BorderRadius.circular(50),
+                      //               ),
+                    headingRowColor: MaterialStateColor.resolveWith((states) => Theme.of(context).accentColor),
+                    columnSpacing: blockSizeHorizontal*11.5,
+                    columns: <DataColumn>[
+                    DataColumn(label: Text("Total Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4))),
+                    DataColumn(label: Text("Total Discounted Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4))),
                     DataColumn(label: Container(
-                      child: Text("Total Booking Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal)))),
+                      child: Text("Total Booking Fee",style: TextStyle(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4)))),
                   ], rows: <DataRow>[
                     DataRow(
                       cells: <DataCell>[
                         DataCell(
-                            Container(child: Center(child: Text('$feeSum')))),
-
-
-
-
-                        DataCell(Center(child: Text('$discountSum'))),
-
-
-
-
-                        DataCell(Center(child: Container(
-                         alignment: Alignment.center,
+                            Container(
+                              alignment: Alignment.center,
                                     height: blockSizeVertical * 5,
-                                    width: blockSizeHorizontal * 20,
+                                    width: blockSizeHorizontal * 17,
                                     decoration: BoxDecoration(
-                                       color: Color(0xffa0d0d6),
+                                       color: Color(0xFFfdf4f7),
                                       shape: BoxShape.rectangle,
                                       borderRadius: BorderRadius.circular(50),
                                     ),
-                          child: Text(' $bookingSum',style: TextStyle(color: Colors.white,fontFamily: 'Poppins'),)))),
+                              child: Center(child: Text('₹ $feeSum',style: TextStyle(color: Color(0xFFc23b5d),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)))),
+
+
+
+
+                        DataCell(
+                          Container(
+                           alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFfef6e5),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                          child: Center(child: Text('₹ $discountSum',style: TextStyle(color: Color(0xFFf6c53e),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),)))),
+
+
+
+
+                        DataCell(
+                          Container(
+                         alignment: Alignment.center,
+                                    height: blockSizeVertical * 5,
+                                    width: blockSizeHorizontal * 17,
+                                    decoration: BoxDecoration(
+                                       color: Color(0xFFecf8f4),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                          child: Text('₹ $bookingSum',style: TextStyle(color: Color(0xFF54a98c),fontFamily: 'Poppins',fontWeight: FontWeight.normal, fontSize: blockSizeVertical*1.4),))),
                       ],
                     )
                   ]),
